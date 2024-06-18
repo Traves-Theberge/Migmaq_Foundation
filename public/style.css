@@ -131,12 +131,11 @@ header {
 
 .word-item:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    opacity: 1; /* Ensure the hovered item remains fully visible */
 }
 
-/* Apply opacity to all adjacent .word-item elements */
-.word-item:hover,
-.word-item:hover ~ .word-item,
-.word-item:hover + .word-item {
+/* Apply opacity to all .word-item elements except the hovered one */
+.word-item:hover ~ .word-item {
     opacity: 0.8; /* Adjust the opacity value as needed */
 }
 
