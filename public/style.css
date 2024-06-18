@@ -134,7 +134,7 @@ header {
 }
 
 .word-item:hover ~ .word-item {
-    filter: blur(2px);
+    opacity: 0.8; /* Adjust the opacity value as needed */
 }
 
 /* Message boxes */
