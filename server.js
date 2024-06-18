@@ -4,9 +4,10 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
+const port = process.env.PORT || 3001; // Use environment variable or port 3001
 
-app.use(cors());
-app.use(express.static('public'));
+app.use(cors()); // Enable CORS for all routes
+app.use(express.static('public')); // Serve static files from 'public' folder
 
 const dictionaryFilePath = path.join(__dirname, 'public', 'dictionary.json');
 
@@ -18,9 +19,9 @@ function caseInsensitiveIncludes(source, searchTerm) {
     return false;
 }
 
-app.get('/dictionary', (req, res) => {
-    const searchTerm = req.query.term.toLowerCase();
-    const filter = req.query.filter.toLowerCase();
+app.get('/api/dictionary', (req, res) => {
+    const searchTerm = req.query.term ? req.query.term.toLowerCase() : '';
+    const filter = req.query.filter ? req.query.filter.toLowerCase() : '';
 
     fs.readFile(dictionaryFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -35,20 +36,20 @@ app.get('/dictionary', (req, res) => {
 
             // Filter based on selected filter (word, type, definitions, translations)
             if (filter === 'word') {
-                filteredWords = dictionaryData.message.words.filter(word => caseInsensitiveIncludes(word.word, searchTerm));
+                filteredWords = dictionaryData.words.filter(word => caseInsensitiveIncludes(word.word, searchTerm));
             } else if (filter === 'type') {
-                filteredWords = dictionaryData.message.words.filter(word => caseInsensitiveIncludes(word.type, searchTerm));
+                filteredWords = dictionaryData.words.filter(word => caseInsensitiveIncludes(word.type, searchTerm));
             } else if (filter === 'definitions') {
-                filteredWords = dictionaryData.message.words.filter(word =>
+                filteredWords = dictionaryData.words.filter(word =>
                     word.definitions.some(def => caseInsensitiveIncludes(def, searchTerm))
                 );
             } else if (filter === 'translations') {
-                filteredWords = dictionaryData.message.words.filter(word =>
+                filteredWords = dictionaryData.words.filter(word =>
                     word.translations.some(trans => caseInsensitiveIncludes(trans, searchTerm))
                 );
             } else {
-                // Handle other filters or default behavior
-                filteredWords = dictionaryData.message.words;
+                // Default to returning all words if no filter or invalid filter provided
+                filteredWords = dictionaryData.words;
             }
 
             res.json({ words: filteredWords });
@@ -59,4 +60,7 @@ app.get('/dictionary', (req, res) => {
     });
 });
 
-
+// Start server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
