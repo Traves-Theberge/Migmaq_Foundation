@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('http://localhost:3000/dictionary.json')
+    fetch('/dictionary.json')
         .then(response => response.json())
         .then(data => {
             const container = document.getElementById('dictionary-container');
