@@ -1,0 +1,89 @@
+/* Updated style.css */
+
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3e5f5; /* Light lavender background */
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #4a148c; /* Dark lavender for the header */
+}
+
+/* Dictionary container */
+#dictionary-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Word item styling */
+.word-item {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #b39ddb; /* Lavender border */
+    margin-bottom: 20px;
+}
+
+.word-item p {
+    margin: 5px 0;
+}
+
+.word-item p strong {
+    color: #4a148c; /* Dark lavender for text */
+}
+
+/* Search container */
+.search-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-container input[type="text"],
+.search-container select {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #b39ddb; /* Lavender border */
+    border-radius: 4px;
+}
+
+.search-container input[type="text"] {
+    margin-right: 8px; /* Add some space between input and button */
+}
+
+.search-container button {
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    background-color: #7e57c2; /* Lavender button */
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #5e35b1; /* Darker lavender on hover */
+}
+
+/* Message boxes */
+.no-results,
+.error,
+.no-input {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #b39ddb; /* Lavender border */
+    border-radius: 5px;
+    background-color: #f8d7da; /* Light red for messages */
+    color: #721c24; /* Dark red text */
+    margin-bottom: 1rem;
+}
