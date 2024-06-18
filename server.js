@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const port = 3000;
 
 app.use(cors());
 app.use(express.static('public'));
@@ -19,7 +18,7 @@ function caseInsensitiveIncludes(source, searchTerm) {
     return false;
 }
 
-app.get('/api/dictionary', (req, res) => {
+app.get('/public/api/dictionary', (req, res) => {
     const searchTerm = req.query.term.toLowerCase();
     const filter = req.query.filter.toLowerCase();
 
@@ -60,6 +59,4 @@ app.get('/api/dictionary', (req, res) => {
     });
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+
