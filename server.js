@@ -11,12 +11,10 @@ app.use(express.static('public'));
 
 const dictionaryFilePath = path.join(__dirname, 'public', 'dictionary.json');
 
-// Define a helper function to perform case-insensitive search
 function caseInsensitiveIncludes(source, searchTerm) {
     return source.toLowerCase().includes(searchTerm.toLowerCase());
 }
 
-// API endpoint to search dictionary data
 app.get('/api/dictionary', (req, res) => {
     const searchTerm = req.query.term ? req.query.term.toLowerCase() : '';
     const filter = req.query.filter ? req.query.filter.toLowerCase() : '';
@@ -24,36 +22,37 @@ app.get('/api/dictionary', (req, res) => {
     fs.readFile(dictionaryFilePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading dictionary file:', err);
-            res.status(500).json({ error: 'Internal server error' });
-            return;
+            return res.status(500).json({ error: 'Internal server error: Failed to read dictionary file' });
         }
 
         try {
             const dictionaryData = JSON.parse(data);
-            let filteredWords = [];
 
-            // Filter based on selected filter (word, type, definitions, translations)
+            if (!dictionaryData || !dictionaryData.message || !Array.isArray(dictionaryData.message.words)) {
+                return res.status(500).json({ error: 'Internal server error: Invalid dictionary format' });
+            }
+
+            let filteredWords = dictionaryData.message.words;
+
+            // Apply filtering based on selected filter (word, type, definitions, translations)
             if (filter === 'word') {
-                filteredWords = dictionaryData.message.words.filter(word => caseInsensitiveIncludes(word.word, searchTerm));
+                filteredWords = filteredWords.filter(word => caseInsensitiveIncludes(word.word, searchTerm));
             } else if (filter === 'type') {
-                filteredWords = dictionaryData.message.words.filter(word => caseInsensitiveIncludes(word.type, searchTerm));
+                filteredWords = filteredWords.filter(word => caseInsensitiveIncludes(word.type, searchTerm));
             } else if (filter === 'definitions') {
-                filteredWords = dictionaryData.message.words.filter(word =>
+                filteredWords = filteredWords.filter(word =>
                     word.definitions.some(def => caseInsensitiveIncludes(def, searchTerm))
                 );
             } else if (filter === 'translations') {
-                filteredWords = dictionaryData.message.words.filter(word =>
+                filteredWords = filteredWords.filter(word =>
                     word.translations.some(trans => caseInsensitiveIncludes(trans, searchTerm))
                 );
-            } else {
-                // Handle other filters or default behavior
-                filteredWords = dictionaryData.message.words;
             }
 
             res.json({ words: filteredWords });
         } catch (error) {
             console.error('Error parsing JSON:', error);
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error: Failed to parse dictionary data' });
         }
     });
 });
