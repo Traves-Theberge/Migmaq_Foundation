@@ -14,7 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
         alphabetContainer.appendChild(letterSpan);
     });
 
-    searchButton.addEventListener('click', function() {
+    // Add event listener for Enter key press
+    searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            performSearch();
+        }
+    });
+
+    searchButton.addEventListener('click', performSearch, function() {
         const searchTerm = searchInput.value.trim();
         const filter = filterSelect.value;
 
