@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 word.usages.forEach(usage => {
                     const usageTranslation = document.createElement('p');
-                    usageTranslation.innerHTML = `<strong>Mi'gmag Translation:</strong> ${usage.translation}`;
+                    usageTranslation.innerHTML = `<strong>Mi'gmaq Translation:</strong> ${usage.translation}`;
                     wordDiv.appendChild(usageTranslation);
 
                     const usageEnglish = document.createElement('p');
