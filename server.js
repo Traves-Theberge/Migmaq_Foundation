@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.static('public'));
@@ -16,9 +16,10 @@ function caseInsensitiveIncludes(source, searchTerm) {
     return source.toLowerCase().includes(searchTerm.toLowerCase());
 }
 
-app.get('/dictionary.json', (req, res) => {
-    const searchTerm = req.query.term.toLowerCase();
-    const filter = req.query.filter.toLowerCase();
+// API endpoint to search dictionary data
+app.get('/api/dictionary', (req, res) => {
+    const searchTerm = req.query.term ? req.query.term.toLowerCase() : '';
+    const filter = req.query.filter ? req.query.filter.toLowerCase() : '';
 
     fs.readFile(dictionaryFilePath, 'utf8', (err, data) => {
         if (err) {
