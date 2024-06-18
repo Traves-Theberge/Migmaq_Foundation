@@ -16,7 +16,7 @@ function caseInsensitiveIncludes(source, searchTerm) {
     return source.toLowerCase().includes(searchTerm.toLowerCase());
 }
 
-app.get('/dictionary', (req, res) => {
+app.get('/dictionary.json', (req, res) => {
     const searchTerm = req.query.term.toLowerCase();
     const filter = req.query.filter.toLowerCase();
 

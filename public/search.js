@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function filterByLetter(letter) {
-        fetch(`/dictionary?term=${encodeURIComponent(letter)}&filter=word`)
+        fetch(`/dictionary.json?term=${encodeURIComponent(letter)}&filter=word`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
