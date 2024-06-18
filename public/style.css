@@ -129,14 +129,18 @@ header {
     color: #fff;
 }
 
+/* Apply the box shadow on hover */
 .word-item:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    opacity: 1; /* Ensure the hovered item remains fully visible */
 }
 
 /* Apply opacity to all .word-item elements except the hovered one */
 .word-item:hover ~ .word-item {
     opacity: 0.8; /* Adjust the opacity value as needed */
+}
+
+.word-item:hover {
+    opacity: 1; /* Ensure the hovered item remains fully visible */
 }
 
 /* Message boxes */
