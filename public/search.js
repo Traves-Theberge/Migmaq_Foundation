@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch(`/api/dictionary?term=${encodeURIComponent(searchTerm)}&filter=${encodeURIComponent(filter)}`)
+        fetch(`/dictionary.json?term=${encodeURIComponent(searchTerm)}&filter=${encodeURIComponent(filter)}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function filterByLetter(letter) {
-        fetch(`/api/dictionary?term=${encodeURIComponent(letter)}&filter=word`)
+        fetch(`/dictionary?term=${encodeURIComponent(letter)}&filter=word`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
