@@ -1,6 +1,8 @@
 Project Name
 Migmag Foundation Dictionary
 
+(https://miqmag-foundation.vercel.app/)
+
 Description
 The Migmag Foundation Dictionary is a web application designed to provide a comprehensive dictionary for the Mi'gmag language. It allows users to search for words, view their definitions, types, and translations, and supports filtering by various criteria.
 
