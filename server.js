@@ -12,7 +12,11 @@ app.use(express.static('public'));
 const dictionaryFilePath = path.join(__dirname, 'public', 'dictionary.json');
 
 function caseInsensitiveIncludes(source, searchTerm) {
-    return source.toLowerCase().includes(searchTerm.toLowerCase());
+    // Check if source is a string and searchTerm is a string
+    if (typeof source === 'string' && typeof searchTerm === 'string') {
+        return source.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+    return false;
 }
 
 app.get('/api/dictionary', (req, res) => {
@@ -32,21 +36,24 @@ app.get('/api/dictionary', (req, res) => {
                 return res.status(500).json({ error: 'Internal server error: Invalid dictionary format' });
             }
 
-            let filteredWords = dictionaryData.message.words;
+            let filteredWords = [];
 
-            // Apply filtering based on selected filter (word, type, definitions, translations)
+            // Filter based on selected filter (word, type, definitions, translations)
             if (filter === 'word') {
-                filteredWords = filteredWords.filter(word => caseInsensitiveIncludes(word.word, searchTerm));
+                filteredWords = dictionaryData.message.words.filter(word => caseInsensitiveIncludes(word.word, searchTerm));
             } else if (filter === 'type') {
-                filteredWords = filteredWords.filter(word => caseInsensitiveIncludes(word.type, searchTerm));
+                filteredWords = dictionaryData.message.words.filter(word => caseInsensitiveIncludes(word.type, searchTerm));
             } else if (filter === 'definitions') {
-                filteredWords = filteredWords.filter(word =>
+                filteredWords = dictionaryData.message.words.filter(word =>
                     word.definitions.some(def => caseInsensitiveIncludes(def, searchTerm))
                 );
             } else if (filter === 'translations') {
-                filteredWords = filteredWords.filter(word =>
+                filteredWords = dictionaryData.message.words.filter(word =>
                     word.translations.some(trans => caseInsensitiveIncludes(trans, searchTerm))
                 );
+            } else {
+                // Handle other filters or default behavior
+                filteredWords = dictionaryData.message.words;
             }
 
             res.json({ words: filteredWords });
