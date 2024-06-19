@@ -64,22 +64,33 @@ document.addEventListener('DOMContentLoaded', function() {
               displayError();
           });
   }
-
+//
   function displayDictionary(words) {
-      dictionaryContainer.innerHTML = '';
+    dictionaryContainer.innerHTML = '';
 
-      words.forEach(word => {
-          const wordHTML = `
-              <div class="word-item bg-gray-50 border border-gray-300 p-4 rounded-lg shadow-sm mb-4">
-                  <p class="text-lg"><strong class="font-semibold">Mi'gmaq Word:</strong> ${word.word}</p>
-                  <p><strong class="font-semibold">Part of speech:</strong> ${word.type}</p>
-                  <p><strong class="font-semibold">Definitions:</strong> ${word.definitions.join(', ')}</p>
-                  <p><strong class="font-semibold">Usage:</strong> ${word.translations.join(', ')}</p>
-              </div>
-          `;
-          dictionaryContainer.innerHTML += wordHTML;
-      });
-  }
+    let newWordsHtml = ""; // Initialize as an empty string
+
+    words.forEach(word => {
+        const wordHTML = `
+            <div class="word-item bg-gray-50 border border-gray-300 p-4 rounded-lg shadow-sm mb-4">
+                <p class="text-lg"><strong class="font-semibold">Mi'gmaq Word:</strong> ${
+                  word.word
+                }</p>
+                <p><strong class="font-semibold">Part of speech:</strong> ${
+                  word.type
+                }</p>
+                <p><strong class="font-semibold">Definitions:</strong> ${word.definitions.join(
+                  ", "
+                )}</p>
+                <p><strong class="font-semibold">Usage:</strong> ${word.translations.join(
+                  ", "
+                )}</p>
+            </div>
+        `;
+    newWordsHtml += wordHTML;
+    });
+    dictionaryContainer.innerHTML = newWordsHtml;
+}
 
   function displayNoResults() {
       dictionaryContainer.innerHTML = '<p class="no-results text-red-500 text-center">No results found.</p>';
