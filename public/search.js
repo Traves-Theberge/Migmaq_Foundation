@@ -1,3 +1,4 @@
+// Description: This file contains the client-side JavaScript code for the dictionary search functionality. 
 
 // We are using the document object to add an event listener to the DOMContentLoaded event and function. 
 document.addEventListener("DOMContentLoaded", function () {

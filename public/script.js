@@ -1,3 +1,4 @@
+// Description: This file contains the client-side JavaScript code for the dictionary search functionality. 
 
 // This function is called when the user clicks on a word in the dictionary. It fetches an interesting fact about the word from the server and displays it in an alert.
 async function getInterestingFact(word) {

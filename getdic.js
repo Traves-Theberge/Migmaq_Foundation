@@ -1,3 +1,6 @@
+// Description: This file contains the code to fetch the dictionary data from the mobtranslate API and save it to the dictionary.json file.
+
+// We are importing the required modules.
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
