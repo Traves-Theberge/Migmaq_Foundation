@@ -31,12 +31,32 @@ The dictionary data is structured in JSON format, with each word represented as 
 json
 Copy code
 {
-  "word": "Word",
-  "type": "Type",
-  "definitions": ["Definition 1", "Definition 2"],
-  "translations": ["Translation 1", "Translation 2"]
+"word": "Word",
+"type": "Type",
+"definitions": ["Definition 1", "Definition 2"],
+"translations": ["Translation 1", "Translation 2"]
 }
 word: The word in the Mi'gmag language.
 type: The type or category of the word (e.g., noun, verb).
 definitions: An array of definitions or meanings of the word.
 translations: An array of translations of the word into other languages.
+
+## Getting Started
+
+```
+nodemon server.js
+```
+
+You can access the website at http://localhost:3000/
+
+### Auto restart server
+
+```
+npm i -g nodemon
+nodemon server.js
+```
+
+### OpenAI
+
+Set a limit
+https://platform.openai.com/settings/organization/limits
