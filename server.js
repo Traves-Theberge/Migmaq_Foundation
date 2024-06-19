@@ -1,6 +1,5 @@
 // Description: This file contains the server-side code for the API server.
 
-// We are importing the required modules.
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -34,8 +33,8 @@ function caseInsensitiveIncludes(source, searchTerm) {
 }
 
 // We are creating a get request to fetch the dictionary data and save it to the dictionary.json file.
-app.get("/api/interesting", async (req, res) => {
-  // We are getting the word, type, translations, and definitions from the query parameters.
+// We are getting the word, type, translations, and definitions from the query parameters.app.get("/api/interesting", async (req, res) => {
+ 
   const word = req.query.word;
   const type = req.query.type;
   const translations = req.query.translations;
@@ -43,7 +42,7 @@ app.get("/api/interesting", async (req, res) => {
 
   // We are creating a new OpenAI instance with the API key.
   // We are setting the API key from the environment variables.
-    // We are using the OpenAI instance to create a chat completion with the word data.
+  // We are using the OpenAI instance to create a chat completion with the word data.
 
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -85,7 +84,6 @@ app.get("/api/interesting", async (req, res) => {
     definitions,
     fact: response.choices[0].message.content,
   });
-});
 
 // We are creating a get request to get the dictionary data from the dictionary.json file.
 app.get("/api/dictionary", (req, res) => {
