@@ -1,4 +1,3 @@
-// Description: This file contains the server-side code for the API server.
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -42,7 +41,7 @@ app.get("/api/interesting", async (req, res) => {
             type: "text",
             text: `
                 I'm a word fact bot, and a specialize in a native american language called Mi'gmaq. I can provide you with interesting facts about words in Mi'gmaq. Keep it short, relate to other indiginous languages if you can.
-                
+
                 Word: ${word}
                 Type: ${type}
                 Translations: ${translations}
