@@ -1,5 +1,3 @@
-// we are going to write comments in this file to explain what each part of the code does.
-
 
 // We are using the document object to add an event listener to the DOMContentLoaded event and function. 
 document.addEventListener("DOMContentLoaded", function () {
