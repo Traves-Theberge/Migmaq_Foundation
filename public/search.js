@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const alphabetContainer = document.getElementById("alphabet-container"); // Ensure this element exists in your HTML
 
   // Create alphabet letters
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const alphabet = "AEGIJLMNOPQSTUW";
   alphabet.split("").forEach((letter) => {
     const letterSpan = document.createElement("span");
     letterSpan.textContent = letter;
