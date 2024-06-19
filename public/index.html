@@ -1,9 +1,11 @@
+<!-- This is the main HTML file that will be served to the client. It contains the structure of the dictionary app. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi'gmaq Dictionary</title>
+    <!-- Link to the CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +13,8 @@
         <header>
             <h1>Mi'gmaq Dictionary</h1>
         </header>
+        
+        <!-- Search bar and filter dropdown -->
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search...">
             <select id="filterSelect">
@@ -19,8 +23,10 @@
                 <option value="translations">Usage</option>
                 <option value="type">Part of speech</option>
             </select>
+            <!-- Search button -->
             <button id="searchButton">Search</button>
         </div>
+        <!-- Alphabet letters container -->
         <div id="alphabet-container" class="alphabet-container">
             <!-- Alphabet letters will be appended here -->
         </div>
@@ -32,7 +38,6 @@
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
-
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
