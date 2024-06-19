@@ -1,3 +1,5 @@
+// Description: This file is the entry point for the server. It sets up the server, loads the dictionary data, and provides API endpoints for fetching dictionary data and interesting facts about words.
+
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
