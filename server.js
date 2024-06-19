@@ -42,25 +42,20 @@ app.get("/api/interesting", async (req, res) => {
   const definitions = req.query.definitions;
 
   // We are creating a new OpenAI instance with the API key.
+  // We are setting the API key from the environment variables.
+    // We are using the OpenAI instance to create a chat completion with the word data.
+
   const openai = new OpenAI({
-    // We are setting the API key from the environment variables.
     apiKey: process.env.OPENAI_API_KEY,
   });
-  // We are using the OpenAI instance to create a chat completion with the word data.
   const response = await openai.chat.completions.create({
-    // We are setting the model to gpt-4o.
     model: "gpt-4o",
-    // We are setting the messages to an array with a system message.
     messages: [
       {
-        // We are setting the role to system.
         role: "system",
-        // We are setting the content to an array with a text message.
         content: [
           {
-            // We are setting the type to text.
             type: "text",
-            // We are setting the text to a message with the word data.
             text: `
                 I'm a word fact bot, and a specialize in a native american language called Mi'gmaq. I can provide you with interesting facts about words in Mi'gmaq. Keep it short, relate to other indiginous languages if you can.
 
@@ -75,16 +70,10 @@ app.get("/api/interesting", async (req, res) => {
         ],
       },
     ],
-    // OpenAI parameters for the chat completion.
-    // We are setting the temperature to 1.
     temperature: 1,
-    // We are setting the max tokens to 256.
     max_tokens: 256,
-    // We are setting the top p to 1.
     top_p: 1,
-    // We are setting the frequency penalty to 0.
     frequency_penalty: 0,
-    // We are setting the presence penalty to 0.
     presence_penalty: 0,
   });
 
@@ -94,7 +83,6 @@ app.get("/api/interesting", async (req, res) => {
     type,
     translations,
     definitions,
-    // We are getting the fact from the response choices.
     fact: response.choices[0].message.content,
   });
 });
