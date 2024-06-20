@@ -43,7 +43,16 @@ async function getInterestingFact(word) {
   // 4. Parse the JSON response from the server
   const data = await response.json();
   // 5. Display the interesting fact in an alert box
-  alert(data.fact);
+  //alert(data.fact);
+
+  function appendMessage(message, className) {
+    const chatbox = document.querySelector('.chatbox');
+    const newMessage = document.createElement('li');
+    newMessage.classList.add(className, 'chat');
+    newMessage.innerHTML = `<p>${message}</p>`;
+    chatbox.appendChild(newMessage);
+}
+  appendMessage(data.fact, 'chat-incoming');
 }
 // 6. Add an event listener to the DOM content loaded event
 // This ensures that the dictionary data is fetched and displayed when the page is loaded
