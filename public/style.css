@@ -141,3 +141,76 @@ header {
     color: #721c24; /* Dark red text */
     margin-bottom: 1rem;
 }
+.chatBot {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #b39ddb; /* Lavender border */
+    margin-bottom: 20px;
+    width: 100%; /* Make the chatbot span the whole width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    position: relative; /* Position the chatbot relative to its normal position */
+}
+
+.chatBot header {
+    font-family: 'League Spartan', Arial, sans-serif;
+    color: #4a148c; /* Dark lavender for headers */
+    text-align: center;
+}
+
+.chatBot ul.chatbox {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 200px; /* Adjust as needed */
+    overflow-y: auto; /* Add a scrollbar if necessary */
+    border: 1px solid #b39ddb; /* Lavender border */
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.chatBot ul.chatbox li.chat {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.chatBot ul.chatbox li.chat-incoming {
+    background-color: #f3e5f5; /* Light lavender background */
+    color: #4a148c; /* Dark lavender for text */
+}
+
+.chatBot ul.chatbox li.chat-outgoing {
+    background-color: #b39ddb; /* Lavender background */
+    color: #ffffff; /* White text */
+}
+
+.chatBot .chat-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatBot .chat-input textarea {
+    flex-grow: 1;
+    padding: 10px;
+    border: 2px solid #b39ddb; /* Lavender border */
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.chatBot .chat-input button {
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    background-color: #7e57c2; /* Lavender button */
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.chatBot .chat-input button:hover {
+    background-color: #5e35b1; /* Darker lavender on hover */
+}
