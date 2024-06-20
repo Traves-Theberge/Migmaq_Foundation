@@ -1,7 +1,12 @@
-// Description: This file contains the client-side JavaScript code for the Mi'gmaq dictionary app. It fetches the dictionary data from the server and displays it in the browser. It also includes a function to fetch interesting facts about a word from the server.
-// 1. The code starts by selecting the search input, search button, filter select, dictionary container, and alphabet container elements from the DOM.
+/* Description: This file contains the client-side JavaScript code for the Mi'gmaq dictionary app. It fetches the dictionary data
+from the server and displays it in the browser. It also includes a function to fetch interesting facts about a word from the server.*/
+/* 0. a function that is called when the DOM is fully loaded. This ensures that the JavaScript code runs after the HTML content is 
+loaded.*/
+/* 1. The code starts by selecting the search input, search button, filter select, dictionary container, and alphabet container
+elements from the DOM. */
 // 2. It then creates alphabet letters and appends them to the alphabet container.
-// 3. It adds an event listener to the search button that fetches the dictionary data from the server based on the search term and filter value.
+/* 3. It adds an event listener to the search button that fetches the dictionary data from the server based on the search
+term and filter value. */
 // 4. If the search term is empty, it displays a message instead of fetching data.
 // 5. If the fetch request is successful, it displays the dictionary data in the browser.
 // 6. If there are no results, it displays a "No results found" message.
@@ -12,7 +17,7 @@
 // 11. The displayError function displays an error message in the dictionary container.
 // 12. The displayNoInputMessage function displays a message prompting the user to enter a search term in the dictionary container.
 
-//a function that is called when the DOM is fully loaded. This ensures that the JavaScript code runs after the HTML content is loaded.
+//0. a function that is called when the DOM is fully loaded. This ensures that the JavaScript code runs after the HTML content is loaded.
 document.addEventListener('DOMContentLoaded', function() {
 // 1. The code starts by selecting the search input, search button, filter select, dictionary container, and alphabet container elements from the DOM.
     //seachInput is the input field where the user enters the search term.

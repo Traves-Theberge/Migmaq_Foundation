@@ -1,4 +1,5 @@
-// Description: This file is the entry point for the server. It sets up the server, loads the dictionary data, and provides API endpoints for fetching dictionary data and interesting facts about words.
+/* Description: This file is the entry point for the server. It sets up the server, loads the dictionary data, and provides
+ API endpoints for fetching dictionary data and interesting facts about words. */
 // 1. Load environment variables from the .env file.
 // 2. Import required modules.
 // 3. Create an Express app.
