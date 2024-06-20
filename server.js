@@ -76,7 +76,7 @@ const response = await openai.chat.completions.create({
           {
             type: "text",
             text: `
-                I'm a word fact bot, and a specialize in a native american language called Mi'gmaq. I can provide you with interesting facts about words in Mi'gmaq. Keep it short, relate to other indiginous languages if you can.
+                I'm a word fact bot, and a specialize in a native american language called Mi'gmaq. I can provide you with interesting facts about words in Mi'gmaq. Keep it short, and respond in a way that does not sound like you are answering a question.
                 
                 Word: ${word}
                 Type: ${type}
