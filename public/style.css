@@ -11,6 +11,7 @@ body {
 header {
     text-align: center;
     margin-bottom: 20px;
+    height: 60px;   /* Add height to the header */
 }
 
 h1 {
@@ -150,7 +151,8 @@ header {
     margin-bottom: 20px;
     width: 100%; /* Make the chatbot span the whole width */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    position: relative; /* Position the chatbot relative to its normal position */
+    position: sticky;
+    top: 0; /* Stick the chatbot to the bottom of the screen */
 }
 
 .chatBot header {
