@@ -1,8 +1,10 @@
 Project Name
 Migmaq_Foundation
 
-Description
+Description:
 The Migmag Foundation Dictionary is a web application designed to provide a comprehensive dictionary for the Mi'gmag language. It allows users to search for words, view their definitions, types, and translations, and supports filtering by various criteria.
+
+With additon of a "fact" bot
 
 ![alt text](image.png)
 
