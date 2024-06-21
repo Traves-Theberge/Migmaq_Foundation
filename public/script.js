@@ -4,7 +4,7 @@
 // 2. Convert the word object to a query string
 // 3. Fetch the interesting fact from the server using the query string
 // 4. Parse the JSON response from the server
-// 5. Display the interesting fact in an alert box
+// 5. Display the interesting fact in an Chat-bot box.
 // 6. Add an event listener to the DOM content loaded event
 // 7. fetch the dictionary data from the server
 // 8. Display the dictionary data in the browser through the dictionary container element and the word div elements.
@@ -31,20 +31,16 @@
 async function getInterestingFact(word) { 
   // log the word object to the console
   console.log({ word });
-
   // 2. Convert the word object to a query string
   const queryString = Object.keys(word) // get the keys of the word object as an array
     .map((key) => `${key}=${word[key]}`) // map each key to a string "key=value
     .join("&"); // join the array of strings with "&" to create a query string
   console.log({ queryString }); // log the query string to the console
-
   // 3. Fetch the interesting fact from the server using the query string
   const response = await fetch("/api/interesting?" + queryString);
   // 4. Parse the JSON response from the server
   const data = await response.json();
-  // 5. Display the interesting fact in an alert box
-  //alert(data.fact);
-
+  // 5. Display the interesting fact in an Chat-bot box.
   function appendMessage(message, className) {
     const chatbox = document.querySelector('.chatbox');
     const newMessage = document.createElement('li');
@@ -60,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 7. fetch the dictionary data from the server
   fetch("/dictionary.json")
     .then((response) => response.json()) // parse the JSON response
- // 8. Display the dictionary data in the browser through the dictionary container element and the word div elements. 
+    // 8. Display the dictionary data in the browser through the dictionary container element and the word div elements. 
     .then((data) => { // log the dictionary data to the console
       const container = document.getElementById("dictionary-container"); // get the dictionary container element
       data.message.words.forEach((word) => { // iterate over each word in the dictionary data
