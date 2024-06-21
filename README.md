@@ -22,8 +22,3 @@ You can access the website at http://localhost:3000/
 npm i -g nodemon
 nodemon server.js
 ```
-
-### OpenAI
-
-Set a limit
-https://platform.openai.com/settings/organization/limits
