@@ -130,12 +130,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function appendMessage(message, className) {
-      const chatbox = document.querySelector('.chatbox');
-      const newMessage = document.createElement('li');
-      newMessage.classList.add(className, 'chat');
-      newMessage.innerHTML = `<p>${message}</p>`;
-      chatbox.appendChild(newMessage);
-  }
+    const chatbox = document.querySelector('.chatbox');
+    const newMessage = document.createElement('li');
+    newMessage.classList.add(className, 'chat');
+    newMessage.innerHTML = `<p>${message}</p>`;
+    chatbox.appendChild(newMessage);
+
+    // Scroll to the bottom of the chatbox
+    chatbox.scrollTop = chatbox.scrollHeight;
+}
 
   // Initial fetch when the page loads
   fetchDictionaryData('', '');
