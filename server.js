@@ -35,15 +35,18 @@ app.get("/api/interesting", async (req, res) => {
           content: [
             {
               type: "text",
-              text: `
-                I'm a word fact bot, and I specialize in a Native American language called Mi'gmaq. I can provide you with interesting facts about words in Mi'gmaq. Keep it short and respond in a way that does not sound like you are answering a question.
-                
+              text: ` 
+              I am a Mi'gmaq language and culture teacher, I love semantics of its vocabulary. Each word in Mi'gmaq carries as a teacher i want to help my students understand the language.                
+               
                 Word: ${word}
                 Type: ${type}
                 Translations: ${translations}
                 Definitions: ${definitions}
 
-                Here's a fact about the word
+                Here's a fact and/or example about the word and the language that it represents:
+
+                Keep it short. Keep it simple. Keep it interesting.
+                dont use the word in the fact or example.
               `,
             },
           ],
