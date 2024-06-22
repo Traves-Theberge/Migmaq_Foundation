@@ -22,3 +22,8 @@ You can access the website at http://localhost:3000/
 npm i -g nodemon
 nodemon server.js
 ```
+
+### TO DO
+
+- Fuzzy Search Feature.
+- Image Generator (Open AI) ?
