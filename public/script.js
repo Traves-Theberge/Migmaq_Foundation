@@ -1,6 +1,7 @@
 /* Description: This file contains the client-side JavaScript code for the Mi'gmaq dictionary app. It fetches the dictionary data
  from the server and displays it in the browser. It also includes a function to fetch interesting facts about a word from the server. */
-// 1. Fetch the dictionary data from the server
+
+// 1. Function to fetch interesting facts about a word from the server.
 // 2. Convert the word object to a query string
 // 3. Fetch the interesting fact from the server using the query string
 // 4. Parse the JSON response from the server
@@ -27,7 +28,7 @@
 // 25. Append the word div element to the dictionary container element
 // 26. Catch any errors that occur during the fetch operation and log them to the console.
 
-// 1. Fetch the dictionary data from the server
+// 1. Function to fetch interesting facts about a word from the server.
 async function getInterestingFact(word) { 
   // log the word object to the console
   console.log({ word });
