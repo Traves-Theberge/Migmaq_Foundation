@@ -36,17 +36,14 @@ app.get("/api/interesting", async (req, res) => {
             {
               type: "text",
               text: ` 
-              I am a Mi'gmaq language and culture teacher, I love semantics of its vocabulary. Each word in Mi'gmaq carries as a teacher i want to help my students understand the language.                
-               
+Delve into the richness of Mi'gmaq language with a fascinating fact: certain words in Mi'gmaq encapsulate knowledge of the language, illustrating the profound connection between indigenous languages and their environments.               
+                
                 Word: ${word}
                 Type: ${type}
                 Translations: ${translations}
                 Definitions: ${definitions}
 
-                Here's a fact and/or example about the word and the language that it represents:
-
-                Keep it short. Keep it simple. Keep it interesting.
-                dont use the word in the fact or example.
+                Here's a fact and/or example about the Word. Keep it no longer than 1.5-2.5 sentences.
               `,
             },
           ],
