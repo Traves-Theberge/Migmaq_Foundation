@@ -75,9 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const wordHTML = `
             <div class="word-item>
             <div><strong class="font-semibold">
-                <p>Mi'gmaq Word:</strong> ${word.word}</p>
-                <p>Part of speech:</strong> ${word.type}</p>
-                <p>English Word:</strong> ${word.definitions.join(", ")}</p>
+                <p><strong>Mi'gmaq Word:</strong> ${word.word}</p>
+                <p><strong>Part of speech:</strong> ${word.type}</p>
+                <p><strong>English Word:</strong> ${word.definitions.join(", ")}</p>
                 <div class="usages">
                     <p><strong class="font-semibold">Translation:</strong></p>
                     ${word.usages.map(usage => `
