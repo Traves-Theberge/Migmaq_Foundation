@@ -73,18 +73,20 @@ document.addEventListener('DOMContentLoaded', function() {
     dictionaryContainer.innerHTML = '';
     words.forEach(word => {
         const wordHTML = `
-            <div class="word-item">
-                <p class="text-lg"><strong class="font-semibold">Mi'gmaq Word:</strong> ${word.word}</p>
-                <p><strong class="font-semibold">Part of speech:</strong> ${word.type}</p>
-                <p><strong class="font-semibold">Definition:</strong> ${word.definitions.join(", ")}</p>
+            <div class="word-item>
+            <div><strong class="font-semibold">
+                <p>Mi'gmaq Word:</strong> ${word.word}</p>
+                <p>Part of speech:</strong> ${word.type}</p>
+                <p>English Word:</strong> ${word.definitions.join(", ")}</p>
                 <div class="usages">
-                    <p><strong class="font-semibold">Usage:</strong></p>
+                    <p><strong class="font-semibold">Translation:</strong></p>
                     ${word.usages.map(usage => `
-                        <div class="Example-item">
-                            <p><strong>Mi'gmaq:</strong> ${usage.translation}</p>
+                        <div class="usage-item">
+                            <p><strong>Mi'gmaq Translation:</strong> ${usage.translation}</p>
                             <p><strong>English Translation:</strong> ${usage.english}</p>
                         </div>
                     `).join('')}
+                    </div>
                 </div>
             </div>
         `;
