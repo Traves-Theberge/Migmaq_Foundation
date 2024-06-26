@@ -6,7 +6,8 @@ The Migmag Foundation Dictionary is a web application designed to provide a comp
 
 With additon of a "fact" bot
 
-![alt text](image.png)
+![image](https://github.com/Traves-Theberge/Migmaq_Foundation/assets/26759760/3c31ed37-01dc-4aff-b72a-867916b9bbc6)
+
 
 ## Getting Started
 
