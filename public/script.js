@@ -7,13 +7,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const alphabet = "AEGIJLMNOPQSTUW";
     let fuse;
     let dictionaryData = [];
-  
-    alphabet.split('').forEach(letter => {
-      const letterSpan = document.createElement('span');
-      letterSpan.textContent = letter;
-      letterSpan.addEventListener('click', () => filterByLetter(letter));
-      alphabetContainer.appendChild(letterSpan);
-    });
+
+  document.getElementById('modeToggle').addEventListener('click', function() {
+      document.documentElement.classList.toggle('dark');
+  }); 
+  alphabet.split('').forEach(letter => {
+    const letterSpan = document.createElement('span');
+    letterSpan.textContent = letter;
+    letterSpan.className = 'border border-gray-300 dark:border-gray-600 w-16 h-16 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200 dark:hover:bg-gray-700'; // Fixed size and rounded-md classes
+    letterSpan.addEventListener('click', () => filterByLetter(letter));
+    alphabetContainer.appendChild(letterSpan);
+});
   
     searchButton.addEventListener('click', searchDictionary);
   
@@ -56,20 +60,20 @@ document.addEventListener('DOMContentLoaded', function() {
         displayNoResults();
         return;
       }
-  
+    
       words.forEach(word => {
         const wordHTML = `
-          <div class="word-item">
-            <div><strong class="font-semibold">
-              <p><strong>Mi'gmaq Word:</strong> ${word.word}</p>
-              <p><strong>Part of speech:</strong> ${word.type}</p>
-              <p><strong>English Word:</strong> ${word.definitions.join(", ")}</p>
-              <div class="usages">
-                <p><strong class="font-semibold">Translation:</strong></p>
+          <div class="word-item border border-gray-300 dark:border-gray-600 rounded-lg p-4 mb-4">
+            <div>
+              <strong class="font-semibold">Mi'gmaq Word:</strong> ${word.word}<br>
+              <strong>Part of speech:</strong> ${word.type}<br>
+              <strong>English Word:</strong> ${word.definitions.join(", ")}<br>
+              <div class="usages mt-2">
+                <strong class="font-semibold">Translations:</strong><br>
                 ${word.usages.map(usage => `
                   <div class="usage-item">
-                    <p><strong>Mi'gmaq Translation:</strong> ${usage.translation}</p>
-                    <p><strong>English Translation:</strong> ${usage.english}</p>
+                    <strong>Mi'gmaq Translation:</strong> ${usage.translation}<br>
+                    <strong>English Translation:</strong> ${usage.english}<br>
                   </div>
                 `).join('')}
               </div>
@@ -77,14 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         `;
         const wordDiv = document.createElement("div");
-        wordDiv.classList.add("word-item");
+        wordDiv.classList.add("word-item", "border", "border-gray-300", "dark:border-gray-600", "rounded-lg", "p-4", "mb-4");
         wordDiv.addEventListener("click", function () {
           getInterestingFact(word);
         });
         wordDiv.innerHTML = wordHTML;
         dictionaryContainer.appendChild(wordDiv);
       });
-    }
+    }    
   
     function displayNoResults() {
       dictionaryContainer.innerHTML = '<p class="no-results text-red-500 text-center">No results found.</p>';
