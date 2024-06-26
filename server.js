@@ -99,21 +99,21 @@ app.get("/api/dictionary", (req, res) => {
       if (term) {
         const searchTerm = term.toLowerCase();
         if (filter === "word") {
-          filteredWords = dictionaryData.message.words.filter((word) =>
+          filteredWords = filteredWords.filter((word) =>
             caseInsensitiveIncludes(word.word, searchTerm)
           );
         } else if (filter === "type") {
-          filteredWords = dictionaryData.message.words.filter((word) =>
+          filteredWords = filteredWords.filter((word) =>
             caseInsensitiveIncludes(word.type, searchTerm)
           );
         } else if (filter === "definitions") {
-          filteredWords = dictionaryData.message.words.filter((word) =>
+          filteredWords = filteredWords.filter((word) =>
             word.definitions.some((def) =>
               caseInsensitiveIncludes(def, searchTerm)
             )
           );
         } else if (filter === "translations") {
-          filteredWords = dictionaryData.message.words.filter((word) =>
+          filteredWords = filteredWords.filter((word) =>
             word.translations.some((trans) =>
               caseInsensitiveIncludes(trans, searchTerm)
             )
@@ -130,6 +130,7 @@ app.get("/api/dictionary", (req, res) => {
     }
   });
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
