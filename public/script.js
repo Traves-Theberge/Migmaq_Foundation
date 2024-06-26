@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const wordHTML = `
         <div class="word-item">
           <div class="p-6 text-white">
-            <h2 class="text-xl font-bold mb-4">${word.word}</h2>
+            <h2 class="text-xl font-semibold mb-4">${word.word}</h2>
             <div class="mb-4">
               <strong class="block text-white-600 mb-2">Part of Speech:</strong>
               <span class="block">${word.type}</span>
