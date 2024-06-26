@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     let options = {
-      threshold: 0.4, // Adjust the threshold to make the search more lenient
-      distance: 100 // Adjust the distance to allow for more typos
+      threshold: 0.4,
+      distance: 100
     };
 
     switch(filter) {
@@ -79,25 +79,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     words.forEach(word => {
       const wordHTML = `
-        <div class="word-item min-h-[10rem] p-4 mb-4">
-          <div>
-            <strong>Mi'gmaq Word:</strong> ${word.word}<br>
-            <strong>Part of speech:</strong> ${word.type}<br>
-            <strong>English Word:</strong> ${word.definitions.join(", ")}<br>
-            <div class="usages mt-2">
-              <strong>Translations:</strong><br>
-              ${word.usages.map(usage => `
-                <div class="usage-item">
-                  <strong>Mi'gmaq Translation:</strong> ${usage.translation}<br>
-                  <strong>English Translation:</strong> ${usage.english}<br>
-                </div>
-              `).join('')}
+        <div class="word-item">
+          <div class="p-6 text-white">
+            <h2 class="text-xl font-bold mb-4">${word.word}</h2>
+            <div class="mb-4">
+              <strong class="block text-white-600 mb-2">Part of Speech:</strong>
+              <span class="block">${word.type}</span>
+            </div>
+            <div class="mb-4">
+              <strong class="block text-white-600 mb-2">English Definitions:</strong>
+              <ul class="list-disc list-inside">
+                ${word.definitions.map(def => `<li>${def}</li>`).join('')}
+              </ul>
+            </div>
+            <div>
+              <strong class="block text-white-600 mb-2">Translations:</strong>
+              <ul>
+                ${word.usages.map(usage => `
+                  <li>
+                    <strong>Mi'gmaq Translation:</strong> ${usage.translation}<br>
+                    <strong>English Translation:</strong> ${usage.english}
+                  </li>
+                `).join('')}
+              </ul>
             </div>
           </div>
         </div>
       `;
       const wordDiv = document.createElement("div");
-      wordDiv.classList.add("word-item", "min-h-[10rem]", "border", "border-gray-300", "dark:border-gray-600", "rounded-lg", "p-4", "mb-4");
+      wordDiv.classList.add("word-item", "min-h-[10rem]", "border", "border-gray-300", "rounded-lg", "p-10", "mb-4");
       wordDiv.addEventListener("click", function () {
         getInterestingFact(word);
       });
@@ -107,15 +117,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function displayNoResults() {
-    dictionaryContainer.innerHTML = '<p class="no-results text-red-500 text-center">No results found.</p>';
+    dictionaryContainer.innerHTML = '<p class="no-results text-white-500 text-center">No results found.</p>';
   }
 
   function displayError() {
-    dictionaryContainer.innerHTML = '<p class="error text-red-500 text-center">Error fetching dictionary data. Please try again later.</p>';
+    dictionaryContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching dictionary data. Please try again later.</p>';
   }
 
   function displayNoInputMessage() {
-    dictionaryContainer.innerHTML = '<p class="no-input text-red-500 text-center">Please enter a search term.</p>';
+    dictionaryContainer.innerHTML = '<p class="no-input text-white-500 text-center">Please enter a search term.</p>';
   }
 
   async function getInterestingFact(word) {
@@ -139,10 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatbox = document.querySelector('.chatbox');
     const newMessage = document.createElement('li');
     newMessage.classList.add(className, 'chat', 'bg-gray-700', 'text-white', 'p-4', 'rounded-lg', 'hover:bg-gray-600', 'transition-colors', 'duration-300', 'border', 'border-gray-500');
-    newMessage.innerHTML = `<p class="text-left">${message}</p>`;
+    newMessage.textContent = message;
     chatbox.appendChild(newMessage);
-
-    // Scroll to the bottom of the chatbox
     chatbox.scrollTop = chatbox.scrollHeight;
-}
+  }
 });
