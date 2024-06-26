@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   alphabet.split('').forEach(letter => {
     const letterSpan = document.createElement('span');
     letterSpan.textContent = letter;
-    letterSpan.className = 'border border-gray-300 dark:border-gray-600 w-16 h-16 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200 dark:hover:bg-gray-700'; // Fixed size and rounded-md classes
+    letterSpan.className = 'border border-gray-300 dark:border-gray-600 w-14 h-14 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200 dark:hover:bg-gray-700'; // Fixed size and rounded-md classes
     letterSpan.addEventListener('click', () => filterByLetter(letter));
     alphabetContainer.appendChild(letterSpan);
 });
