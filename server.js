@@ -4,6 +4,7 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const OpenAI = require("openai");
+const Fuse = require("fuse.js");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -11,13 +12,6 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 const dictionaryFilePath = path.join(__dirname, "public", "dictionary.json");
-
-function caseInsensitiveIncludes(source, searchTerm) {
-  if (typeof source === "string" && typeof searchTerm === "string") {
-    return source.toLowerCase().includes(searchTerm.toLowerCase());
-  }
-  return false;
-}
 
 app.get("/api/interesting", async (req, res) => {
   const { word, type, translations, definitions } = req.query;
@@ -32,21 +26,14 @@ app.get("/api/interesting", async (req, res) => {
       messages: [
         {
           role: "system",
-          content: [
-            {
-              type: "text",
-              text: ` 
-Delve into the richness of Mi'gmaq language with a fascinating fact: certain words in Mi'gmaq encapsulate knowledge of the language, illustrating the profound connection between indigenous languages and their environments.               
-                
-                Word: ${word}
-                Type: ${type}
-                Translations: ${translations}
-                Definitions: ${definitions}
-
-                Here's a fact and/or example about the Word. Keep it no longer than 1.5-2.5 sentences.
-              `,
-            },
-          ],
+          content: ` 
+          Delve into the richness of Mi'gmaq language with a fascinating fact: certain words in Mi'gmaq encapsulate knowledge of the language, illustrating the profound connection between indigenous languages and their environments.               
+          Word: ${word}
+          Type: ${type}
+          Translations: ${translations}
+          Definitions: ${definitions}
+          Here's a fact and/or example about the Word. Keep it no longer than 1.5-2.5 sentences.
+          `,
         },
       ],
       temperature: 1,
@@ -94,34 +81,16 @@ app.get("/api/dictionary", (req, res) => {
         });
       }
 
-      let filteredWords = dictionaryData.message.words;
+      const options = {
+        keys: filter ? [filter] : ['word', 'type', 'definitions', 'translations'],
+        threshold: 0.3, // Adjust the threshold as needed
+      };
 
-      if (term) {
-        const searchTerm = term.toLowerCase();
-        if (filter === "word") {
-          filteredWords = dictionaryData.message.words.filter((word) =>
-            caseInsensitiveIncludes(word.word, searchTerm)
-          );
-        } else if (filter === "type") {
-          filteredWords = dictionaryData.message.words.filter((word) =>
-            caseInsensitiveIncludes(word.type, searchTerm)
-          );
-        } else if (filter === "definitions") {
-          filteredWords = dictionaryData.message.words.filter((word) =>
-            word.definitions.some((def) =>
-              caseInsensitiveIncludes(def, searchTerm)
-            )
-          );
-        } else if (filter === "translations") {
-          filteredWords = dictionaryData.message.words.filter((word) =>
-            word.translations.some((trans) =>
-              caseInsensitiveIncludes(trans, searchTerm)
-            )
-          );
-        }
-      }
+      const fuse = new Fuse(dictionaryData.message.words, options);
 
-      res.json({ words: filteredWords });
+      const result = term ? fuse.search(term).map(result => result.item) : dictionaryData.message.words;
+
+      res.json({ words: result });
     } catch (error) {
       console.error("Error parsing JSON:", error);
       res.status(500).json({
