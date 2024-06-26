@@ -5,12 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const dictionaryContainer = document.getElementById('dictionary-container');
   const alphabetContainer = document.getElementById('alphabet-container');
   const alphabet = "AEGIJLMNOPQSTUW";
-  let fuse;
   let dictionaryData = [];
-
-  document.getElementById('modeToggle').addEventListener('click', function() {
-    document.documentElement.classList.toggle('dark');
-  });
 
   alphabet.split('').forEach(letter => {
     const letterSpan = document.createElement('span');
@@ -26,10 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
       dictionaryData = data.words;
-      fuse = new Fuse(dictionaryData, {
-        keys: ['word', 'type', 'definitions', 'translations'],
-        threshold: 0.3
-      });
       displayDictionary(dictionaryData);
     })
     .catch(error => {
@@ -46,16 +37,32 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    const url = `/api/dictionary?term=${encodeURIComponent(searchTerm)}&filter=${filter}`;
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        displayDictionary(data.words);
-      })
-      .catch(error => {
-        console.error('Error searching:', error);
-        displayError();
-      });
+    let options = {
+      threshold: 0.4, // Adjust the threshold to make the search more lenient
+      distance: 100 // Adjust the distance to allow for more typos
+    };
+
+    switch(filter) {
+      case 'word':
+        options.keys = ['word'];
+        break;
+      case 'type':
+        options.keys = ['type'];
+        break;
+      case 'definitions':
+        options.keys = ['definitions'];
+        break;
+      case 'translations':
+        options.keys = ['translations'];
+        break;
+      default:
+        options.keys = ['word', 'type', 'definitions', 'translations'];
+    }
+
+    const fuse = new Fuse(dictionaryData, options);
+    const results = fuse.search(searchTerm).map(result => result.item);
+
+    displayDictionary(results);
   }
 
   function filterByLetter(letter) {
