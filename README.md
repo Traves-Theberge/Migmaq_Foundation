@@ -25,5 +25,4 @@ nodemon server.js
 
 ### TO DO
 
-- Fuzzy Search Feature.
 - Image Generator (Open AI) ?
