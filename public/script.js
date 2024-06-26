@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   alphabet.split('').forEach(letter => {
     const letterSpan = document.createElement('span');
     letterSpan.textContent = letter;
-    letterSpan.className = 'border border-gray-300 dark:border-gray-600 w-16 h-16 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200 dark:hover:bg-gray-700';
+    letterSpan.className = 'border border-gray-300 w-14 h-14 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200';
     letterSpan.addEventListener('click', () => filterByLetter(letter));
     alphabetContainer.appendChild(letterSpan);
   });
@@ -138,11 +138,11 @@ document.addEventListener('DOMContentLoaded', function() {
   function appendMessage(message, className) {
     const chatbox = document.querySelector('.chatbox');
     const newMessage = document.createElement('li');
-    newMessage.classList.add(className, 'chat');
-    newMessage.innerHTML = `<p>${message}</p>`;
+    newMessage.classList.add(className, 'chat', 'bg-gray-700', 'text-white', 'p-4', 'rounded-lg', 'hover:bg-gray-600', 'transition-colors', 'duration-300', 'border', 'border-gray-500');
+    newMessage.innerHTML = `<p class="text-left">${message}</p>`;
     chatbox.appendChild(newMessage);
 
     // Scroll to the bottom of the chatbox
     chatbox.scrollTop = chatbox.scrollHeight;
-  }
+}
 });

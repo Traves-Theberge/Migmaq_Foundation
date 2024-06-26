@@ -26,3 +26,11 @@ nodemon server.js
 ### TO DO
 
 - Image Generator (Open AI) ?
+
+
+### Updated
+- Updated Fuzzy Search Function using fuse.js
+- Migrated .css to tailwind
+- Changed all .css to tailwind.
+- Updated theme.
+- Updated Chatbox and sytle.

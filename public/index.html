@@ -6,50 +6,53 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+<body class="bg-gray-700 text-gray-100">
     <div class="container mx-auto p-8">
         <header class="flex items-center justify-between mb-8">
             <h1 class="text-3xl text-center flex-1">Mi'gmaq Dictionary with AI Assistance</h1>
         </header>
-        <div class="container mx-auto p-8">  
-            <div class="chatBot bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md mb-8">
-                <ul class="chatbox list-none">
-                    <li class="chat-incoming">
-                        <p class="text-center">Click Any Word!</p>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="search-container text-center mb-8">
-                <input type="text" id="searchInput" placeholder="Alamugsit..." class="px-4 py-2 border-2 border-blue-300 dark:border-gray-600 rounded-md mr-2">
-                <select id="filterSelect" class="px-4 py-2 border-2 border-blue-300 dark:border-gray-600 rounded-md mr-2">
-                    <option value="definitions">English Word</option>
-                    <option value="word">Mi'gmaq Word</option>
-                    <option value="translations">Translation</option>
-                    <option value="type">Part of speech</option>
-                </select>
-                <button id="searchButton" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300">Search</button>
-            </div>
-
-            <div id="alphabet-container" class="alphabet-container text-center flex justify-center gap-4 mb-8">
-                <!-- Alphabet letters will be appended here -->
-            </div>
-
-            <div id="dictionary-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Example word-item structure -->
-                <div class="word-item">
-                    <!-- Content goes here -->
+        <div class="container mx-auto p-8">
+            <div class="chatBot bg-gray-800 p-8 rounded-lg shadow-md mb-8">
+                <!-- Add a fixed height container for chat messages -->
+                <div class="chatbox-container max-h-80 overflow-y-auto border border-gray-500 rounded-lg p-4">
+                    <ul class="chatbox list space-y-2">
+                        <li class="chat-incoming chat text-white p-4 rounded-lg border border-gray-500">
+                            <p class="text-center">Click any word for an AI Fact!</p>
+                        </li>
+                    </ul>
                 </div>
+                <!-- Placeholder for user input
+                <div class="mt-4">
+                    <input type="text" placeholder="Placeholder for future user input..." class="w-full p-4 rounded-lg bg-gray-900 text-white border-2 border-gray-700 focus:outline-none focus:border-blue-500">
+                </div>
+                -->
             </div>
         </div>
-
-        <!-- Your Scripts and External Libraries -->
-        <script defer src="/_vercel/speed-insights/script.js"></script>
-        <script defer src="/_vercel/insights/script.js"></script>
-
-        <!-- Your Custom Scripts -->
-        <script src="script.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+        <div class="search-container text-center text-white mb-8">
+            <input type="text" id="searchInput" placeholder="Alamugsit/Search..." class="px-4 py-2 border-2 border-gray-600 bg-gray-800 rounded-md mr-2">
+            <select id="filterSelect" class="px-4 py-2 border-2 border-gray-600 bg-gray-800 text-white rounded-md mr-2">
+                <option value="definitions">English Word</option>
+                <option value="word">Mi'gmaq Word</option>
+                <option value="translations">Translation</option>
+                <option value="type">Part of speech</option>
+            </select>
+            <button id="searchButton" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300">Search</button>
+        </div>
+        <div id="alphabet-container" class="alphabet-container flex flex-wrap justify-center gap-5 mb-5 sm:gap-2 md:gap-2 lg:gap-2">
+            <!-- Alphabet letters will be appended here -->
+        </div>
+        <div id="dictionary-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Example word-item structure -->
+            <div class="word-item">
+                <!-- Content goes here -->
+            </div>
+        </div>
     </div>
+    <!-- Your Scripts and External Libraries -->
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Your Custom Scripts -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 </body>
 </html>
