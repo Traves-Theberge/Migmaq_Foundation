@@ -136,10 +136,29 @@ document.addEventListener('DOMContentLoaded', function() {
     prevButton.addEventListener('click', () => fetchDictionaryData(currentPage - 1));
     paginationContainer.appendChild(prevButton);
 
-    // Display total pages
+    // Input field for page number
+    const pageInput = document.createElement('input');
+    pageInput.type = 'number';
+    pageInput.min = 1;
+    pageInput.max = totalPages;
+    pageInput.value = currentPage;
+    pageInput.className = 'px-3 py-1 bg-gray-800 text-white rounded-md mx-2 w-16 text-center';
+    pageInput.addEventListener('change', () => {
+        const pageNumber = parseInt(pageInput.value);
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            fetchDictionaryData(pageNumber);
+        } else {
+            alert(`Please enter a valid page number between 1 and ${totalPages}.`);
+            // Reset input value to current page to maintain consistency
+            pageInput.value = currentPage;
+        }
+    });
+    paginationContainer.appendChild(pageInput);
+
+    // Total pages label
     const totalPagesLabel = document.createElement('span');
-    totalPagesLabel.textContent = `Page ${currentPage} of ${totalPages}`;
-    totalPagesLabel.className = 'text-white';
+    totalPagesLabel.textContent = `of ${totalPages}`;
+    totalPagesLabel.className = 'text-gray-400 mx-2';
     paginationContainer.appendChild(totalPagesLabel);
 
     // Next button
@@ -149,7 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
     nextButton.disabled = currentPage === totalPages;
     nextButton.addEventListener('click', () => fetchDictionaryData(currentPage + 1));
     paginationContainer.appendChild(nextButton);
+
+    // Apply flex layout to center align pagination controls
+    paginationContainer.classList.add('flex', 'items-center', 'justify-center');
 }
+
+
 
   function displayNoResults() {
       dictionaryContainer.innerHTML = '<p class="no-results text-white-500 text-center">No results found.</p>';
