@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="./output.css">
+
+    <title>Mi'gmaq Dictionary</title>
+
+    <style>
+        /* Additional custom styles can be placed here */
+    </style>
+</head>
+
+<body class="bg-gray-700 text-gray-100">
+    <div class="container mx-auto p-8">
+        <!-- Dictionary Section -->
+        <section id="dictionary-section" class="mb-8">
+            <header class="text-center md:text-4xl lg:text-5xl font-bold text-white p-6">
+                Mi'gmaq Dictionary with AI Assistance
+            </header>
+
+            <!-- Search Container -->
+            <div class="search-container text-center text-white mb-8 flex flex-col sm:flex-row items-center justify-center">
+                <input type="text" id="searchInput" placeholder="Search/Alamugsit..." class="px-4 py-2 border-2 border-gray-600 bg-gray-800 rounded-md mb-2 sm:mb-0 w-full sm:w-auto">
+                <select id="filterSelect" class="px-4 py-2 border-2 border-gray-600 bg-gray-800 text-white rounded-md mb-2 sm:mb-0 w-full sm:w-auto">
+                    <option value="definitions">English Word</option>
+                    <option value="word">Mi'gmaq Word</option>
+                    <option value="translations">Translation</option>
+                    <option value="type">Part of speech</option>
+                </select>
+                <button id="searchButton" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300">Search</button>
+            </div>
+
+            <!-- Alphabet Container -->
+            <div id="alphabet-container" class="alphabet-container flex flex-wrap justify-center gap-2 mb-2 sm:gap-2 md:gap-2 lg:gap-2">
+                <!-- Alphabet letters will be appended here -->
+            </div>
+
+            <!-- Dictionary Container -->
+            <div id="dictionary-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Example word-item structure -->
+                <!-- Each word item will be dynamically added here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- External Scripts -->
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+</body>
+
+</html>
