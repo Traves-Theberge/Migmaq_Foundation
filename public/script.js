@@ -27,7 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Error fetching dictionary data:', error);
       displayError();
     });
-
+    
+    searchInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        // Prevent the default action to avoid form submission or any other default behavior
+        event.preventDefault();
+        // Trigger the search
+        searchDictionary();
+      }
+    });
   function searchDictionary() {
     const searchTerm = searchInput.value.trim();
     const filter = filterSelect.value;
