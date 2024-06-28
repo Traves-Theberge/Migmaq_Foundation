@@ -27,7 +27,6 @@ nodemon server.js
 ### TO DO
 
 - Image Generator (Open AI) ?
-- add optimization for cellphone.
 
 ### Updated
 - Updated Fuzzy Search Function using fuse.js
@@ -36,3 +35,4 @@ nodemon server.js
 - Updated theme.
 - Updated Chatbox and sytle.
 - optimized for cellphones
+- Implemented search button functionality to trigger dictionary search on enter key press- Implemented search button functionality to trigger dictionary search..
