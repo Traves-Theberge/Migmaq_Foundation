@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chatboxContainer.innerHTML = `
             <ul class="chatbox list space-y-2">
                 <li class="chat-incoming chat text-white p-4 rounded-lg border border-gray-500">
-                    <p class="text-center">Click any word for an AI Fact!</p>
+                    <p class="text-center">Click the word above for an Fact!</p>
                 </li>
             </ul>
         `;

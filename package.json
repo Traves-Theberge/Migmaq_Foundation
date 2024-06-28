@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-"build:tailwind": "tailwindcss -i src/input.css -o public/output.css --watch"  },
+    "build:tailwind": "tailwindcss -i src/input.css -o public/output.css --watch"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@supabase/supabase-js": "^2.44.2",
     "@vercel/speed-insights": "^1.0.12",
     "axios": "^1.7.2",
     "cors": "^2.8.5",
