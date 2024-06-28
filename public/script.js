@@ -4,8 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const filterSelect = document.getElementById('filterSelect');
   const dictionaryContainer = document.getElementById('dictionary-container');
   const alphabetContainer = document.getElementById('alphabet-container');
+  const paginationContainer = document.getElementById('pagination-container');
   const alphabet = "AEGIJLMNOPQSTUW";
-  let dictionaryData = [];
+  let currentPage = 1;
+  const itemsPerPage = 20;
+  let currentFilter = '';
+  let currentTerm = '';
 
   alphabet.split('').forEach(letter => {
       const letterSpan = document.createElement('span');
@@ -15,66 +19,66 @@ document.addEventListener('DOMContentLoaded', function() {
       alphabetContainer.appendChild(letterSpan);
   });
 
-  searchButton.addEventListener('click', searchDictionary);
-
-  fetch('/api/dictionary')
-      .then(response => response.json())
-      .then(data => {
-          dictionaryData = data.words;
-          displayDictionary(dictionaryData);
-      })
-      .catch(error => {
-          console.error('Error fetching dictionary data:', error);
-          displayError();
-      });
+  searchButton.addEventListener('click', () => searchDictionary(1));
 
   searchInput.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
           event.preventDefault();
-          searchDictionary();
+          searchDictionary(1);
       }
   });
 
-  function searchDictionary() {
-      const searchTerm = searchInput.value.trim();
-      const filter = filterSelect.value;
+  fetchDictionaryData(currentPage);
 
-      if (searchTerm.length === 0) {
-          displayNoInputMessage();
-          return;
+  function fetchDictionaryData(page = 1) {
+      currentPage = page;
+      const url = new URL('/api/dictionary', window.location.origin);
+      url.searchParams.append('page', page);
+      url.searchParams.append('limit', itemsPerPage);
+      if (currentTerm) {
+          url.searchParams.append('term', currentTerm);
+          url.searchParams.append('filter', currentFilter);
       }
 
-      let options = {
-          threshold: 0.4,
-          distance: 100
-      };
+      fetch(url)
+          .then(response => response.json())
+          .then(data => {
+              displayDictionary(data.words);
+              createPagination(data.total, page);
+          })
+          .catch(error => {
+              console.error('Error fetching dictionary data:', error);
+              displayError();
+          });
+  }
 
-      switch(filter) {
-          case 'word':
-              options.keys = ['word'];
-              break;
-          case 'type':
-              options.keys = ['type'];
-              break;
-          case 'definitions':
-              options.keys = ['definitions'];
-              break;
-          case 'translations':
-              options.keys = ['translations'];
-              break;
-          default:
-              options.keys = ['word', 'type', 'definitions', 'translations'];
-      }
-
-      const fuse = new Fuse(dictionaryData, options);
-      const results = fuse.search(searchTerm).map(result => result.item);
-
-      displayDictionary(results);
+  function searchDictionary(page) {
+      currentTerm = searchInput.value.trim();
+      currentFilter = filterSelect.value;
+      fetchDictionaryData(page);
   }
 
   function filterByLetter(letter) {
-      const results = dictionaryData.filter(word => word.word[0].toUpperCase() === letter);
-      displayDictionary(results);
+      currentTerm = letter;
+      currentFilter = 'startsWith'; // Special filter to handle letter filtering
+      fetchAllWords(); // Fetch all words starting with the letter
+  }
+
+  function fetchAllWords() {
+      const url = new URL('/api/dictionary', window.location.origin);
+      url.searchParams.append('term', currentTerm);
+      url.searchParams.append('filter', currentFilter);
+
+      fetch(url)
+          .then(response => response.json())
+          .then(data => {
+              displayDictionary(data.words);
+              paginationContainer.innerHTML = ''; // Clear pagination for letter filter
+          })
+          .catch(error => {
+              console.error('Error fetching dictionary data:', error);
+              displayError();
+          });
   }
 
   function displayDictionary(words) {
@@ -120,15 +124,38 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
+  function createPagination(totalItems, currentPage) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    paginationContainer.innerHTML = '';
+
+    // Previous button
+    const prevButton = document.createElement('button');
+    prevButton.textContent = 'Previous';
+    prevButton.className = 'px-3 py-1 bg-gray-800 text-white rounded-md mr-2 hover:bg-gray-600';
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener('click', () => fetchDictionaryData(currentPage - 1));
+    paginationContainer.appendChild(prevButton);
+
+    // Display total pages
+    const totalPagesLabel = document.createElement('span');
+    totalPagesLabel.textContent = `Page ${currentPage} of ${totalPages}`;
+    totalPagesLabel.className = 'text-white';
+    paginationContainer.appendChild(totalPagesLabel);
+
+    // Next button
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.className = 'px-3 py-1 bg-gray-800 text-white rounded-md ml-2 hover:bg-gray-600';
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener('click', () => fetchDictionaryData(currentPage + 1));
+    paginationContainer.appendChild(nextButton);
+}
+
   function displayNoResults() {
       dictionaryContainer.innerHTML = '<p class="no-results text-white-500 text-center">No results found.</p>';
   }
 
   function displayError() {
       dictionaryContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching dictionary data. Please try again later.</p>';
-  }
-
-  function displayNoInputMessage() {
-      dictionaryContainer.innerHTML = '<p class="no-input text-white-500 text-center">Please enter a search term.</p>';
   }
 });

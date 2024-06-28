@@ -19,6 +19,13 @@ function caseInsensitiveIncludes(source, searchTerm) {
     return false;
 }
 
+function startsWith(source, searchTerm) {
+    if (typeof source === "string" && typeof searchTerm === "string") {
+        return source.toLowerCase().startsWith(searchTerm.toLowerCase());
+    }
+    return false;
+}
+
 // Endpoint to fetch interesting facts about a word
 app.get("/api/interesting", async (req, res) => {
     const { word, type, translations, definitions } = req.query;
@@ -72,9 +79,11 @@ Here's a fact and/or example about the Word. Keep it no longer than 1.5-2.5 sent
     }
 });
 
-// Endpoint to fetch dictionary data
+// Endpoint to fetch dictionary data with pagination and search
 app.get("/api/dictionary", (req, res) => {
-    const { term, filter } = req.query;
+    const { term, filter, page = 1, limit = 20 } = req.query;
+    const pageNumber = parseInt(page);
+    const limitNumber = parseInt(limit);
 
     fs.readFile(dictionaryFilePath, "utf8", (err, data) => {
         if (err) {
@@ -120,10 +129,23 @@ app.get("/api/dictionary", (req, res) => {
                             caseInsensitiveIncludes(trans, searchTerm)
                         )
                     );
+                } else if (filter === "startsWith") {
+                    filteredWords = filteredWords.filter((word) =>
+                        startsWith(word.word, searchTerm)
+                    );
                 }
             }
 
-            res.json({ words: filteredWords });
+            const totalItems = filteredWords.length;
+
+            if (filter !== "startsWith") {
+                filteredWords = filteredWords.slice(
+                    (pageNumber - 1) * limitNumber,
+                    pageNumber * limitNumber
+                );
+            }
+
+            res.json({ words: filteredWords, total: totalItems });
         } catch (error) {
             console.error("Error parsing JSON:", error);
             res.status(500).json({
