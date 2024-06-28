@@ -1,194 +1,254 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const fs = require("fs");
-const path = require("path");
-const OpenAI = require("openai");
+// Wait for the DOM content to load before executing the script
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM elements
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const filterSelect = document.getElementById('filterSelect');
+    const dictionaryContainer = document.getElementById('dictionary-container');
+    const alphabetContainer = document.getElementById('alphabet-container');
+    const paginationContainer = document.getElementById('pagination-container');
 
-const app = express();
-const port = process.env.PORT || 3001;
+    // Constants and variables
+    const alphabet = "AEGIJLMNOPQSTUW";
+    let currentPage = 1;
+    const itemsPerPage = 20;
+    let currentFilter = '';
+    let currentTerm = '';
+    let fuse; // Fuse.js instance
 
-app.use(cors());
-app.use(express.static(path.join(__dirname, "public")));
-const dictionaryFilePath = path.join(__dirname, "public", "dictionary.json");
+    // Initialize application
+    initialize();
 
-function caseInsensitiveIncludes(source, searchTerm) {
-    if (typeof source === "string" && typeof searchTerm === "string") {
-        return source.toLowerCase().includes(searchTerm.toLowerCase());
+    // Function to initialize the application
+    function initialize() {
+        populateAlphabetContainer();
+        addEventListeners();
+        fetchDictionaryData();
     }
-    return false;
-}
 
-function startsWith(source, searchTerm) {
-    if (typeof source === "string" && typeof searchTerm === "string") {
-        return source.toLowerCase().startsWith(searchTerm.toLowerCase());
-    }
-    return false;
-}
-
-// Endpoint to fetch interesting facts about a word
-app.get("/api/interesting", async (req, res) => {
-    const { word, type, translations, definitions } = req.query;
-
-    const openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY,
-    });
-
-    try {
-        const response = await openai.chat.completions.create({
-            model: "gpt-4o",
-            messages: [
-                {
-                    role: "system",
-                    content: [
-                        {
-                            type: "text",
-                            text: ` 
-Delve into the richness of Mi'gmaq language with a fascinating fact: certain words in Mi'gmaq encapsulate knowledge of the language, illustrating the profound connection between indigenous languages and their environments.               
-                
-Word: ${word}
-Type: ${type}
-Translations: ${translations}
-Definitions: ${definitions}
-
-Here's a fact and/or example about the Word. Keep it no longer than 1.5-2.5 sentences.
-`,
-                        },
-                    ],
-                },
-            ],
-            temperature: 1,
-            max_tokens: 256,
-            top_p: 1,
-            frequency_penalty: 0,
-            presence_penalty: 0,
-        });
-
-        res.json({
-            word,
-            type,
-            translations,
-            definitions,
-            fact: response.choices[0].message.content,
-        });
-    } catch (error) {
-        console.error("Error generating interesting fact:", error);
-        res.status(500).json({
-            error: "Internal server error: Failed to generate interesting fact",
+    // Function to populate the alphabet filter container
+    function populateAlphabetContainer() {
+        alphabet.split('').forEach(letter => {
+            const letterSpan = document.createElement('span');
+            letterSpan.textContent = letter;
+            letterSpan.className = 'border border-gray-300 w-14 h-14 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200';
+            letterSpan.addEventListener('click', () => filterByLetter(letter));
+            alphabetContainer.appendChild(letterSpan);
         });
     }
-});
 
-// Endpoint to fetch dictionary data with pagination and search
-app.get("/api/dictionary", (req, res) => {
-    const { term, filter, page = 1, limit = 20 } = req.query;
-    const pageNumber = parseInt(page);
-    const limitNumber = parseInt(limit);
+    // Function to add event listeners to search input and button
+    function addEventListeners() {
+        searchButton.addEventListener('click', () => searchDictionary());
+        searchInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                searchDictionary();
+            }
+        });
+    }
 
-    fs.readFile(dictionaryFilePath, "utf8", (err, data) => {
-        if (err) {
-            console.error("Error reading dictionary file:", err);
-            return res.status(500).json({
-                error: "Internal server error: Failed to read dictionary file",
-            });
+    // Function to fetch dictionary data from the backend
+    function fetchDictionaryData(page = 1) {
+        currentPage = page;
+        const url = new URL('/api/dictionary', window.location.origin);
+        url.searchParams.append('page', page);
+        url.searchParams.append('limit', itemsPerPage);
+        if (currentTerm) {
+            url.searchParams.append('term', currentTerm);
+            url.searchParams.append('filter', currentFilter);
         }
 
-        try {
-            const dictionaryData = JSON.parse(data);
-            if (
-                !dictionaryData ||
-                !dictionaryData.message ||
-                !Array.isArray(dictionaryData.message.words)
-            ) {
-                return res.status(500).json({
-                    error: "Internal server error: Invalid dictionary format",
-                });
-            }
-
-            let filteredWords = dictionaryData.message.words;
-
-            if (term) {
-                const searchTerm = term.toLowerCase();
-                if (filter === "word") {
-                    filteredWords = filteredWords.filter((word) =>
-                        caseInsensitiveIncludes(word.word, searchTerm)
-                    );
-                } else if (filter === "type") {
-                    filteredWords = filteredWords.filter((word) =>
-                        caseInsensitiveIncludes(word.type, searchTerm)
-                    );
-                } else if (filter === "definitions") {
-                    filteredWords = filteredWords.filter((word) =>
-                        word.definitions.some((def) =>
-                            caseInsensitiveIncludes(def, searchTerm)
-                        )
-                    );
-                } else if (filter === "translations") {
-                    filteredWords = filteredWords.filter((word) =>
-                        word.translations.some((trans) =>
-                            caseInsensitiveIncludes(trans, searchTerm)
-                        )
-                    );
-                } else if (filter === "startsWith") {
-                    filteredWords = filteredWords.filter((word) =>
-                        startsWith(word.word, searchTerm)
-                    );
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-            }
-
-            const totalItems = filteredWords.length;
-
-            if (filter !== "startsWith") {
-                filteredWords = filteredWords.slice(
-                    (pageNumber - 1) * limitNumber,
-                    pageNumber * limitNumber
-                );
-            }
-
-            res.json({ words: filteredWords, total: totalItems });
-        } catch (error) {
-            console.error("Error parsing JSON:", error);
-            res.status(500).json({
-                error: "Internal server error: Failed to parse dictionary data",
+                return response.json();
+            })
+            .then(data => {
+                if (currentTerm && currentFilter) {
+                    initializeFuse(data.words);
+                }
+                displayDictionary(data.words);
+                createPagination(data.total);
+            })
+            .catch(error => {
+                console.error('Error fetching dictionary data:', error);
+                displayError();
             });
+    }
+
+    // Function to initialize Fuse.js for fuzzy searching
+    function initializeFuse(words) {
+        let fuseOptions = {
+            keys: [],
+            includeScore: true,
+        };
+
+        // Configure Fuse.js options based on current filter
+        switch (currentFilter) {
+            case 'definitions':
+                fuseOptions.keys = ['definitions'];
+                fuseOptions.threshold = 0.1;
+                fuseOptions.distance = 3;
+                break;
+            case 'word':
+                fuseOptions.keys = ['word'];
+                fuseOptions.threshold = 0.6;
+                fuseOptions.distance = 3;
+                break;
+            case 'translations':
+                fuseOptions.keys = ['usages.translation', 'usages.english'];
+                fuseOptions.threshold = 0.6;
+                fuseOptions.distance = 3;
+                break;
+            case 'type':
+                fuseOptions.keys = ['type'];
+                fuseOptions.threshold = 0.6;
+                fuseOptions.distance = 1;
+                break;
         }
-    });
-});
 
-// Endpoint to fetch details of a specific word
-app.get("/api/word-details", (req, res) => {
-    const { word } = req.query;
+        // Create a new Fuse instance
+        fuse = new Fuse(words, fuseOptions);
+    }
 
-    fs.readFile(dictionaryFilePath, "utf8", (err, data) => {
-        if (err) {
-            console.error("Error reading dictionary file:", err);
-            return res.status(500).json({
-                error: "Internal server error: Failed to read dictionary file",
+    // Function to handle search action
+    function searchDictionary() {
+        currentTerm = searchInput.value.trim();
+        currentFilter = filterSelect.value;
+        fetchDictionaryData();
+    }
+
+    // Function to filter words by starting letter
+    function filterByLetter(letter) {
+        currentTerm = letter;
+        currentFilter = 'startsWith';
+        fetchAllWords();
+    }
+
+    // Function to fetch all words based on current filter and term
+    function fetchAllWords() {
+        const url = new URL('/api/dictionary', window.location.origin);
+        url.searchParams.append('term', currentTerm);
+        url.searchParams.append('filter', currentFilter);
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayDictionary(data.words);
+                paginationContainer.innerHTML = '';
+            })
+            .catch(error => {
+                console.error('Error fetching dictionary data:', error);
+                displayError();
             });
+    }
+
+    // Function to display dictionary words in the UI
+    function displayDictionary(words) {
+        dictionaryContainer.innerHTML = '';
+        if (words.length === 0) {
+            displayNoResults();
+            return;
         }
 
-        try {
-            const dictionaryData = JSON.parse(data);
-            const wordDetails = dictionaryData.message.words.find(
-                (item) => item.word === word
-            );
+        // Generate HTML for each word and append to dictionary container
+        words.forEach(word => {
+            const wordDiv = document.createElement('div');
+            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4');
+            wordDiv.innerHTML = `
+                <a href="/word-details.html?word=${encodeURIComponent(word.word)}" class="block p-6 text-white">
+                    <h2 class="text-xl font-semibold mb-4">${word.word}</h2>
+                    <div class="mb-4">
+                        <strong class="block text-white-600 mb-2">Part of Speech:</strong>
+                        <span class="block">${word.type}</span>
+                    </div>
+                    <div class="mb-4">
+                        <strong class="block text-white-600 mb-2">English Definitions:</strong>
+                        <ul class="list-disc list-inside">
+                            ${word.definitions.map(def => `<li>${def}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div>
+                        <strong class="block text-white-600 mb-2">Translations:</strong>
+                        <ul>
+                            ${word.usages.map(usage => `
+                                <li>
+                                    <strong>Mi'gmaq Translation:</strong> ${usage.translation}<br>
+                                    <strong>English Translation:</strong> ${usage.english}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </a>
+            `;
+            dictionaryContainer.appendChild(wordDiv);
+        });
+    }
 
-            if (!wordDetails) {
-                return res.status(404).json({
-                    error: "Word not found in the dictionary",
-                });
+    // Function to create pagination controls
+    function createPagination(totalItems) {
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        paginationContainer.innerHTML = '';
+
+        // Previous button
+        paginationContainer.appendChild(createPaginationButton('Previous', currentPage > 1, currentPage - 1));
+
+        // Input field for page number
+        const pageInput = document.createElement('input');
+        pageInput.type = 'number';
+        pageInput.min = 1;
+        pageInput.max = totalPages;
+        pageInput.value = currentPage;
+        pageInput.className = 'px-3 py-1 bg-gray-800 text-white rounded-md mx-2 w-16 text-center';
+        paginationContainer.appendChild(pageInput);
+
+        // Go to page button
+        paginationContainer.appendChild(createPaginationButton('Go', true, () => {
+            const pageNumber = parseInt(pageInput.value);
+            if (pageNumber >= 1 && pageNumber <= totalPages) {
+                fetchDictionaryData(pageNumber);
+            } else {
+                alert(`Please enter a valid page number between 1 and ${totalPages}.`);
             }
+        }));
 
-            res.json(wordDetails);
-        } catch (error) {
-            console.error("Error parsing JSON:", error);
-            res.status(500).json({
-                error: "Internal server error: Failed to parse dictionary data",
-            });
+        // Total pages label
+        const totalPagesLabel = document.createElement('span');
+        totalPagesLabel.textContent = `of ${totalPages}`;
+        totalPagesLabel.className = 'text-white mx-2';
+        paginationContainer.appendChild(totalPagesLabel);
+
+        // Next button
+        paginationContainer.appendChild(createPaginationButton('Next', currentPage < totalPages, currentPage + 1));
+    }
+
+    // Function to create a pagination button
+    function createPaginationButton(text, enabled, page) {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.className = 'px-3 py-1 bg-gray-800 text-white rounded-md mx-2 hover:bg-gray-600';
+        button.disabled = !enabled;
+        if (enabled) {
+            button.addEventListener('click', () => fetchDictionaryData(page));
         }
-    });
-});
+        return button;
+    }
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    // Function to display a message when no results are found
+    function displayNoResults() {
+        dictionaryContainer.innerHTML = '<p class="no-results text-white-500 text-center">No results found.</p>';
+    }
+
+    // Function to display an error message when fetching data fails
+    function displayError() {
+        dictionaryContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching dictionary data. Please try again later.</p>';
+    }
 });
