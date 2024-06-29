@@ -90,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
         switch (currentFilter) {
             case 'definitions':
                 fuseOptions.keys = ['definitions'];
-                fuseOptions.threshold = 0.1;
-                fuseOptions.distance = 3;
+                fuseOptions.threshold = 0.6;
+                fuseOptions.distance = 1;
                 break;
             case 'word':
                 fuseOptions.keys = ['word'];

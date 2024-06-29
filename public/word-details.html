@@ -35,6 +35,23 @@
             <!-- Placeholder for word details -->
             <!-- Actual word details will be displayed here -->
         </div>
+
+        <!-- Comment Section -->
+        <div id="comment-section" class="mt-8">
+            <!-- Form to add a new comment -->
+            <form id="comment-form" class="mb-4">
+                <textarea id="comment-text" rows="3" placeholder="Add a comment..." class="w-full bg-gray-900 text-white p-2 rounded-md"></textarea>
+                <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300 shadow-md">Submit</button>
+            </form>
+
+            <!-- Existing comments -->
+            <div id="comments-list">
+                <!-- Comments fetched from Supabase will go here -->
+            </div>
+        </div>
+
+    
+
     </div>
 
     <!-- External Scripts -->

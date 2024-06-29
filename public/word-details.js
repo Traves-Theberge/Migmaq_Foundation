@@ -128,4 +128,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayError() {
         wordDetailsContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching word details. Please try again later.</p>';
     }
+
+    // Handle form submission for adding a comment
+    const commentForm = document.getElementById('comment-form');
+    commentForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const commentText = document.getElementById('comment-text').value.trim();
+        if (commentText) {
+            addComment(commentText);
+        }
+    });
+
+    // Function to add a comment using Supabase
+    function addComment(commentText) {
+        // Example: Replace with your Supabase integration logic
+        console.log('Adding comment:', commentText);
+        // Here you would typically use Supabase SDK to insert the comment into your database
+        // and then update the UI with the new comment.
+    }
+
 });
