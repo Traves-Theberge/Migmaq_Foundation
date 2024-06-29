@@ -55,8 +55,7 @@ app.get("/api/interesting", async (req, res) => {
                         {
                             type: "text",
                             text: `
-Delve into the richness of Mi'gmaq language with a fascinating fact: certain words in Mi'gmaq encapsulate knowledge of the language, illustrating the profound connection between indigenous languages and their environments.
-
+ embody the role of a knowledgeable Mi'gmaq linguist and share an insightful fact or story about a specific Mi'gmaq word, its origins, and its cultural significance.
 Word: ${word}
 Type: ${type}
 Translations: ${translations}
