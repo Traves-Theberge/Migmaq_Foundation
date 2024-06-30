@@ -1,12 +1,15 @@
 Migmaq_Foundation
 Description:
 The Migmaq Foundation Dictionary is a web application designed to provide a comprehensive dictionary for the Mi'gmaq language. It allows users to search for words, view their definitions, types, and translations, and supports filtering by various criteria.
+If user clicks any word it redirects to a new page with AI features! Check it out!
 
 ### Getting Started
+
+### Start Server
 ```
 nodemon server.js
-You can access the website at http://localhost:3000/
 ```
+You can access the website at http://localhost:3000/
 ### Auto restart server
 ```
 npm i -g nodemon
@@ -15,6 +18,8 @@ nodemon server.js
 
 ### TO-DO
 - Image Generator (Open AI) ?
+- Database.
+  - Comment sections
 
 ### Updates Implemented Tonight
 - Updated Fuzzy Search Function: Improved search functionality using fuse.js.
