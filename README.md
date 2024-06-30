@@ -59,9 +59,6 @@ Usage
 Access the application: Open your browser and go to http://localhost:3001.
 ```
 
-### License
-- This project is licensed under the MIT License.
-
 ## Using the Mi'gmaq Dictionary
 
 ### Homepage
@@ -101,8 +98,9 @@ Access the application: Open your browser and go to http://localhost:3001.
 1. **Comment Section**:
    - At the bottom of the word details page, there is a comment section where you can add comments about the word.
    
-
+### License
+- This project is licensed under the MIT License.
   
-- Feel free to contribute to the project by submitting issues or pull requests. We appreciate your feedback and contributions!
+# Feel free to contribute to the project by submitting issues or pull requests. We appreciate your feedback and contributions!
 
 
