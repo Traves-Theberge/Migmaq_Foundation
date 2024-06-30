@@ -17,10 +17,10 @@ nodemon server.js
 ```
 
 ### TO-DO
-- Image Generator (Open AI) ?
+- Image Generator on word details page.
+- No results found. Please check your filter and try again. should be centered in with a box around it.
 - Database.
-  - Comment sections
--No results found. Please check your filter and try again. should be centered in with a box around it.
+  - Comment sections.
 
 ### Updates Implemented Tonight
 - Updated Fuzzy Search Function: Improved search functionality using fuse.js.
