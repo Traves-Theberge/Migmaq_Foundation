@@ -15,7 +15,6 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 
 ```
 Mi'gmaq Foundation
-├── Backend
 │   ├── .env
 │   ├── .env.sample
 │   ├── .gitignore
