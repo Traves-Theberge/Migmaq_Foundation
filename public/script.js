@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const itemsPerPage = 20;
     let currentFilter = '';
     let currentTerm = '';
+    let dictionaryData = [];
+    let filteredData = [];
     let fuse; // Fuse.js instance
 
     // Initialize application
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initialize() {
         populateAlphabetContainer();
         addEventListeners();
-        fetchDictionaryData();
+        fetchFullDictionaryData();
     }
 
     // Function to populate the alphabet filter container
@@ -48,18 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to fetch dictionary data from the backend
-    function fetchDictionaryData(page = 1) {
-        currentPage = page;
-        const url = new URL('/api/dictionary', window.location.origin);
-        url.searchParams.append('page', page);
-        url.searchParams.append('limit', itemsPerPage);
-        if (currentTerm) {
-            url.searchParams.append('term', currentTerm);
-            url.searchParams.append('filter', currentFilter);
-        }
-
-        fetch(url)
+    // Function to fetch full dictionary data from the backend
+    function fetchFullDictionaryData() {
+        fetch('/api/dictionary')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -67,50 +60,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                if (currentTerm && currentFilter) {
-                    initializeFuse(data.words);
-                }
-                displayDictionary(data.words);
-                createPagination(data.total);
+                dictionaryData = data.words;
+                initializeFuse(dictionaryData);
+                filteredData = dictionaryData;
+                displayDictionary(filteredData);
+                createPagination(filteredData.length);
             })
             .catch(error => {
                 console.error('Error fetching dictionary data:', error);
-                displayError();
+                displayError('Error fetching dictionary data. Please try again later.');
             });
     }
 
     // Function to initialize Fuse.js for fuzzy searching
     function initializeFuse(words) {
-        let fuseOptions = {
-            keys: [],
-            includeScore: true,
+        const fuseOptions = {
+            keys: [
+                'word',
+                { name: 'usages.translation', weight: 0.5 },
+                { name: 'usages.english', weight: 0.5 },
+                'type',
+                'definitions'
+            ],
+            threshold: 0.4,
         };
-
-        // Configure Fuse.js options based on current filter
-        switch (currentFilter) {
-            case 'definitions':
-                fuseOptions.keys = ['definitions'];
-                fuseOptions.threshold = 0.6;
-                fuseOptions.distance = 1;
-                break;
-            case 'word':
-                fuseOptions.keys = ['word'];
-                fuseOptions.threshold = 0.6;
-                fuseOptions.distance = 3;
-                break;
-            case 'translations':
-                fuseOptions.keys = ['usages.translation', 'usages.english'];
-                fuseOptions.threshold = 0.6;
-                fuseOptions.distance = 3;
-                break;
-            case 'type':
-                fuseOptions.keys = ['type'];
-                fuseOptions.threshold = 0.6;
-                fuseOptions.distance = 1;
-                break;
-        }
-
-        // Create a new Fuse instance
         fuse = new Fuse(words, fuseOptions);
     }
 
@@ -118,49 +91,80 @@ document.addEventListener('DOMContentLoaded', function() {
     function searchDictionary() {
         currentTerm = searchInput.value.trim();
         currentFilter = filterSelect.value;
-        fetchDictionaryData();
+        if (currentTerm) {
+            let result = [];
+            switch (currentFilter) {
+                case 'word':
+                    result = fuse.search(currentTerm).filter(item => 
+                        item.item.word.toLowerCase().includes(currentTerm.toLowerCase()) ||
+                        (item.item.usages && item.item.usages.some(usage => usage.translation.toLowerCase().includes(currentTerm.toLowerCase())))
+                    );
+                    break;
+                case 'translations_mi':
+                    result = fuse.search(currentTerm).filter(item => 
+                        (item.item.usages && item.item.usages.some(usage => usage.translation.toLowerCase().includes(currentTerm.toLowerCase()))) ||
+                        item.item.word.toLowerCase().includes(currentTerm.toLowerCase())
+                    );
+                    break;
+                case 'translations_en':
+                    result = fuse.search(currentTerm).filter(item => 
+                        (item.item.usages && item.item.usages.some(usage => usage.english.toLowerCase().includes(currentTerm.toLowerCase()))) ||
+                        (item.item.definitions && item.item.definitions.some(def => def.toLowerCase().includes(currentTerm.toLowerCase())))
+                    );
+                    break;
+                case 'definitions':
+                    result = fuse.search(currentTerm).filter(item => 
+                        (item.item.definitions && item.item.definitions.some(def => def.toLowerCase().includes(currentTerm.toLowerCase()))) ||
+                        (item.item.usages && item.item.usages.some(usage => usage.english.toLowerCase().includes(currentTerm.toLowerCase())))
+                    );
+                    break;
+                case 'type':
+                    result = fuse.search(currentTerm).filter(item => item.item.type.toLowerCase().includes(currentTerm.toLowerCase()));
+                    break;
+                default:
+                    result = fuse.search(currentTerm);
+                    break;
+            }
+            filteredData = result.map(r => r.item);
+        } else {
+            filteredData = dictionaryData;
+        }
+
+        if (filteredData.length === 0) {
+            displayError('No results found. Please check your filter and try again.');
+        } else {
+            currentPage = 1; // Reset to first page on new search
+            displayDictionary(filteredData);
+            createPagination(filteredData.length);
+        }
     }
 
     // Function to filter words by starting letter
     function filterByLetter(letter) {
         currentTerm = letter;
         currentFilter = 'startsWith';
-        fetchAllWords();
-    }
-
-    // Function to fetch all words based on current filter and term
-    function fetchAllWords() {
-        const url = new URL('/api/dictionary', window.location.origin);
-        url.searchParams.append('term', currentTerm);
-        url.searchParams.append('filter', currentFilter);
-
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                displayDictionary(data.words);
-                paginationContainer.innerHTML = '';
-            })
-            .catch(error => {
-                console.error('Error fetching dictionary data:', error);
-                displayError();
-            });
+        filteredData = dictionaryData.filter(word => word.word.toLowerCase().startsWith(letter.toLowerCase()));
+        if (filteredData.length === 0) {
+            displayError('No results found. Please check your filter and try again.');
+        } else {
+            currentPage = 1; // Reset to first page on new filter
+            displayDictionary(filteredData);
+            createPagination(filteredData.length);
+        }
     }
 
     // Function to display dictionary words in the UI
     function displayDictionary(words) {
         dictionaryContainer.innerHTML = '';
         if (words.length === 0) {
-            displayNoResults();
+            displayError('No results found. Please check your filter and try again.');
             return;
         }
 
+        const paginatedWords = words.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
         // Generate HTML for each word and append to dictionary container
-        words.forEach(word => {
+        paginatedWords.forEach(word => {
             const wordDiv = document.createElement('div');
             wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4');
             wordDiv.innerHTML = `
@@ -201,24 +205,24 @@ document.addEventListener('DOMContentLoaded', function() {
         // Previous button
         paginationContainer.appendChild(createPaginationButton('Previous', currentPage > 1, currentPage - 1));
 
-        // Input field for page number
+        // Page input field
         const pageInput = document.createElement('input');
         pageInput.type = 'number';
         pageInput.min = 1;
         pageInput.max = totalPages;
         pageInput.value = currentPage;
         pageInput.className = 'px-3 py-1 bg-gray-800 text-white rounded-md mx-2 w-16 text-center';
-        paginationContainer.appendChild(pageInput);
-
-        // Go to page button
-        paginationContainer.appendChild(createPaginationButton('Go', true, () => {
+        pageInput.addEventListener('change', () => {
             const pageNumber = parseInt(pageInput.value);
             if (pageNumber >= 1 && pageNumber <= totalPages) {
-                fetchDictionaryData(pageNumber);
+                currentPage = pageNumber;
+                displayDictionary(filteredData);
+                createPagination(filteredData.length);
             } else {
                 alert(`Please enter a valid page number between 1 and ${totalPages}.`);
             }
-        }));
+        });
+        paginationContainer.appendChild(pageInput);
 
         // Total pages label
         const totalPagesLabel = document.createElement('span');
@@ -237,18 +241,17 @@ document.addEventListener('DOMContentLoaded', function() {
         button.className = 'px-3 py-1 bg-gray-800 text-white rounded-md mx-2 hover:bg-gray-600';
         button.disabled = !enabled;
         if (enabled) {
-            button.addEventListener('click', () => fetchDictionaryData(page));
+            button.addEventListener('click', () => {
+                currentPage = page;
+                displayDictionary(filteredData);
+                createPagination(filteredData.length);
+            });
         }
         return button;
     }
 
     // Function to display a message when no results are found
-    function displayNoResults() {
-        dictionaryContainer.innerHTML = '<p class="no-results text-white-500 text-center">No results found.</p>';
-    }
-
-    // Function to display an error message when fetching data fails
-    function displayError() {
-        dictionaryContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching dictionary data. Please try again later.</p>';
+    function displayError(message) {
+        dictionaryContainer.innerHTML = `<p class="error text-white-500 text-center">${message}</p>`;
     }
 });
