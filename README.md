@@ -20,12 +20,13 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 |   |-- word-details.html
 |   |-- dictionary.json
 |   |-- wordOfTheDay.json
+|   |-- index-script.js
+|   |-- script.js
+|   |-- word-details.js
 |   |-- output.css
 |
 |-- server.js
-|-- index-script.js
-|-- script.js
-|-- word-details.js
+|-- .env
 ```
 
 ### Installation
