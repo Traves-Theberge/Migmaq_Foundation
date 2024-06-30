@@ -14,19 +14,30 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 ## Project Structure
 
 ```
-|-- public
-|   |-- dictionary.html
-|   |-- index.html
-|   |-- word-details.html
-|   |-- dictionary.json
-|   |-- wordOfTheDay.json
-|   |-- index-script.js
-|   |-- script.js
-|   |-- word-details.js
-|   |-- output.css
-|
-|-- server.js
-|-- .env
+Mi'gmaq Foundation
+├── Backend
+│   ├── .env
+│   ├── .env.sample
+│   ├── .gitignore
+│   ├── LICENSE.md
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   ├── server.js
+│   ├── tailwind.config.js
+│   └── vercel.json
+├── src
+│   └── input.css
+└── public
+    ├── dictionary.html
+    ├── dictionary.json
+    ├── index-script.js
+    ├── index.html
+    ├── output.css
+    ├── script.js
+    ├── word-details.html
+    ├── word-details.js
+    └── wordOfTheDay.json
 ```
 
 # Installation
