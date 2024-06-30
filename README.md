@@ -29,35 +29,31 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 |-- .env
 ```
 
-### Installation
+# Installation
 
-### Clone the repository:
+## Clone the repository:
 
 ```
-bash
-Copy code
 git clone <repository-url>
 cd <repository-directory>
 
 ```
-### Install dependencies:
+## Install dependencies:
+
 ```
-bash
-Copy code
 npm install
 ```
-### Set up environment variables:
+
+## Set up environment variables:
 Create a .env file in the root directory and add the following:
 
 ```
-PORT=3001
 OPENAI_API_KEY=<your-openai-api-key>
 SUPABASE_KEY=<your-supabase-key>
 ```
 
 ### Run the server:
 ```
-bash
 node server.js
 Usage
 Access the application: Open your browser and go to http://localhost:3001.
