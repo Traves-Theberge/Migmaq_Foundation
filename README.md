@@ -22,7 +22,7 @@ nodemon server.js
 - Database.
   - Comment sections.
 
-### Updates Implemented Tonight
+### Updates Implemented.
 - Updated Fuzzy Search Function: Improved search functionality using fuse.js.
 - Frontend Styling: Migrated all CSS to Tailwind CSS for a more consistent and responsive design.
 - Theme Updates: Enhanced the overall theme of the application for better visual appeal.
