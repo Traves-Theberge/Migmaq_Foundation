@@ -142,7 +142,7 @@ app.get("/api/interesting", async (req, res) => {
             messages: [
                 {
                     role: "system",
-                    content: `You are a knowledgeable Mi'gmaq linguist. Share an insightful fact or story about the word "${word}", its origins, and its cultural significance.`,
+                    content: `You are a knowledgeable Mi'gmaq linguist. Share an insightful fact or story about the word "${word}", its origins, and its cultural significance. keep it short between 1 - 2 sentences .`,
                 },
                 {
                     role: "user",

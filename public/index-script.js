@@ -17,14 +17,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to display word of the day
     function displayWordOfTheDay(word) {
         wordOfTheDayContainer.innerHTML = `
-            <h3 class="text-2xl font-bold mb-2">${word.word}</h3>
-            <p class="text-lg mb-4"><strong>Part of Speech:</strong> ${word.type}</p>
-            <p class="text-lg mb-4"><strong>Definitions:</strong> ${word.definitions.join(', ')}</p>
-            <div>
-                <h4 class="text-xl font-semibold mb-2">Translations:</h4>
-                <ul class="list-disc list-inside">
-                    ${word.usages.map(usage => `<li><strong>Mi'gmaq:</strong> ${usage.translation}, <strong>English:</strong> ${usage.english}</li>`).join('')}
-                </ul>
+            <h3 class="text-3xl font-extrabold mb-6 text-white">${word.word}</h3>
+            <div class="mb-6">
+                <p class="text-2xl font-semibold mb-2">Part of Speech:</p>
+                <p class="text-xl">${word.type}</p>
+            </div>
+            <div class="mb-6">
+                <p class="text-2xl font-semibold mb-2">Definitions:</p>
+                <p class="text-xl">${word.definitions.join(', ')}</p>
+            </div>
+            <div class="mb-6">
+                <p class="text-2xl font-semibold mb-2">Translations:</p>
+                <div class="space-y-4">
+                    ${word.usages.map(usage => `
+                        <div class="mb-6">
+                            <p class="text-xl font-semibold mb-2">Mi'gmaq:</p>
+                            <p class="text-xl mb-4">${usage.translation}</p>
+                            <p class="text-xl font-semibold mb-2">English:</p>
+                            <p class="text-xl">${usage.english}</p>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
         `;
     }
