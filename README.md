@@ -64,10 +64,9 @@ SUPABASE_KEY=<your-supabase-key>
 
 ### Run the server:
 ```
-node server.js
-Usage
-Access the application: Open your browser and go to http://localhost:3001.
+nodemon server.js
 ```
+Access the application: Open your browser and go to http://localhost:3001.
 
 ## Using the Mi'gmaq Dictionary
 
