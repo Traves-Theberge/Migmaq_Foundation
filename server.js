@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs").promises;
 const path = require("path");
+const OpenAI = require("openai"); // Ensure you have the OpenAI library installed
 const cron = require("node-cron");
 
 const app = express();
@@ -12,6 +13,11 @@ const wordOfTheDayFilePath = path.join(__dirname, "public", "wordOfTheDay.json")
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
+
+// Initialize OpenAI API with the provided API key
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 // Helper functions
 async function readDictionaryFile() {
@@ -122,6 +128,45 @@ app.get("/api/word-details", async (req, res) => {
         console.error("Error fetching word details:", error);
         res.status(500).json({
             error: "Internal server error: Failed to fetch word details",
+        });
+    }
+});
+
+// Endpoint to fetch interesting facts about a word
+app.get("/api/interesting", async (req, res) => {
+    const { word, type, translations, definitions } = req.query;
+
+    try {
+        const response = await openai.chat.completions.create({
+            model: "gpt-4",
+            messages: [
+                {
+                    role: "system",
+                    content: `You are a knowledgeable Mi'gmaq linguist. Share an insightful fact or story about the word "${word}", its origins, and its cultural significance.`,
+                },
+                {
+                    role: "user",
+                    content: `Word: ${word}\nType: ${type}\nTranslations: ${translations}\nDefinitions: ${definitions}`,
+                },
+            ],
+            temperature: 1,
+            max_tokens: 256,
+            top_p: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0,
+        });
+
+        res.json({
+            word,
+            type,
+            translations,
+            definitions,
+            fact: response.choices[0].message.content,
+        });
+    } catch (error) {
+        console.error("Error generating interesting fact:", error.response ? error.response.data : error.message);
+        res.status(500).json({
+            error: "Internal server error: Failed to generate interesting fact",
         });
     }
 });
