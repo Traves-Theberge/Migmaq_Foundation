@@ -20,6 +20,7 @@ nodemon server.js
 - Image Generator (Open AI) ?
 - Database.
   - Comment sections
+-No results found. Please check your filter and try again. should be centered in with a box around it.
 
 ### Updates Implemented Tonight
 - Updated Fuzzy Search Function: Improved search functionality using fuse.js.
