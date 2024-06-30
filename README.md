@@ -13,6 +13,7 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 
 ## Project Structure
 
+```
 |-- public
 |   |-- dictionary.html
 |   |-- index.html
@@ -25,6 +26,7 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 |-- index-script.js
 |-- script.js
 |-- word-details.js
+```
 
 ### Installation
 
