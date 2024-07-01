@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to the Mi'gmaq Dictionary! Discover the word of the day and navigate to the dictionary.">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,18 +45,25 @@
         </section>
 
         <!-- Word of the Day Section -->
-        <div class="flex justify-center">
-            <section id="word-of-the-day" class="inline-block text-center mb-8">
-                <h2 class="text-3xl font-semibold mb-4">Word of the Day</h2>
+        <div class="justify-center">
+            <section id="word-of-the-day" class="inline-block text-center mb-4">
+                <h2 class="text-3xl font-semibold mb-2">Word of the Day</h2>
                 <div id="word-of-the-day-container" class="bg-gray-800 p-6 rounded-md shadow-md">
                     <!-- Word of the day will be rendered here -->
                 </div>
             </section>
+        <!-- Instructions Section -->
+            <section id="instructions-section" class="text-center">
+                <header class="text-3xl font-semibold mb-2 text-white">
+                    How to Use the Help Feature
+                </header>
+                <p class="text-lg text-gray-300 mb-2">
+                    On each page, you will find a help icon 
+                    <span class="inline-block w-6 h-6 bg-gray-500 text-white rounded-full text-center leading-6">?</span>.
+                    Hover over this icon to see instructions specific to that page.
+                </p>
+            </section>
         </div>
-
-        <footer class="text-sm text-center text-gray-400">
-            Note: This is a test page for a Dictionary with AI Facts. The dictionary is not functional yet. Thank you for your patience.
-        </footer>
     </div>
 
     <!-- External Scripts -->

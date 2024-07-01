@@ -13,6 +13,15 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="./output.css">
     <title>Word Details</title>
+
+    <style>
+        #instructionsTooltip {
+            display: none;
+        }
+        .group:hover #instructionsTooltip {
+            display: block;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-700 text-gray-100">
@@ -23,17 +32,28 @@
         </header>
         
         <!-- Navigation Link -->
-        <div class="text-center mt-8">
+        <div class="text-center mt-8 flex justify-center items-center space-x-4">
             <!-- Back to Dictionary Link -->
             <a href="dictionary.html" class="inline-block mb-6 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300 shadow-md">
                 Back to Dictionary
             </a>
+            <div id="instructionsIcon" class="relative group inline-block mb-6">
+                <div class="w-8 h-8 bg-gray-500 text-white rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-400">
+                    ?
+                </div>
+                <div id="instructionsTooltip" class="absolute left-10 bg-gray-800 text-white p-4 rounded-md w-64">
+                    <p class="mb-2">1. View detailed information about the selected word.</p>
+                    <p class="mb-2">2. Click on the word to get an interesting fact from the AI chatbot.</p>
+                    <p class="mb-2">3. Use the back button to return to the dictionary page.</p>
+                </div>
+            </div>
         </div>
 
         <!-- Word Details Container -->
         <div id="word-details-container" class="bg-gray-800 p-8 rounded-lg shadow-md mb-8 hover:shadow-lg cursor-pointer">
             <!-- Placeholder for word details -->
             <!-- Actual word details will be displayed here -->
+            <!-- AI chatbot appended afterward -->
         </div>
     </div>
 

@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const alphabetContainer = document.getElementById('alphabet-container');
     const paginationContainer = document.getElementById('pagination-container');
 
+    // Instructions icon elements
+    const instructionsIcon = document.getElementById('instructionsIcon');
+    const instructionsTooltip = document.getElementById('instructionsTooltip');
+
     // Constants and variables
     const alphabet = "AEGIJLMNOPQSTUW";
     let currentPage = 1;
@@ -47,6 +51,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 searchDictionary();
             }
+        });
+
+        // Event listeners for showing and hiding the instructions tooltip
+        instructionsIcon.addEventListener('mouseover', () => {
+            instructionsTooltip.classList.add('tooltip-visible');
+        });
+        instructionsIcon.addEventListener('mouseout', () => {
+            instructionsTooltip.classList.remove('tooltip-visible');
         });
     }
 

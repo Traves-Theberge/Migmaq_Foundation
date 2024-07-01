@@ -15,9 +15,14 @@
 
     <title>Mi'gmaq Dictionary</title>
 
-
     <style>
         /* Additional custom styles can be placed here */
+        #instructionsTooltip {
+            display: none;
+        }
+        .group:hover #instructionsTooltip {
+            display: block;
+        }
     </style>
 </head>
 
@@ -32,20 +37,25 @@
             <div class="search-container text-center text-white mb-8 flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2">
                 <input type="text" id="searchInput" placeholder="Search/Alamugsit..." class="px-4 py-2 border-2 border-gray-600 bg-gray-800 rounded-md w-full sm:w-auto">
                 <select id="filterSelect" class="px-4 py-2 border-2 border-gray-600 bg-gray-800 text-white rounded-md w-full sm:w-auto">
-                        <option value="definitions">English Word</option>
-                        <option value="word">Mi'gmaq Word</option>
-                        <option value="type">Part of Speech</option>
-                        <option value="translations_en">Translations (English)</option>
-                        <option value="translations_mi">Translations (Mi'gmaq)</option>
-                        
+                    <option value="definitions">English Word</option>
+                    <option value="word">Mi'gmaq Word</option>
+                    <option value="type">Part of Speech</option>
+                    <option value="translations_en">Translations (English)</option>
+                    <option value="translations_mi">Translations (Mi'gmaq)</option>
                 </select>
                 <button id="searchButton" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300">Search</button>
+                <div id="instructionsIcon" class="relative group">
+                    <div class="w-8 h-8 bg-gray-500 text-white rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-400">
+                        ?
+                    </div>
+                    <div id="instructionsTooltip" class="absolute left-10 bg-gray-800 text-white p-4 rounded-md w-64">
+                        <p class="mb-2">1. Use the search bar to look for specific words or phrases.</p>
+                        <p class="mb-2">2. Use the filter dropdown to refine your search by English word, Mi'gmaq word, part of speech, or translations.</p>
+                        <p class="mb-2">3. Click on any letter in the alphabet to filter words starting with that letter.</p>
+                        <p class="mb-2">4. Click on any word in the dictionary to view detailed information and interact with the AI chatbot.</p>
+                    </div>
+                </div>
             </div>
-            <!-- Note -->
-            <div class="text-sm text-center mb-4">
-                Note:  Click any word for more details an AI interaction.
-            </div>
-
             <!-- Alphabet Container -->
             <div id="alphabet-container" class="alphabet-container flex flex-wrap justify-center gap-2 mb-2 sm:gap-2 md:gap-2 lg:gap-2">
                 <!-- Alphabet letters will be appended here dynamically -->
@@ -77,8 +87,8 @@
     </div>
 
     <!-- External Scripts -->
-    <script defer src="/_vercel/speed-insights/script.js"></script>
-    <script defer src="/_vercel/insights/script.js"></script>
+    <script src="/_vercel/speed-insights/script.js"></script>
+    <script src="/_vercel/insights/script.js"></script>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 </body>
