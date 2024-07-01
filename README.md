@@ -7,7 +7,7 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
+- [Usage](#UsingtheMi'gmaqDictionary)
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
@@ -118,7 +118,8 @@ Access the application: Open your browser and go to http://localhost:3001.
    
 ### License
 - This project is licensed under the MIT License.
-  
-# Feel free to contribute to the project by submitting issues or pull requests. We appreciate your feedback and contributions!
+
+### contributing  
+- Feel free to contribute to the project by submitting issues or pull requests. We appreciate your feedback and contributions!
 
 
