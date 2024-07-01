@@ -5,13 +5,11 @@
 This project is a Mi'gmaq dictionary web application that provides users with the ability to search and explore Mi'gmaq words, their definitions, translations, and usage examples. The application also features a "Word of the Day" functionality, which is updated daily.
 
 ## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
 - [Features](#features)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
+- [Installation](#installation)
 - [License](#license)
+- [Contributing](#contributing)
 
 ## Features
 
@@ -117,7 +115,8 @@ Access the application: Open your browser and go to http://localhost:3001.
    
 ### License
 - This project is licensed under the MIT License.
-  
-# Feel free to contribute to the project by submitting issues or pull requests. We appreciate your feedback and contributions!
+
+### contributing  
+- Feel free to contribute to the project by submitting issues or pull requests. We appreciate your feedback and contributions!
 
 
