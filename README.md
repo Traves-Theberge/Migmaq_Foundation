@@ -10,7 +10,7 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 - [Installation](#installation)
 - [License](#license)
 - [Contributing](#contributing)
-- 
+
 ## Features
 
 - **Search Dictionary**: Users can search for words in the Mi'gmaq dictionary.
