@@ -4,12 +4,22 @@
 
 This project is a Mi'gmaq dictionary web application that provides users with the ability to search and explore Mi'gmaq words, their definitions, translations, and usage examples. The application also features a "Word of the Day" functionality, which is updated daily.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Features
 
 - **Search Dictionary**: Users can search for words in the Mi'gmaq dictionary.
 - **Word of the Day**: Displays a randomly selected word each day.
 - **Word Details**: Provides detailed information about selected words, including definitions, translations, and usage examples.
 - **Interactive Chatbot**: Users can click on words to get interesting facts or stories about them.
+- **Help feature**: Help Feature: Easily accessible help icon with instructions.
 
 ## Project Structure
 
