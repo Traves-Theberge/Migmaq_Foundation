@@ -5,14 +5,12 @@
 This project is a Mi'gmaq dictionary web application that provides users with the ability to search and explore Mi'gmaq words, their definitions, translations, and usage examples. The application also features a "Word of the Day" functionality, which is updated daily.
 
 ## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#UsingtheMi'gmaqDictionary)
 - [Features](#features)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
+- [Installation](#installation)
 - [License](#license)
-
+- [Contributing](#contributing)
+- 
 ## Features
 
 - **Search Dictionary**: Users can search for words in the Mi'gmaq dictionary.
