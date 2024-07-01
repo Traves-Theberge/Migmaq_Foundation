@@ -128,44 +128,4 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayError() {
         wordDetailsContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching word details. Please try again later.</p>';
     }
-
-    // Handle form submission for adding a comment
-    const commentForm = document.getElementById('comment-form');
-    commentForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const commentText = document.getElementById('comment-text').value.trim();
-        if (commentText) {
-            addComment(commentText);
-        }
-    });
-
-    // Function to add a comment using Supabase
-    async function addComment(commentText) {
-        try {
-            // Load environment variables from .env file (if using dotenv)
-            require('dotenv').config();
-
-            // Import Supabase SDK and initialize client
-            const { createClient } = require('@supabase/supabase-js');
-            const supabaseUrl = 'https://tniknknmzcpxgezozljr.supabase.co';
-            const supabaseKey = process.env.SUPABASE_KEY;
-            const supabase = createClient(supabaseUrl, supabaseKey);
-
-            // Example: Insert comment into 'comments' table
-            const { data, error } = await supabase.from('comments').insert([
-                { comment_text: commentText, word_id: wordDetails.wordId } // Adjust as per your schema
-            ]);
-
-            if (error) {
-                throw error;
-            }
-
-            console.log('Comment added successfully:', data);
-            // Optionally, update UI with new comment
-        } catch (error) {
-            console.error('Error adding comment:', error.message);
-            // Handle error (e.g., display error message to the user)
-        }
-    }
-
 });
