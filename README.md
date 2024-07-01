@@ -68,7 +68,6 @@ Create a .env file in the root directory and add the following:
 
 ```
 OPENAI_API_KEY=<your-openai-api-key>
-SUPABASE_KEY=<your-supabase-key>
 ```
 
 ### Run the server:
