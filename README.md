@@ -109,11 +109,14 @@ Access the application: Open your browser and go to http://localhost:3001.
    - The word details page displays the selected word along with its part of speech, definitions, translations, and usage examples.
    - You can interact with the chatbot by clicking on the word to get an interesting fact or story about it.
 
-### Adding Comments - undergoing change.
+### Adding Comments
 
-1. **Comment Section**:
-   - At the bottom of the word details page, there is a comment section where you can add comments about the word.
-   
+1. Navigate to a word details page by clicking on a word in the dictionary.
+2. Scroll down to the comment section.
+3. Enter your name, email, and comment content.
+4. Click "Post Comment" to add your comment.
+5. To reply to a comment, click "Reply" under the comment, fill out the reply form, and click "Post Reply".
+
 ### License
 - This project is licensed under the MIT License.
 
