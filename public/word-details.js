@@ -1,36 +1,27 @@
-// Wait for the DOM content to load before executing the script
 document.addEventListener('DOMContentLoaded', function() {
-    // Extract the 'word' parameter from the URL query string
     const queryParams = new URLSearchParams(window.location.search);
     const word = queryParams.get('word');
 
-    // Check if 'word' parameter is missing
     if (!word) {
         console.error('No word parameter found in URL.');
         return;
     }
 
-    // Get the container where word details will be displayed
     const wordDetailsContainer = document.getElementById('word-details-container');
 
-    // Fetch word details from the backend API
     fetch(`/api/word-details?word=${encodeURIComponent(word)}`)
-        .then(response => response.json()) // Parse the JSON response
+        .then(response => response.json())
         .then(wordDetails => {
-            // Display word details and initialize the chatbot
             displayWordDetails(wordDetails);
             initializeChatbot(wordDetails);
             fetchComments(word);
         })
         .catch(error => {
-            // Handle errors if fetching word details fails
             console.error('Error fetching word details:', error);
             displayError();
         });
 
-    // Function to display word details in the HTML
     function displayWordDetails(wordDetails) {
-        // Generate HTML content for displaying word details
         const wordHTML = `
             <div class="word-item">
                 <div class="p-6 text-white">
@@ -59,16 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-        // Create a div element and append the generated HTML to display word details
         const wordDiv = document.createElement("div");
         wordDiv.classList.add("word-item", "min-h-[10rem]", "border", "border-gray-300", "rounded-lg", "p-10", "mb-4");
         wordDiv.innerHTML = wordHTML;
         wordDetailsContainer.appendChild(wordDiv);
     }
 
-    // Function to initialize the chatbot for the word details
     function initializeChatbot(wordDetails) {
-        // Create a container for the chatbox and add initial HTML content
         const chatboxContainer = document.createElement('div');
         chatboxContainer.className = 'chatbox-container max-h-80 overflow-y-auto border border-gray-500 rounded-lg p-4';
         chatboxContainer.innerHTML = `
@@ -80,14 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         wordDetailsContainer.appendChild(chatboxContainer);
 
-        // Get the chatbox element
         const chatbox = chatboxContainer.querySelector('.chatbox');
 
-        // Example interaction with chatbot on clicking a word
         wordDetailsContainer.addEventListener('click', function(event) {
             const target = event.target.closest('.word-item');
             if (target) {
-                // Get the clicked word and fetch an interesting fact about it
                 const clickedWord = target.querySelector('h2').textContent.trim();
                 if (clickedWord) {
                     getInterestingFact(clickedWord);
@@ -95,27 +80,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Function to fetch an interesting fact about the clicked word
         function getInterestingFact(word) {
-            // Construct query string with word details and fetch from backend API
             const queryString = Object.keys(wordDetails)
                 .map(key => `${key}=${encodeURIComponent(wordDetails[key])}`)
                 .join("&");
 
             fetch(`/api/interesting?${queryString}`)
-                .then(response => response.json()) // Parse JSON response
+                .then(response => response.json())
                 .then(data => {
-                    // Display the fetched fact in the chatbox
                     appendMessage(data.fact, 'chat-incoming');
                 })
                 .catch(error => {
-                    // Handle errors if fetching interesting fact fails
                     console.error('Error fetching interesting fact:', error);
                     appendMessage('Failed to fetch interesting fact', 'chat-error');
                 });
         }
 
-        // Function to append a message to the chatbox
         function appendMessage(message, className) {
             const newMessage = document.createElement('li');
             newMessage.classList.add(className, 'chat', 'bg-gray-700', 'text-white', 'p-4', 'rounded-lg', 'hover:bg-gray-600', 'transition-colors', 'duration-300', 'border', 'border-gray-500');
@@ -125,70 +105,164 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to display an error message if fetching word details fails
     function displayError() {
         wordDetailsContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching word details. Please try again later.</p>';
     }
 
-    // Fetch comments for the word
     function fetchComments(wordId) {
         fetch(`/api/comments?word_id=${wordId}`)
             .then(response => response.json())
             .then(comments => {
-                displayComments(comments);
+                const nestedComments = buildNestedComments(comments);
+                displayComments(nestedComments);
             })
             .catch(error => {
                 console.error('Error fetching comments:', error);
             });
     }
 
-    // Display comments in the HTML
-    function displayComments(comments) {
-        const commentsList = document.getElementById('comments-list');
-        commentsList.innerHTML = '';
+    function buildNestedComments(comments) {
+        const commentMap = {};
+        comments.forEach(comment => {
+            comment.replies = [];
+            commentMap[comment.id] = comment;
+        });
+
+        const nestedComments = [];
+        comments.forEach(comment => {
+            if (comment.parent_id) {
+                commentMap[comment.parent_id].replies.push(comment);
+            } else {
+                nestedComments.push(comment);
+            }
+        });
+
+        return nestedComments;
+    }
+
+    function displayComments(comments, parentElement = null, level = 0) {
+        const commentsList = parentElement || document.getElementById('comments-list');
+        if (parentElement === null) commentsList.innerHTML = '';
+    
         comments.forEach(comment => {
             const commentItem = document.createElement('li');
-            commentItem.classList.add('bg-gray-900', 'p-4', 'rounded-md', 'text-white');
-            commentItem.innerHTML = `
-                <p>${comment.content}</p>
-                <small>${comment.name} (${comment.email})</small>
-                <br>
-                <small>Posted at: ${new Date(comment.created_at).toLocaleString()}</small>
-            `;
+            commentItem.classList.add('bg-gray-800', 'p-4', 'rounded-md', 'text-white', 'mt-4', 'comment-item', 'flex', 'flex-col', 'space-y-2');
+            if (level > 0) {
+                commentItem.classList.add('ml-12', 'border-l-2', 'border-gray-700', 'pl-4'); // Increased margin-left for replies
+            }
+    
+            const avatar = generateAvatar(comment.name);
+            const commentHeader = document.createElement('div');
+            commentHeader.classList.add('flex', 'items-start', 'space-x-4');
+    
+            const avatarWrapper = document.createElement('div');
+            avatarWrapper.innerHTML = avatar;
+            commentHeader.appendChild(avatarWrapper);
+    
+            const commentContent = document.createElement('div');
+            commentContent.classList.add('flex', 'flex-col', 'space-y-1', 'flex-grow');
+    
+            const commentAuthor = document.createElement('div');
+            commentAuthor.classList.add('flex', 'items-center', 'justify-between', 'mt-1');
+    
+            const authorNameDate = document.createElement('div');
+            authorNameDate.classList.add('flex', 'flex-col');
+    
+            const authorName = document.createElement('p');
+            authorName.classList.add('text-md', 'font-semibold');
+            authorName.textContent = comment.name;
+    
+            const commentDate = document.createElement('p');
+            commentDate.classList.add('text-sm', 'text-gray-400');
+            commentDate.textContent = new Date(comment.created_at).toLocaleString();
+    
+            authorNameDate.appendChild(authorName);
+            authorNameDate.appendChild(commentDate);
+    
+            commentAuthor.appendChild(authorNameDate);
+    
+            const commentText = document.createElement('p');
+            commentText.classList.add('text-lg', 'font-medium');
+            commentText.textContent = comment.content;
+    
+            commentContent.appendChild(commentAuthor);
+            commentContent.appendChild(commentText);
+    
+            commentHeader.appendChild(commentContent);
+            commentItem.appendChild(commentHeader);
+    
+            const replyButton = document.createElement('button');
+            replyButton.classList.add('reply-button', 'mt-2', 'text-blue-400', 'hover:text-blue-300', 'transition', 'duration-200', 'self-start');
+            replyButton.setAttribute('data-comment-id', comment.id);
+            replyButton.textContent = 'Reply';
+    
+            const replyForm = document.createElement('form');
+            replyForm.classList.add('reply-form', 'hidden', 'mt-2', 'flex', 'flex-col', 'space-y-2');
+            replyForm.setAttribute('data-comment-id', comment.id);
+    
+            const replyName = document.createElement('input');
+            replyName.classList.add('reply-name', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+            replyName.setAttribute('type', 'text');
+            replyName.setAttribute('placeholder', 'Your Name');
+            replyName.required = true;
+    
+            const replyEmail = document.createElement('input');
+            replyEmail.classList.add('reply-email', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+            replyEmail.setAttribute('type', 'email');
+            replyEmail.setAttribute('placeholder', 'Your Email');
+            replyEmail.required = true;
+    
+            const replyContent = document.createElement('textarea');
+            replyContent.classList.add('reply-content', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+            replyContent.setAttribute('placeholder', 'Write a reply...');
+            replyContent.required = true;
+    
+            const replySubmitButton = document.createElement('button');
+            replySubmitButton.classList.add('mt-2', 'px-4', 'py-2', 'bg-blue-600', 'text-white', 'rounded-md', 'hover:bg-blue-500', 'transition-colors', 'duration-300');
+            replySubmitButton.setAttribute('type', 'submit');
+            replySubmitButton.textContent = 'Post Reply';
+    
+            replyForm.appendChild(replyName);
+            replyForm.appendChild(replyEmail);
+            replyForm.appendChild(replyContent);
+            replyForm.appendChild(replySubmitButton);
+    
+            replyButton.addEventListener('click', () => {
+                replyForm.classList.toggle('hidden');
+            });
+    
+            replyForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const commentId = this.getAttribute('data-comment-id');
+                const replyNameValue = this.querySelector('.reply-name').value;
+                const replyEmailValue = this.querySelector('.reply-email').value;
+                const replyContentValue = this.querySelector('.reply-content').value;
+                if (replyNameValue.trim() && replyEmailValue.trim() && replyContentValue.trim()) {
+                    postComment(word, commentId, replyNameValue, replyEmailValue, replyContentValue);
+                }
+            });
+    
+            commentItem.appendChild(replyButton);
+            commentItem.appendChild(replyForm);
+    
             commentsList.appendChild(commentItem);
+    
+            if (comment.replies.length > 0) {
+                const replyList = document.createElement('ul');
+                commentItem.appendChild(replyList);
+                displayComments(comment.replies, replyList, level + 1);
+            }
         });
     }
-
-    // Handle comment form submission
-    const commentForm = document.getElementById('comment-form');
-    commentForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const commentName = document.getElementById('comment-name').value;
-        const commentEmail = document.getElementById('comment-email').value;
-        const commentContent = document.getElementById('comment-content').value;
-        if (commentName.trim() && commentEmail.trim() && commentContent.trim()) {
-            postComment(word, null, commentName, commentEmail, commentContent);
-        }
-    });
-
-    // Post a new comment
-    function postComment(wordId, parentId, name, email, content) {
-        fetch('/api/comments', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ word_id: wordId, parent_id: parentId, name, email, content })
-        })
-        .then(response => response.json())
-        .then(comment => {
-            fetchComments(wordId); // Refresh comments list
-            document.getElementById('comment-name').value = ''; // Clear name input
-            document.getElementById('comment-email').value = ''; // Clear email input
-            document.getElementById('comment-content').value = ''; // Clear textarea
-        })
-        .catch(error => {
-            console.error('Error posting comment:', error);
-        });
-    }
+    
+    function generateAvatar(name) {
+        const firstLetter = name.charAt(0).toUpperCase();
+        const colors = ['#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+        const color = colors[firstLetter.charCodeAt(0) % colors.length];
+        return `
+            <div class="avatar w-10 h-10 rounded-full flex items-center justify-center text-white font-bold" style="background-color: ${color};">
+                ${firstLetter}
+            </div>
+        `;
+    }    
 });
