@@ -18,6 +18,7 @@ This project is a Mi'gmaq dictionary web application that provides users with th
 - **Word Details**: Provides detailed information about selected words, including definitions, translations, and usage examples.
 - **Interactive Chatbot**: Users can click on words to get interesting facts or stories about them.
 - **Help feature**: Help Feature: Easily accessible help icon with instructions.
+- **Post Comments:** Users can now post comments on specific words or phrases within our dictionary. This opens up a new avenue for discussions and sharing personal insights or experiences related to the language.
 
 ## Project Structure
 

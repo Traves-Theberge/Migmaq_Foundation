@@ -3,8 +3,9 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs").promises;
 const path = require("path");
-const OpenAI = require("openai"); // Ensure you have the OpenAI library installed
+const OpenAI = require("openai");
 const cron = require("node-cron");
+const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -13,8 +14,10 @@ const wordOfTheDayFilePath = path.join(__dirname, "public", "wordOfTheDay.json")
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
 
-// Initialize OpenAI API with the provided API key
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -169,6 +172,34 @@ app.get("/api/interesting", async (req, res) => {
             error: "Internal server error: Failed to generate interesting fact",
         });
     }
+});
+
+// Endpoint to fetch comments for a word
+app.get("/api/comments", async (req, res) => {
+    const { word_id } = req.query;
+    const { data, error } = await supabase
+        .from('comments')
+        .select('*')
+        .eq('word_id', word_id)
+        .order('created_at', { ascending: true });
+
+    if (error) {
+        return res.status(500).json({ error: error.message });
+    }
+    res.json(data);
+});
+
+// Endpoint to create a new comment
+app.post("/api/comments", async (req, res) => {
+    const { word_id, parent_id, name, email, content } = req.body;
+    const { data, error } = await supabase
+        .from('comments')
+        .insert([{ word_id, parent_id, name, email, content }]);
+
+    if (error) {
+        return res.status(500).json({ error: error.message });
+    }
+    res.json(data);
 });
 
 app.listen(port, () => {

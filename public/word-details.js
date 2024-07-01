@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Display word details and initialize the chatbot
             displayWordDetails(wordDetails);
             initializeChatbot(wordDetails);
+            fetchComments(word);
         })
         .catch(error => {
             // Handle errors if fetching word details fails
@@ -127,5 +128,67 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to display an error message if fetching word details fails
     function displayError() {
         wordDetailsContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching word details. Please try again later.</p>';
+    }
+
+    // Fetch comments for the word
+    function fetchComments(wordId) {
+        fetch(`/api/comments?word_id=${wordId}`)
+            .then(response => response.json())
+            .then(comments => {
+                displayComments(comments);
+            })
+            .catch(error => {
+                console.error('Error fetching comments:', error);
+            });
+    }
+
+    // Display comments in the HTML
+    function displayComments(comments) {
+        const commentsList = document.getElementById('comments-list');
+        commentsList.innerHTML = '';
+        comments.forEach(comment => {
+            const commentItem = document.createElement('li');
+            commentItem.classList.add('bg-gray-900', 'p-4', 'rounded-md', 'text-white');
+            commentItem.innerHTML = `
+                <p>${comment.content}</p>
+                <small>${comment.name} (${comment.email})</small>
+                <br>
+                <small>Posted at: ${new Date(comment.created_at).toLocaleString()}</small>
+            `;
+            commentsList.appendChild(commentItem);
+        });
+    }
+
+    // Handle comment form submission
+    const commentForm = document.getElementById('comment-form');
+    commentForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const commentName = document.getElementById('comment-name').value;
+        const commentEmail = document.getElementById('comment-email').value;
+        const commentContent = document.getElementById('comment-content').value;
+        if (commentName.trim() && commentEmail.trim() && commentContent.trim()) {
+            postComment(word, null, commentName, commentEmail, commentContent);
+        }
+    });
+
+    // Post a new comment
+    function postComment(wordId, parentId, name, email, content) {
+        fetch('/api/comments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ word_id: wordId, parent_id: parentId, name, email, content })
+        })
+        .then(response => response.json())
+        .then(comment => {
+            fetchComments(wordId); // Refresh comments list
+            document.getElementById('comment-name').value = ''; // Clear name input
+            document.getElementById('comment-email').value = ''; // Clear email input
+            document.getElementById('comment-content').value = ''; // Clear textarea
+        })
+        .catch(error => {
+            console.error('Error posting comment:', error);
+        });
     }
 });
