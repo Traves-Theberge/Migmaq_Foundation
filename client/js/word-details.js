@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 
-    function displayComments(comments) {
-        commentsContainer.innerHTML = '';
+    function displayComments(comments, container = commentsContainer) {
+        container.innerHTML = '';
         comments.forEach(comment => {
             const commentDiv = document.createElement('div');
             commentDiv.classList.add('comment', 'mb-4', 'bg-gray-800', 'p-4', 'rounded-md');
@@ -89,25 +89,73 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p class="text-xl font-semibold">${comment.name}</p>
                 <p class="text-gray-500 text-sm">${new Date(comment.created_at).toLocaleString()}</p>
                 <p class="mt-2">${comment.content}</p>
+                <button class="reply-button text-blue-500 text-sm mt-2">Reply</button>
+                <div class="replies ml-4 mt-4"></div>
             `;
-            commentsContainer.appendChild(commentDiv);
+            container.appendChild(commentDiv);
 
-            if (comment.replies) {
-                const repliesDiv = document.createElement('div');
-                repliesDiv.classList.add('ml-4', 'mt-4');
-                comment.replies.forEach(reply => {
-                    const replyDiv = document.createElement('div');
-                    replyDiv.classList.add('reply', 'mb-4', 'bg-gray-700', 'p-4', 'rounded-md');
-                    replyDiv.innerHTML = `
-                        <p class="text-lg font-semibold">${reply.name}</p>
-                        <p class="text-gray-500 text-sm">${new Date(reply.created_at).toLocaleString()}</p>
-                        <p class="mt-2">${reply.content}</p>
-                    `;
-                    repliesDiv.appendChild(replyDiv);
-                });
-                commentDiv.appendChild(repliesDiv);
+            const repliesContainer = commentDiv.querySelector('.replies');
+            if (comment.replies && comment.replies.length > 0) {
+                displayComments(comment.replies, repliesContainer);
             }
+
+            const replyButton = commentDiv.querySelector('.reply-button');
+            replyButton.addEventListener('click', () => {
+                const parent_id = comment.id;
+                const replyForm = createReplyForm(parent_id);
+                repliesContainer.appendChild(replyForm);
+            });
         });
+    }
+
+    function createReplyForm(parent_id) {
+        const form = document.createElement('form');
+        form.classList.add('reply-form', 'mt-4');
+        form.innerHTML = `
+            <input type="hidden" name="parent_id" value="${parent_id}">
+            <input type="hidden" name="word_id" value="${wordIdInput.value}">
+            <div class="mb-4">
+                <input type="text" name="name" placeholder="Your Name" class="px-4 py-2 border-2 border-gray-600 bg-gray-800 rounded-md w-full">
+            </div>
+            <div class="mb-4">
+                <input type="email" name="email" placeholder="Your Email" class="px-4 py-2 border-2 border-gray-600 bg-gray-800 rounded-md w-full">
+            </div>
+            <div class="mb-4">
+                <textarea name="content" placeholder="Your Comment" class="px-4 py-2 border-2 border-gray-600 bg-gray-800 rounded-md w-full" rows="4"></textarea>
+            </div>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300">Submit Comment</button>
+        `;
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const commentData = {
+                word_id: formData.get('word_id'),
+                parent_id: formData.get('parent_id') || null,
+                name: formData.get('name'),
+                email: formData.get('email'),
+                content: formData.get('content')
+            };
+
+            fetch('/api/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(commentData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    form.remove();
+                    fetchComments(word);
+                })
+                .catch(error => {
+                    console.error('Error adding comment:', error);
+                });
+        });
+
+        return form;
     }
 
     commentForm.addEventListener('submit', function(event) {
