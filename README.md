@@ -70,20 +70,16 @@ Mi'gmaq Foundation
 ```
 git clone https://github.com/your-username/migmaq-foundation.git
 cd migmaq-foundation
-Install the dependencies:
 ```
-
+Install the dependencies:
 ```
 npm install
 ```
-
 Copy the sample environment file and configure it with your keys:
-
 ```
 cp .env.sample .env
 Update .env with your Supabase and OpenAI keys.
 ```
-
 ## Running the Application
 
 Start the server:
