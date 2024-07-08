@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const wordOfTheDayContainer = document.getElementById('word-of-the-day-container');
 
-    // Fetch and display word of the day
     function fetchWordOfTheDay() {
         fetch('/api/word-of-the-day')
             .then(response => response.json())
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Function to display word of the day
     function displayWordOfTheDay(word) {
         wordOfTheDayContainer.innerHTML = `
             <h3 class="text-3xl font-extrabold mb-6 text-white">${word.word}</h3>

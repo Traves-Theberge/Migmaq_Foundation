@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Educational Section - Mi'gmaq Dictionary">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="../css/output.css">
+    <title>Educational Section - Mi'gmaq Dictionary</title>
+
+    <style>
+        /* Additional custom styles can be placed here */
+    </style>
+</head>
+
+<body class="bg-gray-700 text-gray-100">
+    <div class="container mx-auto p-8">
+        <!-- Navigation Bar -->
+        <nav class="text-center mb-8">
+            <ul class="flex justify-center space-x-4">
+                <li>
+                    <a href="/" class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300 shadow-md">
+                        Back to Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#word-of-the-day-section" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300 shadow-md">
+                        Word of the Day
+                    </a>
+                </li>
+                <li>
+                    <a href="#lessons-section" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300 shadow-md">
+                        Lessons
+                    </a>
+                </li>
+                <li>
+                    <a href="#games-section" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300 shadow-md">
+                        Games
+                    </a>
+                </li>
+                <li>
+                    <a href="#resources-section" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300 shadow-md">
+                        Resources
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Word of the Day Section -->
+        <section id="word-of-the-day-section" class="text-center mt-12">
+            <h2 class="text-3xl font-semibold mb-6">Word of the Day</h2>
+            <div id="word-of-the-day-container" class="bg-gray-800 p-6 rounded-md shadow-md">
+                <!-- Word of the day will be rendered here -->
+            </div>
+        </section>
+
+        <!-- Lessons Section -->
+        <section id="lessons-section" class="text-center mt-12">
+            <h2 class="text-3xl font-semibold mb-6">Lessons</h2>
+            <p class="text-xl mb-6">Here you will find various lessons to help you learn the Mi'gmaq language.</p>
+            <!-- Lesson links or descriptions will go here -->
+            <div id="lessons-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Example lesson -->
+                <div class="lesson-item bg-gray-800 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold mb-2">Lesson 1</h3>
+                    <p class="text-lg mb-4">Description of the lesson and what it covers.</p>
+                    <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300">Start Lesson</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games-section" class="text-center mt-12">
+            <h2 class="text-3xl font-semibold mb-6">Games</h2>
+            <p class="text-xl mb-6">Here you will find various educational games to help you learn the Mi'gmaq language.</p>
+            <!-- Game links or descriptions will go here -->
+            <div id="games-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Example game -->
+                <div class="game-item bg-gray-800 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold mb-2">Game 1</h3>
+                    <p class="text-lg mb-4">Description of the game and how it helps in learning Mi'gmaq.</p>
+                    <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300">Play Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources-section" class="text-center mt-12">
+            <h2 class="text-3xl font-semibold mb-6">Resources</h2>
+            <p class="text-xl mb-6">Here you will find various resources to help you learn the Mi'gmaq language.</p>
+            <!-- Resource links or descriptions will go here -->
+            <div id="resources-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Example resource -->
+                <div class="resource-item bg-gray-800 p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold mb-2">Resource 1</h3>
+                    <p class="text-lg mb-4">Description of the resource and how it helps in learning Mi'gmaq.</p>
+                    <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300">View Resource</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- External Scripts -->
+    <script src="../js/education.js"></script>
+</body>
+
+</html>

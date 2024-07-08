@@ -1,6 +1,4 @@
-// Wait for the DOM content to load before executing the script
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM elements
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const filterSelect = document.getElementById('filterSelect');
@@ -8,11 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const alphabetContainer = document.getElementById('alphabet-container');
     const paginationContainer = document.getElementById('pagination-container');
 
-    // Instructions icon elements
-    const instructionsIcon = document.getElementById('instructionsIcon');
-    const instructionsTooltip = document.getElementById('instructionsTooltip');
-
-    // Constants and variables
     const alphabet = "AEGIJLMNOPQSTUW";
     let currentPage = 1;
     const itemsPerPage = 20;
@@ -20,19 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentTerm = '';
     let dictionaryData = [];
     let filteredData = [];
-    let fuse; // Fuse.js instance
+    let fuse;
 
-    // Initialize application
     initialize();
 
-    // Function to initialize the application
     function initialize() {
         populateAlphabetContainer();
         addEventListeners();
         fetchFullDictionaryData();
     }
 
-    // Function to populate the alphabet filter container
     function populateAlphabetContainer() {
         alphabet.split('').forEach(letter => {
             const letterSpan = document.createElement('span');
@@ -43,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to add event listeners to search input and button
     function addEventListeners() {
         searchButton.addEventListener('click', () => searchDictionary());
         searchInput.addEventListener('keydown', function(event) {
@@ -52,27 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 searchDictionary();
             }
         });
-
-        // Event listeners for showing and hiding the instructions tooltip
-        instructionsIcon.addEventListener('mouseover', () => {
-            instructionsTooltip.classList.add('tooltip-visible');
-        });
-        instructionsIcon.addEventListener('mouseout', () => {
-            instructionsTooltip.classList.remove('tooltip-visible');
-        });
     }
 
-    // Function to fetch full dictionary data from the backend
     function fetchFullDictionaryData() {
         fetch('/api/dictionary')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                dictionaryData = data.words;
+                dictionaryData = data || [];
                 initializeFuse(dictionaryData);
                 filteredData = dictionaryData;
                 displayDictionary(filteredData);
@@ -84,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Function to initialize Fuse.js for fuzzy searching
     function initializeFuse(words) {
         const fuseOptions = {
             keys: [
@@ -99,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
         fuse = new Fuse(words, fuseOptions);
     }
 
-    // Function to handle search action
     function searchDictionary() {
         currentTerm = searchInput.value.trim();
         currentFilter = filterSelect.value;
@@ -107,25 +80,25 @@ document.addEventListener('DOMContentLoaded', function() {
             let result = [];
             switch (currentFilter) {
                 case 'word':
-                    result = fuse.search(currentTerm).filter(item => 
+                    result = fuse.search(currentTerm).filter(item =>
                         item.item.word.toLowerCase().includes(currentTerm.toLowerCase()) ||
                         (item.item.usages && item.item.usages.some(usage => usage.translation.toLowerCase().includes(currentTerm.toLowerCase())))
                     );
                     break;
                 case 'translations_mi':
-                    result = fuse.search(currentTerm).filter(item => 
+                    result = fuse.search(currentTerm).filter(item =>
                         (item.item.usages && item.item.usages.some(usage => usage.translation.toLowerCase().includes(currentTerm.toLowerCase()))) ||
                         item.item.word.toLowerCase().includes(currentTerm.toLowerCase())
                     );
                     break;
                 case 'translations_en':
-                    result = fuse.search(currentTerm).filter(item => 
+                    result = fuse.search(currentTerm).filter(item =>
                         (item.item.usages && item.item.usages.some(usage => usage.english.toLowerCase().includes(currentTerm.toLowerCase()))) ||
                         (item.item.definitions && item.item.definitions.some(def => def.toLowerCase().includes(currentTerm.toLowerCase())))
                     );
                     break;
                 case 'definitions':
-                    result = fuse.search(currentTerm).filter(item => 
+                    result = fuse.search(currentTerm).filter(item =>
                         (item.item.definitions && item.item.definitions.some(def => def.toLowerCase().includes(currentTerm.toLowerCase()))) ||
                         (item.item.usages && item.item.usages.some(usage => usage.english.toLowerCase().includes(currentTerm.toLowerCase())))
                     );
@@ -145,13 +118,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (filteredData.length === 0) {
             displayError('No results found. Please check your filter and try again.');
         } else {
-            currentPage = 1; // Reset to first page on new search
+            currentPage = 1;
             displayDictionary(filteredData);
             createPagination(filteredData.length);
         }
     }
 
-    // Function to filter words by starting letter
     function filterByLetter(letter) {
         currentTerm = letter;
         currentFilter = 'startsWith';
@@ -159,13 +131,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (filteredData.length === 0) {
             displayError('No results found. Please check your filter and try again.');
         } else {
-            currentPage = 1; // Reset to first page on new filter
+            currentPage = 1;
             displayDictionary(filteredData);
             createPagination(filteredData.length);
         }
     }
 
-    // Function to display dictionary words in the UI
     function displayDictionary(words) {
         dictionaryContainer.innerHTML = '';
         if (words.length === 0) {
@@ -175,7 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const paginatedWords = words.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-        // Generate HTML for each word and append to dictionary container
         paginatedWords.forEach(word => {
             const wordDiv = document.createElement('div');
             wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4');
@@ -209,15 +179,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to create pagination controls
     function createPagination(totalItems) {
         const totalPages = Math.ceil(totalItems / itemsPerPage);
         paginationContainer.innerHTML = '';
 
-        // Previous button
         paginationContainer.appendChild(createPaginationButton('Previous', currentPage > 1, currentPage - 1));
 
-        // Page input field
         const pageInput = document.createElement('input');
         pageInput.type = 'number';
         pageInput.min = 1;
@@ -236,17 +203,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         paginationContainer.appendChild(pageInput);
 
-        // Total pages label
         const totalPagesLabel = document.createElement('span');
         totalPagesLabel.textContent = `of ${totalPages}`;
         totalPagesLabel.className = 'text-white mx-2';
         paginationContainer.appendChild(totalPagesLabel);
 
-        // Next button
         paginationContainer.appendChild(createPaginationButton('Next', currentPage < totalPages, currentPage + 1));
     }
 
-    // Function to create a pagination button
     function createPaginationButton(text, enabled, page) {
         const button = document.createElement('button');
         button.textContent = text;
@@ -262,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return button;
     }
 
-    // Function to display a message when no results are found
     function displayError(message) {
         dictionaryContainer.innerHTML = `<p class="error text-white-500 text-center">${message}</p>`;
     }
