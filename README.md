@@ -1,126 +1,160 @@
-# Mi'gmaq Dictionary Project
+# Mi'gmaq Foundation
 
 ## Overview
 
-This project is a Mi'gmaq dictionary web application that provides users with the ability to search and explore Mi'gmaq words, their definitions, translations, and usage examples. The application also features a "Word of the Day" functionality, which is updated daily.
-
-## Table of Contents
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [License](#license)
-- [Contributing](#contributing)
-
-## Features
-
-- **Search Dictionary**: Users can search for words in the Mi'gmaq dictionary.
-- **Word of the Day**: Displays a randomly selected word each day.
-- **Word Details**: Provides detailed information about selected words, including definitions, translations, and usage examples.
-- **Interactive Chatbot**: Users can click on words to get interesting facts or stories about them.
-- **Help feature**: Help Feature: Easily accessible help icon with instructions.
-- **Post Comments:** Users can now post comments on specific words or phrases within our dictionary. This opens up a new avenue for discussions and sharing personal insights or experiences related to the language.
+The Mi'gmaq Foundation project is a web application aimed at preserving and promoting the Mi'gmaq language through an interactive dictionary, educational resources, and a word of the day feature. The application is built using Node.js for the backend, with Express for routing and Supabase for data storage. The frontend is built with HTML, CSS, and JavaScript.
 
 ## Project Structure
 
 ```
 Mi'gmaq Foundation
-│   ├── .env.sample // rename to .env
-│   ├── .gitignore
-│   ├── LICENSE.md
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── README.md
-│   ├── server.js
-│   ├── tailwind.config.js
-│   └── vercel.json
-├── src
-│   └── input.css
-└── public
-    ├── dictionary.html
-    ├── dictionary.json
-    ├── index-script.js
-    ├── index.html
-    ├── output.css
-    ├── script.js
-    ├── word-details.html
-    ├── word-details.js
-    └── wordOfTheDay.json
+├── .env.sample
+├── .gitignore
+├── LICENSE.md
+├── README.md
+├── package-lock.json
+├── package.json
+├── tailwind.config.js
+├── vercel.json
+├── client
+│ ├── css
+│ │ ├── input.css
+│ │ ├── output.css
+│ ├── js
+│ │ ├── index.js
+│ │ ├── education.js
+│ │ ├── dictionary.js
+│ │ ├── word-details.js
+│ ├── pages
+│ │ ├── index.html
+│ │ ├── education.html
+│ │ ├── dictionary.html
+│ │ ├── word-details.html
+│ ├── assets
+│ │ ├── dictionary.json
+│ │ ├── wordOfTheDay.json
+├── server
+│ ├── config
+│ │ ├── database.js
+│ │ ├── openai.js
+│ ├── controllers
+│ │ ├── dictionaryController.js
+│ │ ├── wordOfTheDayController.js
+│ │ ├── aiController.js
+│ ├── routes
+│ │ ├── dictionaryRoutes.js
+│ │ ├── wordOfTheDayRoutes.js
+│ │ ├── aiRoutes.js
+│ ├── services
+│ │ ├── dictionaryService.js
+│ │ ├── wordOfTheDayService.js
+│ │ ├── aiService.js
+│ ├── app.js
+│ ├── server.js
+├── .env
 ```
 
-# Installation
+## Getting Started
 
-## Clone the repository:
+### Prerequisites
+
+- Node.js (v14 or later)
+- NPM (v6 or later)
+- Supabase account and API keys
+- OpenAI API keys
+
+### Installation
+
+1. Clone the repository:
 
 ```
-git clone <repository-url>
-cd <repository-directory>
-
+git clone https://github.com/your-username/migmaq-foundation.git
+cd migmaq-foundation
+Install the dependencies:
 ```
-## Install dependencies:
 
 ```
 npm install
 ```
 
-## Set up environment variables:
-Create a .env file in the root directory and add the following:
+Copy the sample environment file and configure it with your keys:
 
 ```
-OPENAI_API_KEY=<your-openai-api-key>
+cp .env.sample .env
+Update .env with your Supabase and OpenAI keys.
 ```
 
-### Run the server:
+## Running the Application
+
+Start the server:
 ```
-nodemon server.js
+node server/server.js
+Open your browser and navigate to http://localhost:3001.
 ```
-Access the application: Open your browser and go to http://localhost:3001.
 
-## Using the Mi'gmaq Dictionary
+## Features
 
-### Homepage
+### Word of the Day
+- Displays a new Mi'gmaq word every day.
+- Fetches word details and an interesting fact using the OpenAI API.
 
-- **Welcome Section**: The homepage greets you with a welcome message and a button to enter the dictionary.
-- **Word of the Day**: The homepage displays a "Word of the Day" along with its part of speech, definitions, and translations.
+### Dictionary
+- Allows users to search for Mi'gmaq words and view their translations and definitions.
+- Provides details for each word, including part of speech, translations, and example usages.
 
-### Searching the Dictionary
+### Educational Resources
+- Contains various sections including lessons, games, and additional resources to help users learn Mi'gmaq.
 
-1. **Navigate to the Dictionary**:
-   - Click the "Enter Dictionary" button on the homepage to go to the dictionary page.
+### Comments
+- Users can comment on words, and comments can have nested replies.
+- Each comment displays the user's avatar (based on the initial of their email), name, date, and content.
 
-2. **Using the Search Bar**:
-   - Enter the term you want to search for in the search input field.
-   - Use the dropdown menu to select the type of search filter:
-     - `English Word` (definitions)
-     - `Mi'gmaq Word` (word)
-     - `Part of Speech` (type)
-     - `Translations (English)` (translations_en)
-     - `Translations (Mi'gmaq)` (translations_mi)
-   - Click the "Search" button or press `Enter` to execute the search.
+## Project Structure Details
 
-3. **Filtering by Alphabet**:
-   - Click on any letter in the alphabet filter to view words that start with that letter.
+### Backend
+- `server/config`: Contains configuration files for database and OpenAI.
+- `server/controllers`: Handles the business logic for different functionalities.
+- `server/routes`: Defines the routes for the API endpoints.
+- `server/services`: Contains service files that interact with the database and external APIs.
 
-### Viewing Word Details
+### Frontend
+- `client/css`: Contains the CSS files for styling the application.
+- `client/js`: Contains JavaScript files for handling client-side logic and interactions.
+- `client/pages`: Contains HTML files for different pages of the application.
+- `client/assets`: Contains JSON files and other static assets.
 
-1. **Select a Word**:
-   - Click on any word from the search results or the filtered list to view its details.
+## API Endpoints
 
-2. **Word Details Page**:
-   - The word details page displays the selected word along with its part of speech, definitions, translations, and usage examples.
-   - You can interact with the chatbot by clicking on the word to get an interesting fact or story about it.
+### Word of the Day
+- `GET /api/word-of-the-day`: Fetches the current word of the day.
 
-### Adding Comments
+### Dictionary
+- `GET /api/dictionary`: Fetches the list of words in the dictionary.
+- `GET /api/word-details?word=<word>`: Fetches details for a specific word.
 
-1. Navigate to a word details page by clicking on a word in the dictionary.
-2. Scroll down to the comment section.
-3. Enter your name, email, and comment content.
-4. Click "Post Comment" to add your comment.
-5. To reply to a comment, click "Reply" under the comment, fill out the reply form, and click "Post Reply".
+### Comments
+- `GET /api/comments?word_id=<word_id>`: Fetches comments for a specific word.
+- `POST /api/comments`: Submits a new comment.
 
-### License
-- This project is licensed under the MIT License.
+## Contributing
 
-### contributing  
-- Feel free to contribute to the project by submitting issues or pull requests. We appreciate your feedback and contributions!
+If you would like to contribute to this project, please follow these steps:
 
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Open a pull request.
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgements
+
+- Supabase for providing a robust backend solution.
+- OpenAI for their powerful language processing API.
+- Tailwind CSS for their utility-first CSS framework.
+
+Feel free to modify this README as per your project's needs and specifics.
