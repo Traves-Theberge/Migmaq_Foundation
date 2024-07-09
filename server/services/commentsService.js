@@ -1,37 +1,32 @@
 const supabase = require('../config/database');
 
-exports.getComments = async (word_id) => {
-    const { data, error } = await supabase
-        .from('comments')
-        .select('*')
-        .eq('word_id', word_id)
-        .order('created_at', { ascending: true });
+exports.getComments = async (wordId) => {
+    try {
+        const { data, error } = await supabase
+            .from('comments')
+            .select('*')
+            .eq('word_id', wordId)
+            .order('created_at', { ascending: true });
 
-    if (error) throw new Error('Error fetching comments');
-
-    // Organize comments into a nested structure
-    const commentsMap = {};
-    data.forEach(comment => {
-        commentsMap[comment.id] = { ...comment, replies: [] };
-    });
-    
-    const rootComments = [];
-    data.forEach(comment => {
-        if (comment.parent_id) {
-            commentsMap[comment.parent_id].replies.push(commentsMap[comment.id]);
-        } else {
-            rootComments.push(commentsMap[comment.id]);
-        }
-    });
-
-    return rootComments;
+        if (error) throw error;
+        return data;
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        throw error;
+    }
 };
 
 exports.addComment = async (comment) => {
-    const { data, error } = await supabase
-        .from('comments')
-        .insert([comment]);
+    try {
+        const { data, error } = await supabase
+            .from('comments')
+            .insert([comment])
+            .select();
 
-    if (error) throw new Error('Error adding comment');
-    return data[0];
+        if (error) throw error;
+        return data[0];
+    } catch (error) {
+        console.error('Error adding comment:', error);
+        throw error;
+    }
 };

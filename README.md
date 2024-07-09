@@ -4,6 +4,46 @@
 
 The Mi'gmaq Foundation project is a web application aimed at preserving and promoting the Mi'gmaq language through an interactive dictionary, educational resources, and a word of the day feature. The application is built using Node.js for the backend, with Express for routing and Supabase for data storage. The frontend is built with HTML, CSS, and JavaScript.
 
+## High-Level Architecture Diagram
+```
++------------------+         +-------------------+         +-----------------------+
+|                  |         |                   |         |                       |
+|   Client (HTML)  +<------->+   Server (API)    +<------->+   Data Sources        |
+|                  | HTTP    |                   |         |                       |
++------------------+         +-------------------+         +-----------------------+
+      |                            |                              |
+      v                            v                              v
++-------------+         +-------------------+         +------------------------+
+|             |         |   Routes          |         |  Static JSON Files     |
+|  JS Files   +<------->+ (dictionaryRoutes,|         |  (dictionary.json,     |
+|             | HTTP    |  wordOfTheDayRoutes,        |   wordOfTheDay.json)   |
++-------------+         |  aiRoutes,         |         +------------------------+
+                       |  commentsRoutes)    |                   |
+                       +-------------------+                    |
+                                |                              |
+                                v                              |
+                       +-------------------+                   |
+                       |   Controllers     |                   |
+                       | (dictionary,      |                   |
+                       |  wordOfTheDay,    |                   |
+                       |  ai, comments)    |                   |
+                       +-------------------+                   |
+                                |                              |
+                                v                              |
+                       +-------------------+                   |
+                       |   Services        |                   |
+                       | (dictionary,      |                   |
+                       |  wordOfTheDay,    |                   |
+                       |  ai, comments)    |                   |
+                       +-------------------+                   |
+                                |                              |
+                                v                              v
+                       +-------------------+         +------------------------+
+                       |  Config           |         |   Supabase (DB)        |
+                       | (openai, database)|         +------------------------+
+                       +-------------------+
+```
+
 ## Project Structure
 
 ```
