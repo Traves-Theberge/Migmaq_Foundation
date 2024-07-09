@@ -41,14 +41,17 @@ Mi'gmaq Foundation
 │ │ ├── dictionaryController.js
 │ │ ├── wordOfTheDayController.js
 │ │ ├── aiController.js
+│ │ ├── commentsController.js
 │ ├── routes
 │ │ ├── dictionaryRoutes.js
 │ │ ├── wordOfTheDayRoutes.js
 │ │ ├── aiRoutes.js
+│ │ ├── commentsRoutes.js
 │ ├── services
 │ │ ├── dictionaryService.js
 │ │ ├── wordOfTheDayService.js
 │ │ ├── aiService.js
+│ │ ├── commentsService.js           
 │ ├── app.js
 │ ├── server.js
 ├── .env
