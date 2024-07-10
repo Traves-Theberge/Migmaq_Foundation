@@ -6,7 +6,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "client/pages/**/*",
+      "src": "client/**/*",
       "use": "@vercel/static"
     }
   ],
@@ -16,12 +16,24 @@
       "dest": "/server/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/client/pages/$1"
+      "src": "/dictionary",
+      "dest": "/client/pages/dictionary.html"
+    },
+    {
+      "src": "/education",
+      "dest": "/client/pages/education.html"
+    },
+    {
+      "src": "/word-details",
+      "dest": "/client/pages/word-details.html"
     },
     {
       "src": "/",
       "dest": "/client/pages/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/pages/$1"
     }
   ]
 }
