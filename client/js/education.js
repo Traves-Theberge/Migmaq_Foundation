@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     const wordOfTheDayContainer = document.getElementById('word-of-the-day-container');
 
-    // Function to fetch the word of the day from the server
     function fetchWordOfTheDay() {
         fetch('/api/word-of-the-day')
             .then(response => response.json())
             .then(data => {
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                console.log('Fetched word of the day:', data);
                 displayWordOfTheDay(data);
             })
             .catch(error => {
@@ -14,8 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Function to display the word of the day in the HTML
     function displayWordOfTheDay(word) {
+        if (!word || !word.word || !word.type || !word.definitions || !word.translations || !word.usages) {
+            console.error('Invalid word data:', word);
+            wordOfTheDayContainer.innerHTML = '<p class="text-red-500">Error displaying word of the day. Invalid data format.</p>';
+            return;
+        }
+
         wordOfTheDayContainer.innerHTML = `
             <h3 class="text-3xl font-extrabold mb-6 text-white">${word.word}</h3>
             <div class="mb-6">
@@ -28,6 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div class="mb-6">
                 <p class="text-2xl font-semibold mb-2">Translations:</p>
+                <div class="space-y-4">
+                    ${word.translations.map(translation => `<p class="text-xl">${translation}</p>`).join('')}
+                </div>
+            </div>
+            <div class="mb-6">
+                <p class="text-2xl font-semibold mb-2">Usages:</p>
                 <div class="space-y-4">
                     ${word.usages.map(usage => `
                         <div class="mb-6">
@@ -42,6 +56,5 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 
-    // Fetch and display the word of the day when the page loads
     fetchWordOfTheDay();
 });
