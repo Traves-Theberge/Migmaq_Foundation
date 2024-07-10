@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`/api/comments?word_id=${encodeURIComponent(wordId)}`)
             .then(response => response.json())
             .then(comments => {
+                commentsContainer.innerHTML = ''; // Clear previous comments
                 const nestedComments = buildNestedComments(comments);
                 displayComments(nestedComments);
             })
@@ -99,8 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function displayComments(comments, parentElement = null, level = 0) {
         const commentsList = parentElement || document.createElement('ul');
-        commentsContainer.appendChild(commentsList);
-        if (parentElement === null) commentsList.innerHTML = '';
+        if (!parentElement) commentsContainer.appendChild(commentsList);
 
         comments.forEach(comment => {
             const commentItem = document.createElement('li');
@@ -241,7 +241,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.error) {
                 throw new Error(data.error.message);
             }
-            fetchComments(wordId);
+            // Ensure the new comment has a replies property
+            const newComment = {
+                ...data,
+                replies: []
+            };
+            appendNewComment(newComment);
             document.getElementById('name').value = '';
             document.getElementById('email').value = '';
             document.getElementById('content').value = '';
@@ -250,6 +255,20 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error posting comment:', error);
         });
+    }
+
+    function appendNewComment(comment) {
+        // Find the parent comment if it exists
+        if (comment.parent_id) {
+            const parentCommentElement = document.querySelector(`button[data-comment-id="${comment.parent_id}"]`).closest('li');
+            const replyList = parentCommentElement.querySelector('ul') || document.createElement('ul');
+            parentCommentElement.appendChild(replyList);
+            displayComments([comment], replyList);
+        } else {
+            // Append as a new top-level comment
+            const nestedComments = buildNestedComments([comment]);
+            displayComments(nestedComments);
+        }
     }
 
     function generateAvatar(name) {
