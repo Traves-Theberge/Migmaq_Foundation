@@ -1,48 +1,16 @@
+
 # Mi'gmaq Foundation
 
-## Overview
+- Welcome to the Mi'gmaq Foundation repository. This project aims to provide educational resources and tools for learning and preserving the Mi'gmaq language.
 
-The Mi'gmaq Foundation project is a web application aimed at preserving and promoting the Mi'gmaq language through an interactive dictionary, educational resources, and a word of the day feature. The application is built using Node.js for the backend, with Express for routing and Supabase for data storage. The frontend is built with HTML, CSS, and JavaScript.
+## Table of Contents
 
-## High-Level Architecture Diagram
-```
-+------------------+         +-------------------+         +-----------------------+
-|                  |         |                   |         |                       |
-|   Client (HTML)  +<------->+   Server (API)    +<------->+   Data Sources        |
-|                  | HTTP    |                   |         |                       |
-+------------------+         +-------------------+         +-----------------------+
-      |                            |                              |
-      v                            v                              v
-+-------------+         +-------------------+         +------------------------+
-|             |         |   Routes          |         |  Static JSON Files     |
-|  JS Files   +<------->+ (dictionaryRoutes,|         |  (dictionary.json,     |
-|             | HTTP    |  wordOfTheDayRoutes,        |   wordOfTheDay.json)   |
-+-------------+         |  aiRoutes,         |         +------------------------+
-                       |  commentsRoutes)    |                   |
-                       +-------------------+                    |
-                                |                              |
-                                v                              |
-                       +-------------------+                   |
-                       |   Controllers     |                   |
-                       | (dictionary,      |                   |
-                       |  wordOfTheDay,    |                   |
-                       |  ai, comments)    |                   |
-                       +-------------------+                   |
-                                |                              |
-                                v                              |
-                       +-------------------+                   |
-                       |   Services        |                   |
-                       | (dictionary,      |                   |
-                       |  wordOfTheDay,    |                   |
-                       |  ai, comments)    |                   |
-                       +-------------------+                   |
-                                |                              |
-                                v                              v
-                       +-------------------+         +------------------------+
-                       |  Config           |         |   Supabase (DB)        |
-                       | (openai, database)|         +------------------------+
-                       +-------------------+
-```
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+- [Client-side Code](#client-side-code)
+- [Server-side Code](#server-side-code)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Project Structure
 
@@ -91,109 +59,119 @@ Mi'gmaq Foundation
 │ │ ├── dictionaryService.js
 │ │ ├── wordOfTheDayService.js
 │ │ ├── aiService.js
-│ │ ├── commentsService.js           
+│ │ ├── commentsService.js
 │ ├── app.js
 │ ├── server.js
 ├── .env
 ```
+## High-Level Architecture Diagram
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v14 or later)
-- NPM (v6 or later)
-- Supabase account and API keys
-- OpenAI API keys
-
-### Installation
-
-1. Clone the repository:
-
-```
-git clone https://github.com/your-username/migmaq-foundation.git
-cd migmaq-foundation
-```
-Install the dependencies:
-```
-npm install
-```
-Copy the sample environment file and configure it with your keys:
-```
-cp .env.sample .env
-Update .env with your Supabase and OpenAI keys.
-```
-## Running the Application
-
-Start the server:
-```
-node server/server.js
-Open your browser and navigate to http://localhost:3001.
-```
-
-## Features
-
-### Word of the Day
-- Displays a new Mi'gmaq word every day.
-- Fetches word details and an interesting fact using the OpenAI API.
-
-### Dictionary
-- Allows users to search for Mi'gmaq words and view their translations and definitions.
-- Provides details for each word, including part of speech, translations, and example usages.
-
-### Educational Resources
-- Contains various sections including lessons, games, and additional resources to help users learn Mi'gmaq.
-
-### Comments
-- Users can comment on words, and comments can have nested replies.
-- Each comment displays the user's avatar (based on the initial of their email), name, date, and content.
-
-## Project Structure Details
-
-### Backend
-- `server/config`: Contains configuration files for database and OpenAI.
-- `server/controllers`: Handles the business logic for different functionalities.
-- `server/routes`: Defines the routes for the API endpoints.
-- `server/services`: Contains service files that interact with the database and external APIs.
-
-### Frontend
-- `client/css`: Contains the CSS files for styling the application.
-- `client/js`: Contains JavaScript files for handling client-side logic and interactions.
-- `client/pages`: Contains HTML files for different pages of the application.
-- `client/assets`: Contains JSON files and other static assets.
++-------------------+             +-------------------------+
+|                   |             |                         |
+|   Client (Browser)|<--HTTP/JSON->|    Web Server (Node.js) |
+|   (HTML/CSS/JS)   |             |                         |
++-------------------+             +-------------------------+
+            |                                     |
+            |                                     |
+            V                                     V
++----------------------+               +---------------------+
+|                      |               |                     |
+|  Frontend Components |               |  Backend Components |
+|  - HTML Pages        |               |  - Express.js       |
+|  - CSS (Tailwind)    |               |  - Controllers      |
+|  - JavaScript        |               |  - Services         |
+|    - index.js        |               |  - Routes           |
+|    - education.js    |               |                     |
+|    - dictionary.js   |               |                     |
+|    - word-details.js |               +---------------------+
++----------------------+                        |
+                      |                         |
+                      V                         V
++------------------------------+      +------------------------------+
+|                              |      |                              |
+|  Static Assets               |      |  External APIs               |
+|  - CSS Files                 |      |  - Supabase (Database)       |
+|  - JSON Files (dictionary)   |      |  - OpenAI (AI Services)      |
++------------------------------+      +------------------------------+
 
 ## API Endpoints
 
-### Word of the Day
-- `GET /api/word-of-the-day`: Fetches the current word of the day.
+### Dictionary Routes
 
-### Dictionary
-- `GET /api/dictionary`: Fetches the list of words in the dictionary.
-- `GET /api/word-details?word=<word>`: Fetches details for a specific word.
+- `GET /api/dictionary` - Retrieve the entire dictionary.
+- `GET /api/word-details?word={word}` - Retrieve details for a specific word.
 
-### Comments
-- `GET /api/comments?word_id=<word_id>`: Fetches comments for a specific word.
-- `POST /api/comments`: Submits a new comment.
+### Word of the Day Routes
+
+- `GET /api/word-of-the-day` - Retrieve the word of the day.
+
+### AI Routes
+
+- `GET /api/fact?word={word}` - Retrieve an AI-generated fact about a word.
+
+### Comments Routes
+
+- `GET /api/comments?word_id={word_id}` - Retrieve comments for a specific word.
+- `POST /api/comments` - Add a new comment.
+
+## Client-side Code
+
+### `client/js/index.js`
+
+Placeholder for index-specific JavaScript if needed.
+
+### `client/js/education.js`
+
+- Fetches and displays the word of the day.
+
+### `client/js/dictionary.js`
+
+- Handles dictionary search and filtering.
+- Fetches and displays dictionary data.
+- Implements pagination for dictionary entries.
+
+### `client/js/word-details.js`
+
+- Fetches and displays details for a specific word.
+- Fetches and displays comments for a word.
+- Handles adding new comments and replies.
+
+## Server-side Code
+
+### `server/app.js`
+
+- Sets up the Express application, middleware, and routes.
+
+### `server/server.js`
+
+- Starts the server on the specified port.
+
+### `server/config/database.js`
+
+- Configures and exports the Supabase client for database interactions.
+
+### `server/config/openai.js`
+
+- Configures and exports the OpenAI client for AI interactions.
+
+## Controllers
+
+- `dictionaryController.js` - Handles dictionary-related API requests.
+- `wordOfTheDayController.js` - Handles word of the day API requests.
+- `aiController.js` - Handles AI-related API requests.
+- `commentsController.js` - Handles comment-related API requests.
+
+## Services
+
+- `dictionaryService.js` - Provides dictionary data operations.
+- `wordOfTheDayService.js` - Provides word of the day data operations.
+- `aiService.js` - Provides AI-related operations.
+- `commentsService.js` - Provides comment-related operations.
 
 ## Contributing
 
-If you would like to contribute to this project, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a pull request.
+If you would like to contribute, please fork the repository and submit a pull request. For major changes, please open an issue to discuss what you would like to change.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgements
-
-- Supabase for providing a robust backend solution.
-- OpenAI for their powerful language processing API.
-- Tailwind CSS for their utility-first CSS framework.
-
-Feel free to modify this README as per your project's needs and specifics.
+This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
