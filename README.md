@@ -25,44 +25,76 @@ Mi'gmaq Foundation
 ├── tailwind.config.js
 ├── vercel.json
 ├── client
-│ ├── css
-│ │ ├── input.css
-│ │ ├── output.css
-│ ├── js
-│ │ ├── index.js
-│ │ ├── education.js
-│ │ ├── dictionary.js
-│ │ ├── word-details.js
-│ ├── pages
-│ │ ├── index.html
-│ │ ├── education.html
-│ │ ├── dictionary.html
-│ │ ├── word-details.html
-│ ├── assets
-│ │ ├── dictionary.json
-│ │ ├── wordOfTheDay.json
+│   ├── css
+│   │   ├── input.css
+│   │   ├── output.css
+│   ├── js
+│   │   ├── index.js
+│   │   ├── wordOfTheDay.js
+│   │   ├── dictionary.js
+│   │   ├── word-details.js
+│   │   ├── games
+│   │   │   ├── flashcard.js
+│   │   ├── lessons
+│   │   │   ├── lesson1.js
+│   │   ├── resources
+│   │       ├── resource1.js
+│   ├── pages
+│   │   ├── index.html
+│   │   ├── education.html
+│   │   ├── dictionary.html
+│   │   ├── word-details.html
+│   │   ├── games
+│   │   │   ├── flashcard.html
+│   │   ├── lessons
+│   │   │   ├── lesson1.html
+│   │   ├── resources
+│   │       ├── resource1.html
+│   ├── assets
+│   │   ├── dictionary.json
+│   │   ├── wordOfTheDay.json
+│   │   ├── favicon.png
 ├── server
-│ ├── config
-│ │ ├── database.js
-│ │ ├── openai.js
-│ ├── controllers
-│ │ ├── dictionaryController.js
-│ │ ├── wordOfTheDayController.js
-│ │ ├── aiController.js
-│ │ ├── commentsController.js
-│ ├── routes
-│ │ ├── dictionaryRoutes.js
-│ │ ├── wordOfTheDayRoutes.js
-│ │ ├── aiRoutes.js
-│ │ ├── commentsRoutes.js
-│ ├── services
-│ │ ├── dictionaryService.js
-│ │ ├── wordOfTheDayService.js
-│ │ ├── aiService.js
-│ │ ├── commentsService.js
-│ ├── app.js
-│ ├── server.js
+│   ├── config
+│   │   ├── database.js
+│   │   ├── openai.js
+│   ├── controllers
+│   │   ├── dictionaryController.js
+│   │   ├── wordOfTheDayController.js
+│   │   ├── aiController.js
+│   │   ├── commentsController.js
+│   │   ├── games
+│   │   │   ├── gamesController.js
+│   │   ├── lessons
+│   │   │   ├── lessonsController.js
+│   │   ├── resources
+│   │       ├── resourcesController.js
+│   ├── routes
+│   │   ├── dictionaryRoutes.js
+│   │   ├── wordOfTheDayRoutes.js
+│   │   ├── aiRoutes.js
+│   │   ├── commentsRoutes.js
+│   │   ├── games
+│   │   │   ├── gamesRoutes.js
+│   │   ├── lessons
+│   │   │   ├── lessonsRoutes.js
+│   │   ├── resources
+│   │       ├── resourcesRoutes.js
+│   ├── services
+│   │   ├── dictionaryService.js
+│   │   ├── wordOfTheDayService.js
+│   │   ├── aiService.js
+│   │   ├── commentsService.js
+│   │   ├── games
+│   │   │   ├── gamesService.js
+│   │   ├── lessons
+│   │   │   ├── lessonsService.js
+│   │   ├── resources
+│   │       ├── resourcesService.js
+│   ├── app.js
+│   ├── server.js
 ├── .env
+
 ```
 ## API Endpoints
 
