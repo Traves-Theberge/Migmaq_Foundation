@@ -123,7 +123,7 @@ Mi'gmaq Foundation
 
 Placeholder for index-specific JavaScript if needed.
 
-### `client/js/education.js`
+### `client/js/wordOfTheDay.js`
 
 - Fetches and displays the word of the day.
 
@@ -163,6 +163,9 @@ Placeholder for index-specific JavaScript if needed.
 - `wordOfTheDayController.js` - Handles word of the day API requests.
 - `aiController.js` - Handles AI-related API requests.
 - `commentsController.js` - Handles comment-related API requests.
+- `games/gamesController.js` - Handles game-related API requests.
+- `lessons/lessonsController.js` - Handles lesson-related API requests.
+- `resources/resourcesController.js` - Handles resource-related API requests.
 
 ## Services
 
@@ -170,6 +173,9 @@ Placeholder for index-specific JavaScript if needed.
 - `wordOfTheDayService.js` - Provides word of the day data operations.
 - `aiService.js` - Provides AI-related operations.
 - `commentsService.js` - Provides comment-related operations.
+- `games/gamesService.js` - Provides game-related operations.
+- `lessons/lessonsService.js` - Provides lesson-related operations.
+- `resources/resourcesService.js` - Provides resource-related operations.
 
 ## Contributing
 
@@ -178,8 +184,3 @@ If you would like to contribute, please fork the repository and submit a pull re
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
-
-
-
-
-
