@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build:tailwind": "tailwindcss -i client/css/input.css -o public/output.css --watch"
+    "build:tailwind": "tailwindcss -i client/css/input.css -o public/output.css --watch",
+    "start": "node server/server.js"
   },
   "keywords": [],
   "author": "",
