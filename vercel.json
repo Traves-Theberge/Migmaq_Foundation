@@ -32,6 +32,18 @@
       "dest": "/client/pages/index.html"
     },
     {
+      "src": "/css/(.*)",
+      "dest": "/client/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/client/js/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/client/assets/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/client/pages/$1"
     }
