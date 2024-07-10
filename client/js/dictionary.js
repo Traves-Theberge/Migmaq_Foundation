@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         paginatedWords.forEach(word => {
             const wordDiv = document.createElement('div');
-            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4');
+            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4', 'hover:bg-gray-600', 'transition', 'duration-300');
             wordDiv.innerHTML = `
                 <a href="/word-details.html?word=${encodeURIComponent(word.word)}" class="block p-6 text-white">
                     <h2 class="text-xl font-semibold mb-4">${word.word}</h2>
