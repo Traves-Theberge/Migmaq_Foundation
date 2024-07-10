@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     const queryParams = new URLSearchParams(window.location.search);
-    const word = queryParams.get('word');
+    const word = queryParams.get('word'); // Get the 'word' query parameter from the URL
 
     if (!word) {
         console.error('No word parameter found in URL.');
         return;
     }
 
+    // Get references to various HTML elements
     const wordDetailsContainer = document.getElementById('word-details-container');
     const aiFactContainer = document.getElementById('ai-fact-container');
     const commentsContainer = document.getElementById('comments-container');
@@ -15,18 +16,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const parentIdInput = document.getElementById('parent_id');
 
     if (word) {
-        wordIdInput.value = word;
+        wordIdInput.value = word; // Set the wordId input value
     }
 
+    // Fetch and display word details, comments, and AI fact
     fetchWordDetails(word);
     fetchComments(word);
     fetchAiFact(word);
 
+    // Add event listeners for comment form and reply button clicks
     commentForm.addEventListener('submit', handleCommentSubmit);
-
     commentsContainer.addEventListener('click', handleReplyButtonClick);
     commentsContainer.addEventListener('submit', handleReplyFormSubmit);
 
+    // Function to fetch word details from the server
     function fetchWordDetails(word) {
         fetch(`/api/word-details?word=${encodeURIComponent(word)}`)
             .then(response => response.json())
@@ -37,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    // Function to fetch AI fact from the server
     function fetchAiFact(word) {
         fetch(`/api/fact?word=${encodeURIComponent(word)}`)
             .then(response => response.json())
@@ -47,46 +51,48 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    // Function to display word details in the HTML
     function displayWordDetails(wordDetails) {
         const wordHTML = `
-            <div class="word-item">
-                <div class="p-6 text-white">
-                    <h2 class="text-xl font-semibold mb-4">${wordDetails.word}</h2>
-                    <div class="mb-4">
-                        <strong class="block text-white-600 mb-2">Part of Speech:</strong>
-                        <span class="block">${wordDetails.type}</span>
-                    </div>
-                    <div class="mb-4">
-                        <strong class="block text-white-600 mb-2">English Definitions:</strong>
-                        <ul class="list-disc list-inside">
-                            ${wordDetails.definitions.map(def => `<li>${def}</li>`).join('')}
-                        </ul>
-                    </div>
-                    <div>
-                        <strong class="block text-white-600 mb-2">Translations:</strong>
-                        <ul>
-                            ${wordDetails.usages.map(usage => `
-                                <li>
-                                    <strong>Mi'gmaq Translation:</strong> ${usage.translation}<br>
-                                    <strong>English Translation:</strong> ${usage.english}
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
+            <div class="word-item p-6 text-white">
+                <h2 class="text-3xl font-bold mb-6 text-center">${wordDetails.word}</h2>
+                <div class="mb-6">
+                    <strong class="block text-xl text-white-600 mb-3">Part of Speech:</strong>
+                    <span class="block text-lg">${wordDetails.type}</span>
+                </div>
+                <div class="mb-6">
+                    <strong class="block text-xl text-white-600 mb-3">English Definitions:</strong>
+                    <ul class="list-disc list-inside text-lg">
+                        ${wordDetails.definitions.map(def => `<li>${def}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="mb-6">
+                    <strong class="block text-xl text-white-600 mb-3">Translations:</strong>
+                    <ul class="text-lg">
+                        ${wordDetails.usages.map(usage => `
+                            <li class="mb-4">
+                                <strong>Mi'gmaq Translation:</strong> ${usage.translation}<br>
+                                <strong>English Translation:</strong> ${usage.english}
+                            </li>
+                        `).join('')}
+                    </ul>
                 </div>
             </div>
         `;
         wordDetailsContainer.innerHTML = wordHTML;
     }
 
+    // Function to display AI fact in the HTML
     function displayAiFact(fact) {
-        aiFactContainer.innerHTML = `<p class="text-lg font-medium">${fact}</p>`;
+        aiFactContainer.innerHTML = `<p class="text-2xl font-medium text-center">${fact}</p>`;
     }
 
+    // Function to display an error message
     function displayError() {
         wordDetailsContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching word details. Please try again later.</p>';
     }
 
+    // Function to fetch comments from the server
     function fetchComments(wordId) {
         fetch(`/api/comments?word_id=${encodeURIComponent(wordId)}`)
             .then(response => response.json())
@@ -101,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    // Function to build nested comments structure
     function buildNestedComments(comments) {
         const commentMap = {};
         comments.forEach(comment => {
@@ -120,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return nestedComments;
     }
 
+    // Function to display comments in the HTML
     function displayComments(comments, parentElement = null, level = 0) {
         const commentsList = parentElement || document.createElement('ul');
         if (!parentElement) commentsContainer.appendChild(commentsList);
@@ -135,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Function to create a comment item in the HTML
     function createCommentItem(comment, level) {
         const commentItem = document.createElement('li');
         commentItem.classList.add('bg-gray-800', 'p-4', 'rounded-md', 'text-white', 'mt-4', 'comment-item', 'flex', 'flex-col', 'space-y-2');
@@ -160,12 +169,12 @@ document.addEventListener('DOMContentLoaded', function() {
         authorNameDate.classList.add('flex', 'flex-col');
 
         const authorName = document.createElement('p');
-        authorName.classList.add('text-md', 'font-semibold');
+        authorName.classList.add('flex','text-lg', 'font-semibold');
         authorName.textContent = comment.name;
 
         const commentDate = document.createElement('p');
         commentDate.classList.add('text-sm', 'text-gray-400');
-        commentDate.textContent = new Date(comment.created_at).toLocaleString();
+        commentDate.textContent = new Date(comment.created_at).toLocaleString(); // Format the timestamp to local time
 
         authorNameDate.appendChild(authorName);
         authorNameDate.appendChild(commentDate);
@@ -195,6 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return commentItem;
     }
 
+    // Function to create a reply form for a comment
     function createReplyForm(commentId) {
         const replyForm = document.createElement('form');
         replyForm.classList.add('reply-form', 'hidden', 'mt-2', 'flex', 'flex-col', 'space-y-2');
@@ -230,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return replyForm;
     }
 
+    // Function to handle the comment form submission
     function handleCommentSubmit(event) {
         event.preventDefault();
         const commentName = document.getElementById('name').value;
@@ -245,6 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to handle reply button click
     function handleReplyButtonClick(event) {
         if (event.target.classList.contains('reply-button')) {
             const replyForm = event.target.nextElementSibling;
@@ -252,6 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to handle the reply form submission
     function handleReplyFormSubmit(event) {
         if (event.target.classList.contains('reply-form')) {
             event.preventDefault();
@@ -261,11 +274,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const replyContentValue = event.target.querySelector('.reply-content').value;
             if (replyNameValue.trim() && replyEmailValue.trim() && replyContentValue.trim()) {
                 postComment(word, commentId, replyNameValue, replyEmailValue, replyContentValue);
-                event.target.classList.add('hidden'); // Hide the form after posting
+                clearForm(event.target); // Clear and hide the form after posting
             }
         }
     }
 
+    // Function to post a new comment to the server
     function postComment(wordId, parentId, name, email, content) {
         fetch('/api/comments', {
             method: 'POST',
@@ -285,9 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 replies: []
             };
             appendNewComment(newComment);
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('content').value = '';
+            clearForm(commentForm); // Clear the main comment form
             parentIdInput.value = '';
         })
         .catch(error => {
@@ -295,6 +307,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Function to clear and hide a form
+    function clearForm(form) {
+        form.reset();
+        form.classList.add('hidden');
+    }
+
+    // Function to append a new comment to the DOM
     function appendNewComment(comment) {
         // Find the parent comment if it exists
         if (comment.parent_id) {
@@ -309,6 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to generate an avatar based on the user's name
     function generateAvatar(name) {
         const firstLetter = name.charAt(0).toUpperCase();
         const colors = ['#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];

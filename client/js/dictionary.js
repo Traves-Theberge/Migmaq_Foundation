@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Elements for the search input, search button, filter select, dictionary container, alphabet container, and pagination container
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const filterSelect = document.getElementById('filterSelect');
@@ -6,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const alphabetContainer = document.getElementById('alphabet-container');
     const paginationContainer = document.getElementById('pagination-container');
 
+    // Define constants and variables for alphabet, current page, items per page, current filter, current term, dictionary data, filtered data, and Fuse instance
     const alphabet = "AEGIJLMNOPQSTUW";
     let currentPage = 1;
     const itemsPerPage = 20;
@@ -15,14 +17,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let filteredData = [];
     let fuse;
 
+    // Initialize the dictionary functionalities
     initialize();
 
+    // Function to initialize the dictionary functionalities
     function initialize() {
         populateAlphabetContainer();
         addEventListeners();
         fetchFullDictionaryData();
     }
 
+    // Function to populate the alphabet container with clickable letters
     function populateAlphabetContainer() {
         alphabet.split('').forEach(letter => {
             const letterSpan = document.createElement('span');
@@ -33,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Function to add event listeners for search button and input field
     function addEventListeners() {
         searchButton.addEventListener('click', () => searchDictionary());
         searchInput.addEventListener('keydown', function(event) {
@@ -43,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Function to fetch full dictionary data from the server
     function fetchFullDictionaryData() {
         fetch('/api/dictionary')
             .then(response => response.json())
@@ -59,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    // Function to initialize Fuse.js for searching
     function initializeFuse(words) {
         const fuseOptions = {
             keys: [
@@ -73,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fuse = new Fuse(words, fuseOptions);
     }
 
+    // Function to search the dictionary based on input and filter
     function searchDictionary() {
         currentTerm = searchInput.value.trim();
         currentFilter = filterSelect.value;
@@ -124,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to filter dictionary data by starting letter
     function filterByLetter(letter) {
         currentTerm = letter;
         currentFilter = 'startsWith';
@@ -137,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to display dictionary data
     function displayDictionary(words) {
         dictionaryContainer.innerHTML = '';
         if (words.length === 0) {
@@ -179,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Function to create pagination buttons
     function createPagination(totalItems) {
         const totalPages = Math.ceil(totalItems / itemsPerPage);
         paginationContainer.innerHTML = '';
@@ -211,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
         paginationContainer.appendChild(createPaginationButton('Next', currentPage < totalPages, currentPage + 1));
     }
 
+    // Function to create a pagination button
     function createPaginationButton(text, enabled, page) {
         const button = document.createElement('button');
         button.textContent = text;
@@ -226,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return button;
     }
 
+    // Function to display an error message
     function displayError(message) {
         dictionaryContainer.innerHTML = `<p class="error text-white-500 text-center">${message}</p>`;
     }
