@@ -1,4 +1,3 @@
-// server/services/games/gamesService.js
 const fs = require('fs').promises;
 const path = require('path');
 
@@ -6,7 +5,7 @@ const path = require('path');
 const dictionaryFilePath = path.join(__dirname, '..', '..', '..', 'client', 'assets', 'dictionary.json');
 
 // Function to get random words from the dictionary
-async function getRandomWords(count = 6) { // Adjust count as needed for pairs
+async function getRandomWords(count = 6) {
     try {
         const data = await fs.readFile(dictionaryFilePath, 'utf8');
         const dictionary = JSON.parse(data);
@@ -22,7 +21,11 @@ async function getRandomWords(count = 6) { // Adjust count as needed for pairs
         // Duplicate the words to create pairs and shuffle again
         const wordPairs = [...selectedWords, ...selectedWords].sort(() => 0.5 - Math.random());
 
-        return wordPairs;
+        // Return words with definitions
+        return wordPairs.map(wordObj => ({
+            word: wordObj.word,
+            definition: wordObj.definitions ? wordObj.definitions[0] : 'No definition available' // Select the first definition
+        }));
     } catch (error) {
         throw new Error('Error reading dictionary file');
     }

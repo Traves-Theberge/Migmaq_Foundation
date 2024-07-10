@@ -553,3 +553,80 @@ video {
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.memory-game {
+  width: 960px;
+  /* Adjusted width for 4 cards per row */
+  height: 720px;
+  /* Adjusted height for 3 rows */
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px;
+}
+
+.memory-card {
+  width: calc(25% - 10px);
+  /* Four cards per row */
+  height: calc(33.333% - 10px);
+  /* Three rows */
+  margin: 5px;
+  position: relative;
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform 0.2s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-direction: column;
+  /* Stack word and definition */
+}
+
+.front-face {
+  transform: rotateY(180deg);
+  background: #FFCC00;
+  color: #333;
+}
+
+.back-face {
+  background: #1C7CCC;
+  color: #FFFFFF;
+}
+
+.word {
+  font-size: 1.5rem;
+  /* Adjusted font size */
+}
+
+.definition {
+  font-size: 1rem;
+  /* Adjusted font size */
+  margin-top: 10px;
+  /* Space between word and definition */
+}

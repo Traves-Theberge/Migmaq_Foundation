@@ -1,9 +1,9 @@
-// flashcard.js
 document.addEventListener('DOMContentLoaded', function() {
     const memoryGame = document.getElementById('memory-game');
     let hasFlippedCard = false;
     let lockBoard = false;
     let firstCard, secondCard;
+    let matchedPairs = 0;
 
     // Function to fetch game data from the server
     async function fetchGameData() {
@@ -23,17 +23,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to create memory cards
     function createMemoryCards(words) {
         memoryGame.innerHTML = ''; // Clear existing cards
-        words.forEach(word => {
+        matchedPairs = 0; // Reset matched pairs count
+        words.forEach(wordObj => {
             const card = document.createElement('div');
             card.classList.add('memory-card');
-            card.dataset.framework = word.word;
+            card.dataset.framework = wordObj.word;
 
             const frontFace = document.createElement('div');
             frontFace.classList.add('front-face');
-            frontFace.textContent = word.word;
+            frontFace.innerHTML = `<div class="word">${wordObj.word}</div><div class="definition">${wordObj.definition}</div>`;
 
             const backFace = document.createElement('div');
             backFace.classList.add('back-face');
+            backFace.textContent = '?'; // Placeholder symbol
 
             card.appendChild(frontFace);
             card.appendChild(backFace);
@@ -79,6 +81,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function disableCards() {
         firstCard.removeEventListener('click', flipCard);
         secondCard.removeEventListener('click', flipCard);
+        matchedPairs += 1; // Increment matched pairs count
+        if (matchedPairs === 6) { // All pairs matched
+            setTimeout(restartGame, 1500); // Restart game after a short delay
+        }
         resetBoard();
     }
 
@@ -98,14 +104,19 @@ document.addEventListener('DOMContentLoaded', function() {
         [firstCard, secondCard] = [null, null];
     }
 
-    // Initialize the game
-    async function init() {
+    // Function to restart the game
+    async function restartGame() {
         const gameData = await fetchGameData();
         if (gameData) {
             createMemoryCards(gameData);
         } else {
             memoryGame.innerHTML = '<p class="text-red-500">Failed to load game data. Please try again later.</p>';
         }
+    }
+
+    // Initialize the game
+    async function init() {
+        await restartGame();
     }
 
     init();
