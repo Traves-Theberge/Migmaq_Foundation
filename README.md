@@ -64,36 +64,6 @@ Mi'gmaq Foundation
 │ ├── server.js
 ├── .env
 ```
-## High-Level Architecture Diagram
-
-+-------------------+             +-------------------------+
-|                   |             |                         |
-|   Client (Browser)|<--HTTP/JSON->|    Web Server (Node.js) |
-|   (HTML/CSS/JS)   |             |                         |
-+-------------------+             +-------------------------+
-            |                                     |
-            |                                     |
-            V                                     V
-+----------------------+               +---------------------+
-|                      |               |                     |
-|  Frontend Components |               |  Backend Components |
-|  - HTML Pages        |               |  - Express.js       |
-|  - CSS (Tailwind)    |               |  - Controllers      |
-|  - JavaScript        |               |  - Services         |
-|    - index.js        |               |  - Routes           |
-|    - education.js    |               |                     |
-|    - dictionary.js   |               |                     |
-|    - word-details.js |               +---------------------+
-+----------------------+                        |
-                      |                         |
-                      V                         V
-+------------------------------+      +------------------------------+
-|                              |      |                              |
-|  Static Assets               |      |  External APIs               |
-|  - CSS Files                 |      |  - Supabase (Database)       |
-|  - JSON Files (dictionary)   |      |  - OpenAI (AI Services)      |
-+------------------------------+      +------------------------------+
-
 ## API Endpoints
 
 ### Dictionary Routes
@@ -104,6 +74,7 @@ Mi'gmaq Foundation
 ### Word of the Day Routes
 
 - `GET /api/word-of-the-day` - Retrieve the word of the day.
+- `PUT /api/word-of-the-day/update` - Update the word of the day.
 
 ### AI Routes
 
@@ -175,3 +146,8 @@ If you would like to contribute, please fork the repository and submit a pull re
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
+
+
+
+
+
