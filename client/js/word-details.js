@@ -18,16 +18,34 @@ document.addEventListener('DOMContentLoaded', function() {
         wordIdInput.value = word;
     }
 
-    fetch(`/api/word-details?word=${encodeURIComponent(word)}`)
-        .then(response => response.json())
-        .then(wordDetails => {
-            displayWordDetails(wordDetails);
-            fetchComments(word);
-        })
-        .catch(error => {
-            console.error('Error fetching word details:', error);
-            displayError();
-        });
+    fetchWordDetails(word);
+    fetchComments(word);
+    fetchAiFact(word);
+
+    commentForm.addEventListener('submit', handleCommentSubmit);
+
+    commentsContainer.addEventListener('click', handleReplyButtonClick);
+    commentsContainer.addEventListener('submit', handleReplyFormSubmit);
+
+    function fetchWordDetails(word) {
+        fetch(`/api/word-details?word=${encodeURIComponent(word)}`)
+            .then(response => response.json())
+            .then(wordDetails => displayWordDetails(wordDetails))
+            .catch(error => {
+                console.error('Error fetching word details:', error);
+                displayError();
+            });
+    }
+
+    function fetchAiFact(word) {
+        fetch(`/api/fact?word=${encodeURIComponent(word)}`)
+            .then(response => response.json())
+            .then(data => displayAiFact(data.fact))
+            .catch(error => {
+                console.error('Error fetching AI fact:', error);
+                aiFactContainer.innerHTML = '<p class="error text-white-500 text-center">Error fetching AI fact. Please try again later.</p>';
+            });
+    }
 
     function displayWordDetails(wordDetails) {
         const wordHTML = `
@@ -59,6 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         wordDetailsContainer.innerHTML = wordHTML;
+    }
+
+    function displayAiFact(fact) {
+        aiFactContainer.innerHTML = `<p class="text-lg font-medium">${fact}</p>`;
     }
 
     function displayError() {
@@ -103,108 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!parentElement) commentsContainer.appendChild(commentsList);
 
         comments.forEach(comment => {
-            const commentItem = document.createElement('li');
-            commentItem.classList.add('bg-gray-800', 'p-4', 'rounded-md', 'text-white', 'mt-4', 'comment-item', 'flex', 'flex-col', 'space-y-2');
-            if (level > 0) {
-                commentItem.classList.add('ml-12', 'border-l-2', 'border-gray-700', 'pl-4');
-            }
-
-            const avatar = generateAvatar(comment.name);
-            const commentHeader = document.createElement('div');
-            commentHeader.classList.add('flex', 'items-start', 'space-x-4');
-
-            const avatarWrapper = document.createElement('div');
-            avatarWrapper.innerHTML = avatar;
-            commentHeader.appendChild(avatarWrapper);
-
-            const commentContent = document.createElement('div');
-            commentContent.classList.add('flex', 'flex-col', 'space-y-1', 'flex-grow');
-
-            const commentAuthor = document.createElement('div');
-            commentAuthor.classList.add('flex', 'items-center', 'justify-between', 'mt-1');
-
-            const authorNameDate = document.createElement('div');
-            authorNameDate.classList.add('flex', 'flex-col');
-
-            const authorName = document.createElement('p');
-            authorName.classList.add('text-md', 'font-semibold');
-            authorName.textContent = comment.name;
-
-            const commentDate = document.createElement('p');
-            commentDate.classList.add('text-sm', 'text-gray-400');
-            commentDate.textContent = new Date(comment.created_at).toLocaleString();
-
-            authorNameDate.appendChild(authorName);
-            authorNameDate.appendChild(commentDate);
-
-            commentAuthor.appendChild(authorNameDate);
-
-            const commentText = document.createElement('p');
-            commentText.classList.add('text-lg', 'font-medium');
-            commentText.textContent = comment.content;
-
-            commentContent.appendChild(commentAuthor);
-            commentContent.appendChild(commentText);
-
-            commentHeader.appendChild(commentContent);
-            commentItem.appendChild(commentHeader);
-
-            const replyButton = document.createElement('button');
-            replyButton.classList.add('reply-button', 'mt-2', 'text-blue-400', 'hover:text-blue-300', 'transition', 'duration-200', 'self-start');
-            replyButton.setAttribute('data-comment-id', comment.id);
-            replyButton.textContent = 'Reply';
-
-            const replyForm = document.createElement('form');
-            replyForm.classList.add('reply-form', 'hidden', 'mt-2', 'flex', 'flex-col', 'space-y-2');
-            replyForm.setAttribute('data-comment-id', comment.id);
-
-            const replyName = document.createElement('input');
-            replyName.classList.add('reply-name', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
-            replyName.setAttribute('type', 'text');
-            replyName.setAttribute('placeholder', 'Your Name');
-            replyName.required = true;
-
-            const replyEmail = document.createElement('input');
-            replyEmail.classList.add('reply-email', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
-            replyEmail.setAttribute('type', 'email');
-            replyEmail.setAttribute('placeholder', 'Your Email');
-            replyEmail.required = true;
-
-            const replyContent = document.createElement('textarea');
-            replyContent.classList.add('reply-content', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
-            replyContent.setAttribute('placeholder', 'Write a reply...');
-            replyContent.required = true;
-
-            const replySubmitButton = document.createElement('button');
-            replySubmitButton.classList.add('mt-2', 'px-4', 'py-2', 'bg-blue-600', 'text-white', 'rounded-md', 'hover:bg-blue-500', 'transition-colors', 'duration-300');
-            replySubmitButton.setAttribute('type', 'submit');
-            replySubmitButton.textContent = 'Post Reply';
-
-            replyForm.appendChild(replyName);
-            replyForm.appendChild(replyEmail);
-            replyForm.appendChild(replyContent);
-            replyForm.appendChild(replySubmitButton);
-
-            replyButton.addEventListener('click', () => {
-                replyForm.classList.toggle('hidden');
-            });
-
-            replyForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const commentId = this.getAttribute('data-comment-id');
-                const replyNameValue = this.querySelector('.reply-name').value;
-                const replyEmailValue = this.querySelector('.reply-email').value;
-                const replyContentValue = this.querySelector('.reply-content').value;
-                if (replyNameValue.trim() && replyEmailValue.trim() && replyContentValue.trim()) {
-                    postComment(word, commentId, replyNameValue, replyEmailValue, replyContentValue);
-                }
-            });
-
-            commentItem.appendChild(replyButton);
-            commentItem.appendChild(replyForm);
-
+            const commentItem = createCommentItem(comment, level);
             commentsList.appendChild(commentItem);
-
             if (comment.replies.length > 0) {
                 const replyList = document.createElement('ul');
                 commentItem.appendChild(replyList);
@@ -213,7 +135,102 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    commentForm.addEventListener('submit', function(event) {
+    function createCommentItem(comment, level) {
+        const commentItem = document.createElement('li');
+        commentItem.classList.add('bg-gray-800', 'p-4', 'rounded-md', 'text-white', 'mt-4', 'comment-item', 'flex', 'flex-col', 'space-y-2');
+        if (level > 0) {
+            commentItem.classList.add('ml-12', 'border-l-2', 'border-gray-700', 'pl-4');
+        }
+
+        const avatar = generateAvatar(comment.name);
+        const commentHeader = document.createElement('div');
+        commentHeader.classList.add('flex', 'items-start', 'space-x-4');
+
+        const avatarWrapper = document.createElement('div');
+        avatarWrapper.innerHTML = avatar;
+        commentHeader.appendChild(avatarWrapper);
+
+        const commentContent = document.createElement('div');
+        commentContent.classList.add('flex', 'flex-col', 'space-y-1', 'flex-grow');
+
+        const commentAuthor = document.createElement('div');
+        commentAuthor.classList.add('flex', 'items-center', 'justify-between', 'mt-1');
+
+        const authorNameDate = document.createElement('div');
+        authorNameDate.classList.add('flex', 'flex-col');
+
+        const authorName = document.createElement('p');
+        authorName.classList.add('text-md', 'font-semibold');
+        authorName.textContent = comment.name;
+
+        const commentDate = document.createElement('p');
+        commentDate.classList.add('text-sm', 'text-gray-400');
+        commentDate.textContent = new Date(comment.created_at).toLocaleString();
+
+        authorNameDate.appendChild(authorName);
+        authorNameDate.appendChild(commentDate);
+
+        commentAuthor.appendChild(authorNameDate);
+
+        const commentText = document.createElement('p');
+        commentText.classList.add('flex','text-lg', 'font-medium');
+        commentText.textContent = comment.content;
+
+        commentContent.appendChild(commentAuthor);
+        commentContent.appendChild(commentText);
+
+        commentHeader.appendChild(commentContent);
+        commentItem.appendChild(commentHeader);
+
+        const replyButton = document.createElement('button');
+        replyButton.classList.add('reply-button', 'mt-2', 'text-blue-400', 'hover:text-blue-300', 'transition', 'duration-200', 'self-start');
+        replyButton.setAttribute('data-comment-id', comment.id);
+        replyButton.textContent = 'Reply';
+
+        const replyForm = createReplyForm(comment.id);
+
+        commentItem.appendChild(replyButton);
+        commentItem.appendChild(replyForm);
+
+        return commentItem;
+    }
+
+    function createReplyForm(commentId) {
+        const replyForm = document.createElement('form');
+        replyForm.classList.add('reply-form', 'hidden', 'mt-2', 'flex', 'flex-col', 'space-y-2');
+        replyForm.setAttribute('data-comment-id', commentId);
+
+        const replyName = document.createElement('input');
+        replyName.classList.add('reply-name', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+        replyName.setAttribute('type', 'text');
+        replyName.setAttribute('placeholder', 'Your Name');
+        replyName.required = true;
+
+        const replyEmail = document.createElement('input');
+        replyEmail.classList.add('reply-email', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+        replyEmail.setAttribute('type', 'email');
+        replyEmail.setAttribute('placeholder', 'Your Email');
+        replyEmail.required = true;
+
+        const replyContent = document.createElement('textarea');
+        replyContent.classList.add('reply-content', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+        replyContent.setAttribute('placeholder', 'Write a reply...');
+        replyContent.required = true;
+
+        const replySubmitButton = document.createElement('button');
+        replySubmitButton.classList.add('mt-2', 'px-4', 'py-2', 'bg-blue-600', 'text-white', 'rounded-md', 'hover:bg-blue-500', 'transition-colors', 'duration-300');
+        replySubmitButton.setAttribute('type', 'submit');
+        replySubmitButton.textContent = 'Post Reply';
+
+        replyForm.appendChild(replyName);
+        replyForm.appendChild(replyEmail);
+        replyForm.appendChild(replyContent);
+        replyForm.appendChild(replySubmitButton);
+
+        return replyForm;
+    }
+
+    function handleCommentSubmit(event) {
         event.preventDefault();
         const commentName = document.getElementById('name').value;
         const commentEmail = document.getElementById('email').value;
@@ -226,7 +243,28 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             alert('All fields are required.');
         }
-    });
+    }
+
+    function handleReplyButtonClick(event) {
+        if (event.target.classList.contains('reply-button')) {
+            const replyForm = event.target.nextElementSibling;
+            replyForm.classList.toggle('hidden');
+        }
+    }
+
+    function handleReplyFormSubmit(event) {
+        if (event.target.classList.contains('reply-form')) {
+            event.preventDefault();
+            const commentId = event.target.getAttribute('data-comment-id');
+            const replyNameValue = event.target.querySelector('.reply-name').value;
+            const replyEmailValue = event.target.querySelector('.reply-email').value;
+            const replyContentValue = event.target.querySelector('.reply-content').value;
+            if (replyNameValue.trim() && replyEmailValue.trim() && replyContentValue.trim()) {
+                postComment(word, commentId, replyNameValue, replyEmailValue, replyContentValue);
+                event.target.classList.add('hidden'); // Hide the form after posting
+            }
+        }
+    }
 
     function postComment(wordId, parentId, name, email, content) {
         fetch('/api/comments', {
