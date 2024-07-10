@@ -1,3 +1,4 @@
+// app.js
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -5,6 +6,7 @@ const dictionaryRoutes = require('./routes/dictionaryRoutes');
 const wordOfTheDayRoutes = require('./routes/wordOfTheDayRoutes');
 const aiRoutes = require('./routes/aiRoutes');
 const commentsRoutes = require('./routes/commentsRoutes');
+const gamesRoutes = require('./routes/games/gamesRoutes'); // Corrected games routes path
 
 const app = express();
 
@@ -18,6 +20,7 @@ app.use('/api', dictionaryRoutes); // Dictionary routes
 app.use('/api', wordOfTheDayRoutes); // Word of the Day routes
 app.use('/api', aiRoutes); // AI-related routes
 app.use('/api', commentsRoutes); // Comments routes
+app.use('/api/games', gamesRoutes); // Games routes
 
 // Serve HTML files for different routes
 app.get('/', (req, res) => {

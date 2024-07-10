@@ -1,3 +1,4 @@
+// wordOfTheDay.js
 document.addEventListener('DOMContentLoaded', function() {
     const wordOfTheDayContainer = document.getElementById('word-of-the-day-container');
 
