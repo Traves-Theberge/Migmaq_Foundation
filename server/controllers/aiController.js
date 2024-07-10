@@ -1,13 +1,18 @@
-const aiService = require('../services/aiService'); // Import the AI service
+const aiService = require('../services/aiService');
 
-// Controller function to get an AI-generated fact
+// Controller method to handle the request for generating a fact
 exports.getFact = async (req, res) => {
-    const { word } = req.query; // Get the 'word' query parameter from the request
     try {
-        const fact = await aiService.getFact(word); // Fetch the AI-generated fact from the service
-        res.json({ fact }); // Respond with the fact in JSON format
+        // Retrieve query parameters from the request
+        const { word, type, translations, definitions } = req.query;
+
+        // Call the service method to generate the fact
+        const fact = await aiService.generateFact({ word, type, translations, definitions });
+
+        // Send the generated fact in the response
+        res.json({ word, type, translations, definitions, fact });
     } catch (error) {
-        console.error('Error fetching AI fact:', error); // Log any errors
-        res.status(500).json({ error: 'Failed to fetch AI fact' }); // Respond with an error message
+        console.error('Error generating fact:', error);
+        res.status(500).json({ error: 'Failed to generate fact' });
     }
 };

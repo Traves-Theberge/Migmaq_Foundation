@@ -13,14 +13,36 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Custom Styles -->
     <link rel="stylesheet" href="../css/output.css">
-    <title>Word Details - Mi'gmaq Dictionary</title>
-
+    
     <style>
         /* Additional custom styles can be placed here */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 
 <body class="bg-gray-700 text-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-white text-lg font-semibold">Mi'gmaq Dictionary</div>
+            <ul class="flex space-x-4">
+                <li>
+                    <a href="/" class="text-gray-300 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 bg-blue-600 px-4 py-2 rounded-lg shadow-md">Home</a>
+                </li>
+                <li>
+                    <a href="/education" class="text-gray-300 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 bg-green-600 px-4 py-2 rounded-lg shadow-md">Education</a>
+                </li>
+                <li>
+                    <a href="#ai-fact-section" class="text-gray-300 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 bg-yellow-600 px-4 py-2 rounded-lg shadow-md">Interesting Fact</a>
+                </li>
+                <li>
+                    <a href="#comments-section" class="text-gray-300 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 bg-red-600 px-4 py-2 rounded-lg shadow-md">Comments</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container mx-auto p-8">
         <!-- Word Details Section -->
         <section id="word-details-section" class="text-center">

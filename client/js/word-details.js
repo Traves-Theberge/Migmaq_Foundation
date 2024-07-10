@@ -21,8 +21,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch and display word details, comments, and AI fact
     fetchWordDetails(word);
+
+    // Fetch AI fact after word details to ensure required parameters are available
+    fetchWordDetails(word).then(wordDetails => {
+        const type = wordDetails.type;
+        const translations = wordDetails.usages.map(usage => usage.translation).join(', ');
+        const definitions = wordDetails.definitions.join(', ');
+        fetchAiFact(word, type, translations, definitions);
+    });
+
     fetchComments(word);
-    fetchAiFact(word);
 
     // Add event listeners for comment form and reply button clicks
     commentForm.addEventListener('submit', handleCommentSubmit);
@@ -31,9 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch word details from the server
     function fetchWordDetails(word) {
-        fetch(`/api/word-details?word=${encodeURIComponent(word)}`)
+        return fetch(`/api/word-details?word=${encodeURIComponent(word)}`)
             .then(response => response.json())
-            .then(wordDetails => displayWordDetails(wordDetails))
+            .then(wordDetails => {
+                displayWordDetails(wordDetails);
+                return wordDetails;
+            })
             .catch(error => {
                 console.error('Error fetching word details:', error);
                 displayError();
@@ -41,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to fetch AI fact from the server
-    function fetchAiFact(word) {
-        fetch(`/api/fact?word=${encodeURIComponent(word)}`)
+    function fetchAiFact(word, type, translations, definitions) {
+        fetch(`/api/fact?word=${encodeURIComponent(word)}&type=${encodeURIComponent(type)}&translations=${encodeURIComponent(translations)}&definitions=${encodeURIComponent(definitions)}`)
             .then(response => response.json())
             .then(data => displayAiFact(data.fact))
             .catch(error => {

@@ -1,8 +1,8 @@
-const express = require('express'); // Import the express module
-const router = express.Router(); // Create a new router object
-const aiController = require('../controllers/aiController'); // Import the AI controller
+const express = require('express');
+const router = express.Router();
+const aiController = require('../controllers/aiController');
 
-// Define a route to get an AI-generated fact
+// Define the route to fetch interesting facts
 router.get('/fact', aiController.getFact);
 
-module.exports = router; // Export the router
+module.exports = router;

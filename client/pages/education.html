@@ -13,49 +13,40 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Custom Styles -->
     <link rel="stylesheet" href="../css/output.css">
-    <title>Educational Section - Mi'gmaq Dictionary</title>
 
     <style>
         /* Additional custom styles can be placed here */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 
 <body class="bg-gray-700 text-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-white text-lg font-semibold">Mi'gmaq Dictionary</div>
+            <ul class="flex space-x-4">
+                <li>
+                    <a href="/" class="text-gray-300 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 bg-blue-600 px-4 py-2 rounded-lg shadow-md">Home</a>
+                </li>
+                <li>
+                    <a href="#lessons-section" class="text-gray-300 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 bg-green-600 px-4 py-2 rounded-lg shadow-md">Lessons</a>
+                </li>
+                <li>
+                    <a href="#games-section" class="text-gray-300 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 bg-red-600 px-4 py-2 rounded-lg shadow-md">Games</a>
+                </li>
+                <li>
+                    <a href="#resources-section" class="text-gray-300 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 bg-purple-600 px-4 py-2 rounded-lg shadow-md">Resources</a>
+                </li>
+            </ul>            
+        </div>
+    </nav>
     <div class="container mx-auto p-8">
-        <!-- Navigation Bar -->
-        <nav class="text-center mb-8">
-            <ul class="flex justify-center space-x-4">
-                <li>
-                    <a href="/" class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300 shadow-md">
-                        Back to Home
-                    </a>
-                </li>
-                <li>
-                    <a href="#word-of-the-day-section" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300 shadow-md">
-                        Word of the Day
-                    </a>
-                </li>
-                <li>
-                    <a href="#lessons-section" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300 shadow-md">
-                        Lessons
-                    </a>
-                </li>
-                <li>
-                    <a href="#games-section" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300 shadow-md">
-                        Games
-                    </a>
-                </li>
-                <li>
-                    <a href="#resources-section" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300 shadow-md">
-                        Resources
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
         <!-- Word of the Day Section -->
         <section id="word-of-the-day-section" class="text-center mt-12">
-            <h2 class="text-3xl font-semibold mb-6">Word of the Day</h2>
+            <h2 class="text-5xl font-semibold mb-6">Word of the Day</h2>
             <div id="word-of-the-day-container" class="bg-gray-800 p-6 rounded-md shadow-md">
                 <!-- Word of the day will be rendered here -->
             </div>
