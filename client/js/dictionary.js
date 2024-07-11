@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alphabet.split('').forEach(letter => {
             const letterSpan = document.createElement('span');
             letterSpan.textContent = letter;
-            letterSpan.className = 'border border-gray-300 w-14 h-14 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200';
+            letterSpan.className = 'border border-gray-300 w-14 h-14 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200 dark:hover:bg-gray-600';
             letterSpan.addEventListener('click', () => filterByLetter(letter));
             alphabetContainer.appendChild(letterSpan);
         });
@@ -155,23 +155,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
         paginatedWords.forEach(word => {
             const wordDiv = document.createElement('div');
-            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4', 'hover:bg-gray-600', 'transition', 'duration-300', 'bg-gray-800', 'text-gray-100');
+            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4', 'hover:bg-gray-300', 'dark:hover:bg-gray-600', 'transition', 'duration-300', 'bg-gray-100', 'dark:bg-gray-800', 'text-gray-900', 'dark:text-white');
             wordDiv.innerHTML = `
-                <a href="/word-details.html?word=${encodeURIComponent(word.word)}" class="block p-6 text-white">
-                    <h2 class="text-xl font-semibold mb-4">${word.word}</h2>
+                <a href="/word-details.html?word=${encodeURIComponent(word.word)}" class="block p-6 text-gray-900 dark:text-white">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">${word.word}</h2>
                     <div class="mb-4">
-                        <strong class="block text-gray-300 mb-2">Part of Speech:</strong>
-                        <span class="block">${word.type}</span>
+                        <strong class="block text-gray-900 dark:text-white mb-2">Part of Speech:</strong>
+                        <span class="block text-gray-900 dark:text-white">${word.type}</span>
                     </div>
                     <div class="mb-4">
-                        <strong class="block text-gray-300 mb-2">English Definitions:</strong>
-                        <ul class="list-disc list-inside">
+                        <strong class="block text-gray-900 dark:text-white mb-2">English Definitions:</strong>
+                        <ul class="list-disc list-inside text-gray-900 dark:text-white">
                             ${word.definitions.map(def => `<li>${def}</li>`).join('')}
                         </ul>
                     </div>
                     <div>
-                        <strong class="block text-gray-300 mb-2">Translations:</strong>
-                        <ul>
+                        <strong class="block text-gray-900 dark:text-white mb-2">Translations:</strong>
+                        <ul class="text-gray-900 dark:text-white">
                             ${word.usages.map(usage => `
                                 <li>
                                     <strong>Mi'gmaq Translation:</strong> ${usage.translation}<br>
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         pageInput.min = 1;
         pageInput.max = totalPages;
         pageInput.value = currentPage;
-        pageInput.className = 'px-3 py-1 bg-gray-800 text-white rounded-md mx-2 w-16 text-center';
+        pageInput.className = 'px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md mx-2 w-16 text-center';
         pageInput.addEventListener('change', () => {
             const pageNumber = parseInt(pageInput.value);
             if (pageNumber >= 1 && pageNumber <= totalPages) {
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const totalPagesLabel = document.createElement('span');
         totalPagesLabel.textContent = `of ${totalPages}`;
-        totalPagesLabel.className = 'text-white mx-2';
+        totalPagesLabel.className = 'text-gray-900 dark:text-white mx-2';
         paginationContainer.appendChild(totalPagesLabel);
 
         paginationContainer.appendChild(createPaginationButton('Next', currentPage < totalPages, currentPage + 1));
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function createPaginationButton(text, enabled, page) {
         const button = document.createElement('button');
         button.textContent = text;
-        button.className = 'px-3 py-1 bg-gray-800 text-white rounded-md mx-2 hover:bg-gray-600';
+        button.className = 'px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-md mx-2 hover:bg-gray-300 dark:hover:bg-gray-600';
         button.disabled = !enabled;
         if (enabled) {
             button.addEventListener('click', () => {
@@ -241,13 +241,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const isDarkMode = document.body.classList.contains('dark-mode');
         document.querySelectorAll('.word-item').forEach(item => {
             item.classList.toggle('bg-gray-800', isDarkMode);
-            item.classList.toggle('text-gray-100', isDarkMode);
+            item.classList.toggle('text-white', isDarkMode);
             item.classList.toggle('bg-gray-100', !isDarkMode);
             item.classList.toggle('text-gray-900', !isDarkMode);
         });
         document.querySelectorAll('a.block').forEach(link => {
             link.classList.toggle('text-white', isDarkMode);
-            link.classList.toggle('text-black', !isDarkMode);
+            link.classList.toggle('text-gray-900', !isDarkMode);
         });
         document.querySelectorAll('.pagination button').forEach(button => {
             button.classList.toggle('bg-gray-800', isDarkMode);
@@ -257,9 +257,24 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.toggle('text-gray-900', !isDarkMode);
             button.classList.toggle('hover:bg-gray-300', !isDarkMode);
         });
+        // Apply dark mode to search input and filter select
+        searchInput.classList.toggle('bg-gray-800', isDarkMode);
+        searchInput.classList.toggle('text-gray-100', isDarkMode);
+        searchInput.classList.toggle('bg-gray-100', !isDarkMode);
+        searchInput.classList.toggle('text-gray-900', !isDarkMode);
+        filterSelect.classList.toggle('bg-gray-800', isDarkMode);
+        filterSelect.classList.toggle('text-gray-100', isDarkMode);
+        filterSelect.classList.toggle('bg-gray-100', !isDarkMode);
+        filterSelect.classList.toggle('text-gray-900', !isDarkMode);
+        // Apply dark mode to pagination label
+        const totalPagesLabel = document.querySelector('.pagination span');
+        if (totalPagesLabel) {
+            totalPagesLabel.classList.toggle('text-white', isDarkMode);
+            totalPagesLabel.classList.toggle('text-gray-900', !isDarkMode);
+        }
     }
 
     function displayError(message) {
-        dictionaryContainer.innerHTML = `<p class="error text-white-500 text-center">${message}</p>`;
+        dictionaryContainer.innerHTML = `<p class="error text-gray-500 text-center dark:text-white">${message}</p>`;
     }
 });
