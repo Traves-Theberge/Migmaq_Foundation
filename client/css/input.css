@@ -5,17 +5,52 @@
 html {
     scroll-behavior: smooth;
 }
+body.light-mode {
+    background-color: #f9f9f9;
+    color: #333;
+}
+body.dark-mode {
+    background-color: #1a202c;
+    color: #f9f9f9;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.navbar.light-mode {
+    background-color: #f9f9f9;
+    color: #333;
+}
+.navbar.dark-mode {
+    background-color: #1a202c;
+    color: #f9f9f9;
+}
+.navbar a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+.navbar .icons {
+    display: flex;
+    align-items: center;
+}
+.navbar .icon {
+    margin-left: 15px;
+    cursor: pointer;
+}
 .memory-game {
-    width: 960px; /* Adjusted width for 4 cards per row */
-    height: 720px; /* Adjusted height for 3 rows */
+    width: 960px;
+    height: 720px;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
 }
 .memory-card {
-    width: calc(25% - 10px); /* Four cards per row */
-    height: calc(33.333% - 10px); /* Three rows */
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
     margin: 5px;
     position: relative;
     transform: scale(1);
@@ -43,7 +78,7 @@ html {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    flex-direction: column; /* Stack word and definition */
+    flex-direction: column;
 }
 .front-face {
     transform: rotateY(180deg);
@@ -55,9 +90,9 @@ html {
     color: #FFFFFF;
 }
 .word {
-    font-size: 1.5rem; /* Adjusted font size */
+    font-size: 1.5rem;
 }
 .definition {
-    font-size: 1rem; /* Adjusted font size */
-    margin-top: 10px; /* Space between word and definition */
+    font-size: 1rem;
+    margin-top: 10px;
 }

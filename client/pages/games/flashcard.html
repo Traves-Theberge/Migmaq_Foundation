@@ -11,15 +11,117 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/output.css">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body.light-mode {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #f9f9f9;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar.light-mode {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .navbar.dark-mode {
+            background-color: #1a202c;
+            color: #f9f9f9;
+        }
+        .navbar a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+        .navbar .icons {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .icon {
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        .memory-game {
+            width: 960px;
+            height: 720px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            perspective: 1000px;
+        }
+        .memory-card {
+            width: calc(25% - 10px);
+            height: calc(33.333% - 10px);
+            margin: 5px;
+            position: relative;
+            transform: scale(1);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        .memory-card:active {
+            transform: scale(0.97);
+            transition: transform 0.2s;
+        }
+        .memory-card.flip {
+            transform: rotateY(180deg);
+        }
+        .front-face,
+        .back-face {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            position: absolute;
+            border-radius: 5px;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-direction: column;
+        }
+        .front-face {
+            transform: rotateY(180deg);
+            background: #FFCC00;
+            color: #333;
+        }
+        .back-face {
+            background: #1C7CCC;
+            color: #FFFFFF;
+        }
+        .word {
+            font-size: 1.5rem;
+        }
+        .definition {
+            font-size: 1rem;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
-<body class="bg-gray-700 text-gray-100">
+<body class="bg-gray-700 text-gray-100 dark-mode">
+    <nav class="navbar dark-mode" id="navbar">
+        <a href="/education">Mi'gmaq Foundation</a>
+        <div class="icons">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/github.png" class="icon" alt="GitHub" onclick="window.open('https://github.com', '_blank')">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/moon-symbol.png" class="icon" id="theme-toggle" alt="Toggle Theme">
+        </div>
+    </nav>
     <div class="container mx-auto p-8">
         <h1 class="text-3xl font-semibold mb-6 text-center">Flashcard Memory Game</h1>
         <section class="memory-game" id="memory-game"></section>
     </div>
     <script src="../../js/games/flashcard.js"></script>
+    <script src="../../js/utils/theme-toggle.js"></script>
 </body>
 
 </html>
