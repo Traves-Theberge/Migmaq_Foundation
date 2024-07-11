@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         populateAlphabetContainer();
         addEventListeners();
         fetchFullDictionaryData();
-        applyDarkModeClasses();
+        applyTheme();
     }
 
     function populateAlphabetContainer() {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const themeToggle = document.getElementById('theme-toggle');
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            applyDarkModeClasses();
+            applyTheme();
         });
     }
 
@@ -155,23 +155,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         paginatedWords.forEach(word => {
             const wordDiv = document.createElement('div');
-            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4', 'hover:bg-gray-300', 'dark:hover:bg-gray-600', 'transition', 'duration-300', 'bg-gray-100', 'dark:bg-gray-800', 'text-gray-900', 'dark:text-white');
+            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4', 'hover:bg-gray-300', 'dark:hover:bg-gray-600', 'transition', 'duration-300', 'bg-gray-100', 'dark:bg-gray-800');
+
             wordDiv.innerHTML = `
-                <a href="/word-details.html?word=${encodeURIComponent(word.word)}" class="block p-6 text-gray-900 dark:text-white">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">${word.word}</h2>
+                <a href="/word-details.html?word=${encodeURIComponent(word.word)}" class="block p-6">
+                    <h2 class="text-xl font-semibold mb-4">${word.word}</h2>
                     <div class="mb-4">
-                        <strong class="block text-gray-900 dark:text-white mb-2">Part of Speech:</strong>
-                        <span class="block text-gray-900 dark:text-white">${word.type}</span>
+                        <strong class="block mb-2">Part of Speech:</strong>
+                        <span class="block">${word.type}</span>
                     </div>
                     <div class="mb-4">
-                        <strong class="block text-gray-900 dark:text-white mb-2">English Definitions:</strong>
-                        <ul class="list-disc list-inside text-gray-900 dark:text-white">
+                        <strong class="block mb-2">English Definitions:</strong>
+                        <ul class="list-disc list-inside">
                             ${word.definitions.map(def => `<li>${def}</li>`).join('')}
                         </ul>
                     </div>
                     <div>
-                        <strong class="block text-gray-900 dark:text-white mb-2">Translations:</strong>
-                        <ul class="text-gray-900 dark:text-white">
+                        <strong class="block mb-2">Translations:</strong>
+                        <ul>
                             ${word.usages.map(usage => `
                                 <li>
                                     <strong>Mi'gmaq Translation:</strong> ${usage.translation}<br>
@@ -185,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
             dictionaryContainer.appendChild(wordDiv);
         });
 
-        applyDarkModeClasses();
+        applyTheme(); // Ensure dark mode classes are applied after appending new elements
     }
 
     function createPagination(totalItems) {
@@ -219,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         paginationContainer.appendChild(createPaginationButton('Next', currentPage < totalPages, currentPage + 1));
 
-        applyDarkModeClasses();
+        applyTheme();
     }
 
     function createPaginationButton(text, enabled, page) {
@@ -237,40 +238,28 @@ document.addEventListener('DOMContentLoaded', function() {
         return button;
     }
 
-    function applyDarkModeClasses() {
+    function applyTheme() {
         const isDarkMode = document.body.classList.contains('dark-mode');
         document.querySelectorAll('.word-item').forEach(item => {
-            item.classList.toggle('bg-gray-800', isDarkMode);
-            item.classList.toggle('text-white', isDarkMode);
-            item.classList.toggle('bg-gray-100', !isDarkMode);
-            item.classList.toggle('text-gray-900', !isDarkMode);
+            item.style.backgroundColor = isDarkMode ? '#2d3748' : '#f7fafc';
+            item.style.color = isDarkMode ? '#ffffff' : '#1a202c';
         });
         document.querySelectorAll('a.block').forEach(link => {
-            link.classList.toggle('text-white', isDarkMode);
-            link.classList.toggle('text-gray-900', !isDarkMode);
+            link.style.color = isDarkMode ? '#ffffff' : '#1a202c';
         });
         document.querySelectorAll('.pagination button').forEach(button => {
-            button.classList.toggle('bg-gray-800', isDarkMode);
-            button.classList.toggle('text-white', isDarkMode);
-            button.classList.toggle('hover:bg-gray-600', isDarkMode);
-            button.classList.toggle('bg-gray-100', !isDarkMode);
-            button.classList.toggle('text-gray-900', !isDarkMode);
-            button.classList.toggle('hover:bg-gray-300', !isDarkMode);
+            button.style.backgroundColor = isDarkMode ? '#2d3748' : '#f7fafc';
+            button.style.color = isDarkMode ? '#ffffff' : '#1a202c';
         });
         // Apply dark mode to search input and filter select
-        searchInput.classList.toggle('bg-gray-800', isDarkMode);
-        searchInput.classList.toggle('text-gray-100', isDarkMode);
-        searchInput.classList.toggle('bg-gray-100', !isDarkMode);
-        searchInput.classList.toggle('text-gray-900', !isDarkMode);
-        filterSelect.classList.toggle('bg-gray-800', isDarkMode);
-        filterSelect.classList.toggle('text-gray-100', isDarkMode);
-        filterSelect.classList.toggle('bg-gray-100', !isDarkMode);
-        filterSelect.classList.toggle('text-gray-900', !isDarkMode);
+        searchInput.style.backgroundColor = isDarkMode ? '#2d3748' : '#f7fafc';
+        searchInput.style.color = isDarkMode ? '#ffffff' : '#1a202c';
+        filterSelect.style.backgroundColor = isDarkMode ? '#2d3748' : '#f7fafc';
+        filterSelect.style.color = isDarkMode ? '#ffffff' : '#1a202c';
         // Apply dark mode to pagination label
         const totalPagesLabel = document.querySelector('.pagination span');
         if (totalPagesLabel) {
-            totalPagesLabel.classList.toggle('text-white', isDarkMode);
-            totalPagesLabel.classList.toggle('text-gray-900', !isDarkMode);
+            totalPagesLabel.style.color = isDarkMode ? '#ffffff' : '#1a202c';
         }
     }
 

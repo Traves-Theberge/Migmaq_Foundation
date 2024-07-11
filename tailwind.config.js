@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./*.html'], // Make sure this matches the files where you want Tailwind to apply
+  content: ['./client/**/*.html', './client/**/*.js'], // Update this to match all relevant files
   theme: {
     extend: {
       fontFamily: {
@@ -8,4 +8,5 @@ module.exports = {
       },
     },
   },
+  plugins: [],
 }
