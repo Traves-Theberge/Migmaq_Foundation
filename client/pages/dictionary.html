@@ -14,7 +14,54 @@
     <link rel="stylesheet" href="../css/output.css">
     
     <style>
-        /* Additional custom styles can be placed here */
+        html {
+            scroll-behavior: smooth;
+        }
+        body.light-mode {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #f9f9f9;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar.light-mode {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .navbar.dark-mode {
+            background-color: #1a202c;
+            color: #f9f9f9;
+        }
+        .navbar a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+        .navbar .icons {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .icon {
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        .container > section {
+            background-color: inherit;
+            color: inherit;
+        }
+        .bg-gray-800 {
+            background-color: #2d3748;
+        }
+        .text-gray-100 {
+            color: #f9f9f9;
+        }
         #instructionsTooltip {
             display: none;
         }
@@ -24,28 +71,21 @@
     </style>
 </head>
 
-<body class="bg-gray-700 text-gray-100">
+<body class="bg-gray-700 text-gray-100 dark-mode">
     <!-- Navigation Bar -->
-    <nav class="bg-gray-800 p-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="text-white text-lg font-semibold">Mi'gmaq Dictionary</div>
-            <ul class="flex space-x-4">
-                <li>
-                    <a href="/" class="text-gray-300 hover:text-white transform hover:-translate-y-1 hover:scale-110 bg-blue-600 px-4 py-2 rounded-lg shadow-md">Home</a>
-                </li>
-                <li>
-                    <a href="/education" class="text-gray-300 hover:text-white transform hover:-translate-y-1 hover:scale-110 bg-green-600 px-4 py-2 rounded-lg shadow-md">Education</a>
-                </li>
-            </ul>
-            
+    <nav class="navbar dark-mode" id="navbar">
+        <a href="/index.html">Mi'gmaq Foundation</a>
+        <div class="icons">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/github.png" class="icon" alt="GitHub" onclick="window.open('https://github.com', '_blank')">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/moon-symbol.png" class="icon" id="theme-toggle" alt="Toggle Theme">
         </div>
     </nav>
     <div class="container mx-auto p-8">
         <!-- Dictionary Section -->
         <section id="dictionary-section" class="mb-8">
             <!-- Search Container -->
-            <div class="search-container text-center text-white mb-8 flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2">
-                <input type="text" id="searchInput" placeholder="Search/Alamugsit..." class="px-4 py-2 border-2 border-gray-600 bg-gray-800 rounded-md w-full sm:w-auto">
+            <div class="search-container text-center mb-8 flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-2">
+                <input type="text" id="searchInput" placeholder="Search/Alamugsit..." class="px-4 py-2 border-2 border-gray-600 bg-gray-800 rounded-md w-full sm:w-auto text-gray-100">
                 <select id="filterSelect" class="px-4 py-2 border-2 border-gray-600 bg-gray-800 text-white rounded-md w-full sm:w-auto">
                     <option value="definitions">English Word</option>
                     <option value="word">Mi'gmaq Word</option>
@@ -101,6 +141,7 @@
     <script src="/_vercel/insights/script.js"></script>
     <script src="../js/dictionary.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="../js/utils/theme-toggle.js"></script>
 </body>
 
 </html>
