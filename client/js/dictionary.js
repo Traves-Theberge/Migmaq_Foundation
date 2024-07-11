@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         paginatedWords.forEach(word => {
             const wordDiv = document.createElement('div');
-            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4', 'hover:bg-gray-300', 'dark:hover:bg-gray-600', 'transition', 'duration-300', 'bg-gray-100', 'dark:bg-gray-800');
+            wordDiv.classList.add('word-item', 'min-h-[10rem]', 'border', 'border-gray-300', 'rounded-lg', 'p-10', 'mb-4', 'transition', 'duration-300');
 
             wordDiv.innerHTML = `
                 <a href="/word-details.html?word=${encodeURIComponent(word.word)}" class="block p-6">
@@ -183,6 +183,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </a>
             `;
+            wordDiv.addEventListener('mouseover', () => applyHoverEffect(wordDiv, true));
+            wordDiv.addEventListener('mouseout', () => applyHoverEffect(wordDiv, false));
             dictionaryContainer.appendChild(wordDiv);
         });
 
@@ -261,6 +263,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (totalPagesLabel) {
             totalPagesLabel.style.color = isDarkMode ? '#ffffff' : '#1a202c';
         }
+    }
+
+    function applyHoverEffect(element, isHover) {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        element.style.backgroundColor = isHover 
+            ? (isDarkMode ? '#4a5568' : '#e2e8f0') 
+            : (isDarkMode ? '#2d3748' : '#f7fafc');
     }
 
     function displayError(message) {
