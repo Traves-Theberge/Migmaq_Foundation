@@ -1,4 +1,3 @@
-// wordOfTheDay.js
 document.addEventListener('DOMContentLoaded', function() {
     const wordOfTheDayContainer = document.getElementById('word-of-the-day-container');
 
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         wordOfTheDayContainer.innerHTML = `
-            <h3 class="text-3xl font-extrabold mb-6 text-white">${word.word}</h3>
+            <h3 class="text-3xl font-extrabold mb-6">${word.word}</h3>
             <div class="mb-6">
                 <p class="text-2xl font-semibold mb-2">Part of Speech:</p>
                 <p class="text-xl">${word.type}</p>
