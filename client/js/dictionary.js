@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Get references to DOM elements
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const filterSelect = document.getElementById('filterSelect');
@@ -6,24 +7,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const alphabetContainer = document.getElementById('alphabet-container');
     const paginationContainer = document.getElementById('pagination-container');
 
+    // Define alphabet for navigation
     const alphabet = "AEGIJLMNOPQSTUW";
-    let currentPage = 1;
-    const itemsPerPage = 20;
-    let currentFilter = '';
-    let currentTerm = '';
-    let dictionaryData = [];
-    let filteredData = [];
-    let fuse;
+    let currentPage = 1; // Current page for pagination
+    const itemsPerPage = 20; // Items per page for pagination
+    let currentFilter = ''; // Current filter for search
+    let currentTerm = ''; // Current search term
+    let dictionaryData = []; // Full dictionary data
+    let filteredData = []; // Filtered dictionary data
+    let fuse; // Fuse.js instance for searching
 
+    // Initialize the application
     initialize();
 
     function initialize() {
-        populateAlphabetContainer();
-        addEventListeners();
-        fetchFullDictionaryData();
-        applyTheme();
+        populateAlphabetContainer(); // Populate alphabet navigation
+        addEventListeners(); // Add event listeners
+        fetchFullDictionaryData(); // Fetch dictionary data
+        applyTheme(); // Apply the current theme
     }
 
+    // Populate alphabet navigation container
     function populateAlphabetContainer() {
         alphabet.split('').forEach(letter => {
             const letterSpan = document.createElement('span');
@@ -34,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Add event listeners for search and theme toggle
     function addEventListeners() {
         searchButton.addEventListener('click', () => searchDictionary());
         searchInput.addEventListener('keydown', function(event) {
@@ -50,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Fetch the full dictionary data from the server
     function fetchFullDictionaryData() {
         fetch('/api/dictionary')
             .then(response => response.json())
@@ -66,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    // Initialize Fuse.js for searching
     function initializeFuse(words) {
         const fuseOptions = {
             keys: [
@@ -80,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fuse = new Fuse(words, fuseOptions);
     }
 
+    // Search the dictionary based on the current term and filter
     function searchDictionary() {
         currentTerm = searchInput.value.trim();
         currentFilter = filterSelect.value;
@@ -131,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Filter dictionary by letter
     function filterByLetter(letter) {
         currentTerm = letter;
         currentFilter = 'startsWith';
@@ -144,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Display the dictionary words on the page
     function displayDictionary(words) {
         dictionaryContainer.innerHTML = '';
         if (words.length === 0) {
@@ -191,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         applyTheme(); // Ensure dark mode classes are applied after appending new elements
     }
 
+    // Create pagination controls
     function createPagination(totalItems) {
         const totalPages = Math.ceil(totalItems / itemsPerPage);
         paginationContainer.innerHTML = '';
@@ -225,6 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
         applyTheme();
     }
 
+    // Create a pagination button
     function createPaginationButton(text, enabled, page) {
         const button = document.createElement('button');
         button.textContent = text;
@@ -240,6 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return button;
     }
 
+    // Apply the current theme (dark or light)
     function applyTheme() {
         const isDarkMode = document.body.classList.contains('dark-mode');
         document.querySelectorAll('.word-item').forEach(item => {
@@ -265,6 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Apply hover effect for word items
     function applyHoverEffect(element, isHover) {
         const isDarkMode = document.body.classList.contains('dark-mode');
         element.style.backgroundColor = isHover 
@@ -272,6 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
             : (isDarkMode ? '#2d3748' : '#f7fafc');
     }
 
+    // Display an error message
     function displayError(message) {
         dictionaryContainer.innerHTML = `<p class="error text-gray-500 text-center dark:text-white">${message}</p>`;
     }
