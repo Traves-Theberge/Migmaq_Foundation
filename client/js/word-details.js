@@ -37,6 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
     commentsContainer.addEventListener('click', handleReplyButtonClick);
     commentsContainer.addEventListener('submit', handleReplyFormSubmit);
 
+    // Add event listener for theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        document.body.classList.toggle('light-mode');
+        applyTheme();
+    });
+
+    applyTheme(); // Apply the initial theme
+
     // Function to fetch word details from the server
     function fetchWordDetails(word) {
         return fetch(`/api/word-details?word=${encodeURIComponent(word)}`)
@@ -65,20 +75,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to display word details in the HTML
     function displayWordDetails(wordDetails) {
         const wordHTML = `
-            <div class="word-item p-6 text-white">
+            <div class="word-item rounded-md">
                 <h2 class="text-3xl font-bold mb-6 text-center">${wordDetails.word}</h2>
                 <div class="mb-6">
-                    <strong class="block text-xl text-white-600 mb-3">Part of Speech:</strong>
+                    <strong class="block text-xl mb-3">Part of Speech:</strong>
                     <span class="block text-lg">${wordDetails.type}</span>
                 </div>
                 <div class="mb-6">
-                    <strong class="block text-xl text-white-600 mb-3">English Definitions:</strong>
+                    <strong class="block text-xl mb-3">English Definitions:</strong>
                     <ul class="list-disc list-inside text-lg">
                         ${wordDetails.definitions.map(def => `<li>${def}</li>`).join('')}
                     </ul>
                 </div>
                 <div class="mb-6">
-                    <strong class="block text-xl text-white-600 mb-3">Translations:</strong>
+                    <strong class="block text-xl mb-3">Translations:</strong>
                     <ul class="text-lg">
                         ${wordDetails.usages.map(usage => `
                             <li class="mb-4">
@@ -91,11 +101,13 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         wordDetailsContainer.innerHTML = wordHTML;
+        applyTheme(); // Apply theme to newly added elements
     }
 
     // Function to display AI fact in the HTML
     function displayAiFact(fact) {
         aiFactContainer.innerHTML = `<p class="text-2xl font-medium text-center">${fact}</p>`;
+        applyTheme(); // Apply theme to newly added elements
     }
 
     // Function to display an error message
@@ -152,12 +164,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayComments(comment.replies, replyList, level + 1);
             }
         });
+        applyTheme(); // Apply theme to newly added elements
     }
 
     // Function to create a comment item in the HTML
     function createCommentItem(comment, level) {
         const commentItem = document.createElement('li');
-        commentItem.classList.add('bg-gray-800', 'p-4', 'rounded-md', 'text-white', 'mt-4', 'comment-item', 'flex', 'flex-col', 'space-y-2');
+        commentItem.classList.add('bg-gray-800', 'p-4', 'rounded-md', 'mt-4', 'comment-item', 'flex', 'flex-col', 'space-y-2');
         if (level > 0) {
             commentItem.classList.add('ml-12', 'border-l-2', 'border-gray-700', 'pl-4');
         }
@@ -180,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         authorNameDate.classList.add('flex', 'flex-col');
 
         const authorName = document.createElement('p');
-        authorName.classList.add('flex','text-lg', 'font-semibold');
+        authorName.classList.add('flex', 'text-lg', 'font-semibold');
         authorName.textContent = comment.name;
 
         const commentDate = document.createElement('p');
@@ -193,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
         commentAuthor.appendChild(authorNameDate);
 
         const commentText = document.createElement('p');
-        commentText.classList.add('flex','text-lg', 'font-medium');
+        commentText.classList.add('flex', 'text-lg', 'font-medium');
         commentText.textContent = comment.content;
 
         commentContent.appendChild(commentAuthor);
@@ -222,19 +235,19 @@ document.addEventListener('DOMContentLoaded', function() {
         replyForm.setAttribute('data-comment-id', commentId);
 
         const replyName = document.createElement('input');
-        replyName.classList.add('reply-name', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+        replyName.classList.add('reply-name', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900');
         replyName.setAttribute('type', 'text');
         replyName.setAttribute('placeholder', 'Your Name');
         replyName.required = true;
 
         const replyEmail = document.createElement('input');
-        replyEmail.classList.add('reply-email', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+        replyEmail.classList.add('reply-email', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900');
         replyEmail.setAttribute('type', 'email');
         replyEmail.setAttribute('placeholder', 'Your Email');
         replyEmail.required = true;
 
         const replyContent = document.createElement('textarea');
-        replyContent.classList.add('reply-content', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900', 'text-white');
+        replyContent.classList.add('reply-content', 'w-full', 'p-2', 'rounded-md', 'bg-gray-900');
         replyContent.setAttribute('placeholder', 'Write a reply...');
         replyContent.required = true;
 
@@ -312,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
             appendNewComment(newComment);
             clearForm(commentForm); // Clear the main comment form
             parentIdInput.value = '';
+            applyTheme(); // Apply theme to newly added elements
         })
         .catch(error => {
             console.error('Error posting comment:', error);
@@ -337,6 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const nestedComments = buildNestedComments([comment]);
             displayComments(nestedComments);
         }
+        applyTheme(); // Apply theme to newly added elements
     }
 
     // Function to generate an avatar based on the user's name
@@ -349,5 +364,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${firstLetter}
             </div>
         `;
+    }
+
+    // Function to apply the current theme (dark or light)
+    function applyTheme() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        const themeToggleIcon = document.getElementById('theme-toggle');
+        const githubIcon = document.querySelector('.icon[src*="github"]');
+
+        // Update the theme toggle icon
+        themeToggleIcon.src = isDarkMode
+            ? 'https://img.icons8.com/ios-glyphs/30/ffffff/moon-symbol.png'
+            : 'https://img.icons8.com/ios-glyphs/30/000000/sun.png';
+
+        // Update the GitHub icon color
+        githubIcon.src = isDarkMode
+            ? 'https://img.icons8.com/material-outlined/24/ffffff/github.png'
+            : 'https://img.icons8.com/material-outlined/24/000000/github.png';
+
+        // Update the navbar classes
+        const navbar = document.querySelector('.navbar');
+        navbar.classList.toggle('dark-mode', isDarkMode);
+        navbar.classList.toggle('light-mode', !isDarkMode);
+
+        // Set the background color for HTML and body elements
+        document.documentElement.style.backgroundColor = isDarkMode ? '#1a202c' : '#f9f9f9';
+        document.body.style.backgroundColor = isDarkMode ? '#1a202c' : '#f9f9f9';
+
+        // Update text and background colors for various sections
+        document.querySelectorAll('.word-item, .container > section, .comment-item').forEach(item => {
+            item.style.backgroundColor = isDarkMode ? '#2d3748' : '#f7fafc';
+            item.style.color = isDarkMode ? '#f9f9f9' : '#1a202c';
+            item.classList.add('rounded-md');
+        });
+
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.style.backgroundColor = isDarkMode ? '#2d3748' : '#f7fafc';
+            input.style.color = isDarkMode ? '#f9f9f9' : '#1a202c';
+        });
     }
 });
