@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function disableCards() {
         firstCard.removeEventListener('click', flipCard);
         secondCard.removeEventListener('click', flipCard);
+        firstCard.classList.add('glow');
+        secondCard.classList.add('glow');
         matchedPairs += 1; // Increment matched pairs count
         if (matchedPairs === 6) { // All pairs matched
             setTimeout(restartGame, 1500); // Restart game after a short delay
@@ -117,6 +119,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the game
     async function init() {
         await restartGame();
+        applyTheme(); // Apply the current theme initially
+    }
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        applyTheme();
+    });
+
+    function applyTheme() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        document.querySelectorAll('.memory-card').forEach(card => {
+            card.style.backgroundColor = isDarkMode ? '#2d3748' : '#f7fafc';
+            card.style.color = isDarkMode ? '#f9f9f9' : '#1a202c';
+        });
     }
 
     init();
