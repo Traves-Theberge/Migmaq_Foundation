@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const instructionsIconLight = document.getElementById('instructionsIconLight');
     const instructionsIconDark = document.getElementById('instructionsIconDark');
     const githubIcon = document.querySelector('.icon[alt="GitHub"]');
+    const instructionsModal = document.getElementById('instructionsModal');
+    const closeButton = document.querySelector('.modal-close-button');
 
     // Load the saved theme from localStorage, default to dark-mode if not set
     const savedTheme = localStorage.getItem('theme') || 'dark-mode';
@@ -41,6 +43,29 @@ document.addEventListener('DOMContentLoaded', function() {
             instructionsIconDark.classList.add('hidden');
             githubIcon.src = 'https://img.icons8.com/material-outlined/24/000000/github.png';
             localStorage.setItem('theme', 'light-mode');
+        }
+    });
+
+    // Toggle instructions modal
+    function toggleInstructionsModal(show) {
+        if (show) {
+            instructionsModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        } else {
+            instructionsModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Re-enable background scrolling
+        }
+    }
+
+    // Add event listeners for the instruction icons and close button
+    instructionsIconLight.addEventListener('click', () => toggleInstructionsModal(true));
+    instructionsIconDark.addEventListener('click', () => toggleInstructionsModal(true));
+    closeButton.addEventListener('click', () => toggleInstructionsModal(false));
+
+    // Close modal when clicking outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === instructionsModal) {
+            toggleInstructionsModal(false);
         }
     });
 });
