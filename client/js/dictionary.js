@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const dictionaryContainer = document.getElementById('dictionary-container');
     const alphabetContainer = document.getElementById('alphabet-container');
     const paginationContainer = document.getElementById('pagination-container');
+    const instructionsModal = document.getElementById('instructionsModal');
+    const themeToggle = document.getElementById('theme-toggle');
+    const instructionsIconLight = document.getElementById('instructionsIconLight');
+    const instructionsIconDark = document.getElementById('instructionsIconDark');
+    const closeButton = document.querySelector('.modal-close-button');
 
     // Define alphabet for navigation
     const alphabet = "AEGIJLMNOPQSTUW";
@@ -38,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add event listeners for search and theme toggle
+    // Add event listeners for search, theme toggle, and instructions modal
     function addEventListeners() {
         searchButton.addEventListener('click', () => searchDictionary());
         searchInput.addEventListener('keydown', function(event) {
@@ -48,10 +53,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        const themeToggle = document.getElementById('theme-toggle');
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             applyTheme();
+        });
+
+        instructionsIconLight.addEventListener('click', () => toggleInstructionsModal(true));
+        instructionsIconDark.addEventListener('click', () => toggleInstructionsModal(true));
+        closeButton.addEventListener('click', () => toggleInstructionsModal(false));
+
+        window.addEventListener('click', (event) => {
+            if (event.target === instructionsModal) {
+                toggleInstructionsModal(false);
+            }
         });
     }
 
@@ -276,6 +290,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (totalPagesLabel) {
             totalPagesLabel.style.color = isDarkMode ? '#ffffff' : '#1a202c';
         }
+
+        // Toggle icon visibility based on theme
+        if (isDarkMode) {
+            instructionsIconLight.classList.add('hidden');
+            instructionsIconDark.classList.remove('hidden');
+        } else {
+            instructionsIconLight.classList.remove('hidden');
+            instructionsIconDark.classList.add('hidden');
+        }
+
+        // Apply dark or light mode to the close button
+        if (closeButton) {
+            if (isDarkMode) {
+                closeButton.classList.remove('light-mode');
+            } else {
+                closeButton.classList.add('light-mode');
+            }
+        }
     }
 
     // Apply hover effect for word items
@@ -289,5 +321,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Display an error message
     function displayError(message) {
         dictionaryContainer.innerHTML = `<p class="error text-gray-500 text-center dark:text-white">${message}</p>`;
+    }
+
+    // Toggle instructions modal
+    function toggleInstructionsModal(show) {
+        if (show) {
+            instructionsModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        } else {
+            instructionsModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Re-enable background scrolling
+        }
     }
 });
