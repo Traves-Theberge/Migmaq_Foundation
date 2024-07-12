@@ -33,6 +33,8 @@ Mi'gmaq Foundation
 │   │   ├── wordOfTheDay.js
 │   │   ├── dictionary.js
 │   │   ├── word-details.js
+│   │   ├── utils
+│   │   │   ├── theme-toggle.js
 │   │   ├── games
 │   │   │   ├── flashcard.js
 │   │   ├── lessons

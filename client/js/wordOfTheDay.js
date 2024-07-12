@@ -54,7 +54,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
+        applyTheme(); // Ensure theme is applied to the new content
     }
 
     fetchWordOfTheDay();
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        applyTheme();
+    });
+
+    function applyTheme() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        document.querySelectorAll('.bg-gray-800').forEach(item => {
+            item.style.backgroundColor = isDarkMode ? '#2d3748' : '#f7fafc';
+            item.style.color = isDarkMode ? '#f9f9f9' : '#1a202c';
+        });
+        document.querySelectorAll('.text-gray-100').forEach(item => {
+            item.style.color = isDarkMode ? '#f9f9f9' : '#1a202c';
+        });
+    }
 });
