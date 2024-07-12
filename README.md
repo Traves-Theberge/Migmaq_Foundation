@@ -54,8 +54,6 @@ Mi'gmaq Foundation
 │   │       ├── resource1.html
 │   ├── assets
 │   │   ├── dictionary.json
-│   │   ├── wordOfTheDay.json
-│   │   ├── favicon.png
 ├── server
 │   ├── config
 │   │   ├── database.js
