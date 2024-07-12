@@ -23,18 +23,18 @@
 
         body.light-mode {
             background-color: #f9f9f9;
-            color: #333;
+            color: #333333;
         }
 
         body.light-mode a {
-            color: #333;
+            color: #333333;
         }
 
         body.light-mode header,
         body.light-mode p,
         body.light-mode a,
         body.light-mode nav ul li a {
-            color: #333;
+            color: #333333;
         }
 
         body.dark-mode {
@@ -66,7 +66,7 @@
 
         .navbar.light-mode {
             background-color: #f9f9f9;
-            color: #333;
+            color: #333333;
         }
 
         .navbar.dark-mode {
@@ -110,23 +110,42 @@
         .text-center {
             text-align: center;
         }
-        
+
         .main-content {
-            padding-top: 60px; /* Adjust based on navbar height */
+            padding-top: 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 60px); /* Full height minus navbar height */
+            min-height: calc(100vh - 60px);
         }
 
         .button-custom {
-            background-color: #3877e4; /* Neutral gray color */
-            color: #f9f9f9;
+            background-color: #007bff;
+            color: #ffffff;
+            transition: background-color 0.3s ease;
         }
 
         .button-custom:hover {
-            background-color: #2d3748; /* Darker shade on hover */
+            background-color: #0056b3;
+        }
+
+        body.light-mode .button-custom {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        body.light-mode .button-custom:hover {
+            background-color: #0056b3;
+        }
+
+        body.dark-mode .button-custom {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        body.dark-mode .button-custom:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -151,12 +170,12 @@
             <nav class="text-center mb-8">
                 <ul class="flex justify-center space-x-4">
                     <li>
-                        <a href="/dictionary" class="px-6 py-3 button-custom rounded-md transition-colors duration-300 shadow-md">
+                        <a href="/dictionary" class="px-6 py-3 button-custom rounded-md shadow-md">
                             Enter Dictionary
                         </a>
                     </li>
                     <li>
-                        <a href="/education" class="px-6 py-3 button-custom rounded-md transition-colors duration-300 shadow-md">
+                        <a href="/education" class="px-6 py-3 button-custom rounded-md shadow-md">
                             Enter Games, Lessons, and Resources
                         </a>
                     </li>
