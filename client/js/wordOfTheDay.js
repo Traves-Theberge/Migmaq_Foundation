@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const wordOfTheDayContainer = document.getElementById('word-of-the-day-container');
+    const preloader = document.getElementById('preloader');
+    const content = document.getElementById('content');
 
+    // Fetch the word of the day from the API
     function fetchWordOfTheDay() {
         fetch('/api/word-of-the-day')
             .then(response => response.json())
@@ -10,13 +13,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 console.log('Fetched word of the day:', data);
                 displayWordOfTheDay(data);
+                // Hide preloader and show content
+                preloader.style.display = 'none';
+                content.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error fetching word of the day:', error);
                 wordOfTheDayContainer.innerHTML = '<p class="text-red-500">Error fetching word of the day. Please try again later.</p>';
+                // Hide preloader and show content even if there's an error
+                preloader.style.display = 'none';
+                content.style.display = 'block';
             });
     }
 
+    // Display the word of the day in the container
     function displayWordOfTheDay(word) {
         if (!word || !word.word || !word.type || !word.definitions || !word.translations || !word.usages) {
             console.error('Invalid word data:', word);
@@ -57,15 +67,17 @@ document.addEventListener('DOMContentLoaded', function() {
         applyTheme(); // Ensure theme is applied to the new content
     }
 
+    // Initial fetch of the word of the day
     fetchWordOfTheDay();
 
-    // Theme Toggle
+    // Handle theme toggle
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
         applyTheme();
     });
 
+    // Apply the current theme to elements
     function applyTheme() {
         const isDarkMode = document.body.classList.contains('dark-mode');
         document.querySelectorAll('.bg-gray-800').forEach(item => {
