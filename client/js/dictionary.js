@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alphabet.split('').forEach(letter => {
             const letterSpan = document.createElement('span');
             letterSpan.textContent = letter;
-            letterSpan.className = 'border border-gray-300 w-14 h-14 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-200 dark:hover:bg-gray-600';
+            letterSpan.className = 'border border-gray-300 w-14 h-14 flex items-center justify-center text-4xl cursor-pointer rounded-md m-2 hover:bg-gray-400 dark:hover:bg-gray-300';
             letterSpan.addEventListener('click', () => filterByLetter(letter));
             alphabetContainer.appendChild(letterSpan);
         });

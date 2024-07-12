@@ -90,10 +90,29 @@
         .text-center {
             text-align: center;
         }
+
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #1a202c; /* dark background color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f9f9f9; /* light text color */
+            font-size: 2rem;
+        }
     </style>
 </head>
 
 <body class="dark-mode bg-gray-700 text-gray-100">
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
     <!-- Navigation Bar -->
     <nav class="navbar dark-mode" id="navbar">
         <a href="/dictionary">Mi'gmaq Foundation</a>
@@ -118,7 +137,7 @@
         <section id="ai-fact-section" class="text-center mt-8">
             <header class="text-3xl pt-8 lg:text-4xl font-extrabold mb-6">
                 Interesting Fact
-            </header> 
+            </header>
             <div id="ai-fact-container" class="p-8 rounded-md shadow-md mx-auto">
                 <!-- AI fact will be rendered here -->
             </div>

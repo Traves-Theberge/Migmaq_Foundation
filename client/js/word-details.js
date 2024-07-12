@@ -19,18 +19,23 @@ document.addEventListener('DOMContentLoaded', function() {
         wordIdInput.value = word; // Set the wordId input value
     }
 
-    // Fetch and display word details, comments, and AI fact
-    fetchWordDetails(word);
-
-    // Fetch AI fact after word details to ensure required parameters are available
-    fetchWordDetails(word).then(wordDetails => {
-        const type = wordDetails.type;
-        const translations = wordDetails.usages.map(usage => usage.translation).join(', ');
-        const definitions = wordDetails.definitions.join(', ');
-        fetchAiFact(word, type, translations, definitions);
+    // Fetch and display word details and comments
+    Promise.all([
+        fetchWordDetails(word),
+        fetchComments(word)
+    ]).finally(() => {
+        // Hide preloader after word details and comments are loaded
+        const preloader = document.getElementById('preloader');
+        preloader.style.display = 'none';
+        
+        // Fetch AI fact after main content is loaded
+        fetchWordDetails(word).then(wordDetails => {
+            const type = wordDetails.type;
+            const translations = wordDetails.usages.map(usage => usage.translation).join(', ');
+            const definitions = wordDetails.definitions.join(', ');
+            fetchAiFact(word, type, translations, definitions);
+        });
     });
-
-    fetchComments(word);
 
     // Add event listeners for comment form and reply button clicks
     commentForm.addEventListener('submit', handleCommentSubmit);
@@ -63,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch AI fact from the server
     function fetchAiFact(word, type, translations, definitions) {
-        fetch(`/api/fact?word=${encodeURIComponent(word)}&type=${encodeURIComponent(type)}&translations=${encodeURIComponent(translations)}&definitions=${encodeURIComponent(definitions)}`)
+        return fetch(`/api/fact?word=${encodeURIComponent(word)}&type=${encodeURIComponent(type)}&translations=${encodeURIComponent(translations)}&definitions=${encodeURIComponent(definitions)}`)
             .then(response => response.json())
             .then(data => displayAiFact(data.fact))
             .catch(error => {
@@ -117,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch comments from the server
     function fetchComments(wordId) {
-        fetch(`/api/comments?word_id=${encodeURIComponent(wordId)}`)
+        return fetch(`/api/comments?word_id=${encodeURIComponent(wordId)}`)
             .then(response => response.json())
             .then(comments => {
                 commentsContainer.innerHTML = ''; // Clear previous comments
