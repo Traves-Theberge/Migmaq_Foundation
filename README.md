@@ -6,6 +6,7 @@
 ## Table of Contents
 
 - [Project Structure](#project-structure)
+- [#Access-documentaion](#Access-documentaion-page)
 - [API Endpoints](#api-endpoints)
 - [Client-side Code](#client-side-code)
 - [Server-side Code](#server-side-code)
