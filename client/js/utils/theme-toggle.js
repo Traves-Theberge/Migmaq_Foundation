@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Toggle instructions modal
-    function toggleInstructionsModal(show) {
+    window.toggleInstructionsModal = function(show) {  // <-- Expose the function globally
         if (show) {
             instructionsModal.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
