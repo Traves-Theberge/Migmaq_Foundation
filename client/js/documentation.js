@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchProjectStructure();
 
     document.getElementById('searchInput').addEventListener('keyup', searchFunction);
-    initializeResizer();
 });
 
 function fetchProjectStructure() {
@@ -63,13 +62,20 @@ function displayDetails(item) {
         <p><strong>Purpose:</strong> ${item.details.purpose}</p>
         <div class="details">
             <p><strong>Content:</strong></p>
-            <pre>${typeof item.details.content === 'object' 
-                ? JSON.stringify(item.details.content, null, 2) 
-                : item.details.content.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;')}
-            </pre>
-            <p><strong>Notes:</strong> ${item.details.notes}</p>
+            <pre>${formatDetails(item.details.content)}</pre>
+            <p><strong>Notes:</strong></p>
+            <pre>${formatDetails(item.details.notes)}</pre>
         </div>
     `;
+}
+
+function formatDetails(details) {
+    if (Array.isArray(details)) {
+        return details.join('<br>');
+    } else if (typeof details === 'object') {
+        return JSON.stringify(details, null, 2).replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
+    }
+    return details;
 }
 
 function searchFunction() {
@@ -85,30 +91,4 @@ function searchFunction() {
             element.classList.add('hidden');
         }
     });
-}
-
-function initializeResizer() {
-    const resizer = document.getElementById('resizer');
-    const sidebar = document.getElementById('sidebar');
-    let isResizing = false;
-
-    resizer.addEventListener('mousedown', (e) => {
-        isResizing = true;
-        document.addEventListener('mousemove', resizeSidebar);
-        document.addEventListener('mouseup', stopResizing);
-    });
-
-    function resizeSidebar(e) {
-        if (!isResizing) return;
-        const newWidth = e.clientX;
-        if (newWidth >= 200 && newWidth <= 400) {
-            sidebar.style.width = newWidth + 'px';
-        }
-    }
-
-    function stopResizing() {
-        isResizing = false;
-        document.removeEventListener('mousemove', resizeSidebar);
-        document.removeEventListener('mouseup', stopResizing);
-    }
 }

@@ -17,12 +17,9 @@
             width: 250px;
             background-color: #1a202c;
             color: #f9f9f9;
-            padding: 20px;
+            padding: 10px;
             overflow-y: auto;
-            resize: horizontal;
-            overflow: auto;
-            min-width: 200px;
-            max-width: 400px;
+            flex-shrink: 0;
         }
         .sidebar h1 {
             margin: 0 0 20px 0;
@@ -75,21 +72,11 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
-        .resizer {
-            width: 5px;
-            background: #1a202c;
-            cursor: ew-resize;
-            height: 100%;
-            position: absolute;
-            right: -2.5px;
-            top: 0;
-        }
     </style>
 </head>
 <body>
     <div class="sidebar" id="sidebar">
-        <div class="resizer" id="resizer"></div>
-        <h1>Documentation</h1>
+        <h1>Mi'gmaq Foundation Documentation</h1>
         <input type="text" id="searchInput" placeholder="Search for files...">
         <div id="documentation">
             <!-- Documentation content will be injected here by documentation.js -->
