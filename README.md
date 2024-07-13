@@ -6,7 +6,7 @@
 ## Table of Contents
 
 - [Project Structure](#project-structure)
-- [#Access-documentaion](#Access-documentaion-page)
+- [Access Documentaion](#Access-documentaion-page)
 - [API Endpoints](#api-endpoints)
 - [Client-side Code](#client-side-code)
 - [Server-side Code](#server-side-code)
@@ -101,9 +101,9 @@ Mi'gmaq Foundation
 
 
 ```
-## Access documentaion page
+## Access Documentaion
 
-- Enter in the browser after the .com/ 
+- Enter in the browser { no direct ui link to DOCS currently ) 
 
 ``` /documentation.html  ```
 
