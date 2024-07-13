@@ -5,12 +5,102 @@
 
 ## Table of Contents
 
-- [Project Structure](#project-structure)
+
+- [Access Documentaion](#access-documentaion)
 - [API Endpoints](#api-endpoints)
 - [Client-side Code](#client-side-code)
 - [Server-side Code](#server-side-code)
+- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
+
+
+## Access Documentaion
+
+- Enter in the browser { no direct ui link to DOCS currently ) 
+
+``` /documentation.html  ```
+
+## API Endpoints
+
+### Dictionary Routes
+
+- `GET /api/dictionary` - Retrieve the entire dictionary.
+- `GET /api/word-details?word={word}` - Retrieve details for a specific word.
+
+### Word of the Day Routes
+
+- `GET /api/word-of-the-day` - Retrieve the word of the day.
+- `PUT /api/word-of-the-day/update` - Update the word of the day.
+
+### AI Routes
+
+- `GET /api/fact?word={word}` - Retrieve an AI-generated fact about a word.
+
+### Comments Routes
+
+- `GET /api/comments?word_id={word_id}` - Retrieve comments for a specific word.
+- `POST /api/comments` - Add a new comment.
+
+## Client-side Code
+
+### `client/js/index.js`
+
+Placeholder for index-specific JavaScript if needed.
+
+### `client/js/wordOfTheDay.js`
+
+- Fetches and displays the word of the day.
+
+### `client/js/dictionary.js`
+
+- Handles dictionary search and filtering.
+- Fetches and displays dictionary data.
+- Implements pagination for dictionary entries.
+
+### `client/js/word-details.js`
+
+- Fetches and displays details for a specific word.
+- Fetches and displays comments for a word.
+- Handles adding new comments and replies.
+
+## Server-side Code
+
+### `server/app.js`
+
+- Sets up the Express application, middleware, and routes.
+
+### `server/server.js`
+
+- Starts the server on the specified port.
+
+### `server/config/database.js`
+
+- Configures and exports the Supabase client for database interactions.
+
+### `server/config/openai.js`
+
+- Configures and exports the OpenAI client for AI interactions.
+
+## Controllers
+
+- `dictionaryController.js` - Handles dictionary-related API requests.
+- `wordOfTheDayController.js` - Handles word of the day API requests.
+- `aiController.js` - Handles AI-related API requests.
+- `commentsController.js` - Handles comment-related API requests.
+- `games/gamesController.js` - Handles game-related API requests.
+- `lessons/lessonsController.js` - Handles lesson-related API requests.
+- `resources/resourcesController.js` - Handles resource-related API requests.
+
+## Services
+
+- `dictionaryService.js` - Provides dictionary data operations.
+- `wordOfTheDayService.js` - Provides word of the day data operations.
+- `aiService.js` - Provides AI-related operations.
+- `commentsService.js` - Provides comment-related operations.
+- `games/gamesService.js` - Provides game-related operations.
+- `lessons/lessonsService.js` - Provides lesson-related operations.
+- `resources/resourcesService.js` - Provides resource-related operations.
 
 ## Project Structure
 
@@ -100,92 +190,6 @@ Mi'gmaq Foundation
 
 
 ```
-## Access documentaion page
-
-- Enter in the browser after the .com/ 
-
-``` /documentation.html  ```
-
-## API Endpoints
-
-### Dictionary Routes
-
-- `GET /api/dictionary` - Retrieve the entire dictionary.
-- `GET /api/word-details?word={word}` - Retrieve details for a specific word.
-
-### Word of the Day Routes
-
-- `GET /api/word-of-the-day` - Retrieve the word of the day.
-- `PUT /api/word-of-the-day/update` - Update the word of the day.
-
-### AI Routes
-
-- `GET /api/fact?word={word}` - Retrieve an AI-generated fact about a word.
-
-### Comments Routes
-
-- `GET /api/comments?word_id={word_id}` - Retrieve comments for a specific word.
-- `POST /api/comments` - Add a new comment.
-
-## Client-side Code
-
-### `client/js/index.js`
-
-Placeholder for index-specific JavaScript if needed.
-
-### `client/js/wordOfTheDay.js`
-
-- Fetches and displays the word of the day.
-
-### `client/js/dictionary.js`
-
-- Handles dictionary search and filtering.
-- Fetches and displays dictionary data.
-- Implements pagination for dictionary entries.
-
-### `client/js/word-details.js`
-
-- Fetches and displays details for a specific word.
-- Fetches and displays comments for a word.
-- Handles adding new comments and replies.
-
-## Server-side Code
-
-### `server/app.js`
-
-- Sets up the Express application, middleware, and routes.
-
-### `server/server.js`
-
-- Starts the server on the specified port.
-
-### `server/config/database.js`
-
-- Configures and exports the Supabase client for database interactions.
-
-### `server/config/openai.js`
-
-- Configures and exports the OpenAI client for AI interactions.
-
-## Controllers
-
-- `dictionaryController.js` - Handles dictionary-related API requests.
-- `wordOfTheDayController.js` - Handles word of the day API requests.
-- `aiController.js` - Handles AI-related API requests.
-- `commentsController.js` - Handles comment-related API requests.
-- `games/gamesController.js` - Handles game-related API requests.
-- `lessons/lessonsController.js` - Handles lesson-related API requests.
-- `resources/resourcesController.js` - Handles resource-related API requests.
-
-## Services
-
-- `dictionaryService.js` - Provides dictionary data operations.
-- `wordOfTheDayService.js` - Provides word of the day data operations.
-- `aiService.js` - Provides AI-related operations.
-- `commentsService.js` - Provides comment-related operations.
-- `games/gamesService.js` - Provides game-related operations.
-- `lessons/lessonsService.js` - Provides lesson-related operations.
-- `resources/resourcesService.js` - Provides resource-related operations.
 
 ## Contributing
 
