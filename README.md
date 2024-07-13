@@ -40,7 +40,8 @@ Mi'gmaq Foundation
 │   │   ├── lessons
 │   │   │   ├── lesson1.js
 │   │   ├── resources
-│   │       ├── resource1.js
+│   │   │   ├── resource1.js
+│   │   ├── documentation.js
 │   ├── pages
 │   │   ├── index.html
 │   │   ├── education.html
@@ -51,9 +52,11 @@ Mi'gmaq Foundation
 │   │   ├── lessons
 │   │   │   ├── lesson1.html
 │   │   ├── resources
-│   │       ├── resource1.html
+│   │   │   ├── resource1.html
+│   │   ├── documentation.html
 │   ├── assets
 │   │   ├── dictionary.json
+│   │   ├── documentation.json
 ├── server
 │   ├── config
 │   │   ├── database.js
@@ -95,7 +98,14 @@ Mi'gmaq Foundation
 │   ├── server.js
 ├── .env
 
+
 ```
+## Access documentaion page
+
+- Enter in the browser after the .com/ 
+
+``` /documentation.html  ```
+
 ## API Endpoints
 
 ### Dictionary Routes
