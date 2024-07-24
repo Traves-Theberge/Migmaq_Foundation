@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded');
     const memoryGame = document.getElementById('memory-game');
+    console.log('Memory game element:', memoryGame);
+
     let hasFlippedCard = false;
     let lockBoard = false;
     let firstCard, secondCard;
@@ -20,6 +23,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Function to truncate text if it's too long
+    function truncateText(text, maxLength) {
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength - 3) + '...';
+        }
+        return text;
+    }
+
     // Function to create memory cards
     function createMemoryCards(words) {
         memoryGame.innerHTML = ''; // Clear existing cards
@@ -31,7 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const frontFace = document.createElement('div');
             frontFace.classList.add('front-face');
-            frontFace.innerHTML = `<div class="word">${wordObj.word}</div><div class="definition">${wordObj.definition}</div>`;
+            frontFace.innerHTML = `
+                <div class="word">${truncateText(wordObj.word, 20)}</div>
+                <div class="definition">${truncateText(wordObj.definition, 50)}</div>
+            `;
 
             const backFace = document.createElement('div');
             backFace.classList.add('back-face');
@@ -66,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (this === firstCard) return;
 
         this.classList.add('flip');
+        console.log('Card flipped'); // Add this line for debugging
 
         if (!hasFlippedCard) {
             hasFlippedCard = true;
