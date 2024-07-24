@@ -5,8 +5,6 @@
 
 ## Table of Contents
 
-
-- [Access Documentaion](#access-documentaion)
 - [API Endpoints](#api-endpoints)
 - [Client-side Code](#client-side-code)
 - [Server-side Code](#server-side-code)
