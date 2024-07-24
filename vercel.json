@@ -47,5 +47,11 @@
       "src": "/(.*)",
       "dest": "/client/pages/$1"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/word-of-the-day/update",
+      "schedule": "0 0 * * *"
+    }
   ]
 }
