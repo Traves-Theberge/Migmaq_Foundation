@@ -1,3 +1,4 @@
+// server/app.js
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -6,6 +7,7 @@ const wordOfTheDayRoutes = require('./routes/wordOfTheDayRoutes');
 const aiRoutes = require('./routes/aiRoutes');
 const commentsRoutes = require('./routes/commentsRoutes');
 const gamesRoutes = require('./routes/games/gamesRoutes');
+const lessonsRoutes = require('./routes/lessons/lessonsRoutes');
 
 const app = express();
 
@@ -20,6 +22,7 @@ app.use('/api', wordOfTheDayRoutes);
 app.use('/api', aiRoutes);
 app.use('/api', commentsRoutes);
 app.use('/api/games', gamesRoutes);
+app.use('/api/lessons', lessonsRoutes);
 
 // Serve HTML files for different routes
 app.get('/', (req, res) => {
@@ -39,7 +42,11 @@ app.get('/word-details', (req, res) => {
 });
 
 app.get('/games/flashcard', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'games', 'flashcard.html'));
+    res.sendFile(path.join(__dirname, '..', 'client', 'pages', 'games', 'flashcard.html'));
+});
+
+app.get('/lessons/lesson1', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'pages', 'lessons', 'lesson1.html'));
 });
 
 // Catch-all to serve HTML files correctly from any nested route

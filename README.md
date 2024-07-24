@@ -15,12 +15,6 @@
 - [License](#license)
 
 
-## Access Documentaion
-
-- Enter in the browser { no direct ui link to DOCS currently ) 
-
-``` /documentation.html  ```
-
 ## API Endpoints
 
 ### Dictionary Routes

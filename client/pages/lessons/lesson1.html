@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lesson 1 - Mi'gmaq Phoneme Table">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/output.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body.light-mode {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #f9f9f9;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar.light-mode {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .navbar.dark-mode {
+            background-color: #1a202c;
+            color: #f9f9f9;
+        }
+        .navbar a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+        .navbar .icons {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .icon {
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        .container > section {
+            background-color: inherit;
+            color: inherit;
+        }
+        .bg-gray-800 {
+            background-color: #2d3748;
+        }
+        .text-gray-100 {
+            color: #f9f9f9;
+        }
+        .text-gray-800 {
+            color: #2d3748;
+        }
+        .text-gray-300 {
+            color: #d1d5db;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #dacece;
+        }
+        th.header-light {
+            background-color: #1a202c;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-700 text-gray-100 dark-mode">
+    <!-- Preloader (Blank) -->
+    <div id="preloader"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar dark-mode" id="navbar">
+        <a href="/education.html">Mi'gmaq Foundation</a>
+        <div class="icons">
+            <img src="https://img.icons8.com/ios-glyphs/30/000000/info.png" class="icon light-mode" id="instructionsIconLight" alt="Instructions">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/info.png" class="icon dark-mode hidden" id="instructionsIconDark" alt="Instructions">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/github.png" class="icon" alt="GitHub" onclick="window.open('https://github.com/Traves-Theberge')">
+            <img src="https://img.icons8.com/ios-glyphs/30/ffffff/moon-symbol.png" class="icon" id="theme-toggle" alt="Toggle Theme">
+        </div>
+    </nav>
+
+    <div id="content" class="container mx-auto p-8">
+        <section id="lesson-content" class="text-center mt-12">
+            <h2 class="text-5xl font-semibold mb-6">Listuguj Constantant Phoneme Table</h2>
+            <div class="bg-gray-800 p-6 rounded-md shadow-md text-gray-100">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="header-light">Listuguj</th>
+                            <th class="header-light">Francis/Smith</th>
+                            <th class="header-light">IPA</th>
+                            <th class="header-light">VPM</th>
+                            <th class="header-light">Example Words</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>p</td>
+                            <td>p</td>
+                            <td>p</td>
+                            <td>voiceless bilabial plosive</td>
+                            <td>pugtew 'fire', pe'sgewei 'gun/rifle', nipugt 'forest', mt'p 'brain'</td>
+                        </tr>
+                        <tr>
+                            <td>t</td>
+                            <td>t</td>
+                            <td>t</td>
+                            <td>voiceless alveolar plosive</td>
+                            <td>tmawei 'tobacco', temte'g 's/he breaks it by hitting', gesita'tl 's/he hurts someone badly', si'st 'three'</td>
+                        </tr>
+                        <tr>
+                            <td>g</td>
+                            <td>k</td>
+                            <td>g</td>
+                            <td>voiced velar plosive</td>
+                            <td>gelu'lg 'it's good', guntew 'a rock', igeggwet 's/he gets sick', gitaqeg 'it is sore from work/exercise'</td>
+                        </tr>
+                        <tr>
+                            <td>q</td>
+                            <td>q</td>
+                            <td>q</td>
+                            <td>voiceless uvular plosive</td>
+                            <td>qame'g 'on the other side of river/valley', gaqtugwaw 'thunder', jampo'qiet 's/he is doing somersaults', qasawo'q 'iron'</td>
+                        </tr>
+                        <tr>
+                            <td>gw</td>
+                            <td>kw</td>
+                            <td>gw</td>
+                            <td>labialized velar plosive</td>
+                            <td>tapusi’gw ‘we are two’ (inclusive), Gisu'lgw ‘the one who made us’, nesuto’gsi’gw ‘s/he won or beat us three’, gwe’ ‘greetings or hello’</td>
+                        </tr>
+                        <tr>
+                            <td>qw</td>
+                            <td>qw</td>
+                            <td>qw</td>
+                            <td>labialized uvular plosive</td>
+                            <td>qwalqwasiet ‘the setting sun’, qwa’niej ‘phoney person’, qwaniejuwei ‘fake/not the real thing’</td>
+                        </tr>
+                        <tr>
+                            <td>j</td>
+                            <td>j</td>
+                            <td>ʧ</td>
+                            <td>voiceless palatoalveolar affricate</td>
+                            <td>jipji’j ‘bird’, jugu’wa ‘come here’, jigla’si ‘go away’, jiptug ‘perhaps’</td>
+                        </tr>
+                        <tr>
+                            <td>s</td>
+                            <td>s</td>
+                            <td>s</td>
+                            <td>voiceless alveolar fricative</td>
+                            <td>sepei ‘this morning’, sismo’qon ‘maple sugar/sugar’, tapuisqa’q ‘twenty’, Se’sus ‘Jesus’</td>
+                        </tr>
+                        <tr>
+                            <td>m</td>
+                            <td>m</td>
+                            <td>m</td>
+                            <td>bilabial nasal</td>
+                            <td>maqtawe’g ‘black or is being black’, eptaqano’guom ‘cupboard’, tmi’gn ‘axe’, amgwes ‘the first one/time’</td>
+                        </tr>
+                        <tr>
+                            <td>n</td>
+                            <td>n</td>
+                            <td>n</td>
+                            <td>alveolar nasal</td>
+                            <td>nasgwa’tu ‘divide it’, nantunewet ‘reaching around under something eg. under seagrass for eels’, sgilminn ‘seeds’, Se’ta’n ‘St. Anne’</td>
+                        </tr>
+                        <tr>
+                            <td>l</td>
+                            <td>l</td>
+                            <td>l</td>
+                            <td>alveolar lateral approximant</td>
+                            <td>lusgnign ‘bannok’, pelqa’toq s/he peels it’, llgusuaqan 'ladder', elpilatl 's/he sends him/her by rope'</td>
+                        </tr>
+                        <tr>
+                            <td>i</td>
+                            <td>y</td>
+                            <td>j</td>
+                            <td>palatal approximant</td>
+                            <td>iap 'bull moose', gaqtaqaiet ‘the end of rope or string’, atlaig ‘shirts’, asgaiwatl ‘causes hurt’, atnamgewei 'checker game'</td>
+                        </tr>
+                        <tr>
+                            <td>w</td>
+                            <td>w</td>
+                            <td>w</td>
+                            <td>labio-velar approximant</td>
+                            <td>wela’lin ‘thank you’, welm’toq ‘s/he is kind’, wisawe’g ‘yellow or is being yellow’, welm'tu'ti'gw 'we are kind'</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="vowel-content" class="text-center mt-12">
+            <h2 class="text-5xl font-semibold mb-6">Listuguj Vowel Phoneme Table</h2>
+            <div class="bg-gray-800 p-6 rounded-md shadow-md text-gray-100">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="header-light">Listuguj</th>
+                            <th class="header-light">Francis Smith</th>
+                            <th class="header-light">IPA</th>
+                            <th class="header-light">HAR (Height, Advancement, Rounding)</th>
+                            <th class="header-light">Example Words</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>i</td>
+                            <td>i</td>
+                            <td>i</td>
+                            <td>close (high) front unrounded</td>
+                            <td>ilta'toq 's/he closes it', istua'latl 's/he turns him/her sideways', naspit 's/he is attached', mijua'ji'j 'child'</td>
+                        </tr>
+                        <tr>
+                            <td>e</td>
+                            <td>ε</td>
+                            <td>ε</td>
+                            <td>open-mid front unrounded</td>
+                            <td>ewle'jit 's/he is poor/pitiful', e'pite'ji'j 'little girl', na'te'l 'there', neget 'that one'</td>
+                        </tr>
+                        <tr>
+                            <td>a</td>
+                            <td>ɑ</td>
+                            <td>ɑ</td>
+                            <td>open back low unrounded</td>
+                            <td>a'papi 'rope', lpa 'that's definite', eta 'it was', amatpa't 'foolish thinker or crazy'</td>
+                        </tr>
+                        <tr>
+                            <td>o</td>
+                            <td>o</td>
+                            <td>o</td>
+                            <td>closed-mid back rounded</td>
+                            <td>o'plteg 'it's not set right', oqnisgwa'tu 'cover it up', giwto'qigsma'toq 's/he pushes it around in a circle', nsanoqon 'danger'</td>
+                        </tr>
+                        <tr>
+                            <td>u</td>
+                            <td>u</td>
+                            <td>u</td>
+                            <td>close back rounded</td>
+                            <td>ugsua'tu 'take it', ugsuguni 'his/her tail', ulugun 'his/her thigh', ugtejgewei 'the last one'</td>
+                        </tr>
+                        <tr>
+                            <td>i'</td>
+                            <td>i:</td>
+                            <td>i:</td>
+                            <td>long vowel (applies to all vowels)</td>
+                            <td>i'tew 's/he will be there', ji'nm 'a man', e'pit 'a woman', je'g 'jack in cards', a'pi 'fishing net', nijja't 's/he falls', o'pla'teget 's/he does wrong', samqwano'q 'water container', u'j 'house fly', u'nig 'it's foggy'</td>
+                        </tr>
+                        <tr>
+                            <td>'</td>
+                            <td>ə</td>
+                            <td>ə</td>
+                            <td>mid central unrounded (not always written)</td>
+                            <td>pans'g 's/he cuts it open', n'mi' 'term of affection for one's grandmother', esp'pit 'sitting high up', etliatl /edêliadêl/ 's/he is making it'</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="../js/utils/theme-toggle.js"></script>
+</body>
+
+</html>
