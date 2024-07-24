@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         secondCard.classList.add('glow');
         matchedPairs += 1; // Increment matched pairs count
         if (matchedPairs === 6) { // All pairs matched
-            setTimeout(restartGame, 1500); // Restart game after a short delay
+            setTimeout(showWinScreen, 1000); // Show win screen after a short delay
         }
         resetBoard();
     }
@@ -120,6 +120,24 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             memoryGame.innerHTML = '<p class="text-red-500">Failed to load game data. Please try again later.</p>';
         }
+    }
+
+    // Function to create and display the "You Win" screen
+    function showWinScreen() {
+        const winScreen = document.createElement('div');
+        winScreen.classList.add('win-screen');
+        winScreen.innerHTML = `
+            <h2>Congratulations!</h2>
+            <p>You've matched all the pairs!</p>
+            <button id="resetGameBtn">Play Again</button>
+        `;
+        document.body.appendChild(winScreen);
+
+        // Add event listener to the reset button
+        document.getElementById('resetGameBtn').addEventListener('click', () => {
+            document.body.removeChild(winScreen);
+            restartGame();
+        });
     }
 
     // Initialize the game
