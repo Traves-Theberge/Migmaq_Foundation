@@ -2,4 +2,8 @@ node_modules/
 .env
 .vercel
 UI_UX.md
- -i
+.DS_Store
+*.log
+
+# Make sure we don't ignore images
+!client/assets/images/*
