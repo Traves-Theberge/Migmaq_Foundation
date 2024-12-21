@@ -1,0 +1,113 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #818CF8 0%, #6366F1 100%);
+    --bg-gradient-dark: linear-gradient(135deg, #1a1f35 0%, #1e2538 100%);
+    --bg-gradient-light: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
+    --transition-duration: 0.3s;
+    --font-display: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+/* Base styles */
+body {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background var(--transition-duration), color var(--transition-duration);
+}
+
+/* Theme styles */
+body.dark-mode {
+    background: var(--bg-gradient-dark);
+    color: #ffffff;
+}
+
+body.light-mode {
+    background: var(--bg-gradient-light);
+    color: #1E293B;
+}
+
+/* Navigation styles */
+.navbar {
+    transition: all var(--transition-duration);
+}
+
+/* Dark mode navbar - seamless */
+body.dark-mode .navbar {
+    background: transparent;
+    border-bottom: none;
+    backdrop-filter: none;
+}
+
+/* Light mode navbar - seamless */
+body.light-mode .navbar {
+    background: transparent;
+    border-bottom: none;
+    backdrop-filter: none;
+}
+
+/* Add hover effect for better interaction */
+.nav-brand {
+    opacity: 0.9;
+    transition: opacity var(--transition-duration);
+}
+
+.nav-brand:hover {
+    opacity: 1;
+}
+
+/* Update icon button styles */
+.icon-button {
+    padding: 0.75rem;  /* Increased padding */
+    transition: all 0.2s ease;
+    background: none !important;  /* Remove background */
+}
+
+.icon-button svg {
+    width: 1.75rem;  /* Increased from 1.25rem (w-5) */
+    height: 1.75rem;  /* Increased from 1.25rem (h-5) */
+}
+
+/* Hover effects */
+.icon-button:hover {
+    transform: translateY(-1px);
+    opacity: 0.8;
+}
+
+/* Light/Dark mode specific colors */
+body.light-mode .icon-button {
+    color: #1E293B;  /* Changed from #4F46E5 to dark slate color */
+}
+
+body.dark-mode .icon-button {
+    color: #ffffff;
+}
+
+/* Hover effects */
+body.light-mode .icon-button:hover {
+    color: #4F46E5;  /* Change to indigo on hover in light mode */
+    opacity: 0.8;
+}
+
+body.dark-mode .icon-button:hover {
+    opacity: 0.8;
+}
+
+/* Utility classes */
+.gradient-text {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .gradient-text {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+    
+    .main-content {
+        padding-top: 4rem;
+    }
+} 

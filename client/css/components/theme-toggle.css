@@ -1,0 +1,112 @@
+/* Theme toggle container */
+.theme-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* SVG styles */
+.theme-toggle svg {
+    width: 4rem;
+    height: 2.25rem;
+    transition: transform var(--transition-duration) ease;
+}
+
+/* Container styles */
+#container {
+    fill: #83cbd8;
+    transition: fill var(--transition-duration);
+}
+
+/* Element visibility */
+#sun {
+    opacity: 1;
+    transition: opacity var(--transition-duration);
+}
+
+#toggle:checked + svg #sun {
+    opacity: 0;
+}
+
+#moon {
+    opacity: 0;
+    transition: opacity var(--transition-duration);
+}
+
+#toggle:checked + svg #moon {
+    opacity: 1;
+}
+
+#cloud {
+    opacity: 1;
+    transition: opacity var(--transition-duration);
+}
+
+#toggle:checked + svg #cloud {
+    opacity: 0;
+}
+
+#stars {
+    opacity: 0;
+    transition: opacity var(--transition-duration);
+}
+
+#toggle:checked + svg #stars {
+    opacity: 1;
+}
+
+/* Button movement */
+#toggle:checked + svg #button {
+    transform: translate(28px, 2.333px);
+}
+
+/* Transition all elements */
+#container,
+#patches,
+#stars,
+#button,
+#sun,
+#moon,
+#cloud {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.25s;
+}
+
+/* Sun styles */
+#sun-outer-2 {
+    fill: #f8e664;
+}
+
+#sun-3 {
+    fill: rgba(246,254,247,0.29);
+}
+
+#sun-inner {
+    fill: #fcf4b9;
+}
+
+/* Moon styles */
+#moon-3 {
+    fill: #cce6ee;
+}
+
+#patches circle {
+    fill: #a6cad0;
+}
+
+/* Cloud styles */
+#cloud {
+    fill: #fff;
+}
+
+/* Stars styles */
+#stars path {
+    fill: #def8ff;
+}
+
+/* Animation states */
+.peer:checked ~ svg #button {
+    transform: translateX(28px);
+} 
