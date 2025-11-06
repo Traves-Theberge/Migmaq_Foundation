@@ -1,7 +1,7 @@
 
 # Mi'gmaq Foundation
 
-- Welcome to the Mi'gmaq Foundation repository. This project aims to provide educational resources and tools for learning and preserving the Mi'gmaq language.
+Welcome to the Mi'gmaq Foundation repository. This project aims to provide educational resources and tools for learning and preserving the Mi'gmaq language.
 
 ## Table of Contents
 
@@ -9,6 +9,7 @@
 - [Client-side Code](#client-side-code)
 - [Server-side Code](#server-side-code)
 - [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -20,29 +21,19 @@
 - `GET /api/dictionary` - Retrieve the entire dictionary.
 - `GET /api/word-details?word={word}` - Retrieve details for a specific word.
 
-### Word of the Day Routes
+### Games Routes
 
-- `GET /api/word-of-the-day` - Retrieve the word of the day.
-- `PUT /api/word-of-the-day/update` - Update the word of the day.
+- Game-related API endpoints for interactive learning.
 
-### AI Routes
+### Lessons Routes
 
-- `GET /api/fact?word={word}` - Retrieve an AI-generated fact about a word.
-
-### Comments Routes
-
-- `GET /api/comments?word_id={word_id}` - Retrieve comments for a specific word.
-- `POST /api/comments` - Add a new comment.
+- Lesson-related API endpoints for structured learning.
 
 ## Client-side Code
 
 ### `client/js/index.js`
 
-Placeholder for index-specific JavaScript if needed.
-
-### `client/js/wordOfTheDay.js`
-
-- Fetches and displays the word of the day.
+Homepage JavaScript functionality.
 
 ### `client/js/dictionary.js`
 
@@ -53,33 +44,29 @@ Placeholder for index-specific JavaScript if needed.
 ### `client/js/word-details.js`
 
 - Fetches and displays details for a specific word.
-- Fetches and displays comments for a word.
-- Handles adding new comments and replies.
+- Handles theme toggling and UI interactions.
+
+### `client/js/games/flashcard.js`
+
+Interactive flashcard game for learning Mi'gmaq vocabulary.
+
+### `client/js/lessons/lesson1.js`
+
+Interactive lessons for learning Mi'gmaq language basics.
 
 ## Server-side Code
 
 ### `server/app.js`
 
-- Sets up the Express application, middleware, and routes.
+Sets up the Express application, middleware, and routes.
 
 ### `server/server.js`
 
-- Starts the server on the specified port.
-
-### `server/config/database.js`
-
-- Configures and exports the Supabase client for database interactions.
-
-### `server/config/openai.js`
-
-- Configures and exports the OpenAI client for AI interactions.
+Starts the server on the specified port (default: 3001).
 
 ## Controllers
 
 - `dictionaryController.js` - Handles dictionary-related API requests.
-- `wordOfTheDayController.js` - Handles word of the day API requests.
-- `aiController.js` - Handles AI-related API requests.
-- `commentsController.js` - Handles comment-related API requests.
 - `games/gamesController.js` - Handles game-related API requests.
 - `lessons/lessonsController.js` - Handles lesson-related API requests.
 - `resources/resourcesController.js` - Handles resource-related API requests.
@@ -87,9 +74,6 @@ Placeholder for index-specific JavaScript if needed.
 ## Services
 
 - `dictionaryService.js` - Provides dictionary data operations.
-- `wordOfTheDayService.js` - Provides word of the day data operations.
-- `aiService.js` - Provides AI-related operations.
-- `commentsService.js` - Provides comment-related operations.
 - `games/gamesService.js` - Provides game-related operations.
 - `lessons/lessonsService.js` - Provides lesson-related operations.
 - `resources/resourcesService.js` - Provides resource-related operations.
@@ -98,7 +82,6 @@ Placeholder for index-specific JavaScript if needed.
 
 ```
 Mi'gmaq Foundation
-├── .env.sample
 ├── .gitignore
 ├── LICENSE.md
 ├── README.md
@@ -110,77 +93,95 @@ Mi'gmaq Foundation
 │   ├── css
 │   │   ├── input.css
 │   │   ├── output.css
+│   │   ├── styles.css
+│   │   └── components
+│   │       ├── animations.css
+│   │       ├── theme-toggle.css
+│   │       └── feature-card.css
 │   ├── js
 │   │   ├── index.js
-│   │   ├── wordOfTheDay.js
 │   │   ├── dictionary.js
 │   │   ├── word-details.js
 │   │   ├── utils
-│   │   │   ├── theme-toggle.js
+│   │   │   └── theme-toggle.js
+│   │   ├── components
+│   │   │   └── spelling-cycler.js
 │   │   ├── games
-│   │   │   ├── flashcard.js
+│   │   │   └── flashcard.js
 │   │   ├── lessons
-│   │   │   ├── lesson1.js
-│   │   ├── resources
-│   │   │   ├── resource1.js
-│   │   ├── documentation.js
+│   │   │   └── lesson1.js
+│   │   └── resources
+│   │       └── resource1.js
 │   ├── pages
 │   │   ├── index.html
 │   │   ├── education.html
 │   │   ├── dictionary.html
 │   │   ├── word-details.html
 │   │   ├── games
-│   │   │   ├── flashcard.html
+│   │   │   └── flashcard.html
 │   │   ├── lessons
-│   │   │   ├── lesson1.html
-│   │   ├── resources
-│   │   │   ├── resource1.html
-│   │   ├── documentation.html
-│   ├── assets
-│   │   ├── dictionary.json
-│   │   ├── documentation.json
+│   │   │   └── lesson1.html
+│   │   └── resources
+│   │       └── resource1.html
+│   └── assets
+│       ├── dictionary.json
+│       └── documentation.json
 ├── server
-│   ├── config
-│   │   ├── database.js
-│   │   ├── openai.js
 │   ├── controllers
 │   │   ├── dictionaryController.js
-│   │   ├── wordOfTheDayController.js
-│   │   ├── aiController.js
-│   │   ├── commentsController.js
 │   │   ├── games
-│   │   │   ├── gamesController.js
+│   │   │   └── gamesController.js
 │   │   ├── lessons
-│   │   │   ├── lessonsController.js
-│   │   ├── resources
-│   │       ├── resourcesController.js
+│   │   │   └── lessonsController.js
+│   │   └── resources
+│   │       └── resourcesController.js
 │   ├── routes
 │   │   ├── dictionaryRoutes.js
-│   │   ├── wordOfTheDayRoutes.js
-│   │   ├── aiRoutes.js
-│   │   ├── commentsRoutes.js
 │   │   ├── games
-│   │   │   ├── gamesRoutes.js
+│   │   │   └── gamesRoutes.js
 │   │   ├── lessons
-│   │   │   ├── lessonsRoutes.js
-│   │   ├── resources
-│   │       ├── resourcesRoutes.js
+│   │   │   └── lessonsRoutes.js
+│   │   └── resources
+│   │       └── resourcesRoutes.js
 │   ├── services
 │   │   ├── dictionaryService.js
-│   │   ├── wordOfTheDayService.js
-│   │   ├── aiService.js
-│   │   ├── commentsService.js
 │   │   ├── games
-│   │   │   ├── gamesService.js
+│   │   │   └── gamesService.js
 │   │   ├── lessons
-│   │   │   ├── lessonsService.js
-│   │   ├── resources
-│   │       ├── resourcesService.js
+│   │   │   └── lessonsService.js
+│   │   └── resources
+│   │       └── resourcesService.js
 │   ├── app.js
-│   ├── server.js
-├── .env
+│   └── server.js
+```
 
+## Getting Started
 
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Traves-Theberge/Migmaq_Foundation.git
+   cd Migmaq_Foundation
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+4. Open your browser and navigate to `http://localhost:3001`
+
+### Building Tailwind CSS
+
+To rebuild the Tailwind CSS styles:
+```bash
+npm run build:tailwind
 ```
 
 ## Contributing
