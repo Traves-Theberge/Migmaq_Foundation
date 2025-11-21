@@ -4,7 +4,6 @@ const cors = require('cors');
 const path = require('path');
 const dictionaryRoutes = require('./routes/dictionaryRoutes');
 const gamesRoutes = require('./routes/games/gamesRoutes');
-const lessonsRoutes = require('./routes/lessons/lessonsRoutes');
 
 const app = express();
 
@@ -16,7 +15,6 @@ app.use(express.static(path.join(__dirname, '..', 'client')));
 // Route setup
 app.use('/api', dictionaryRoutes);
 app.use('/api/games', gamesRoutes);
-app.use('/api/lessons', lessonsRoutes);
 
 // Serve HTML files for different routes
 app.get('/', (req, res) => {
