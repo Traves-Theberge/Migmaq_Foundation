@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Playfair Display', serif;
+
+  /* Malika Palette: Bold, Flat, Unapologetic */
+  --color-primary: #7c3aed;
+  /* Deep Purple */
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #ef4444;
+  /* Lipstick Red */
+  --color-secondary-foreground: #ffffff;
+
+  --color-accent: #f59e0b;
+  /* Marigold */
+  --color-accent-foreground: #000000;
+
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #4b5563;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #000000;
+
+  --color-border: #000000;
+  --color-input: #000000;
+
+  --radius-none: 0px;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+
+  --animate-slide-up: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-reveal: reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}
+
+/* Dark Mode: Warm Neutral */
+.dark {
+  --color-background: #f5f1e8;
+  /* Warm cream */
+  --color-foreground: #1a1a1a;
+  /* Dark charcoal */
+
+  --color-muted: #e8e3d8;
+  /* Light warm beige */
+  --color-muted-foreground: #6b6b6b;
+  /* Medium gray */
+
+  --color-card: #ebe7dd;
+  /* Warm card background */
+  --color-card-foreground: #1a1a1a;
+
+  --color-border: #3a3a3a;
+  /* Dark border */
+  --color-input: #3a3a3a;
+}
+
+/* The "Malika" Hard Shadow Utility */
+.hard-shadow {
+  box-shadow: 6px 6px 0px 0px var(--color-foreground);
+  transition: all 0.2s ease;
+}
+
+.hard-shadow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px 0px var(--color-foreground);
+}
+
+.hard-shadow:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px var(--color-foreground);
+}
+
+/* Typography Refinement */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-display font-bold tracking-tight;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+}
+
+/* Geometric Patterns */
+.bg-grid {
+  /* Removed dotted pattern */
+  opacity: 0;
+}
+
+/* 3D Card Flip Utilities */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
