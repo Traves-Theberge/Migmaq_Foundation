@@ -164,6 +164,8 @@ export default function EducationPage() {
                                                     {lesson.id === 'greetings' && <BookOpen className="w-5 h-5" />}
                                                     {lesson.id === 'numbers' && <Gamepad2 className="w-5 h-5" />}
                                                     {lesson.id === 'family' && <GraduationCap className="w-5 h-5" />}
+                                                    {lesson.id === 'animals' && <Star className="w-5 h-5" />}
+                                                    {lesson.id === 'nature' && <BrainCircuit className="w-5 h-5" />}
                                                 </div>
                                                 <div>
                                                     <span className="font-bold uppercase tracking-wide text-sm sm:text-base block">{lesson.title}</span>
