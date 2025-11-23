@@ -4,10 +4,14 @@ export const animalsLessons: Lesson[] = [
     {
         id: 'land-animals',
         title: 'Land Animals',
-        description: 'Moose and rabbit',
+        description: 'Moose, rabbit, and more',
         difficulty: 'beginner',
-        estimatedMinutes: 2,
+        estimatedMinutes: 3,
         steps: [
+            {
+                type: 'info',
+                description: "Animals are central to Mi'gmaq stories and teachings."
+            },
             {
                 type: 'vocabulary',
                 term: "tia'm",
@@ -19,6 +23,12 @@ export const animalsLessons: Lesson[] = [
                 term: "apli'gmuj",
                 translation: "Rabbit / Hare",
                 pronunciation: "ah-plee-gmoodge"
+            },
+            {
+                type: 'vocabulary',
+                term: "apalqaqamej",
+                translation: "Chipmunk / Ground squirrel",
+                pronunciation: "ah-pahl-kah-kah-medge"
             }
         ]
     },
@@ -27,13 +37,23 @@ export const animalsLessons: Lesson[] = [
         title: 'Water Animals',
         description: 'Fish and sea creatures',
         difficulty: 'beginner',
-        estimatedMinutes: 1,
+        estimatedMinutes: 3,
         steps: [
+            {
+                type: 'info',
+                description: "Fishing has always been vital to Mi'gmaq communities."
+            },
             {
                 type: 'vocabulary',
                 term: "plamu",
                 translation: "Salmon",
                 pronunciation: "plah-moo"
+            },
+            {
+                type: 'vocabulary',
+                term: "atoqwa'su",
+                translation: "Trout",
+                pronunciation: "ah-tok-wah-soo"
             }
         ]
     },
@@ -42,8 +62,12 @@ export const animalsLessons: Lesson[] = [
         title: 'Birds',
         description: 'Eagle, crow, and duck',
         difficulty: 'beginner',
-        estimatedMinutes: 3,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Birds hold special significance in Mi'gmaq culture and spirituality."
+            },
             {
                 type: 'vocabulary',
                 term: "gitpu",

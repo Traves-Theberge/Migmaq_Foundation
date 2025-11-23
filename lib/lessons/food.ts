@@ -4,10 +4,14 @@ export const foodLessons: Lesson[] = [
     {
         id: 'berries',
         title: 'Berries',
-        description: 'Common berries',
+        description: 'Common berries and fruits',
         difficulty: 'beginner',
-        estimatedMinutes: 2,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Berry picking is a traditional activity that connects Mi'gmaq people to the land and seasons."
+            },
             {
                 type: 'vocabulary',
                 term: "atuomgomin",
@@ -22,9 +26,15 @@ export const foodLessons: Lesson[] = [
             },
             {
                 type: 'vocabulary',
-                term: "glitaw",
-                translation: "Strawberry / Berry",
-                pronunciation: "glee-taw"
+                term: "gmu'jmin",
+                translation: "Raspberry",
+                pronunciation: "gmoodge-min"
+            },
+            {
+                type: 'vocabulary',
+                term: "gawaqtejg",
+                translation: "Gooseberry",
+                pronunciation: "gah-wahk-tedge"
             }
         ]
     }

@@ -4,10 +4,14 @@ export const objectsLessons: Lesson[] = [
     {
         id: 'household',
         title: 'Household Items',
-        description: 'Common objects',
+        description: 'Common objects and tools',
         difficulty: 'beginner',
-        estimatedMinutes: 2,
+        estimatedMinutes: 3,
         steps: [
+            {
+                type: 'info',
+                description: "Traditional Mi'gmaq items reflect a deep connection to the land and craftsmanship."
+            },
             {
                 type: 'vocabulary',
                 term: "a'su'n",
@@ -25,15 +29,31 @@ export const objectsLessons: Lesson[] = [
     {
         id: 'transportation',
         title: 'Transportation',
-        description: 'Boats and travel',
+        description: 'Boats, snowshoes, and travel',
         difficulty: 'beginner',
-        estimatedMinutes: 2,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Mi'gmaq people developed ingenious ways to travel across land and water."
+            },
             {
                 type: 'vocabulary',
                 term: "asoqomm'taqan",
                 translation: "Ferry / Boat",
                 pronunciation: "ah-so-kom-tah-kahn"
+            },
+            {
+                type: 'vocabulary',
+                term: "alaqami'g",
+                translation: "Snowshoe",
+                pronunciation: "ah-lah-kah-meeg"
+            },
+            {
+                type: 'vocabulary',
+                term: "aptu'n",
+                translation: "Walking stick / Cane",
+                pronunciation: "ahp-toon"
             }
         ]
     }

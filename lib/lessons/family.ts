@@ -6,8 +6,12 @@ export const familyLessons: Lesson[] = [
         title: 'Immediate Family',
         description: 'Parents and siblings',
         difficulty: 'beginner',
-        estimatedMinutes: 3,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Family is the foundation of Mi'gmaq society and culture."
+            },
             {
                 type: 'vocabulary',
                 term: "giju'",
@@ -31,6 +35,10 @@ export const familyLessons: Lesson[] = [
                 term: "ugjignaml",
                 translation: "Younger brother",
                 pronunciation: "oog-jig-naml"
+            },
+            {
+                type: 'info',
+                description: "Family relationships are deeply valued and respected in Mi'gmaq culture."
             }
         ]
     },
@@ -39,19 +47,27 @@ export const familyLessons: Lesson[] = [
         title: 'Grandparents',
         description: 'Grandmother and grandfather',
         difficulty: 'beginner',
-        estimatedMinutes: 2,
+        estimatedMinutes: 3,
         steps: [
+            {
+                type: 'info',
+                description: "Elders hold wisdom and are greatly respected in Mi'gmaq communities."
+            },
             {
                 type: 'vocabulary',
                 term: "nmi'",
-                translation: "Grandmother",
+                translation: "Grandmother / Granny",
                 pronunciation: "n-mee"
             },
             {
                 type: 'vocabulary',
                 term: "nemijgami'",
-                translation: "Grandfather",
+                translation: "Grandfather / Grampa",
                 pronunciation: "neh-mij-gah-mee"
+            },
+            {
+                type: 'info',
+                description: "Grandparents pass down stories, traditions, and language to younger generations."
             }
         ]
     }

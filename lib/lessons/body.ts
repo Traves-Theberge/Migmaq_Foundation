@@ -6,8 +6,12 @@ export const bodyLessons: Lesson[] = [
         title: 'Face',
         description: 'Parts of the face',
         difficulty: 'beginner',
-        estimatedMinutes: 3,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Learning body parts helps you describe yourself and others."
+            },
             {
                 type: 'vocabulary',
                 term: "ugsisgw",
@@ -25,6 +29,10 @@ export const bodyLessons: Lesson[] = [
                 term: "alpatl",
                 translation: "Mouth / Gums",
                 pronunciation: "ahl-pahtl"
+            },
+            {
+                type: 'info',
+                description: "These words are useful for describing people and expressing yourself."
             }
         ]
     }

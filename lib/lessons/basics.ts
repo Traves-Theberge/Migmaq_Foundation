@@ -6,8 +6,12 @@ export const basicsLessons: Lesson[] = [
         title: 'Basic Greetings',
         description: 'Hello and goodbye',
         difficulty: 'beginner',
-        estimatedMinutes: 2,
+        estimatedMinutes: 3,
         steps: [
+            {
+                type: 'info',
+                description: "Greetings are the foundation of respectful communication in Mi'gmaq culture."
+            },
             {
                 type: 'vocabulary',
                 term: "pusu'l",
@@ -19,6 +23,10 @@ export const basicsLessons: Lesson[] = [
                 term: "atiu",
                 translation: "Goodbye",
                 pronunciation: "ah-tee-oo"
+            },
+            {
+                type: 'info',
+                description: "Practice using these greetings when you meet someone or part ways!"
             }
         ]
     },
@@ -27,8 +35,12 @@ export const basicsLessons: Lesson[] = [
         title: 'Polite Phrases',
         description: 'Thank you, sorry, welcome',
         difficulty: 'beginner',
-        estimatedMinutes: 3,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Politeness and respect are core values in Mi'gmaq interactions."
+            },
             {
                 type: 'vocabulary',
                 term: "wela'lin",
@@ -46,6 +58,10 @@ export const basicsLessons: Lesson[] = [
                 term: "pjila'si",
                 translation: "Welcome / Come in",
                 pronunciation: "pjee-lah-see"
+            },
+            {
+                type: 'info',
+                description: "Using these phrases shows respect and builds strong relationships."
             }
         ]
     },
@@ -54,8 +70,12 @@ export const basicsLessons: Lesson[] = [
         title: 'Numbers 1-5',
         description: 'Count from one to five',
         difficulty: 'beginner',
-        estimatedMinutes: 3,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Numbers are used in daily life, ceremonies, and traditional counting systems."
+            },
             {
                 type: 'vocabulary',
                 term: "newt",
@@ -85,6 +105,10 @@ export const basicsLessons: Lesson[] = [
                 term: "na'n",
                 translation: "Five",
                 pronunciation: "nahn"
+            },
+            {
+                type: 'info',
+                description: "Practice counting objects around you to reinforce these numbers!"
             }
         ]
     },
@@ -93,8 +117,12 @@ export const basicsLessons: Lesson[] = [
         title: 'Numbers 6-10',
         description: 'Count from six to ten',
         difficulty: 'beginner',
-        estimatedMinutes: 3,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Continue building your counting skills with numbers six through ten."
+            },
             {
                 type: 'vocabulary',
                 term: "as'gom",
@@ -124,21 +152,35 @@ export const basicsLessons: Lesson[] = [
                 term: "newtisga'q",
                 translation: "Ten",
                 pronunciation: "newt-is-gahk"
+            },
+            {
+                type: 'info',
+                description: "You can now count from newt to newtisga'q (one to ten)!"
             }
         ]
     },
     {
         id: 'time-of-day',
         title: 'Time of Day',
-        description: 'Morning, day, night',
+        description: 'Morning, midnight, and special days',
         difficulty: 'beginner',
-        estimatedMinutes: 2,
+        estimatedMinutes: 4,
         steps: [
+            {
+                type: 'info',
+                description: "Understanding time helps you talk about daily activities and special occasions."
+            },
             {
                 type: 'vocabulary',
                 term: "egsitpu'g",
                 translation: "Morning",
                 pronunciation: "eg-sit-poog"
+            },
+            {
+                type: 'vocabulary',
+                term: "aqtatpa'q",
+                translation: "Midnight",
+                pronunciation: "ahk-taht-pahk"
             },
             {
                 type: 'vocabulary',
