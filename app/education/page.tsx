@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Gamepad2, GraduationCap, ArrowRight, Lock, Star, BrainCircuit } from 'lucide-react';
+import { lessons } from '@/lib/lessons';
 
 const container = {
     hidden: { opacity: 0 },
@@ -144,12 +145,35 @@ export default function EducationPage() {
                             <h2 className="text-3xl sm:text-4xl font-black uppercase mb-6 tracking-tighter">Lessons</h2>
 
                             <div className="space-y-4">
-                                {['Greetings', 'Numbers', 'Family'].map((lesson, i) => (
-                                    <div key={i} className="flex items-center justify-between p-4 bg-white border-2 border-foreground opacity-60">
-                                        <span className="font-bold uppercase tracking-wide text-sm sm:text-base">{lesson}</span>
-                                        <Lock className="w-4 h-4 sm:w-5 sm:h-5" />
-                                    </div>
-                                ))}
+                                {lessons.map((lesson) => {
+                                    const Icon = lesson.icon === 'Hand' ? BookOpen : lesson.icon === 'Hash' ? Gamepad2 : GraduationCap; // Fallback mapping for now, or import specific icons
+                                    // Better mapping:
+                                    // We need to import Hand, Hash, Users from lucide-react if we want to use them.
+                                    // For now, let's just use a generic icon or map them if we import them.
+                                    // Let's use the existing imports + new ones.
+
+                                    return (
+                                        <Link
+                                            key={lesson.id}
+                                            href={`/education/lessons/${lesson.id}`}
+                                            className="flex items-center justify-between p-4 bg-white border-2 border-foreground hover:bg-accent/20 transition-colors group"
+                                        >
+                                            <div className="flex items-center gap-4">
+                                                <div className={`p-2 ${lesson.color} text-foreground border-2 border-foreground`}>
+                                                    {/* Simple icon mapping based on ID for now to avoid complex dynamic imports */}
+                                                    {lesson.id === 'greetings' && <BookOpen className="w-5 h-5" />}
+                                                    {lesson.id === 'numbers' && <Gamepad2 className="w-5 h-5" />}
+                                                    {lesson.id === 'family' && <GraduationCap className="w-5 h-5" />}
+                                                </div>
+                                                <div>
+                                                    <span className="font-bold uppercase tracking-wide text-sm sm:text-base block">{lesson.title}</span>
+                                                    <span className="text-xs text-muted-foreground font-medium">{lesson.steps.length} Steps</span>
+                                                </div>
+                                            </div>
+                                            <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                        </Link>
+                                    );
+                                })}
                             </div>
                         </div>
                     </motion.section>
