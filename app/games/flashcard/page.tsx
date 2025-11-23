@@ -158,7 +158,7 @@ export default function FlashcardGame() {
                         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-2">
                             Memory
                         </h1>
-                        <p className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wide text-primary">
+                        <p className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wide text-secondary">
                             Match the pairs
                         </p>
                     </div>
@@ -203,7 +203,7 @@ export default function FlashcardGame() {
                                     >
                                         {/* Front (Hidden) */}
                                         <div
-                                            className="absolute inset-0 bg-foreground flex items-center justify-center border-2 sm:border-4 border-foreground rounded-sm sm:rounded-none"
+                                            className="absolute inset-0 bg-accent flex items-center justify-center border-2 sm:border-4 border-accent rounded-sm sm:rounded-none"
                                             style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
                                         >
                                             <img
@@ -260,7 +260,7 @@ export default function FlashcardGame() {
                                 animate={{ scale: 1, y: 0 }}
                                 className="bg-background p-12 max-w-lg w-full text-center border-4 border-white hard-shadow shadow-white"
                             >
-                                <Trophy className="w-20 h-20 mx-auto mb-6 text-primary" />
+                                <Trophy className="w-20 h-20 mx-auto mb-6 text-accent" />
                                 <h2 className="text-6xl font-black uppercase mb-4 tracking-tighter">
                                     Victory!
                                 </h2>
@@ -270,7 +270,7 @@ export default function FlashcardGame() {
                                 <div className="space-y-4">
                                     <button
                                         onClick={fetchGameData}
-                                        className="w-full py-4 bg-primary text-white font-black text-xl uppercase tracking-wide hover:bg-blue-600 transition-colors border-2 border-foreground"
+                                        className="w-full py-4 bg-accent text-foreground font-black text-xl uppercase tracking-wide hover:bg-accent/80 transition-colors border-2 border-foreground"
                                     >
                                         Play Again
                                     </button>

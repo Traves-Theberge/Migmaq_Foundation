@@ -15,20 +15,20 @@ const features = [
     fg: "text-black",
   },
   {
-    title: "GAMES",
-    description: "Play to learn. Interactive challenges for memory retention.",
-    icon: Gamepad2,
-    href: "/education",
-    bg: "bg-secondary",
-    fg: "text-white",
-  },
-  {
     title: "EDUCATION",
     description: "Structured paths. Lessons designed for mastery.",
     icon: GraduationCap,
     href: "/education",
     bg: "bg-accent",
     fg: "text-black",
+  },
+  {
+    title: "GAMES",
+    description: "Play to learn. Interactive challenges for memory retention.",
+    icon: Gamepad2,
+    href: "/education",
+    bg: "bg-secondary",
+    fg: "text-white",
   },
 ];
 

@@ -94,7 +94,7 @@ export default function DictionaryPage() {
                                     setSearchTerm(e.target.value);
                                     setSelectedLetter(null); // Clear letter filter on search
                                 }}
-                                className="w-full bg-background border-4 border-foreground p-4 sm:p-8 text-xl sm:text-3xl font-bold normal-case placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent transition-colors hard-shadow"
+                                className="w-full bg-background border-4 border-foreground p-4 sm:p-8 text-xl sm:text-3xl font-bold normal-case placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent transition-colors"
                             />
                             <Search className="absolute right-8 top-1/2 -translate-y-1/2 w-10 h-10 text-foreground" />
                         </div>

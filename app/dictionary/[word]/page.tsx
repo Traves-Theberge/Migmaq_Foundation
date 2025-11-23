@@ -41,13 +41,26 @@ export default function WordDetailsPage() {
     return (
         <div className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
-                <Link
-                    href="/dictionary"
-                    className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-primary mb-8 transition-colors group"
-                >
-                    <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" />
-                    Back to Dictionary
-                </Link>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                    <Link
+                        href="/dictionary"
+                        className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent transition-colors group"
+                    >
+                        <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" />
+                        Back to Dictionary
+                    </Link>
+
+                    <div className="flex items-center gap-3">
+                        <button className="inline-flex items-center px-4 py-2 border-2 border-foreground font-bold uppercase text-sm hover:bg-foreground hover:text-background transition-colors">
+                            <Share2 className="w-4 h-4 mr-2" />
+                            Share
+                        </button>
+                        <button className="inline-flex items-center px-4 py-2 border-2 border-foreground font-bold uppercase text-sm hover:bg-foreground hover:text-background transition-colors">
+                            <Bookmark className="w-4 h-4 mr-2" />
+                            Save
+                        </button>
+                    </div>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                     {/* Main Content */}
@@ -66,7 +79,7 @@ export default function WordDetailsPage() {
 
                             <div className="flex flex-wrap gap-3">
                                 {data.type && (
-                                    <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-primary text-white font-bold uppercase tracking-widest text-xs sm:text-sm">
+                                    <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-secondary text-white font-bold uppercase tracking-widest text-xs sm:text-sm">
                                         {data.type}
                                     </span>
                                 )}
@@ -96,11 +109,11 @@ export default function WordDetailsPage() {
                             <div className="space-y-8">
                                 <h2 className="text-3xl font-black uppercase border-b-4 border-foreground pb-3">Definitions</h2>
                                 {data.definitions.map((def, idx) => (
-                                    <div key={idx} className="relative pl-6 sm:pl-8 border-l-4 border-primary">
-                                        <span className="absolute -left-[1.2rem] sm:-left-[1.4rem] -top-2 text-4xl sm:text-6xl font-black text-muted-foreground/20">
-                                            {idx + 1}
-                                        </span>
-                                        <p className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight">
+                                    <div key={idx} className="flex gap-6 items-start group">
+                                        <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary text-white flex items-center justify-center border-4 border-transparent group-hover:border-foreground transition-colors">
+                                            <span className="text-2xl sm:text-3xl font-black">{idx + 1}</span>
+                                        </div>
+                                        <p className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight pt-2">
                                             {def}
                                         </p>
                                     </div>
@@ -111,33 +124,25 @@ export default function WordDetailsPage() {
 
                     {/* Sidebar */}
                     <div className="lg:col-span-4 space-y-6">
-                        <div className="p-6 bg-muted border-4 border-foreground">
-                            <h3 className="text-lg font-black uppercase mb-4 border-b-2 border-foreground pb-2">
-                                Actions
-                            </h3>
-                            <div className="flex gap-3">
-                                <button className="flex-1 py-3 border-2 border-foreground font-bold uppercase text-sm hover:bg-foreground hover:text-background transition-colors">
-                                    Share
-                                </button>
-                                <button className="flex-1 py-3 border-2 border-foreground font-bold uppercase text-sm hover:bg-foreground hover:text-background transition-colors">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
+                        {/* Actions removed from here */}
 
                         {data.usages && data.usages.length > 0 && (
-                            <div className="p-6 bg-accent/20 border-4 border-accent">
-                                <h3 className="text-lg font-black uppercase mb-4 border-b-2 border-foreground pb-2">
-                                    Usage Examples
-                                </h3>
-                                <ul className="space-y-4">
-                                    {data.usages.map((usage, idx) => (
-                                        <li key={idx} className="font-medium leading-relaxed">
-                                            <p className="text-base sm:text-lg font-bold mb-1">{usage.translation}</p>
-                                            <p className="text-sm sm:text-base italic opacity-80">{usage.english}</p>
-                                        </li>
-                                    ))}
-                                </ul>
+                            <div className="border-4 border-accent bg-background overflow-hidden relative">
+                                <div className="bg-accent p-4 border-b-4 border-accent">
+                                    <h3 className="text-xl font-black uppercase text-foreground">
+                                        Usage Examples
+                                    </h3>
+                                </div>
+                                <div className="p-6">
+                                    <ul className="space-y-6">
+                                        {data.usages.map((usage, idx) => (
+                                            <li key={idx} className="relative pl-4 border-l-4 border-accent/30">
+                                                <p className="text-lg sm:text-xl font-bold mb-2 leading-snug">{usage.translation}</p>
+                                                <p className="text-base sm:text-lg italic text-muted-foreground font-medium">{usage.english}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
                         )}
                     </div>
