@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alphabet-filter",
+  "type": "registry:component",
+  "title": "AlphabetFilter",
+  "description": "A row of letter buttons for jumping to a section of a word list.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/dictionary-ui/dictionary/AlphabetFilter.tsx",
+      "content": "\"use client\";\n\nimport React from 'react';\nimport { cn } from '../utils';\n\nexport interface AlphabetFilterProps {\n    /** Letters to show, in order — derive this from your own word list so it\n     *  only shows letters that actually have entries. */\n    letters: string[];\n    selected: string | null;\n    onSelect: (letter: string | null) => void;\n    /** Label for the \"clear filter\" button. */\n    allLabel?: string;\n    className?: string;\n}\n\n/** A row of letter buttons for jumping to a section of a word list, plus an \"all\" button to clear it. */\nexport default function AlphabetFilter({ letters, selected, onSelect, allLabel = 'All', className }: AlphabetFilterProps) {\n    const buttonStyle = (active: boolean): React.CSSProperties => ({\n        minWidth: '2rem',\n        height: '2rem',\n        padding: '0 0.4rem',\n        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',\n        borderRadius: 'var(--dui-radius, 0.4rem)',\n        border: '1.5px solid var(--dui-border, currentColor)',\n        background: active ? 'var(--dui-accent, #a8402c)' : 'var(--dui-bg, transparent)',\n        color: active ? 'var(--dui-accent-foreground, #fff)' : 'var(--dui-fg, currentColor)',\n        fontWeight: 700,\n        fontSize: '0.85rem',\n        cursor: 'pointer',\n    });\n\n    return (\n        <div className={cn('dui-alphabet-filter', className)} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>\n            <button type=\"button\" onClick={() => onSelect(null)} style={buttonStyle(selected === null)}>\n                {allLabel}\n            </button>\n            {letters.map((letter) => (\n                <button key={letter} type=\"button\" onClick={() => onSelect(letter)} style={buttonStyle(selected === letter)}>\n                    {letter}\n                </button>\n            ))}\n        </div>\n    );\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/dictionary-ui/utils.ts",
+      "content": "/** Joins truthy class names. No Tailwind-merge semantics — kept dependency-free\n *  so this package doesn't force a specific styling toolchain on consumers. */\nexport function cn(...classes: Array<string | false | null | undefined>): string {\n    return classes.filter(Boolean).join(' ');\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

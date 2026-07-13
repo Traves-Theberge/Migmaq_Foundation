@@ -1,0 +1,50 @@
+{
+  "name": "@dictionary-ui/react",
+  "version": "0.1.0",
+  "description": "Reusable React components for building language dictionary sites: audio playback, gloss tooltips, word lookup primitives, and an animated storybook reader.",
+  "license": "MIT",
+  "keywords": ["react", "dictionary", "language-learning", "audio-player", "storybook", "ui-components"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/dictionary-ui.git",
+    "directory": "packages/react"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "lucide-react": "^0.554.0",
+    "framer-motion": "^12.23.24",
+    "react-pageflip": "^2.0.3",
+    "canvas-confetti": "^1.9.4"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/react": "^19.2.6",
+    "@types/react-dom": "^19.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.9.3"
+  }
+}

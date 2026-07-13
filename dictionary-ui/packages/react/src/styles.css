@@ -1,0 +1,241 @@
+/* Optional stylesheet for the StoryBook reader — import once if you use it:
+ *   import '@dictionary-ui/react/styles.css';
+ * Every other component in this package is inline-styled and needs no CSS.
+ */
+
+/* react-pageflip / StPageFlip ships its engine as JS only (no dist CSS) —
+   these base rules are required for its positioning, copied verbatim from
+   page-flip's src/Style/stPageFlip.css. */
+.stf__parent {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    transform: translateZ(0);
+    touch-action: pan-y;
+}
+.stf__wrapper {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+.stf__parent canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.stf__block {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    perspective: 2000px;
+}
+.stf__item {
+    display: none;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+.stf__outerShadow,
+.stf__innerShadow,
+.stf__hardShadow,
+.stf__hardInnerShadow {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* The reader's "real book" skin: warm paper, a spine crease, soft elevation.
+   Light values first; .dark overrides (opt-in — add a `.dark` class to an
+   ancestor, e.g. via next-themes) read like a lamp-lit room rather than an
+   inverted daytime palette. Every color is a CSS variable, so you can
+   override any of them without touching these rules. */
+.dui-stage {
+    --dui-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    --dui-weave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M0 0h6v6H0z' fill='none'/%3E%3Cpath d='M0 3h6M3 0v6' stroke='%23000' stroke-opacity='.35' stroke-width='0.6'/%3E%3C/svg%3E");
+
+    --dui-paper: #fbf3e4;
+    --dui-paper-shade: #f0e2c4;
+    --dui-ink: #2b2118;
+    --dui-ink-soft: #7c6a52;
+    --dui-book-accent: #a8402c;
+    --dui-cover: #5c1f1a;
+    --dui-cover-light: #7a2e22;
+    --dui-cover-ink: #f3e6c8;
+    --dui-frame: #2c1f18;
+    --dui-frame-light: #3d2c22;
+    --dui-gold: #c9a35a;
+    --dui-gold-bright: #e6c987;
+    --dui-spine: rgba(20, 10, 8, 0.35);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+}
+
+.dark .dui-stage {
+    --dui-paper: #efe3c8;
+    --dui-paper-shade: #e4d3ab;
+    --dui-ink: #2b2118;
+    --dui-ink-soft: #6e5c42;
+    --dui-book-accent: #e0805f;
+    --dui-cover: #3d1512;
+    --dui-cover-light: #55201a;
+    --dui-cover-ink: #ecdcb2;
+    --dui-frame: #171310;
+    --dui-frame-light: #241d17;
+    --dui-gold: #b8944e;
+    --dui-gold-bright: #ddc07f;
+    --dui-spine: rgba(10, 6, 4, 0.45);
+}
+
+.dui-book-shadow {
+    filter: drop-shadow(0 28px 40px rgba(20, 12, 6, 0.28)) drop-shadow(0 4px 10px rgba(20, 12, 6, 0.18));
+}
+
+/* react-pageflip renders each child as a `.page`; we style the content inside. */
+.dui-leaf {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--dui-paper);
+    color: var(--dui-ink);
+    overflow: hidden;
+    border-radius: 0.6rem;
+    background-image:
+        var(--dui-noise),
+        radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.03) 0, transparent 40%),
+        radial-gradient(circle at 80% 75%, rgba(0, 0, 0, 0.03) 0, transparent 45%),
+        radial-gradient(ellipse 90% 70% at 50% 50%, transparent 55%, rgba(43, 33, 24, 0.05) 100%);
+    background-blend-mode: overlay, normal, normal, normal;
+    background-size: 180px 180px, auto, auto, auto;
+    box-shadow: inset 0 0 24px rgba(43, 33, 24, 0.06);
+}
+
+.dui-leaf.dui-image-leaf::after,
+.dui-leaf.dui-text-leaf::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem;
+    pointer-events: none;
+}
+.dui-leaf.dui-image-leaf::after {
+    right: 0;
+    background: linear-gradient(to right, transparent, var(--dui-spine));
+}
+.dui-leaf.dui-text-leaf::before {
+    left: 0;
+    background: linear-gradient(to left, transparent, var(--dui-spine));
+}
+/* A thin gilt line on each leaf's outward-facing edge — the classic
+   gold-edged-pages cue of a well-bound book. */
+.dui-leaf.dui-image-leaf {
+    box-shadow: inset 2px 0 0 color-mix(in srgb, var(--dui-gold) 55%, transparent), inset 0 0 24px rgba(43, 33, 24, 0.06);
+}
+.dui-leaf.dui-text-leaf {
+    box-shadow: inset -2px 0 0 color-mix(in srgb, var(--dui-gold) 55%, transparent), inset 0 0 24px rgba(43, 33, 24, 0.06);
+}
+
+.dui-hard-cover {
+    width: 100%;
+    height: 100%;
+    background:
+        var(--dui-weave),
+        radial-gradient(ellipse 140% 100% at 15% 0%, rgba(255, 255, 255, 0.1), transparent 60%),
+        radial-gradient(ellipse 120% 90% at 85% 100%, rgba(0, 0, 0, 0.3), transparent 65%),
+        linear-gradient(160deg, var(--dui-cover-light), var(--dui-cover) 55%, color-mix(in srgb, var(--dui-cover) 70%, black));
+    background-size: 6px 6px, auto, auto, auto;
+    color: var(--dui-cover-ink);
+    display: flex;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 0 2px color-mix(in srgb, var(--dui-gold) 30%, transparent),
+        inset 0 0 60px rgba(0, 0, 0, 0.4);
+}
+.dui-hard-cover--column { flex-direction: column; }
+.dui-hard-cover--row { flex-direction: row; }
+
+/* Ornamental rule under a cover's title — book-plate gold foil line. */
+.dui-cover-rule {
+    position: relative;
+}
+.dui-cover-rule::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 2.5rem;
+    margin: 0.5rem auto 0;
+    background: linear-gradient(to right, transparent, var(--dui-gold), transparent);
+}
+
+/* A subtle gold outline on cover title text, book-plate engraving style. */
+.dui-title-outline {
+    -webkit-text-stroke: 0.5px color-mix(in srgb, var(--dui-gold) 70%, transparent);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 1px color-mix(in srgb, var(--dui-gold) 45%, transparent);
+}
+
+/* Scrim behind a full-bleed cover's title, guaranteeing legibility over any art. */
+.dui-cover-scrim {
+    background: linear-gradient(to top, rgba(10, 6, 4, 0.88) 0%, rgba(10, 6, 4, 0.6) 55%, transparent 100%);
+}
+
+.dui-seal-button {
+    background: linear-gradient(160deg, var(--dui-gold-bright), var(--dui-gold) 60%, color-mix(in srgb, var(--dui-gold) 70%, black));
+    color: color-mix(in srgb, var(--dui-cover) 85%, black);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 -2px 4px rgba(0, 0, 0, 0.25) inset,
+        0 6px 14px rgba(0, 0, 0, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.dui-seal-button:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 -2px 4px rgba(0, 0, 0, 0.25) inset,
+        0 9px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* Big, bright, tactile nav — kid-friendly touch targets, not a subtle outline pill. */
+.dui-nav-button {
+    background: linear-gradient(160deg, var(--dui-gold-bright), var(--dui-gold) 70%);
+    color: color-mix(in srgb, var(--dui-frame) 85%, black);
+    border: none;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 4px 0 color-mix(in srgb, var(--dui-gold) 60%, black),
+        0 6px 14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.dui-nav-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 6px 0 color-mix(in srgb, var(--dui-gold) 60%, black),
+        0 10px 18px rgba(0, 0, 0, 0.3);
+}
+.dui-nav-button:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 2px 0 color-mix(in srgb, var(--dui-gold) 60%, black),
+        0 3px 8px rgba(0, 0, 0, 0.25);
+}
+.dui-nav-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.dui-page-dot {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.dui-page-dot:hover {
+    transform: scale(1.25);
+}

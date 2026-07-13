@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "word-card",
+  "type": "registry:component",
+  "title": "WordCard / SearchBox",
+  "description": "Word list card and search input primitives for dictionary lookups.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/dictionary-ui/dictionary/WordCard.tsx",
+      "content": "\"use client\";\n\nimport React from 'react';\nimport type { DictionaryWord } from './types';\n\nexport interface WordCardProps {\n    word: DictionaryWord;\n    className?: string;\n}\n\n/** A small pill badge — used internally for part-of-speech, exported in case you want it standalone. */\nexport function PartOfSpeechBadge({ children }: { children: React.ReactNode }) {\n    return (\n        <span\n            style={{\n                display: 'inline-block',\n                padding: '0.2rem 0.6rem',\n                fontSize: '0.65rem',\n                fontWeight: 700,\n                textTransform: 'uppercase',\n                letterSpacing: '0.05em',\n                borderRadius: 'var(--dui-radius, 9999px)',\n                background: 'var(--dui-muted, rgba(127,127,127,0.15))',\n                color: 'var(--dui-fg, currentColor)',\n            }}\n        >\n            {children}\n        </span>\n    );\n}\n\n/** A word list card: word, pronunciation, part-of-speech badge, first definition.\n *  Renders as a plain `<a>` when `word.href` is set, a `<div>` otherwise. */\nexport default function WordCard({ word, className }: WordCardProps) {\n    const Tag = word.href ? 'a' : 'div';\n    return (\n        <Tag\n            href={word.href}\n            className={className}\n            style={{\n                display: 'block',\n                padding: '1.25rem',\n                borderRadius: 'var(--dui-radius, 0.75rem)',\n                border: '1px solid var(--dui-border, rgba(127,127,127,0.25))',\n                textDecoration: 'none',\n                color: 'inherit',\n            }}\n        >\n            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '0.35rem' }}>\n                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0 }}>{word.word}</h3>\n                {word.partOfSpeech && <PartOfSpeechBadge>{word.partOfSpeech}</PartOfSpeechBadge>}\n            </div>\n            {word.pronunciation && (\n                <p style={{ fontSize: '0.85rem', opacity: 0.6, margin: '0 0 0.4rem' }}>{word.pronunciation}</p>\n            )}\n            {word.definitions[0] && (\n                <p style={{ fontSize: '0.95rem', margin: 0, opacity: 0.9 }}>{word.definitions[0]}</p>\n            )}\n        </Tag>\n    );\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/dictionary-ui/dictionary/SearchBox.tsx",
+      "content": "\"use client\";\n\nimport React from 'react';\nimport { Search } from 'lucide-react';\n\nexport interface SearchBoxProps {\n    value: string;\n    onChange: (value: string) => void;\n    placeholder?: string;\n    /** Result count to show as a hint, e.g. \"42 words\". Omit to hide. */\n    resultCount?: number;\n    className?: string;\n}\n\n/**\n * A controlled search input. Deliberately has no search engine baked in —\n * plug in whatever you filter/fuzzy-match with (Fuse.js, a server query,\n * plain `.includes()`) and pass the current text in via `value`/`onChange`.\n */\nexport default function SearchBox({ value, onChange, placeholder = 'Search…', resultCount, className }: SearchBoxProps) {\n    return (\n        <div className={className} style={{ position: 'relative' }}>\n            <input\n                type=\"text\"\n                value={value}\n                onChange={(e) => onChange(e.target.value)}\n                placeholder={placeholder}\n                style={{\n                    width: '100%',\n                    padding: '0.75rem 2.75rem 0.75rem 1rem',\n                    fontSize: '1rem',\n                    borderRadius: 'var(--dui-radius, 0.5rem)',\n                    border: '1.5px solid var(--dui-border, #ccc)',\n                    background: 'var(--dui-bg, transparent)',\n                    color: 'var(--dui-fg, currentColor)',\n                    outline: 'none',\n                }}\n            />\n            <Search\n                size={18}\n                style={{ position: 'absolute', right: '0.9rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.6 }}\n            />\n            {resultCount !== undefined && (\n                <p style={{ fontSize: '0.8rem', opacity: 0.6, marginTop: '0.5rem' }}>\n                    {resultCount} {resultCount === 1 ? 'result' : 'results'}\n                </p>\n            )}\n        </div>\n    );\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/dictionary-ui/dictionary/types.ts",
+      "content": "export interface DictionaryWord {\n    word: string;\n    pronunciation?: string;\n    partOfSpeech?: string;\n    /** Short definitions/glosses, first one used as the card's summary line. */\n    definitions: string[];\n    /** Link to the word's full detail page, if any. */\n    href?: string;\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

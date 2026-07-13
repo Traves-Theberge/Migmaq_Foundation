@@ -1,0 +1,26 @@
+{
+  "name": "docs",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@dictionary-ui/react": "*",
+    "lucide-react": "^0.554.0",
+    "next": "^16.2.10",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.11.1",
+    "@types/react": "^19.2.6",
+    "@types/react-dom": "^19.2.0",
+    "@tailwindcss/postcss": "^4.1.17",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
+  }
+}

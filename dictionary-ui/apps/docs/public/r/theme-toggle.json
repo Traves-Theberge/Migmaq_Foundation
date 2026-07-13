@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-toggle",
+  "type": "registry:component",
+  "title": "ThemeToggle",
+  "description": "A light/dark toggle with no theming library required.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/dictionary-ui/theme/ThemeToggle.tsx",
+      "content": "\"use client\";\n\nimport React, { useEffect, useState } from 'react';\nimport { Moon, Sun } from 'lucide-react';\nimport { cn } from '../utils';\n\nexport interface ThemeToggleProps {\n    className?: string;\n    /** localStorage key used to persist the choice. */\n    storageKey?: string;\n}\n\nfunction applyTheme(dark: boolean) {\n    document.documentElement.classList.toggle('dark', dark);\n}\n\n/**\n * A light/dark toggle with no framework theming library required — it just\n * adds/removes a `.dark` class on `<html>` and persists the choice to\n * localStorage. This is the exact convention the storybook reader's dark\n * mode already looks for (`.dark .dui-stage`), so this toggle and that\n * component work together with zero extra wiring.\n *\n * If you already use next-themes (or similar), skip this component and\n * just make sure whatever you use also toggles a `.dark` class.\n */\nexport default function ThemeToggle({ className, storageKey = 'dui-theme' }: ThemeToggleProps) {\n    const [dark, setDark] = useState(false);\n    const [mounted, setMounted] = useState(false);\n\n    useEffect(() => {\n        const stored = localStorage.getItem(storageKey);\n        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;\n        const initial = stored ? stored === 'dark' : !!prefersDark;\n        setDark(initial);\n        applyTheme(initial);\n        setMounted(true);\n    }, [storageKey]);\n\n    const toggle = () => {\n        const next = !dark;\n        setDark(next);\n        applyTheme(next);\n        localStorage.setItem(storageKey, next ? 'dark' : 'light');\n    };\n\n    // Avoid a flash of the wrong icon before we know the real preference.\n    if (!mounted) return <span className={className} style={{ display: 'inline-block', width: '2.25rem', height: '2.25rem' }} />;\n\n    return (\n        <button\n            type=\"button\"\n            onClick={toggle}\n            aria-label=\"Toggle dark mode\"\n            className={cn('dui-theme-toggle', className)}\n            style={{\n                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',\n                width: '2.25rem', height: '2.25rem', borderRadius: 'var(--dui-radius, 9999px)',\n                border: '1.5px solid var(--dui-border, currentColor)', background: 'var(--dui-bg, transparent)',\n                color: 'var(--dui-fg, currentColor)', cursor: 'pointer',\n            }}\n        >\n            {dark ? <Sun size={16} /> : <Moon size={16} />}\n        </button>\n    );\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "components/dictionary-ui/utils.ts",
+      "content": "/** Joins truthy class names. No Tailwind-merge semantics — kept dependency-free\n *  so this package doesn't force a specific styling toolchain on consumers. */\nexport function cn(...classes: Array<string | false | null | undefined>): string {\n    return classes.filter(Boolean).join(' ');\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

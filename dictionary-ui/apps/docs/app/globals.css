@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Matches the "Malika" palette from the Migmaq Foundation app this library
+   was extracted from — bold, flat, thick black borders, hard offset
+   shadows — rather than a generic docs-site look. */
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+
+  --color-primary: #7c3aed;
+  --color-secondary: #ef4444;
+  --color-accent: #f59e0b;
+  --color-accent-foreground: #000000;
+
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #4b5563;
+  --color-border: #000000;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+/* The "Malika" hard-shadow utility — a thick offset shadow that steps in on
+   hover and presses down on click. */
+.hard-shadow {
+  box-shadow: 6px 6px 0 0 var(--color-foreground);
+  transition: all 0.15s ease;
+}
+.hard-shadow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 var(--color-foreground);
+}
+.hard-shadow:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--color-foreground);
+}
+
+/* Live-preview container: plugs the same Malika tokens into the library's
+   --dui-* variables, so a component preview here looks the way it actually
+   looks embedded in the real app — not a generic default theme. */
+.dui-preview {
+  --dui-accent: var(--color-accent);
+  --dui-accent-foreground: var(--color-accent-foreground);
+  --dui-border: var(--color-border);
+  --dui-fg: var(--color-foreground);
+  --dui-bg: var(--color-background);
+  --dui-muted: var(--color-muted);
+  --dui-radius: 0px;
+  --dui-tooltip-bg: var(--color-foreground);
+  --dui-tooltip-fg: var(--color-background);
+}

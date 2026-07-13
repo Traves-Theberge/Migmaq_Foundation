@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spelling-cycler",
+  "type": "registry:component",
+  "title": "SpellingCycler",
+  "description": "Cycles through alternate spellings/orthographies of a language or word name.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/dictionary-ui/theme/SpellingCycler.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useState } from 'react';\n\nexport interface SpellingCyclerProps {\n    /** Alternate spellings/orthographies to cycle between, e.g. [\"Mi'gmaq\", \"Mi'gmaaq\", \"Mi'gma'k\"]. */\n    variants: string[];\n    intervalMs?: number;\n    className?: string;\n}\n\n/**\n * Cycles through alternate spellings of a language/word name — useful since\n * many languages have more than one accepted orthography and a dictionary\n * site's header is a natural place to acknowledge that rather than pick\n * just one.\n */\nexport function SpellingCycler({ variants, intervalMs = 3000, className }: SpellingCyclerProps) {\n    const [index, setIndex] = useState(0);\n\n    useEffect(() => {\n        if (variants.length <= 1) return;\n        const interval = setInterval(() => setIndex((prev) => (prev + 1) % variants.length), intervalMs);\n        return () => clearInterval(interval);\n    }, [variants.length, intervalMs]);\n\n    return <span className={className}>{variants[index] ?? ''}</span>;\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

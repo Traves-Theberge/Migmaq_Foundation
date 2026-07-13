@@ -1,0 +1,14 @@
+{
+  "name": "dictionary-ui",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/docs",
+    "build": "npm run build --workspace=packages/react && npm run build --workspace=apps/docs",
+    "build:package": "npm run build --workspace=packages/react",
+    "registry:build": "node scripts/build-registry.mjs"
+  }
+}

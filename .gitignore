@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# nested projects (e.g. dictionary-ui/) — the rules above are root-anchored
+# and don't reach subfolders, so mirror the important ones unanchored here.
+node_modules/
+.next/
+dist/
+.turbo/
