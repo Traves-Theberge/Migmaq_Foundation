@@ -1,0 +1,380 @@
+            The Mi'kmaq Future: A n Analysis
+STEPHANIE INGLIS AND ELEANOR JOHNSON
+             Mi 'kmaq Studies, University College of Cape Breton
+
+The Mi'kmaq Future has always been a bit of an anomaly (Proulx
+1990:138; D a w e 1986:54-57). If however, w e re-analyze the verbal para-
+digms of M i ' k m a q in terms of a modal system characterized by evidential
+contrasts then the future forms fall into place. For the purposes of this dis-
+cussion focus will be on the future forms of the Mi'kmaq Al. Table 1 pre-
+sents the endings of the A l Future and illustrates them using the verb
+stem -np 'to sleep'.
+
+Table 1. Al Future Endings and Al Future of verb stem -np- 'to sleep'
+         ENDINGS              STEM + ENDINGS
+   1     -tes                 npates                    'I will sleep'
+   2     -tesk/-teks          npateks                   'You (sg.) will sleep'
+   3     -tew                 npatew                    'S/he will sleep'
+  12     -tesnu/-teksnu       npate(k)snu               'We incl. will sleep'
+  13     -tesnen/-teksnen     npate(k)snen              'We excl. will sleep'
+  23     -toqsip              npatoqsip                 'You (pi.) will sleep'
+  33     -taq                 npataq                    'They will sleep'
+
+
+    Before examining the structure of the A l Future a brief outline of the
+system of modality is needed. Modality in Mi'kmaq is characterized by a
+set of suffixes, primarily evidentials, which mark "...the ways in which
+ordinary people ... naturally regard the source and reliability of their
+knowledge" (Chafe and Nichols 1986:vii). The main evidential suffixes in
+Mi'kmaq are attestive -p(ri), suppositive -s(n) and inferential -s(i)p(n).
+
+
+1. The language traditionally spelled 'Micmac' in Algonquian literature is, throughout
+this discussion, spelled 'Mi'kmaq'. 'Micmac' is an anglicized version of the word
+Mi'kmaq meaning 'the Allies'. Mi'kmaq is the spelling using the Smith-Francis orthogra-
+phy which is used throughout this paper (see Hewson and Francis 1990:ii-iii). In this
+orthography schwa is represented by a barred /i/ and vowel length is represented by an
+apostrophe.
+2. Abbreviations used for person and number are: 1:firstperson singular, 2: second per-
+son singular, 3: third person singular, 12:firstperson inclusive plural, 13:firstperson
+exclusive plural, 23, second person plural, 33: third person plural.
+250              STEPHANIE INGLIS A N D E L E A N O R J O H N S O N
+
+
+
+Evidential suffixes mark secondary modality. Primary modality, indicat-
+ing realis or irrealis of the verb, is marked by full or reduced stems
+respectively.
+
+
+THE MI'KMAQ Al FUTURE: AN ANALYSIS
+    There are four observations which can be made about the Mi'kmaq
+Al Future which will allow us to draw some conclusions concerning its
+cognitive framework as well as its historical origins:
+
+(1) The Al Future developed from a Proto-Algonquian (PA) type II verb form
+    (discussed below) which originally had a full set of personal prefixes and
+    suffixes.
+(2) The endings of the Al Future contain the evidential suffixes -s(n) l-s(i)p(n
+    which mark for suppositive / inferential knowledge respectively.
+(3) The -te(k) element found in the endings of the Al Future is a
+    grammaticalized form of the II Independent neutral of the verb 'to be', etek.
+(4) The Al Future forms are characterized by an unchanged or reduced stem
+    which marks for irrealis modality.
+
+    A proposed morphological pattern resulting in an Al Future is pre-
+sented in Table 2 below and is the pattern argued for in this discussion.
+
+
+Table 2. Morphological pattern of a future Al verb
+
+Reduced + -tek + -s I -sp + personal suffixes
+stem               (except 3/33)     (only on 12, 13 & 33)
+
+
+The morphological pattern of Table 2 shows a reduced stem followe
+by the suffix, -tek, which is a grammaticalized form of the reduced II verb
+'to be', etek. The suffix -tek is followed by an evidential suffix (-s or -
+and finally personal suffixes. Table 4 shows the Future Al verb laid out
+following the pattern of Table 3.
+    In Mi'kmaq most of the verbal orders evolved from Proto-Algon-
+quian (PA) Type I verbs (Proulx 1990) which did not have personal pre-
+fixes and suffixes. The exception being the Future and the Subordinative
+(equivalent to 'that...' clauses) which both appear to have developed
+from PA type II verbs which did have personal affixes. In the paradigm of
+the Al Future (Table 3) it can be seen that the final suffixes on the 12, 13
+and 33 forms are easily recognizable as personal suffixes. Table 4 pre-
+                          T H E M I ' K M A Q FUTURE: A N ANALYSIS                              251
+
+
+
+sents, for comparison, the full set of Mi'kmaq personal affixes for ani-
+mate and inanimate singular possessed nouns.
+
+Table 3. Al Future endings showing morpheme boundaries
+          REDUCED STEM           -tek SUFFIX        EVIDENTIAL SUFFIX      PERSONAL SUFFIX
+   1      V stem                 -te                -s
+   2      V stem                 -tek               -S
+   3      V stem                 -tew
+  12      V stem                 -te(k)             -S                     -nu
+  13      V stem                 -te(k)             -s                     -nen
+  23      V stem                  -t                -oq* -s ip
+  33      V stem                  -t                                       -aq
+*The m o r p h e m e -oq occurs repeatedly on 23 verbs within the verbal paradigms of Mi'kmaq
+but, its function has yet to be explained.
+
+
+
+Table 4. Personal affixes for singular animate and inanimate nouns
+
+                                  ANIMATE SINGULAR                INANIMATE SINGULAR
+           PERSONAL PREFIX        PERSONAL SUFFIX                 PERSONAL SUFFIX
+   1       n-
+   2       k-
+   3       w-                     -1
+  12       k-                     -inu                            -inu
+  13       n-                     -inen                           -inen
+  23       k-                     -wow                            -wow
+  33       w-                     -wal,                           -wow
+                                  -wa(q) [an.pl.]
+
+
+    There is evidence (Inglis 1998) showing that as personal prefixes and
+suffixes are dropped from the Mi'kmaq language, with respect to posses-
+sion, it is the 12 and 13 personal suffixes, -inu and -inen, which appear to
+be the last to go. In a study done on language death in the Cape Breton
+Mi'kmaq communities of Eskasoni and Wagmatcook, senior Mi'kmaq
+university students at the University College of Cape Breton, found that
+among many younger Mi'kmaq speakers all the personal prefixes and suf-
+fixes had been dropped for possessed nouns, except for the 12 and 13 suf-
+fixes, -inu and -inen.
+    The same type of language change as we have witnessed over the last
+decade with respect to the dropping of personal suffixes on possessed
+nouns could have taken place in terms of the Al Future if w e surmise that
+originally the Future was a PA Type II verb form which exhibited both
+252                    STEPHANIE INGLIS A N D E L E A N O R J O H N S O N
+
+
+
+personal prefixes and suffixes; which over time regularized because of
+analogy with the other Mi'kmaq verb orders and began to drop the per-
+sonal affixes. This would not be impossible as the personal prefixes have
+long since gone from the Subordinative in Mi'kmaq (see Table 5) though
+some of the personal suffixes have become frozen in the Subordinative
+endings; primarily on the 12, 13 and 33 forms. This is similar to what we
+are seeing with the Al Future endings where the personal prefixes are
+occurring on the 12, 13 and 33 forms. A comparison of the Al Subordina-
+tive and the Al Future can be made by examining Tables 5 and 6.
+
+
+Table 5. Endings of Al Subordinative compared with personal suff
+
+          SUBORDINATIVE              SUBORDINATIVE             PERSONAL SUFFIXES
+          PERSONAL PREFIXES*         ENDINGS                   (INANIMATE SG. NOUN)**
+   1      n-                         -n
+   2      k-                         -n
+   3      w-                         -n
+  12      k-                         -nenu                      -inu
+  13      n-                         -nen                       -inen
+  23      k-                         -new                       -WOW
+  33      w-                         -new                       -wow
+* Pacifique (see Hewson and Francis 1990:53) shows the use of personal prefixes with the Subor-
+dinative in his 1939 grammar. In current Mi'kmaq use, personal prefixes with the Subordinative
+are n o w gone. ** Personal suffixes are presented here for reference only.
+
+
+
+Table 6. Al Future Endings compared with personal suffixes
+
+PERSONAL SUFFIXES (ANIMATE SG. NOUN)
+   1      -tes
+   2      -teks
+   3      -tew                       -1
+  12      -teksnu                    -inu
+  13      -teksnen                   -inen
+  23      -toqsip                    -wow
+  33      -taq                       -wal;
+                                     -wa(q) [an.pl.
+
+
+       Sentence (1) below gives an example of the Subordinative.
+(1) ...toqomna'q kejituoqksip ki's kis tli-ksinukwa-n
+    ...toqomna'q kejituoqksip  ki's kis
+      so not yet you know/knew already
+                       THE MI'KMAQ FUTURE: A N ANALYSIS                              253
+
+    tli-ksinukwa-n
+    thus-forthcoming winter-Al.3.Sub3
+    '...so y o u (sg.) didn't k n o w that winter was almost here?' (Sylliboy in
+    Leavitt 1986:8)
+
+
+THE MI'KMAQ Al FUTURE CONTAINS EVIDENTIALS
+     T h e A l Future forms contain the evidential suffixes, -s(n), and
+-s(i)p(n). U s e of suppositive/inferential evidential suffixes in a verb form
+notionally expressing hypothetical potential actions (actions not yet done)
+makes cognitive sense for one can only 'suppose' or 'infer' about 'the
+future'.
+     Evidentials in M i ' k m a q are placed on top of neutral forms in most
+instances; they are non-paradigmatic forms. For example sentence (2)
+gives the II Independent neutral form, tekpa'q, meaning 'it is cold.' This
+contrasts with sentence (3) which show the nearly identical sentence but
+with the suppositive evidential -s being suffixed to the Independent neu-
+tral form of (2):
+
+(2) Independent neutral
+    Tekpa 'q.
+    tek-pa-a-q
+    cold-liquid-II.VF-II.3.Indep.neut
+    'It [water] is cold right now.'
+(3) Independent suppositive
+    Tekpa 'qas.
+    tek-pa-a-q-as
+    cold-liquid-II.VF-II.3.Indep.neut-supp
+    'It [the water] w a s cold, so I'm told.'
+
+     Referring back to Table 4 it can be seen that 3 and 33 persons are not
+marked in the A l Future with an evidential. This fits with what w e k n o w
+about the role of Speech Act Participants (SAPs). In discourse first and
+second persons are considered S A P s while third person is a n o n - S A P It is
+the S A P s which are most likely to carry evidential suffixes in M i ' k m a q as
+they are the only persons which can c o m m e n t on the source and reliability
+
+
+3. The following abbreviations are used in the labeling morphemes:
+Al: Animate Intransitive verb; exist: existential modal suffix, -tek; II: Inanimate Intransi-
+tive verb; Indep: Independent order; infer: inferential evidential modal suffix, -s(i)p(n);
+loc: locative; neut: neutral (verb unmarked for modality or tense); pers: personal suffix;
+Sub: Subordinative order; sg.: singular; supp: suppositive evidential modal suffix, -s(n);
+WhemConj: When-conjunct order
+254                   S T E P H A N I E INGLIS A N D E L E A N O R J O H N S O N
+
+
+
+of their o w n personal knowledge during discourse. Third person S A P s are
+not active participants in a speech act; thus, cannot be active sources of
+information. Note also that 23 forms in the Future A l take the inferential
+
+
+Table 7. Al Endings showing neutral paradigms, contrasting attestive and
+    suppositive forms.
+
+           INDEPENDENT        INDEPENDENT         INDEPENDENT         INDEPENDENT
+           NEUTRAL            ATTESTIVE           SUPPOSITIVE         INFERENTIAL
+
+   1       V-y(an)            V-yap(n)            V-yas(n)
+   2       V-n                V-p(n)                                  V-s(i)p(n)
+   3       V-t                V-p(n)              V-s(n)              V- s(i)p(n)
+  12       V-yikw             V-yikup(n)          V-yikus(n)          V-yikus(i)p(n)
+  13       V-yek              V-yekip(n)          V-yeks(n)           V-yeks(i)p(n)
+  23       V-yoq              V-yoqop(n)          V-yoqs(n)           V-yoqs(i)p(n)
+  33       V-jik              V-pnik              V-snik              V- sipnik
+
+
+           CONDITIONAL        FUTURE               IF-CONJUNCT         IF-CONJUNCT
+           NEUTRAL                                 NEUTRAL             SUPPOSITIVE
+
+   1       V-k                V-tes                V-yan               V-yas(n)
+   2       V-k                V-tesk/-teks         V-n                 V-s(i)p(n)
+   3       V-s(n)             V-tew                v-j                 V-s(n)
+  12       V-kup(n)           V-te(k)snu           V-yikw              V-yikus
+  13       V-kek              V-te(k)snen          V-yek               V-yeks(i)p(n)
+  23       V-koq              V-toqsip             V-yoq               V-yoqs(i)p(n)
+  33       V-tis(n)           V-taq                V'-tij              V - tis(n)
+
+       V    vowel of stem (The endings in Table 8 are generalized without morphophonemic
+            adjustments.)
+       V    vowel length
+       j    schwa (the schwa is used to prevent the formation of a cluster of three consonants.)
+       v    "... element, inherited from PA, that links vowel of stem with vowel of inflection"
+       y
+            (Dawe 1986:32).
+
+
+
+ evidential -s(i)p(n). The inferential evidential forms in -s(i)p(n) are
+ referred to by Mi'kmaq speakers as questions - "I don't k n o w do you?".
+     Examine the Al verbal endings for the Independent, Conditional,
+ Future and If-Conjunct presented in Table 7. Notice that the -s(i)p(n) infer-
+ ential evidential most often occur on 2, 23 or 13 forms; forms which
+ require the speaker to defer to the knowledge of "the other" or the "com-
+ bined knowledge of the other" as in 23 or 13 forms.
+                     THE MI'KMAQ FUTURE: A N ANALYSIS                          255
+
+THE MI'KMAQ Al FUTURE CONTAINS -TE(K)
+    T h e A l Future is built on -tek, a grammaticalized, reduced form, of
+the M i ' k m a q II Independent neutral of the verb 'to be', etek. H e w s o n and
+Francis (1990:124) c o m m e n t that the II form of the Independent neutral
+of the verb eymik, 'to be there', is etek as in (4) and (5) below.
+(4) etek
+     et-e-k
+     exist-II.VF-II.3.Indep.neut
+     'it (inanimate) is located or exists in such a space or time'
+(5) Kuntew etek a 'la.
+    'The rock is over there.'
+
+    T h e -te(k) form of the A l Future attaches directly to the verb stem as
+in sentences (6) through (8).
+
+(6) Atlasmites sapo'nuk.
+    atlasm-i-te-s          sapo'n-uk
+    rest-AI.VF-exis-supp tomorrow-loc
+    'I will rest tomorrow.'
+(7) Mijisiteksnu kewisinyikw.
+    mijis-i-tek-s-nu             kewisin-yikw
+    eat-AI.VF-exis-supp-pers. 12 hungry-AI.12.When:Conj.neut
+    'We (inclusive) will eat when w e are hungry.'
+(8) Apaja 'sitaq tpu 'nuk.
+    apaj-a'si-t-aq                tpu'n-uk
+    come back-AI.VF-exis-pers.33 night-loc
+    'They will come back during the night.'
+
+    -tek is the reduced variant of the II Independent neutral of the verb 'to
+be', etek. Reducing the verb etek and grammaticalizing the reduced form
+such that it functions as an existential modal suffix captures the irrealis
+sense that a future form needs to convey. T h e form, -tek, of the A l Future
+appears to be a suffix created by grammaticalization for the purpose of
+expressing existentialism - to exist. T h e infinitive of etek is eymik. A s
+noted by H e w s o n and Francis (1990:123)
+    Maillard gives in Micmac eymik ... [but it] does not mean to be some-
+    one or something (Gr. M a . 162); it means to be somewhere: ula eym, I
+    am here, na'te'l eymn, thou art there ...
+    T h e notion of being s o m e w h e r e in the future, to position oneself in a
+potential hypothetical situation or existential space sits well with a
+'Future'. A s noted by B y b e e (1985:168)
+256                STEPHANIE INGLIS A N D E L E A N O R J O H N S O N
+
+
+      W e might generalize, then, and suppose that as modals develop, they
+      move in the direction of becoming markers that have the whole proposi-
+      tion in their scope, a generalization which also holds for the develop-
+      ment of future markers out of verbs meaning "to want" or "to go".
+
+
+THE MI'KMAQ Al FUTURE HAS A REDUCED STEM
+      There are two types of modality in Mi'kmaq: primary and secondary.
+Primary modality is realized thorough the used of full and reduced stems
+which mark realis and irrealis modality respectively. Secondary modality
+is marked by various evidential suffixes. In the Al Future forms both
+types of modality are present: reduced stems of Future verbs mark for
+irrealis modality while the existential suffix -tek and the suppositive/infer-
+ential evidentials -s(n) l-s(i)p(n), mark for supposed hypothetical possi-
+bleness - a future.
+
+
+CONCLUSION
+
+      In conclusion it appears that the Mi'kmaq Al Future forms could be
+remnants of a PA Type II verb which originally had personal prefixes and
+suffixes. One way to achieve the notion of future or unrealized/unexperi-
+enced events in such a highly modal language would be to grammaticalize
+the reduced form of the II Independent neutral of the verb 'to be', -tek,
+thus creating an existential suffix and to couple that notion of existential-
+ism with the modality of the suppositive/inferential evidentials. Then, by
+reducing the stem of the verb the concept of irrealis is heightened giving
+the sense of a remote or distance hypothetical event which one may sup-
+pose of or infer about - i.e. a future. In summary w e conclude that to build
+a future form in Mi'kmaq, modal suffixes (existential and evidential) are
+used on an irrealis stem creating a Future form but, not a future tense.
+
+
+REFERENCES
+Bybee, Joan L. 1985. Morphology.a study of the relation between meaning and form.
+    Amsterdam: John Benjamins.
+Chafe, Wallace, and Johanna Nichols, eds. 1986. Evidentiality: the linguistic coding of
+    epistemology. Norwood, N.J.: Ablex.
+Dawe, A. 1986. The fundamentals of Micmac historical morphology. M.A. thesis, M e m o -
+    rial University of Newfoundland.
+ Hewson, John, and Francis, Bernard. 1990. The Micmac grammar of Father Pacifique.
+     Algonquian and Iroquian Linguistics, Memoir 7. (Translation and re-transcription
+                      T H E M I ' K M A Q FUTURE: A N ANALYSIS                    257
+
+     with Introduction and Index of Father Pacifique's 1939 Lecons grammaticales
+     theoriques et pratiques de la langue micmaque.)
+Inglis, S. 1998. Mi'kmaq language death: case study and solutions. Paper presented at the
+     L'nui'sultinej Conference, St. Francis Xavier University, Antigonish, Nova Scotia
+Leavitt, Robert M . 1986. A'tukwaqnn: Micmac stories. Fredericton: Micmac-Maliseet
+     Institute, University of N e w Brunswick.
+Proulx, Paul. 1990. Proto-Algonquian verb inflection. Kansas Working Papers in Linguis-
+      tics 15(2): 100-145.
+

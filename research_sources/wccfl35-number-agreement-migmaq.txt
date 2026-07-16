@@ -1,0 +1,536 @@
+          A Binary Feature Analysis of Mi’gmaq Number
+                           Agreement
+                                            Carol-Rose Little
+
+1. Introduction
+     This article aims to contribute to the debate on a feature-geometric approach versus a binary feature
+approach to number. With data from the Eastern Algonquian language, Mi’gmaq, I argue that the feature
+geometry in Harley & Ritter (2002) does not successfully capture the Mi’gmaq singular-dual-plural
+agreement pattern. On the other hand, a binary feature approach to number easily allows for a one-to-
+one abstract feature-to-morpheme correspondence in Mi’gmaq.
+     The data in (1) shows the singular, dual, and plural morphology for the animate intransitive verb
+mijj(i)- ‘eat’ in Mi’gmaq. The third person marker is -t as in (1a). Dual is derived from the singular
+adding the -ig nonsingular marker to (1a) in (1b) (where -t affricatizes to -j). The plural is derived from
+the dual by adding -ulti to the dual form in (1c).
+
+(1)       a. Mijj-i-t.                     b. Mijj-i-j-ig.                     c. Mijj-ulti-j-ig.
+             eat-AI-3                         eat-AI-3-PL . AN                    eat-PLU-3-PL . AN
+             ‘S/he eats.’ 1                    ‘They (dual) eat.’                  ‘They (plural) eat.’
+
+     I argue that such a pattern is expected under a binary feature account, but not under Harley & Ritter
+(2002)’s feature-geometric account. While Harley & Ritter (2002)’s feature geometry predicts complex
+dual forms as dual is represented with more features, a complex plural form like in (1c) is unexpected.
+In a binary feature system, there is no such prediction: typologically we expect languages to be able
+to have morphologically complex dual or plural forms. Thus, a binary feature system can capture the
+number pattern in (1).
+     This paper is organized as follows. In §2, I describe how the feature geometry and binary
+feature approaches formalize the singular-dual-plural distinction. In §3, I present the Mi’gmaq animate
+intransitive verbal paradigm that makes the three-way number distinction (§3.1). The data shows that
+-ulti appears in plural forms and that the plural is morphologically more complex than the dual. The
+Mi’gmaq data poses problems for the feature geometry of Harley & Ritter (2002) where a morpheme-to-
+feature correspondence is not possible since complex plural forms are unexpected (§3.2). The Mi’gmaq
+data is easily captured in a binary feature feature system by associating morphemes to feature-values
+(§3.3). In §4, I extend the binary feature analysis of verbs to account for nouns by showing how to derive
+agreement between nouns and verbs in Mi’gmaq. In §5, I summarize my arguments and conclude.
+
+
+
+
+      ∗
+       Carol-Rose Little, Cornell University, crl223@cornell.edu. I thank Miloje Despić, Sarah Murray, the 2017
+Cornell Spring Syntax Seminar, and the audiences at PLC 41 and WCCFL 35 for comments. Any errors are my
+own.
+     1
+       Mi’gmaq is an Eastern Algonquian language with about 8,000 reported speakers according to a 2011 census. It
+is spoken primarily in eastern Canada. All data is written in the Listuguj orthography and any data from the grammar
+by Hewson & Francis (1990) has been adapted to the Listuguj orthography for consistency. Other data comes from
+the Mi’gmaq Online Dictionary by Haberlin et al. (1997–2017). Listuguj orthography: a – [A]; g – [k]; gw – [kw ];
+j – [Ù]; q – [q]; qw – [qw ]; ’ – [@]; V’ – long vowel. Abbreviations: 1 = first person; 2 = second person; 3 = third
+person; AI = animate intransitive verb; EXCL = exclusive; IN = inanimate; INCL = inclusive; LOC = locative; PL =
+plural; PLU = pluralizer; PROG = progressive; SG = singular; TI = transitive inanimate verb.
+
+
+© 2018 Carol-Rose Little. Proceedings of the 35th West Coast Conference on Formal Linguistics,
+ed. Wm. G. Bennett et al., 242-250. Somerville, MA: Cascadilla Proceedings Project.
+                                                                                                           243
+
+2. Formal representations of number
+    The following sections give an overview of a feature-geometric approach to number (§2.1) and a
+binary feature approach to number (§2.2).
+
+2.1. Feature geometry
+
+     Before moving to the formal representation of number in a feature geometry, consider the abstract
+feature geometry in (2).
+
+(2)                                                     [A]
+
+                                                     [B]   [D]
+
+                                                     [C]
+
+In this representation, each feature is monovalent and only appears if it has a positive value. So, a
+feature like [–C] would not appear in the structure. There is a dependency relationship between features:
+[C] implies the existence of [B] and [C] cannot be present if [B] is not present. However, [C] can be
+eliminated from the feature geometry without deleting [B].
+     Using data from 92 languages and generalizations from language acquisition, Harley & Ritter (2002)
+posit a feature geometry to characterize person and number features of the world’s languages. As
+this paper concentrates on number, I will focus the I NDIVIDUATION node responsible for representing
+singular, dual, and plural. An abbreviated tree extracting the I NDIVITUATION node is given in (3).
+
+(3)                                             I NDIVIDUATION
+
+                                                Group      Minimal
+
+                                                              ...
+
+Harley & Ritter (2002)’s feature-geometric approach to represent singular, dual, and plural is given in
+(4).
+
+(4)   a. Singular                           b. Plural                             c. Dual
+         I NDIVIDUATION                        I NDIVIDUATION                        I NDIVIDUATION
+
+              Minimal                                Group                           Group     Minimal
+
+Singular is expressed with the activation of the Minimal node under I NDIVIDUATION in (4a) and plural
+with the Group node activated in (4b). Dual is expressed as the activation of the nodes Minimal and
+Group in (4c). This feature geometry captures Greenberg’s Universal 34: ‘No language has a dual unless
+it has a plural’ (Greenberg, 1963:94). Without the node Group, there can be no dual. Thus, dual implies
+the existence of a plural.
+     Descriptively, it is clear that the dual is more complex than the plural in terms of its features. Indeed,
+this helps derive the implication that dual implies plural. Complex plurals would be unexpected in such
+a system as the plural is just as complex as the singular (with just one node activated). This is different
+than in a binary feature system, which I turn to in the next section.
+
+2.2. Binary features
+
+    A binary feature approach as argued for by Noyer (1992), Harbour (2007, 2011, 2014) and Nevins
+(2011), has two binary features, [±singular] and [±augmented], to account for number categories. The
+binary feature formalizes the singular, dual, and plural number in (5).
+244
+
+(5)       a. Singular = [+singular, –augmented]
+          b. Dual = [–singular, –augmented]
+          c. Plural = [–singular, +augmented]
+          d. The combination [+singular, +augmented] is impossible.
+
+In (5), we see that [–singular] appears in both the dual and plural representations, whereas [+augmented]
+occurs only in the representation of the plural. This will become relevant in §3.3, where I posit that
+Mi’gmaq morphemes are the spellouts of these feature-values.
+     In order to derive Greenberg’s Universal, Nevins (2011) argues for the markedness statements in (6)
+and (7). Nevins (2011:421) argues that the marked value of [±singular] is –, given in (6). Furthermore,
+in the context of [–singular], the marked value of [±augmented] is –, given in (7).
+
+(6) Context-free markedness statement:                                                         (Nevins, 2011:421)
+    The marked value of [± singular] is –.
+(7) Context-sensitive markedness representation:
+    In the context [–singular], the marked value of [±augmented] is –.
+
+So, plural is more marked than singular because it has a marked feature-value [–singular]. Dual is
+more marked than plural because dual contains both the marked value of [–singular] and the feature
+[–augmented], which is marked in the context of [–singular], as per (7). Plural and dual are then both
+marked with respect to singular because both have the marked feature [–singular].
+     The feature [augmented] is always relativized to another feature. In prose, the feature [+augmented]
+means that “given some predicate P that is true of some set x, x is [+augmented] if there is a proper
+subset of x for which P is also true” (Nevins, 2011:422).2 For instance a set of cardinality such as 20
+is [+augmented] for its value of ±singular (i.e., [–singular]) because there is at least one proper subset
+of 20 that is also [–singular]. Sets of the cardinality of 1 are always [–augmented] for their value for
+[±singular] (i.e., [+singular]) since there is no proper subset of 1 which is also [+singular].
+     We can thus account for the dual number, or, sets that have a cardinality of 2. Dual is expressed in a
+binary feature system as [–singular, –augmented]. For dual number, there is no proper subset of 2 that is
+also [–singular] therefore its feature value for [augmented] is –.
+     In sum, a binary feature account uses the binary features [±singular] and [±augmented] to formalize
+a three-way singular-dual-plural number distinction. With markedness statements, we can account for
+Greenberg’s universal that the presence of dual number implies the existence of plural. In contrast to the
+feature geometry in the previous section, the binary feature formalism makes no predictions on which
+number we would expect to be more morphologically complex: dual and plural number in the binary
+feature number formalism in (5) are represented as being equally complex, each with two feature-values.
+
+3. Mi’gmaq number agreement
+     Below, I present data from Mi’gmaq that displays a three-way contrast between singular, dual, and
+plural number in animate intransitive verbs. I argue that Harley & Ritter (2002)’s feature geometry
+approach does not capture the data as it is not able to accommodate complex plural forms. A binary
+feature approach does capture this data easily by corresponding feature-values to morphemes.
+
+3.1. Animate intransitive number morphology
+     The relevant data comes from intransitive animate verb agreement patterns in Mi’gmaq.3 Table 1
+gives the verbal agreement morphemes for first person exclusive (a), first person inclusive (b), second
+person (c), and third person (d). Note that in the orthographic system, the postalveolar affricate [Ù] is
+transcribed as j. I use orthographic conventions to exemplify the Mi’gmaq data.
+
+
+      2
+     Its formal definition comes from the work of Noyer (1992) and Harbour (2007).
+      3
+     Transitive verbs and inanimate intransitive verbs only distinguish between singular/plural. I discuss some other
+instances of a three-way number distinction in Mi’gmaq in the conclusion.
+                                                                                                                    245
+
+                      Table 1: Number agreement in Mi’gmaq animate intransitive verbs.
+
+                                         Person       Sing.     Dual      Plural
+                                    a.   1.EXCL       Ø/-an     -eg       -ulti-eg
+                                    b.   1.INCL       —         -’gw      -ulti-’gw
+                                    c.   2            -n        -oq       -ulti-oq
+                                    d.   3            -t        -j-ig     -ulti-j-ig
+
+Mi’gmaq makes a three-way contrast for number, i.e., singular, dual, and plural. Dual number forms for
+first and second persons are formed by adding the nonsingular person ending in the third column. The
+third person dual form is fully decomposable into -j (third person) and -ig (animate plural), where the
+third person marker -t affricatizes to -j before the animate plural marker -ig. The fourth column shows
+that -ulti is then added before person markers and after the verb stem to form the plural.4 Thus, -ulti
+consistently derives the plural forms from dual. Table 2 exemplifies forms with the verb teluis(i)- ‘to be
+named’. The plural morpheme is bolded and nonsingular morphemes are underlined.
+
+      Table 2: Animate intransitive verb example teluis(i) ‘to be named’ (Hewson & Francis, 1990:46).
+
+                                   Person     Sing.        Dual            Plural
+                            a.     1.EXCL       teluisi    teluisi-eg      teluis-ulti-eg
+                            b.     1.INCL                  teluisi-’gw     teluis-ulti-’gw
+                            c.     2          teluisi-n    teluisi-oq      teluis-ulti-oq
+                            d.     3          teluisi-t    teluisi-j-ig    teluis-ulti-j-ig
+
+     Depending on the verb, the pluralizer has the allomorphs -uti, -u’ti or -a’ti, as shown in (8) with
+forms from the Mi’gmaq Online Dictionary (MOD). Numbers on the right indicate their entry number
+in the MOD.
+
+(8)       a. uti pluralizer
+             Eptegw-a’-uti-eg.
+             have.freckles- AI - PLU -1. EXCL
+             ‘We (plural) have freckles.’                                                                           822
+          b. u’ti pluralizer
+             Gisu’g-m-u’ti-eg.
+             warmly.dressed- TI - PLU -1. EXCL
+             ‘We (plural) are warmly dressed.’                                                                    1,538
+          c. a’ti pluralizer
+             Paqa’l-u-a’ti-eg.
+             bite-AI - PLU -1. EXCL
+             ‘We (plural) bite.’                                                                                  2,850
+
+I assume that in the context of certain verbs like in (8), the pluralizer’s phonological form changes. In
+a Distributed Morphology framework (Halle & Marantz, 1993) this is specified in the Vocabulary.5 For
+the rest of this paper, I will refer to the pluralizer morpheme by its allomorph -ulti.
+      4
+       The dual-plual distinction is an innovation of Eastern Algonquian languages. In other Algonquian languages
+the Mi’gmaq dual corresponds to the plural. Historically, the plural marker comes from the Proto-Algonquian
+reciprocal marker *-etwi- (Goddard, 1967:9), which is why it attaches so close to the verb stem. The morpheme
+-ulti in Mi’gmaq has completely lost its function as a reciprocal marker. Indeed, the reciprocal and the pluralizer
+can co-occur.
+     5
+       Verbs of motion with -a’si or -ie animate intransitive verb suffixes have suppletive forms for dual and plural, as
+in (1). However, the singular-dual-plural contrast still remains.
+246
+
+3.2. Mi’gmaq number in a feature geometry
+
+     Now let us consider the Mi’gmaq data in Harley & Ritter (2002)’s feature-geometric approach as
+outlined in §2.1. Note that although a feature geometry approach was explicitly designed for pronominal
+systems, Harley & Ritter (2002) do take some agreement data into consideration. So, I will extend the
+system to try to account for the Mi’gmaq verbal agreement.
+     Recall the feature-geometric approach representing plural with the node Group activated under
+I NDIVIDUATION. I assume that the features under I NDIVIDUATION correspond to nonsingular and
+plural morphemes in Mi’gmaq. Recall that -ulti appeared in all plural forms. Group also appears as the
+representation for plural in Harley & Ritter (2002)’s feature geometry, so let’s say the feature Group is the
+spellout of the plural morpheme -ulti as in (9a). Once we consider the feature-geometric representation
+of dual, we encounter problems if Group is associated with -ulti. Dual is represented as the activation
+of the features Group and Minimal. If the feature for Group is -ulti then we would expect to see -ulti in
+both dual and plural, shown in (9b). However, -ulti only appears in the plural forms, not the dual.
+
+(9)     a. Plural: Group associated with -ulti                       b. Dual – wrongly predicts -ulti in dual
+           I NDIVIDUATION                                               I NDIVIDUATION
+
+                  Group                                                   Group     Minimal
+                   -ulti                                                   -ulti
+
+    On the other hand, if we associate the Mi’gmaq nonsingular -ig form with Group in (10a), then it
+seems unclear how to compose the Mi’gmaq plural forms, which are made up of -ulti plus the nonsingular
+endings of the dual, once the node Minimal has been deactivated, shown in (10b). How do we derive the
+complex plural when the number of features for plural in a feature geometry are less complex?
+
+(10)     a. Dual                                                     b. Plural — where is -ulti?
+           I NDIVIDUATION                                               I NDIVIDUATION
+
+            Group     Minimal                                                   Group
+             -ig                                                                 -ig
+
+    Though the feature-geometric approach can capture complex dual forms as dual is formally
+represented with more features, the data in Mi’gmaq poses a problem for it. Under a feature-geometric
+approach a complex plural form is unexpected given that plural is only represented as the activation
+of one node. A feature-geometric approach does not seem to provide a clear path to compositionally
+represent Mi’gmaq number morphology.
+    In the next section, I argue that a binary feature analysis can better account for the Mi’gmaq number
+morphology as we can capture the data by associating each morpheme to a feature-value.
+
+3.3. Mi’gmaq in a binary feature system
+     The decomposition of number categories in a binary feature system lends itself to naturally account
+for the decomposable Mi’gmaq number morphology.6 I propose the plural morpheme -ulti is the spellout
+of the feature-value [+augmented]. This accounts for why -ulti is always present in the plural forms, as
+[+augmented] appears in the formal representation of plural. Recall that [–singular] appears in the formal
+
+
+
+(1)    Verb of motion ala’si- ‘to go about’                                                                            48
+       a. Al-a’si.                            b. Al-a’ti-eg.                       c. Al-’tai-eg.
+          about-AI                               about-AI . DU -1. EXCL               about-AI . PLU -1. EXCL
+           ‘I am going about.’                   ‘We (dual) are going about.’         ‘We (plural) are going about.’
+    6
+      Fidelholtz (1968:111) similarly proposes binary features to account for the Mi’gmaq number morphology with
+the features [±singular] and [±plural].
+                                                                                                                      247
+
+representations of dual and plural. Thus, I propose -ig is the spellout of the feature [–singular] as this
+morpheme also appears in both dual and plural forms.7 This is given in (11).
+
+(11) Third person number morphemes in the verbal domain:
+     a. /-ig/     ⇔ [–singular]
+     b. /-ulti/ ⇔ [+augmented]
+
+     Depending on person features, [–singular] has different spellouts. In the context of second person
+[–singular] is -oq, in first person exclusive -eg and so on. As both dual and plural forms in a binary
+feature system both have the feature-value [–singular], this accounts for why nonsingular endings appear
+in both dual and plural forms in Mi’gmaq. The feature-value [–augmented] is not associated with any
+morpheme.8
+     In brief, each morpheme in Mi’gmaq number agreement corresponds to an abstract feature-value
+in the binary system, with variations happening only in the context of person. By associating abstract
+features with morphemes, we can derive the verbal agreement pattern in Table 1.
+     A language like Mi’gmaq is expected under a binary approach where the number system does not
+have a morpheme [–augmented] with which [–singular] would give dual. Rather, the language has a
+morpheme for [+augmented] with which [–singular] gives you plural. A binary feature system is able to
+capture a wide range of typological patterns. To this end, it can easily capture the complex plural forms
+in Mi’gmaq.
+
+4. Deriving agreement: Nouns in Mi’gmaq
+     In this section, I extend the binary analysis of verbs to account for nouns. In most nouns -ulti, never
+appears. The phonetic forms of most nouns distinguish singular from nonsingular. How this works with
+verbal agreement is shown in (12) and (13). Bare nouns are interpreted as singular in (12), whereas -g
+suffix marks nonsingular on nouns in (13). The noun ‘girls’ in both dual and plural forms is epite’ji’j-g.
+Here the allomorph of -ulti for the verb dance is realized as -alti.9
+
+(12) E’pite’ji’j amalg-a-t.
+     girl        dance-AI-3
+     ‘The girl dances.’
+
+(13)    a. E’pite’ji’j-g amalg-a-j-ig.                            b. E’pite’ji’j-g amalg-alti-j-ig.
+           girl-PL . AN dance-AI-3-PL . AN                           girl-PL . AN dance-PLU-3-PL . AN
+           ‘The girls (dual) dance.’                                 ‘The girls (plural) dance.’
+
+     For the noun, I posit that the feature-value [+singular] is not associated with any morpheme (as in
+the bare noun in (12)). The feature-value [–singular] in the context of the animate noun e’pite’ji’j ‘girl’
+in (13) is the spellout of the animate plural morpheme -g. The [–singular] feature -g in nouns is, as
+expected, morpho-phonologically very similar to -ig in (11a).10
+     As for agreement, following a Distributed Morphology model of grammar (Halle & Marantz, 1993),
+we can assume that in nouns the feature [augmented] is impoverished, or deleted postsyntactically,
+accounting for why -ulti (allomorphically -alti) does not appear. Following Chomsky (2000) and
+Chomsky (2001), I take agreement morphemes to be the result of an Agree relation between a probe
+
+     7
+       Hamilton (2015:35) has suggested that -ig is a clitic due to its attachment position in the final slot in the verbal
+morphology and that it is not subject to the same locality restrictions as other morphemes in the verbal spine.
+     8
+       The feature [+singular] is always null. This explains why we see the third person morpheme -t in singular, dual,
+and plural. The presence of [+singular] can affect the spellouts of person features. This accounts for why second
+person singular is spelled out as -n when [+singular] is present. On the other hand, the feature [–singular] is not null
+(e.g., -ig) but it can be affected by other features like person.
+     9
+       Coon & Bale (2014) report the allomorph of the pluralizer to be -a’ti for the verb ‘dance’. The lengthened a’ is
+likely a process whereby the [l] of the pluralizer -alti deletes then there is compensatory lengthening of the vowel.
+    10
+       Nouns in Mi’gmaq are either of the animate or inanimate gender. In the context of an inanimate noun, the
+spellout of [–singular] would be -l as in mutputi-l ‘chairs’.
+248
+
+with unvalued φ features and a goal (an NP or DP) with valued φ features. I schematize how agreement
+works for example (13b) below in (14). Agreement occurs prior to feature deletion so a verb with
+unvalued [singular] and [augmented] features can agree with the plural noun in (14a) that has valued
+[singular] and [augmented] features. After agreement, the [augmented] feature is deleted before any
+phonetic content gets inserted in (14b). Then phonetic content is inserted in (14c).
+
+(14) Deriving agreement in (13b)
+     a. Agree occurs prior to feature deletion
+         GIRL    [–singular ] [+augmented]             DANCE      [ singular]    [ augmented]
+
+
+      b. [augmented] feature is impoverished on the noun
+           GIRL  [–singular ] [+augmented]          DANCE         [–singular]   [+augmented]
+
+      c. Spellout/Vocabulary Insertion
+         e’pite’ji’j-g amalg-alti-j-ig
+
+Only the feature [singular] gets spelled out on the noun, while both [singular] and [augmented] features
+are spelled out on the verb. Thus, the pluralizer (bolded in (14c)) appears on the verb but not the noun.
+In sum, by impoverishing the feature [augmented] on nouns, we can account for agreement.
+
+5. Summary and conclusions
+     In Mi’gmaq nonsingular endings appear in both dual and plural forms. The plural is derived from
+the dual by adding a pluralizing morpheme, -ulti. Thus, the plural is morphologically more complex than
+the dual. A complex plural form is unexpected under Harley & Ritter (2002)’s feature geometry as the
+plural is formally represented as being less complex (i.e, less features) than the dual. There is no simple
+way to parsimoniously associate features in Harley & Ritter (2002)’s feature geometry to morphemes in
+Mi’gmaq that would derive the Mi’gmaq agreement pattern.
+     In a binary feature system, plural is represented as [–singular, +augmented]. By associating the
+plural morpheme -ulti with the feature-value [+augmented], the system can capture the existence of -ulti
+in the plural forms, while excluding it in dual forms, as the value for [augmented] in dual forms is –.
+Both dual and plural have the [–singular], so by associating the nonsingular morphemes in Mi’gmaq
+with [–singular] we account for their appearances in both dual and plural forms.
+     I also extended the binary feature system to nouns and agreement in Mi’gmaq. In other parts of the
+language, like in most nouns, there is only a two-way distinction spelled out: singular and plural. In
+these contexts since the plural morpheme does not appear, the [augmented] feature is impoverished, or
+deleted postsyntactically, after agreement.
+     It might be tempting to argue for a lexical analysis of the -ulti pluralizer where it only attaches
+to animate intransitive verbs (AI). This seems to be inconsistent with some empirical facts in both the
+verbal and nominal domains.
+     Firstly, there are other verbs that are not animate intransitive that make a three-way number
+distinction. For instance, some verbs that do not have an animate intransitive verbal suffix do show
+a three-way contrast. These are the so-called “objectless transitive inanimate verbs”, or, TI - O. These
+verbs have a transitive inanimate verbal suffix (glossed as TI) but do not allow any arguments in object
+position. An example with the TI - O verb ewistu- ‘talk’ is given in (15).
+
+(15) An example of a TI - O which displays a three-way number contrast                                 890
+
+      a. Etl-ewis-tu.                  b. Etl-ewis-tu-eg.               c. Etl-ewis-tu-’ti-eg.
+         PROG -talk- TI                   PROG -talk- TI-1. EXCL           PROG -talk- TI- PLU -1. EXCL
+         ‘I am talking.’                  ‘We (dual) are talking.’         ‘We (plural) are talking.’
+                                                                                                           249
+
+      Some verbs that do not have object agreement but can take objects also make a three way contrast.
+The verb a’sisege- ‘throw over’ makes a three way contrast (a’sisegei ‘I throw it over’, a’sisegei-eg
+‘we (dual) throw it over’, a’siseg-a’ti-eg ‘we (plural) throw it over’). In shape it looks like an animate
+intransitive verb (i.e., it has an animate intransitive verbal suffix, glossed as AI in (16)). However, it can
+still take an overt object as the example in (16) shows.
+
+(16) A’sis-ege-t     a’gusn llutaqan-igtug.
+     throw.over-AI-3 hat     fence-LOC
+    ‘He throws the hat over the fence.’                                                                   394
+
+Under a lexical analysis, it would be difficult to account for all these instances of -ulti attaching to a
+variety of verbs. Under the binary feature analysis presented here, the augmented feature is simply
+spelled out in these cases, rather than impoverished.
+     Secondly in the nominal domain, some nouns listed in the MOD, mainly those denoting professions
+with the prefix nuji-/nut ‘skilled in’, make a three-way number contrast as in Table (3).
+
+   Table 3: Examples of nouns in the MOD that make a three-way contrast in number in Mi’gmaq.
+
+                    Singular         Dual                 Plural
+                    nujiputaqiget    nujiputaqigej-ig     nujiputaq-ati-j-ig    ‘butcher’
+                    nutanteget       nutantegej-ig        nutantaq-ati-j-ig     ‘hunter’
+
+
+Though these nouns look like verbs in some respects (the -t third person suffix, for instance), they can
+function as nouns. The example in (17) shows that nujiputaqiget ‘butcher’ is the subject of the verb
+pegisin- ‘arrive’.
+
+(17) Nujiputaqiget pegi-sin-g gisgug. . .
+     butcher        arrive-AI-3 today
+    ‘The butcher is here today. . . ’
+
+     Under a lexical account where -ulti only attaches to verbs, it would be difficult to include the data in
+Table 3, which provides evidence that some nouns make the three-way number distinction. I posit that
+the feature [augmented] is not impoverished for the cases in Table 3.
+     These data thus show that a three-way number distinction is attested in verbs other than animate
+intransitive verbs and in some nouns. Under a lexical analysis of -ulti attaching to just animate
+intransitive verbs, it would be difficult to account for these other pieces of data. Under a binary feature
+system, the feature [augmented] is simply spelled out for these cases rather than impoverished.
+     To conclude, I make a final note on markedness. Using typological evidence on markedness,
+Nevins (2011) argues that plural is more marked than singular, but plural is unmarked apropos dual.
+By markedness, he refers to morphological markedness, rather than semantic. Under the framework of
+Distributed Morphology (Halle & Marantz, 1993), Nevins (2011) states that it is possible to separate
+featural markedness from how the language phonetically realizes the abstract feature terminals. So,
+though a phonological exponent may look more marked (additional morphemes, for example) this does
+not mean that the form is marked in terms of its features. In order to construct dual forms, two binary
+features are needed, namely [±augmented] and [±singular]. This allows for a singular-dual-plural
+number distinction. Although morphological dual number in Mi’gmaq has less morphemes, the fact
+that another feature is needed to make a three-way contrast with number makes the existence of dual, in
+a formal sense, more marked than plural. This follows from Nevins (2011) description of markedness
+being abstract featural markedness which does not necessarily correlate to phonological exponents.11
+Thus, it is important not to conflate abstract markedness and the markedness of phonological exponents
+in the Vocabulary.
+
+  11
+     Milačić (2016) comes to a different conclusion. Comparing complex dual forms in Manam (Austronesian) and
+Mi’gmaq complex plural forms, he equates phonological exponents with markedness.
+250
+
+     What part of the language displays the more marked pattern is subject to language-dependent
+variation. Mi’gmaq is not the only language where the plural is derived from the dual form. Hopi
+(Uto-Aztecan) also has complex plurals that can be seen on nominal morphology in Table 4.
+
+Table 4: Some Hopi nouns make a three-way contrast in number with plural derived from dual. Data
+from Hale (1997:73).
+
+                                   Singular    Dual        Plural
+                                   taaqa       taaqa-t     tàataq-t   ‘man’
+
+
+This tells us that, crosslinguistically, whether nouns or verbs in a language display the more marked
+pattern is subject to parametric variation. It is my hope that empirical insights from understudied
+languages can further our development of morphological theories of number.
+
+References
+Chomsky, Noam (2000). Minimalist inquiries: The framework. Roger Martin, David Michaels & Juan Uriagereka
+     (eds.), Step by step: Essays on minimalist syntax in honor of Howard Lasnik, Cambridge, MA: MIT Press,
+     89–155.
+Chomsky, Noam (2001). Derivation by phase. Kenstowicz, Michael (ed.), Ken Hale: A Life in Language,
+     Cambridge, MA: MIT Press, 1–52.
+Coon, Jessica & Alan Bale (2014). The interaction of person and number in Mi’gmaq. Nordlyd 41:1, 85–101.
+Fidelholtz, James Lawrence (1968). Micmac morphophonemics. PhD thesis, MIT, Cambridge, MA.
+Goddard, Ives (1967). Notes on the genetic classification of the Algonquian languages. DeBlois, A. D. (ed.),
+     Proceedings of the 1st Algonquian Conference, National Museum of Canada, Ottawa, 7–12.
+Greenberg, Joseph H (1963). Some universals of grammar with particular reference to the order of meaningful
+     elements. Universals of language 2, 73–113.
+Haberlin, Sean, Eunice Metallic, Diane Mitchell, Watson Williams, Joe Wilmot & Dave Ziegler (eds.) (1997–2017).
+     Mi’gmaq-Mi’kmaq Online Dictionary. https://www.mikmaqonline.org/.
+Hale, Ken (1997). Some observations on the contributions of local languages to linguistic science. Lingua 100:1-4,
+     71–89.
+Halle, Morris & Alec Marantz (1993). Distributed Morphology and the pieces of inflection. Hale, Kenneth &
+     Samuel J. Keyser (eds.), The View From Building 20, MIT Press, Cambridge, MA.
+Hamilton, Michael (2015). The syntax of Mi’gmaq: A configurational account. PhD thesis, McGill University,
+     Montreal.
+Harbour, Daniel (2007). Morphosemantic Number: From Kiowa Noun Classes to UG Number Features. Springer,
+     Dordrecht.
+Harbour, Daniel (2011). Valence and atomic number. Linguistic inquiry 42:4, 561–594.
+Harbour, Daniel (2014). Paucity, abundance, and the theory of number. Language 90:1, 185–229.
+Harley, H. & E. Ritter (2002). Person and number in pronouns: A feature-geometric analysis. Language 78:3, 482–
+     526.
+Hewson, John & Bernie Francis (1990). The Micmac grammar of Father Pacifique: Translated and retranscribed by
+     John Hewson and Bernard Francis. Algonquian and Iroquoian Linguistics Memoir 1.
+Milačić, Dejan (2016). Two types of dual number. Talk given at Chicago Linguistic Society (CLS) 52.
+Nevins, A. (2011). Marked targets versus marked triggers and impoverishment of the dual. Linguistic Inquiry 42:3,
+     413–444.
+Noyer, Robert Rolf (1992). Features, positions and affixes in autonomous morphological structure. PhD thesis,
+     Massachusetts Institute of Technology.
+Proceedings of the 35th West Coast
+Conference on Formal Linguistics
+edited by Wm. G. Bennett, Lindsay Hracs,
+and Dennis Ryan Storoshenko
+Cascadilla Proceedings Project               Somerville, MA            2018
+
+
+
+
+Copyright information
+Proceedings of the 35th West Coast Conference on Formal Linguistics
+© 2018 Cascadilla Proceedings Project, Somerville, MA. All rights reserved
+ISBN 978-1-57473-472-0 library binding
+
+A copyright notice for each paper is located at the bottom of the first page of the paper.
+Reprints for course packs can be authorized by Cascadilla Proceedings Project.
+
+
+Ordering information
+Orders for the library binding edition are handled by Cascadilla Press.
+To place an order, go to www.lingref.com or contact:
+
+Cascadilla Press, P.O. Box 440355, Somerville, MA 02144, USA
+phone: 1-617-776-2370, fax: 1-617-776-2271, sales@cascadilla.com
+
+
+Web access and citation information
+This entire proceedings can also be viewed on the web at www.lingref.com. Each paper has a unique document #
+which can be added to citations to facilitate access. The document # should not replace the full citation.
+
+This paper can be cited as:
+
+Little, Carol-Rose. 2018. A Binary Feature Analysis of Mi’gmaq Number Agreement. In Proceedings of the 35th
+West Coast Conference on Formal Linguistics, ed. Wm. G. Bennett et al., 242-250. Somerville, MA: Cascadilla
+Proceedings Project. www.lingref.com, document #3395.
+

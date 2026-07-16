@@ -1,0 +1,88 @@
+               Pragmatic underspecification of tag question evidentials in Mi'kmaq
+                                           Jo Johnson (Cornell University)
+
+Puzzle: Mi'kmaq (Algonquian) has a verbal suffix -s(ɨ)p(n) which receives tag question interpretation
+in a sentence. This question tag suffix is prima facie composed of the direct and indirect evidential
+suffixes -p(n) and -s(n) (all Mi'kmaq examples from Inglis 2002).
+
+       (1)    I'-wape'kɨ-p.                       (2)   I'-wape'kɨ-s.
+              PAST-white-DIR                            PAST-white-IND
+              'It used to be white.'                    'It used to be white, so I'm told.'
+
+       (3)    I'-wape'k-sɨp.
+              PAST-white-TAG
+              'It used to be white, didn't it?'
+
+We provide an account of the tag question suffix which derives its pragmatic properties from the
+interaction of the direct and indirect evidential suffixes.
+
+Background on tag questions: Although little formal work has been done on the semantics of tag
+questions, the literature on the subject assumes that they have the same logical form as negative polar
+questions (Reese & Asher 2010). Negative polar questions are observed to differ from positive
+questions in that they convey a backgrounded speaker attitude, or bias: that the speaker at some point
+had expected a positive response to the question (Givon 1979, Ladd 1981, Horn 1989 et al.). This bias
+is treated on some accounts as following from the interaction of the semantic content of an
+interrogative sentence and pragmatic principles (Romero & Han 2004). Other treatments take biased
+questions to be a complex speech-act type (Reese & Asher 2007, 2010), assert ● question, carrying a
+hybrid illocutionary force: the sentence asserts p, and questions ?¬p.
+
+Two readings for Mi'kmaq tag questions: Negative polar questions in English with preposed
+negation, like their counterparts with low negation, convey the sense that the speaker previously
+expected or believed in the likelihood of a positive response. However, they are not pragmatically
+equivalent: this sense is much stronger for negative questions with preposed negation than for those
+with low negation (4) (Romero & Han 2004). Romero & Han account for this difference by proposing
+that preposed negation introduces the epistemic operator VERUM FOCUS, which necessarily gives rise to a
+non-cancelable 'positive epistemic implicature.'
+
+       (4)    Scenario: The speaker is organizing a party and she is in charge of supplying all the
+              non-alcoholic beverages for teetotalers. The speaker is going through a list of people that
+              are invited. She has no previous belief or expectation about their drinking habits.
+              A: Jane and Mary do not drink.
+              S: OK. What about John? Does he not drink (either)?
+              S': # OK. What about John? Doesn't he drink (either)?               (Romero & Han)
+
+Mi'kmaq tag questions display the same pragmatic properties as negative polar questions with both
+high and low negation, depending on context.
+
+       (5)    [while looking at a closed window in a room which is cold]
+              Panta'tek-sɨp tuo'puti.
+              open-TAG window
+               'The window, it was open, wasn't it?'
+
+       (6)     I'-wape'k-sɨp to'q.
+               PAST-white-TAG COMMUNITY.KNOWLEDGE
+               'It used to be white, didn't it? [everyone knows that]'
+               (neighborhood history tells me that it used to be white)
+
+In (5), the speaker conveys that she expects confirmation that her statement is true, while being open to
+contradiction. In (6), however, compatibility with the to'q particle shows that the speaker holds a
+propositional belief that the object in question used to be white.
+
+Proposal: We propose that the -s(ɨ)p(n) suffix is pragmatically underspecified such that it yields two
+readings: 1) an inference that the speaker expects a positive response to the prejacent, and 2) a non-
+cancelable inference that the speaker believes the prejacent to be true. We propose that these readings
+result from differing scope interactions of the direct and indirect evidential suffixes that comprise the
+question tag suffix. In the first reading, the statement expresses the speaker's belief about the evidential
+relation of the addressee to the proposition expressed by the prejacent: belief about what reportative
+evidence with respect to the proposition should be. In the second reading, the speaker is making an
+assertion about her own epistemic state with respect to a reported proposition.
+
+Observations and implications: The proposed analysis yields the two readings as the result of the
+scope interaction of two overt morphemes, rather than by introducing an extra operator. It also captures
+the intuition of Reese & Asher that biased questions occupy an intermediate position between question
+and assertion. We note that opposite polarity tag questions in English also carry both readings and
+propose that prosody plays a role in disambiguating them. The analysis also correctly predicts that
+statements with the -s(ɨ)p(n) suffix fail as alternative questions, and predicts a gap in the evidential
+paradigm: the tag-question suffix is not available for verbs in the first person, as this would create
+vacous interpretations on both readings.
+
+
+
+
+Selected references
+
+Inglis, S (2003) The deferential evidential in Mi'kmaq. Algonquian Conference. Ladd, DR (1981) A
+first look at the semantics and pragmatics of negative questions and tag questions. CLS. Reese &
+Asher (2010) Biased questions. In Information structure: theoretical, typological, and experimental
+perspectives, eds. Zimmermann and Féry. Romero & Han (2004) On negative yes/no questions. L&P.
+

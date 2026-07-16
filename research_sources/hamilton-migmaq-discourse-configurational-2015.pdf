@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="-1"/>
+<meta http-equiv="CacheControl" content="no-cache"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="shortcut icon" href="data:;base64,iVBORw0KGgo="/>
+
+<script type="text/javascript">
+(function(){
+window["bobcmn"] = "101110101010102000000062000000052000000062000000012ff8e650d200000096200000000200000002300000000300000000300000006/TSPD/300000008TSPD_10130000000cTSPD_101_DID300000005https3000000e008d6e61bd3ab2000fbcf9b26a1381167dca527908028958c6ee8f37826dc7558bb862c59dc46d04508b0bfc0e70a40008795c1acd3404ee26319beed6ac82deef51f52bf1bcfdd9b6da08533d9ee4e743bf48661ac49c13ac917b0755a6798e52167ff198db333c3b3df70dabe950d48300000002TS200000000200000000";
+
+window["failureConfig"] = "524f6f70732e2e2e2e736f6d657468696e672077656e742077726f6e672e2e2e2e20796f757220737570706f72742069642069733a2025444f534c372e6368616c6c656e67652e737570706f72745f6964252e1339393033333431333137313237313635343431062f545350442f171801";window.EFEH=!!window.EFEH;try{(function(){(function(){var S={decrypt:function(S){try{return JSON.parse(function(S){S=S.split("l");var I="";for(var l=0;l<S.length;++l)I+=String.fromCharCode(S[l]);return I}(S))}catch(l){}}};return S={configuration:S.decrypt("123l34l97l99l116l105l118l101l34l58l34l110l111l34l44l34l100l101l98l117l103l103l105l110l103l34l58l34l110l111l34l44l34l109l111l100l117l108l101l49l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l50l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l51l34l58l34l101l110l97l98l108l101l100l34l44l34l109l111l100l117l108l101l52l34l58l34l101l110l97l98l108l101l100l34l125")}})();
+var IS=4;try{var JS,oS,OS=_(757)?0:1;for(var S_=(_(280),0);S_<oS;++S_)OS+=(_(513),3);JS=OS;window._S===JS&&(window._S=++JS)}catch(i_){window._S=JS}var j_=!0;function J(S,I){S+=I;return S.toString(36)}function J_(S){var I=40;!S||document[L(I,158,145,155,145,138,145,148,145,156,161,123,156,137,156,141)]&&document[O(I,158,145,155,145,138,145,148,145,156,161,123,156,137,156,141)]!==O(I,158,145,155,145,138,148,141)||(j_=!1);return j_}
+function L(S){var I=arguments.length,l=[];for(var z=1;z<I;++z)l.push(arguments[z]-S);return String.fromCharCode.apply(String,l)}function O(S){var I=arguments.length,l=[],z=1;while(z<I)l[z-1]=arguments[z++]-S;return String.fromCharCode.apply(String,l)}function z_(){}J_(window[z_[J(1086850,IS)]]===z_);J_(typeof ie9rgb4!==J(1242178186195,IS));J_(RegExp("\x3c")[O(IS,120,105,119,120)](function(){return"\x3c"})&!RegExp(J(42885,IS))[J(1372201,IS)](function(){return"'x3'+'d';"}));
+var Z_=window[L(IS,101,120,120,101,103,108,73,122,105,114,120)]||RegExp(L(IS,113,115,102,109,128,101,114,104,118,115,109,104),J(14,IS))[J(1372201,IS)](window["\x6e\x61vi\x67a\x74\x6f\x72"]["\x75\x73e\x72A\x67\x65\x6et"]),s_=+new Date+(_(112)?6E5:541990),_i,ii,ji,li=window[O(IS,119,105,120,88,109,113,105,115,121,120)],Li=Z_?_(144)?3E4:37750:_(203)?6E3:8276;
+document[O(IS,101,104,104,73,122,105,114,120,80,109,119,120,105,114,105,118)]&&document[L(IS,101,104,104,73,122,105,114,120,80,109,119,120,105,114,105,118)](O(IS,122,109,119,109,102,109,112,109,120,125,103,108,101,114,107,105),function(S){var I=56;document[L(I,174,161,171,161,154,161,164,161,172,177,139,172,153,172,157)]&&(document[L(I,174,161,171,161,154,161,164,161,172,177,139,172,153,172,157)]===J(1058781927,I)&&S[O(I,161,171,140,170,173,171,172,157,156)]?ji=!0:document[L(I,174,161,171,161,154,
+161,164,161,172,177,139,172,153,172,157)]===J(68616527610,I)&&(_i=+new Date,ji=!1,Oi()))});function Oi(){if(!document[O(2,115,119,103,116,123,85,103,110,103,101,118,113,116)])return!0;var S=+new Date;if(S>s_&&(_(503)?537164:6E5)>S-_i)return J_(!1);var I=J_(ii&&!ji&&_i+Li<S);_i=S;ii||(ii=!0,li(function(){ii=!1},_(156)?1:0));return I}Oi();var zi=[_(438)?9541786:17795081,_(311)?2147483647:27611931586,_(619)?1835704243:1558153217];
+function _I(S){var I=46;S=typeof S===J(1743045630,I)?S:S[L(I,162,157,129,162,160,151,156,149)](_(558)?40:36);var l=window[S];if(!l||!l[O(I,162,157,129,162,160,151,156,149)])return;var z=""+l;window[S]=function(S,I){ii=!1;return l(S,I)};window[S][L(I,162,157,129,162,160,151,156,149)]=function(){return z}}for(var iI=(_(732),0);iI<zi[J(1294399201,IS)];++iI)_I(zi[iI]);J_(!1!==window[L(IS,73,74,73,76)]);window.Is=window.Is||{};window.Is.oJ="08cb129d17020001f61c6e8faed8f1c0d54ddb5c6a7c09c5ecc873283ef68a46274628038e433d67acb0208a5ee5ba0152437039142c8c98a45830f235cde5c7f4f65526338fe53d88311426ecce017e531d181cb4eafbfa5ec7d061e580d2ac9430754ed6f0f8326af231be607ab0c85da6f06c6e3e1b2438ca51a8128f32c5942c15438b2ecb28bd3bd5720c72c89c14c7a6c0060d154cd32313e1fef12794c25c1de88629ff71fd800f3e25a067b8e7d0dcb205a64683f4bd4cf26f9f78215355bf93245e3a5d78f08f2512643d6d6c53fd106b628a3b18470303a374567774faebf3f4541bf599dcf5c4929e7450cff31a60c9a07e5f36b4d54428bedaa5bd7a255289229d4a";
+function II(S){var I=+new Date,l;!document[L(4,117,121,105,118,125,87,105,112,105,103,120,115,118,69,112,112)]||I>s_&&(_(731)?785589:6E5)>I-_i?l=J_(!1):(l=J_(ii&&!ji&&_i+Li<I),_i=I,ii||(ii=!0,li(function(){ii=!1},_(801)?0:1)));return!(arguments[S]^l)}function _(S){return 282>S}(function JI(I){I&&"number"!==typeof I||("number"!==typeof I&&(I=1E3),I=Math.max(I,1),setInterval(function(){JI(I-10)},I))})(!0);})();}catch(x){}finally{ie9rgb4=void(0);};function ie9rgb4(a,b){return a>>b>>0};
+
+})();
+
+</script>
+
+<script type="text/javascript" src="/TSPD/08d6e61bd3ab2000c8054d86fc67e1bc118d17392e58e2801e9e8ab6a34574073278bd0aa93a4b1b?type=5"></script>
+<noscript>Please enable JavaScript to view the page content.<br/>Your support ID is: 9903341317127165441.<link rel="stylesheet" href="/TSPD/?type=25" " /></noscript>
+</head><body>
+<!DOCTYPE html>
+<!--[if IEMobile 7]><html class="iem7 oldie" lang="en"><![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="ie7 oldie" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="ie8 oldie" lang="en"><![endif]-->
+<!--[if (IE 9)&!(IEMobile)]><html class="ie9" lang="en"><![endif]-->
+<!--[[if (gt IE 9)|(gt IEMobile 7)]><!--><html lang="en"><!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<title>UBC</title>
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link href="https://cdn.ubc.ca/clf/7.0.4/css/ubc-clf-full-gw.min.css" rel="stylesheet" />
+<style type="text/css">
+body {
+background: #fff;
+}
+#ubc7-unit {
+background: #2b2b2b;
+}
+</style>
+<link rel="shortcut icon" href="https://cdn.ubc.ca/clf/7.0.4/img/favicon.ico" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cdn.ubc.ca/clf/7.0.4/img/apple-touch-icon-144-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cdn.ubc.ca/clf/7.0.4/img/apple-touch-icon-114-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cdn.ubc.ca/clf/7.0.4/img/apple-touch-icon-72-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" href="https://cdn.ubc.ca/clf/7.0.4/img/apple-touch-icon-57-precomposed.png" />
+</head>
+<body class="full-width">
+<header id="ubc7-header" class="row-fluid expand" role="banner">
+<div class="container">
+<div class="span1">
+<div id="ubc7-logo"><a href="https://ubc.ca" title="The University of British Columbia (UBC)">The University of British Columbia</a></div>
+</div>
+<div class="span11" id="ubc7-wordmark-block">
+<div id="ubc7-wordmark"><a href="https://ubc.ca" title="The University of British Columbia (UBC)">The University of British Columbia</a></div>
+</div>
+</div>
+</header>
+<div id="ubc7-unit" class="row-fluid expand">
+<div class="container">
+<div class="span12">
+<div id="ubc7-unit-name" class="ubc7-single-element"><a href="https://ubc.ca" title="UBC"><span id="ubc7-unit-faculty"></span><span id="ubc7-unit-identifier">UBC</span></a></div>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="expand row-fluid" role="main">
+<div id="content" class="hfeed content span12">
+<h4>Sorry for the inconvenience.</h4>
+<p>We have detected excess or unusual web requests originating from your browser, and are unable to determine whether these requests are automated.</p>
+<p>To proceed to the requested page, please complete the captcha below.</p>
+<p><img src="data:image/png;base64,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" alt="Red dot" /> <a href="#" id="bottle"> 
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH1QgXEwYEPM59bQAAAAZiS0dEAP8A/wD/oL2nkwAAEnBJREFUaN7FWgdYlNe2/TEmihUFpNeBGTozVKkKKkpVFLGgVwVsqCBIUWSoKmIviBQBRRBsYAOxa9SLir2gSSyJJjExPnNj1NhwvX0OYuzRvPgu33e+ofwz/1ln773W2vtHACD8X5drrKSlQ4Sor02oQZl0uN4Z6xDdK1ZDdW9aDtb5jdZD+vk72Qj9vbZhBtl2YwzDHcaLtP+J+7L1t99oMr+FQse+Qphm/5bbDQKV7psHacG0nybEvuoQe6tD4q8JswFaIAAQ+6jD2FuNv0r81aHt1a6xi4/CfgVPof9/BYBysOAlCVFukIbogk4a1iF6cIkWo88cSwxY5YBBa50wqKIrgmk1vTqib74tvLKs4JZgAouBTaA0e7ZBJ0/hRjsfIVVQF1p8cgCKQYJIb7hitWS4yjObUfpwi5PAb5kMQWUOCFrtiP4rHRBYaI9+K+zQr+ClRT8HFtnzv7PrGDDvhdagdKLIaFDkNEBRbGjvJ1h/MgBqI4TxlmO7PHaMEME52hi+S6RNmy5u2nBAvgy+uVbok2MGr2Umf64cU/RZbg6fXEv45UnpOht+PQMzsMwR/ej9DAhLPe3e7R636SHM/KCNdxPaUU3lfdDmNcOFdOsJas+cY4wpTazRf5U933hAgQzetLke2UYIyJNh3NpApNRMwNy9iZhHa/7e6fT9VKRUT0DUhsEYWdobA4qcOBh/AsyB0OcMLOuKXrMseA2xtFLxUjih0FNQetd+2nsLkXoBHe9YBGu/f+NGmYKCycR2BTbRmnCbakqbtOE39M+X8pP1WCJCdOUQlNUvR+WZVVhzfDmKjyxE3uHZWLI/jQPI2hWP2TumYGZtNNK2R3Iw0ZUhCCp0JiBWPHKBhXYYUOLAX23DDSDx04B+X6VLnQIFlZf306KH0LNzL4WL2r3bcoJ4L4AOw4UvHKbrbO6eZAaPVHPKZVv0K7SldDCD5xJDpG6fgJ2XqrDrq83YdKYUa08WEJAcrDy6GCv+PR+5h2Yj+8sMLNqXjHl7EjGbgMzYEY3UmklIrh6PpOqxiNo4CIEF9jy1+tLn9y+mtCp1hH2EYRMI/w5XdEJaaXTqJ+ir+rbYrtWz3TOWakTZkA7XZwCevROA5dROeT0zzHlo2cn4F0jhuVSEYas8ceDydtR/dwj7vqlG7cWN2HqunECsxvpTRSg/kccjUlKfjeJjC5F/uAnIQgIyd880ZO6MRUZtFNJqJkJeMx7ybWMxdGU3+OZZPQdhz0nBMcKIg7AYpPMznfYjiZ86LAfpoM88a4RscoHNSL13AxDFfT7QOU0fvbIsEUh56ptvBddFOlj25Qx8+z/f4MyP9ai7tg9fXq7F3q+3Yc9XW7Cb1v4r1Tj4XS12f7MJJceysXh3OlbXZaOyoQilp5Yi70gWFh1IoYhMw6ydU5BeSylFQFjdjCj14iTAQRBjBZU60EkbwbiPGkz7asIjxZxHh9M0sZh0mC4B0HkTgCTxCwP3TMO7febRh1HO++RZwHmBFj/hW7//hK9unceZH47hxPXDOPbtARy/cQhnf6onIFsQXtAXdpP1YDyiAyQjO0EyQhnGw5RgEaqGgDQ3yCsiUVy3APlHMrFwv5zXx8wdMQQkCuk1kRhd7vsKiAGrHdAtyZSTRhCrkaImxgte0xVWTQAaX9m8Ybrwefd5oqO+i2Xwz7F5fvLaOHR1F+49/h03fr2Gy79cxKWfz6Lh5ilcvn0BZ346ivD8QFhM6AybKC2YT1BtNAxve1otRKhVHSaUGoQp7jINV7kvG60D0391gXSULlLXR6Pk1GIsO5j+vD7iMJMiMouKfXCxG9WENdcPpils080bb9YVBsD6bQDMMtrMD1huwzffb4Ut3BfrYTWlAvu68+A2bv52g4O4fucqbt37EUe+2weXNAPYx+tAFqt+yySq/WylUYLuG5ztInxGOuJhMEpxmfFwpSemw1QQnOGF0pPZKDgyF4v3p/D6yNqVQDUSw7WCMd0rYljwAQAM0oSwHtnGdwJybUlhpRhZ4oXmr3sP7+LO/V9w+94tPHh8HzsubISdXAPOcgM4JOrs0x4nKH+IpmiMEGTmo1UuWoZpwn6cCFlbE1B8fAGWUjQW7E2iNZ0KfBJ6kyD2LbD5KwBP37gBgVB2WqCxwnOJ6Jn7fD2MKQ3E/Ud3OYjGZ0/565XbF2EtV4FtkjosEpQWGc36OB9jG63pYj/R4J7JSGUYBXfCgi0pxFZzOEksOZCK7ANpCF/jywXvrQDKCcDQdwB4QaOz27p4Zhud67HEGHaZylj+ZeaLaPRZbAn3WcTFcuXcj9l4+xBBVTRGsUQSrtRoNloZQ2f5oqJ+BTaeK8Sqo0tIP+aRfmQSkJlEvTO4ynPFfgsAZiKJVp++94YUjZYUjbhuSwz+cKVo+GVLEbNhONzmkJGbrX9clCF88UG+pYfQkuojXhatcdduMnG53A5lh/Nw8NtaVDdUYMNp0o/jebzeikjJGZBCEsOpW0Kfp5LtGylEfQcD8ETwWSiNNJ4ttP4LILpdF6hvIiDwybGG+3yD/5imKep/6Ml3ChPm2CVocUrsk26L8z/Xo+H2SRLEGtRcWIct58pQeXoVqfkKsiO5pCFLsfLIIpQey0H/FQ4kctavABhIAGQj9FgUngiOE4x+NRmh8rNxYqshf7URy8y2/hSRK8RWvh9re/UmtfB1mKZ91WmaAWymaGJmVRwBOY66b/eQHanCtvNrsflsGTaeXom1J5psSRl5K8ZQPbPFTS62GQCZP5tQfRaFxwLZ41+NSO20erYF0dwxwwzB6n0bUU38e40HW+0GCZ+bxylNl8aqP2AgeqVYYevJtTh98wi+vFKLHRcrCUjFC1tScTKfAK3CaCpo7+UWLwFwhO1oQ8hG6j8SyBj96jFFiu6pEhj1VoOub4dG8cT2JZJ5Cp3/qb719dU5VNAyjW6/1mJy52dWUaqYVDAMp27UkaofIH+1jdJqPaXVGu5wq86UcKPYg6LQrA3MUjiMFYH6gUcsAv8ZKPfGiCpP9C2UgVIKBp5dYDSo833LaZ3ixHMUPvtUQHQnKHSTxamftY3VglO8CCt2LcL5Wydw+Npu7nRZfWyl+qi9sAHTtoRzC89ccRABcJwggv1YQx6B3wITPLDwUCL65JlxE+WfI+NCIerZBWahqldNU1r3/lQgqOdoYTalY6R1bJffrGO6YOhcbxy4UIszPK22E5CN2N6wkdKrCn1yLbjNYJ1g10lGzFY/ZADu+se7YctXJQha0RV++dZN7d4a1iVZwiRAA1q92sJodJvdopmC4acC0mmUoGwS077QfLJSo+0Ubcwsn4rTP9Tj6PX92PvNVuz/poZbcnIKvPlxijJmIP4QHMaL7vrFu6Dq0krM2TMVvaiPZbzLjBSzrgMIrVuCBKJeXWDQr+NT05gOiyVzFdp+KiDKYwU74yjFI8YT28A3zRFVhyu4Yay7vhf11w/yDi6gWAqXKWI4TTb+g0Xgvm+8M6oailFK1DV0ZXduaV+eJrCQsabGfoyI6kMV4qGdf5UmK4eLsxQUPhUQ7Qgh1HKK8i+yGDXE5Iah7uI+XLx9BgV1c+GVL4ZrrJiBeMB04IFPghM2X1pNSrgUS6l7ep13/2y+HeG7WApLknE2vLIY0+Wsxay2jp8KhFKo0F4c3W6RaXTHpx7TLVBUnYNrv3yNQWVOcE4wglu85J5AefTAb5ozar4u5wpYQS1h6BrvtxqpwOfjECblPWeYwyxQi/rWjs/EEe03UFqpf7L6CBNMRZGt9hpNVETU0hFYtC0drokiuE8zuSdQMfzhO90ZOy5vaFI/6mcL6uZRLYjf6clf1Ad1Su5UH6x3FQ9Rfkh9dCql1Rd/d6Pqye8XSc3xwkCrWJXvvVKt4TLNGN2TTH8XnCcbP/RJcsaeq5vp9PNJvnO4ArI+lQ2mXkmlt0zbgkocqejt4ED6YdJPE1Zj1X8wkbf66JmnSWprK/1RijelySrjyJu9s7ZUxwmtTad0nGGfoP3QI8XsruASI37om+yE/d9uI/ku5FOFNSeW8+/Dy/34VO11N/g6EBaNwWud+LjQcrAu9Pt1hOGUlhVtYoUPKnKKWjvLcWrXzYN0YBmsDekkjRMWmW2s/kLNDXqkm5cKVMmP/JK74vD1HVy6m0GwWqg4XsA3+YKV3pJKrCYYL3eXm8JqCPW9I1WfUJOzgJqcD6Zak6gOmywHasN3iYxrj9VQPUhClBst4jplG2e9/3ME1zjJY98URxz5fm+TrW0GcZKBWME7JaYN/nnSNzbPJgVeWZawGalP1KoM08kdq8l66H+UEse1jBJRV+aRbM7pmk/oiuzgQjTJRvNWERq/SOStgt8JgETqsU+aA07ePIjqC2tfePN1JwspAvlYf7IIM3ZMJhCSV+qB5b9LrIQshx7oEBp7F5gGfGzei+K/mGIyUqXRKdKINm7/YrLd/3ltsQGyPZk28ZDOdDjt91Jf8oYTENynmjz2TrcntTuCWvIczb68GQTz5pWnSzC2vO8rjTYfl5M2UCHxCNhEa/5oMaNNtw/ZOBVpK4tYpQrJMBU4x4i5SPLRyeuUXdzEdD1nWMAmTJ90R+0xMV2aWpLQ8s8pdaLpE+80GS7cqseuS5veCoJFgS02PWMgmkfkzXTqly0jY2UIi3C1RsvEzoXWc9t3N858s92kjXeWpijHS6M0rtmOMoBnmjkfWr0+93mF6egezD77kIDahRvCfqr2bmplX5CDQFz6pE+6DJdun8a+r7dxEDvJ+e28tBk7Giqx9fwarKOaYEA2ni7GmAp/bmsDmpvt5yrNNsEGwWy6TDYXsskaj8yiO+zTj2yRT7Z5s0lkhyPELo/tRuuDqBs+xFgMPE8bvmHb5+s1omCDLYqQ40Qj2E7RuiFd0KHjKynUXW72tFeGFa7cuYCDl3fg8NVdOHb9ACrPrcSwVT2wpaEUNQ3rnoNYwRsMNlVmdoNZW06xzdFY2TQiZ6fVI9WcO0Yyi+gaacyL0iPZDP7siQ4VavODEfZ+FtHgYhfqfx1foewmlrOHW5yYUesj8xmKb1CrQDnc2CvDAt//fg1nb9bjGHVFkRsGQRqrCpNQZXjOMsXWhvIXIFjjvf50EfWqyXx2ynTi5Wg0jwMHPKfXoNVNi33PH0EVvbpxduohq7pjyKpuGFjkTCDsXxwK+wyW/1bj1CCWtx7+VhaiPGz0nm2De8/uYvHBFDjItWAdoUHMYvyEhOKczQQd9MiU/BkJotY1TCNIrctP5CJqA4uGhNdG85z/naJX0LRx/+ePowYXuyOszBsjy3pjWIknBq90bwJR2BQhlmZOFD1reeecd49sMiyeeWVZIHi5C6wmkcOcpArLaUpbKdf0XZdpfe6cprfVLkoXnplmWH+2iIp8AzacKibLkcunBmsIBJvnJG0bSzd34g3Hy8/FmhdrytnvvHPMMXy1JyI3Dsak9cEYW9GXQPhwgmAghpR0w+DVbvCeb9Xk+VN064xm/sk6bwBgIXIlQ+YSL4ajXOe8WZqix8sXEKO0dMnQq3KIMYBzhh4ydkVh19dV2ES1wDdfn81nOCuPLObTNTZVY1PmqZvDELFuAMat7Y+YyhDqacOQXD0O8uoI+lsooiuHcQAR9Pcx5QEIL/NFaLk3hpd4wIvU2CVOAud0/Z3W89orvVeJmXR3TdK9Y5/ZZTwhfasbFM0QPpOlKK+ypubCIVEXg4vcUXWuhBiqnOtEydGlKGJz/8NzkXdoNnIOzsKyAxlYuj+VD2znsMdLtdHcIE7fOgYJBCC26l+YvHEoBzFxXRAmrB+AEIqAu1wC2zjNRlm6agbd9y+9lEAcPpcu7PAhAmSaqhhEUbrTNcEA3bJESKwJ5QXN1Jv5JxYJZj2WE4ClB9J5D9v8fIw/yNgeSVGI4CDYlIGNDhO2jkLMpqEYkOsM9+kSOCbp/G6a3tr3kz2pp8ZehaJRaZfARuuGcJ6li7AKP+T9eza2nC8jplpBrWk2CuvmUzSy+JB2CUVi/l455u6exp/KZO6KRcr28Ri9ti/8F9nCLdkY7kmUMhn65yhlDf5f/ldCL0kIlMmV6xyma8E12QiuMw3QY6Exgle6YuKGIMhrxiJzdwySa8YjcVsoYjZTumwMwpi1/gjMJfc6yxhuKWKw90vlnevMM9qEfOiw+B8B8FJ9WNqkqeS7Zug/8MwwR/d0U3RLF6P7TOqYsmhlPl8zxPz33dJM4JFhBna9bYZKHr3f4r/y3yqvL+L4dgG5tn2opuLJ15f4LJKeoHWP1g1S5nrfxdIt9Ps8v6WyVP8cmxHs+n/ivv8LvR/R9odMlVIAAAAASUVORK5CYII=" alt="bottle" class="thumbnails" /></a>
+</p>
+<p><input type = "text" id="ans" name = "answer" value = "" />
+</p>
+<p><button id="jar" type="button">submit</button>
+</p>
+<p>If you believe that your request has been blocked in error please contact the <b>UBC IT Service Centre</b> at <b>604-822-2008</b> or <a class="email" title="Email UBC IT Help Desk" href="#" onclick="javascript:window.location='mailto:help@it.ubc.ca?subject=UBC Cybersecurity Block Page - <9903341317127165441 >&body=URL of webpage ' + window.location;">help@it.ubc.ca</a>. Quote the web page you were attemping to access, and the following <b>Reference ID:</b>
+<div class="alert alert-info">ITSA -%BOTDEFENSE.captcha.support_id%</div></p>
+</div>
+</div>
+</div>
+<footer id="ubc7-footer" class="expand" role="contentinfo">
+<div class="row-fluid expand" id="ubc7-unit-footer">
+<div class="container">
+<div class="span6">
+<div class="ubc7-address-campus"><b>Vancouver Campus</b></div>
+<div class="ubc7-address-street">2329 West Mall</div>
+<div class="ubc7-address-location"><span class="ubc7-address-city">Vancouver</span>, <span class="ubc7-address-province">BC</span> <span class="ubc7-address-country">Canada</span> <span class="ubc7-address-postal">V6T 1Z4</span></div>
+<div class="ubc7-address-phone">Tel (Directory Assistance) 604 822 2211</div>
+</div>
+<div class="span6">
+<div class="ubc7-address-campus"><b>Okanagan Campus</b></div>
+<div class="ubc7-address-street">3333 University Way</div>
+<div class="ubc7-address-location"><span class="ubc7-address-city">Kelowna</span>, <span class="ubc7-address-province">BC</span> <span class="ubc7-address-country">Canada</span> <span class="ubc7-address-postal">V1V 1V7</span></div>
+<div class="ubc7-address-phone">Tel 250 807 8000</div>
+</div>
+</div>
+</div>
+<div class="row-fluid expand" id="ubc7-global-footer">
+<div class="container">
+<div class="span12" id="ubc7-signature"><a href="https://www.ubc.ca/">The University of British Columbia</a></div>
+</div>
+</div>
+<div class="row-fluid expand" id="ubc7-minimal-footer">
+<div class="container">
+<div class="span12">
+<ul>
+<li><a href="//cdn.ubc.ca/clf/ref/emergency">Emergency Procedures</a> <span class="divider">|</span></li>
+<li><a href="//cdn.ubc.ca/clf/ref/terms">Terms of Use</a> <span class="divider">|</span></li>
+<li><a href="//cdn.ubc.ca/clf/ref/copyright">Copyright</a> <span class="divider">|</span></li>
+<li><a href="//cdn.ubc.ca/clf/ref/accessibility">Accessibility</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</body>
+</html></body></html>

@@ -1,0 +1,1042 @@
+                  The interaction of person and number in Mi’gmaq
+                                               Jessica Coon & Alan Bale
+                                   jessica.coon@mcgill.ca, alan.bale@concordia.ca
+
+
+                                                             Abstract
+       This paper presents puzzles concerning the representation of features in the agreement system of the
+       Eastern Algonquian language, Mi’gmaq. A growing body of research converges on the idea that φ-
+       agreement should be separated into distinct person (π0 ), number (#0 ), and sometimes gender (γ0 ) probes
+       (e.g. Anagnostopoulou 2003, Béjar 2003, Béjar and Rezac 2003, Laka 1993, Shlonsky 1989, SigurDsson
+       1996, SigurDsson and Holmberg 2008, Preminger 2012). While these proposals account well for agree-
+       ment and partial agreement patterns in a number of languages, we show that in order to account for the
+       agreement system of Mi’gmaq, π0 and #0 must probe together, which we argue to be the result of fusion
+       of two distinct probes. We discuss the implications of Mi’gmaq agreement for “prominence hierarchies”
+       and feature geometries in the grammar.
+
+
+1. Introduction1
+
+An increasing range of work shows that φ-agreement—and the φ-features that trigger it—is not an all-
+or-nothing affair. In Nahuatl, for example, subjects and objects of monotransitives agree fully for both
+person (π) and number (#), shown in (1a).2 In ditransitives like (1b), however, subjects and indirect objects
+show full person and number agreement (boldface), while direct objects agree only in number (boxed)
+(Baker 2011, citing Launey 1981). Baker (2011) documents this phenomenon in a number of languages,
+calling this pattern “two-and-a-half” agreement, to reflect that fact that two arguments show full φ-feature
+agreement, while others agree only partially.
+(1)      a.    Xi-nēch-palēhui.
+               2 SG . SUBJ . IMP-1 SG . OBJ-help
+               ‘(You) help me.’
+         b.    Xi-nēch -im -maca                      huēhuèxōlô.
+               2 SG . SUBJ . IMP -1 SG . OBJ - PL-give turkeys
+               ‘(You) give me some turkeys.’                                                       (Nahuatl, Baker 2011:883)
+       A related body of work has argued that different licensing mechanisms are required for different
+φ-features. Béjar and Rezac (2003) derive PCC effects through the requirement that π-features—but not
+#-features—require a special licensing mechanism. This additional licensing mechanism captures the fact
+that if any φ-feature is going to “fail”, it is going to be person—agreement for person appears to be the
+most fragile (Baker 2011). Nevins (2011) proposes that this is particular to π, and notes that there is no
+evidence for a Number Case Constraint. The separation of π, #, and γ (gender) probes has led to a wide
+range of empirical converge, in everything from Mayan Agent Focus constructions to Basque unergatives
+(Preminger 2014). For more on the separation of π and # into distinct syntactic probes, see for example
+Shlonsky 1989, Laka 1993, Taraldsen 1995, Anagnostopoulou 2003, Béjar 2003, Béjar and Rezac 2003,
+Preminger 2014.
+    1 We are especially grateful to Janine Metallic for her generosity and enthusiasm in sharing her language. Thanks to Richard
+
+Compton, Elizabeth Cowper, Michael Hamilton, Daniel Harbour, Éric Mathieu, Will Oxford, Omer Preminger, Betsy Ritter, and
+Martina Wiltschko, as well as to members of the McGill Agreement Reading Group and audiences at the 2013 CLA and the Tromsø
+workshop on features for helpful feedback. Special thanks to two anonymous reviewers for valuable comments and insights. Any
+errors are of course our own. This work was supported by a SSHRC Partnership Development Grant.
+    2 Examples in glosses are as follows: 1, 2, 3 – 1st, 2nd, 3rd person; DIR – direct; EVID – evidential; IMP – imperative; INV –
+
+inverse; NEG – negation; OBJ – object; OBV – obviative; PART – participant (i.e. 1st and 2nd person); PL – plural; SG – singular; SUBJ
+– subject.
+
+
+c Jessica Coon & Alan Bale. Nordlyd 40.1: 85-101, special issue on Features, edited by Martin Krämer, Sandra-Iulia Ronai and
+Peter Svenonius. University of Tromsø – The Arctic University of Norway. http://septentrio.uit.no/index.php/nordlyd
+                                          P ERSON AND NUMBER IN M I ’ GMAQ
+
+
+       In light of the successes of the above accounts, the Mi’gmaq (Eastern Algonquian) data we present in
+this paper initially come as a surprise. Mi’gmaq’s φ-indexing system demonstrates that probes for person
+and number cannot be completely distinct, as 1st and 2nd person plural arguments are privileged over all
+other arguments in competition for a specific slot. Although the searches for person and number features
+must be separate, the results of the search are conjoined together when determining both agreement relations
+and syntactic movement. Our discussion of agreement in Mi’gmaq also demonstrates that while traditional
+prominence hierarchies (e.g. 2≫1≫3) may provide useful descriptive tools, they do not have a formal place
+in the grammar as such (see Bruening 2005, Brown et al. 2003, Harbour 2006, Coon and Preminger 2012,
+Oxford 2014, Preminger 2014).
+       The remainder of this paper is organized as follows. Section 2 presents background on Algonquian
+verb stems and the traditional inverse system, seen in languages across the family. In section 3 we provide
+an overview of Mi’gmaq and introduce two puzzles involving the interaction of π and #—each puzzle cor-
+responding to one of the φ-feature slots on the Mi’gmaq transitive verb stem. Section 4 examines the nature
+of the suffix -ugsi, which corresponds in some ways to a typical inverse morpheme, but differs in crucial
+respects. In section 5 we turn to the second puzzle: competition for the second slot and the importance of
+1st and 2nd person plural arguments. We discuss two possibilities for formalizing the interaction of person
+and number, and then offer a proposal involving the fusion of two probes. Section 6 concludes.
+
+
+2. Algonquian inverse
+
+Mi’gmaq is an Eastern Algonquian language spoken in the Canadian Maritimes and the Gaspé region of
+Quebec. The data in this paper come from the Listuguj variety of Mi’gmaq, and we adopt the Listuguj
+orthography throughout. Though Mi’gmaq shows important differences from some of the more well-studied
+Algonquian agreement systems, background on Algonquian and inverse systems will prove to be a useful
+starting point for understanding the Mi’gmaq data. Plains Cree, shown in (2), provides a prototypical
+example of an Algonquian agreement system with inverse marking.
+
+(2)      a.    ni-wāpam-ā-w
+               1-see-DIRECT-3
+               ‘I see her.’
+         b.    ni-wāpam-ikw-w
+               1-see-INVERSE-3
+               ‘She sees me.’                       (Zúñiga 2006:24, citing Wolfart 1973, Wolfart and Carroll 1981)
+
+       The Plains Cree inverse system is characterized by two logically separable features: (i) competition
+for slots and (ii) direction marking (see Zúñiga 2006 for detailed discussion of inverse systems). The first
+characteristic is illustrated by the prefixal person markers in (2). We see that this φ-indexing “slot” is
+filled not with features of a particular grammatical role (i.e. “subject agreement”), but rather by the highest
+ranking argument along some specific hierarchy.
+       Algonquian languages distinguish grammatical animate from grammatically inanimate nouns. Third
+person animate nouns participate in a system of obviation: in a span with multiple third person arguments,
+the more discourse-prominent argument will be proximate while other third person animate nouns will be
+obviative. With these distinctions in mind, the typical Algonquian prominence hierarchy is shown in (3).
+In the example in (2) above, we observe that the first person prefix ni- co-indexes the higher-ranked first
+person argument, regardless of whether it is the Agent or Patient (1≫3).3
+
+(3)      2≫1≫proximate≫obviative≫inanimate
+
+   3 Following e.g. Comrie 1978, we use the cover terms “Agent” (A) and “Patient” (P) to refer to subjects and objects of transitive
+
+predicates respectively, regardless of specific theta-roles.
+
+
+                                                                86
+                                            J ESSICA C OON & A LAN BALE
+
+
+      The second possible component of an inverse system is a direction marker—commonly called a
+theme sign in Algonquianist literature. This morpheme specifies whether the higher-ranking argument is
+the subject (A) or the object (P), as in (4) and (5).
+
+(4)     D IRECT:                                                 (5)      I NVERSE :
+             A       ≫         P                                               A       ≫        P
+
+
+          HIGH       ≫      LOW                                             HIGH       ≫      LOW
+
+       In Algonquian these theme signs mark not just direction, but also encode information about features
+of subject and object, as shown in the Ojibwe examples in (6) and (7). The theme signs in (6) reflect not
+only the relative ranking of subject and object arguments—direct in (6a) and inverse in (6b)—but also the
+fact that a 3rd person argument is involved; the theme signs in (7) are reserved for combinations of “local”
+(1st and 2nd person) arguments. We will see how this becomes relevant in our discussion of the Mi’gmaq
+morpheme -ugsi below.
+
+(6)     NON - LOCAL                                              (7)      LOCAL
+        a.    n-waabm-aa                                                  a.    g-waabam-i
+              1-see-DIR ( NL )                                                  2-see-DIR ( L )
+              ‘I see him/her.’                                                  ‘You see me.’
+        b.    n-waabm-ig                                                  b.    g-waabam-in
+              1-see-INV ( NL )                                                  2-see-INV ( L )
+              ‘He/she sees me.’                                                 ‘I see you.’          (Valentine 2001:270)
+
+       While Mi’gmaq presents some characteristics of an inverse system, we show that the agreement facts
+cannot be handled by a traditional “prominence hierarchy”, of the type in (3), or the more generalized one
+in (8), which makes reference only to π-features.
+
+(8)     P ROMINENCE HIERARCHY
+        1/2 person pronouns ≫ 3rd person pronoun ≫ [+human] ≫ [+animate] ≫ [−animate]
+
+Instead, we find that person and number features must be examined together in order to understand the
+agreement system.
+
+
+3. Mi’gmaq person and number
+
+Mi’gmaq matrix clauses do not look like those from Plains Cree: There are no person prefixes, and there
+are no immediately obvious reflexes of the direct and inverse markers.4 Instead, Mi’gmaq transitive matrix
+verbs with two (grammatically) animate arguments follow the pattern in (9); see Hewson and Francis 1990
+for more on the Mi’gmaq verb stem.
+
+(9)     M I ’ GMAQ TRANSITIVE TEMPLATE
+        Stem-Slot1-(Neg)-Slot2-(Past/Evid)-(3PL/OBV)
+
+      Slot 1 corresponds to what Oxford (2014; to appear) identifies as the Proto-Algonquian “theme sign”
+or direction marker (i.e. direct or inverse). When verbs appear under the scope of negation (marked by
+pre-verbal mu), a negative morpheme, -u/-w, intervenes between the two slots when present. Negative
+   4 Historically, the Mi’gmaq “independent indicative” (matrix declaratives) derives from the Proto-Algonquian “conjunct order”
+
+(roughly, non-finite embedded clauses; see Hewson 1980).
+
+
+                                                              87
+                                          P ERSON AND NUMBER IN M I ’ GMAQ
+
+
+forms prevent some of the phonological operations and irregularities from occurring between the two slots,
+making the pattern easier to see; we use negated forms throughout, leaving an analysis of the affirmative
+paradigm for future work. A third person plural marker appears stem-finally, marking plurality of either
+subject or object animate 3rd persons (“omnivorous number” in the terms of Nevins (2011)); obviative
+marking also appears in this stem-final position when present.
+      We will argue that Slot 1 is a morphological reflex of v0 agreement, and Slot 2 represents Infl0
+agreement (roughly similar to the analysis of Proto-Algonquian agreement in Oxford 2014; to appear),
+each discussed in more detail below. Assuming that the stem is formed via head-movement of the verb
+root up through higher functional projections, morpheme order is in accordance with the Mirror Principle
+(Baker 1985).5
+
+(10)                                                                            V         –v           –Neg      –Infl
+                     IP                                             (11)
+                                                                                Stem      –Slot 1      –Neg      –Slot 2
+             I
+                           NegP
+           Slot-2
+
+                    Neg              vP
+
+
+                          DPSUBJ              v’
+
+                                       v
+                                                   VP
+                                     Slot-1
+
+                                               V    DPOBJ
+
+
+     Using the negated forms, we can break down the forms in Slots 1 and 2 as in (12) and (13). As (13)
+shows, Mi’gmaq makes a distinction between 1st person plural inclusive (speaker, inclusive of addressee,
+and possibly others) and exclusive (speaker and others, exclusive of addressee).6
+
+(12)      S LOT 1                                                   (13)      S LOT 2
+           1                   -i’li                                           1             (-an)
+           2                   -u’l(n)                                         2             -n
+           3                   -a                                              3             -t/-g
+           3>PART- PL          -ugsi                                           1INCL         -gw
+                                                                               1EXCL         -eg
+                                                                               2PL           -oq
+
+        Across most of the paradigm, Slot 1 can be straightforwardly characterized as object agreement for
+person features. Examples with singular and plural objects are shown in (14) and (15), respectively. Both
+1st person singular and 1st person plural exclusive objects (1EXCL) trigger the 1st person agreement suffix
+-i’li, as in (14a) and (15a), while 2nd person singular and 2nd person plural objects (2PL) trigger the 2nd
+person agreement suffix -u’ln, illustrated in (14b) and (15b). The 3rd person agreement suffix is -a in forms
+in (14c) and (15c); plurality of a 3rd person argument is indicated with the addition of the -ig suffix.
+
+
+
+   5 What we list as the “stem” in (9) can actually be quite complex, involving the typical Algonquian array of preverbs, initials,
+
+medials, and finals. For a recent discussion of stem formation in Mi’gmaq, see McCulloch 2013 and references cited therein. This
+complexity is ignored in the structure in (10) and below.
+   6 Note that it has been proposed for some Algonquian languages that the inclusive is actually a second person inclusive (Déchaine
+
+1999). There appears to be evidence for this in Mi’gmaq as well—for example, the inclusive possessive form includes a second person
+prefix plus a plural suffix. We continue to gloss these forms as 1 INCL below, though this choice does not affect the analysis.
+
+
+                                                                88
+                                       J ESSICA C OON & A LAN BALE
+
+
+(14)     SINGULAR OBJECTS                                (15)     PLURAL OBJECTS
+         a.   Mu nem-i’li-w-g.                                    a.   Mu nem-i’li-w-eg.
+              NEG see-1 OBJ - NEG -3                                   NEG see-1 OBJ - NEG -1 EXCL
+              ‘She doesn’t see me.’                                    ‘You don’t see usEXCL .’
+         b.   Mu nem-u’ln-u-eg.                                   b.   Mu nem-u’ln-u-oq.
+              NEG see-2 OBJ - NEG -1 EXCL                              NEG see-2 OBJ - NEG -2 PL
+              ‘WeEXCL don’t see you.’                                  ‘I don’t see youPL .’
+         c.   Mu nemi-a-w-gw.                                     c.   Mu nemi-a-w-gw-ig.
+              NEG see-3 OBJ - NEG -1 INCL                              NEG see-3 OBJ - NEG -1 INCL -3 PL
+              ‘WeINCL don’t see her.’                                  ‘WeINCL don’t see them.’
+
+
+       If we focus on the forms with 1st and 2nd person singular objects in (14a) and (14b), and forms
+with 3rd person objects regardless of number, (14c) and (15c), then Slot 2 can be characterized as simply
+subject agreement. Take, for example, (14b): in this form, Slot 1 shows agreement for the 2nd person object
+with the suffix -u’ln; in Slot 2 we find agreement with the 1st person exclusive subject with the suffix -eg.
+Things become more complicated, however, in examples involving Speech Act Participant Plural (PART-
+PL ) objects, such as (15a) and (15b). The three Mi’gmaq PART- PL pronoun possibilities are summarized in
+(16).
+
+(16)     S PEECH ACT PARTICIPANT P LURAL ( PART- PL ):
+         a. 1INCL = speaker, addressee, and possibly others
+         b. 1EXCL = speaker and others, exclusive of the addressee
+         c. 2PL = addressee and others
+
+Clauses with PART- PL objects divide further into two morphological types: (i) those with third person
+subjects; and (ii) those with 1st and 2nd person PART subjects.
+      In the first type—clauses with non-PART (3rd person) subjects and PART- PL objects, schematized in
+(17)—the morpheme -ugsi appears in Slot 1, and Slot 2 indexes features of the object. As we will see below,
+person features of the subject are not directly indexed on the stem.
+
+               SUBJECT           OBJECT          E NGLISH GLOSS
+               non-PART          PART- PL
+
+(17)      ◦    3            >    1INCL           He saw usINCL
+          ◦    3            >    2PL             She saw youPL
+          ◦    3PL          >    1EXCL           They saw usEXCL
+          ◦    ...                               ...
+
+In clauses with PART- PL objects and PART subjects, as in (18), Slot 1 indexes features of the object, and the
+realization of Slot 2 is calculated as follows: Slot 2 indexes a 1 EXCL argument if one is present (regardless
+of whether it is subject or object); if not, Slot 2 indexes a 2 PL argument if one is present (again, regardless
+of grammatical function). This is represented in (19) below.
+
+               SUBJECT           OBJECT         E NGLISH GLOSS
+               PART              PART- PL
+          ◦    2            >    1EXCL          You saw usEXCL
+(18)      ◦    1EXCL        >    2PL            WeEXCL saw youPL
+          ◦    2PL          >    1EXCL          YouPL saw usEXCL
+          ◦    1            >    2PL            I saw youPL
+          ◦    ...                              ...
+
+
+
+                                                      89
+                                           P ERSON AND NUMBER IN M I ’ GMAQ
+
+
+(19)       S LOT 2 HIERARCHY
+           1EXCL ≫ 2PL ≫ { 1 SG , 2 SG , OR 3 SUBJECT }
+      One wonders about the behavior of 1 INCL arguments with respect to the scale in (19). Note that
+combinations of arguments with overlapping features are ruled out in Mi’gmaq (see also Lochbihler 2012
+on Ojibwe, and Lasnik 1981). Sentences like those exemplified in (20) are impossible. It is not just that
+these examples sound awkward, as the English equivalents might out of context—rather, there simply is no
+Mi’gmaq verb form corresponding to these meanings.
+
+                  [PART]             [PART- PL]
+(20)        ∗     2PL          >     1INCL                You saw usINCL
+            ∗     1            >     1EXCL                I saw usEXCL
+            ∗     2            >     1INCL                You saw usINCL
+      What this means for the discussion at hand is that whenever there is a 1 INCL object, we will have
+an -ugsi form, as in (17). 1 INCL objects are impossible with both 1st person and 2nd person subjects,
+confirming that they combine both [SPEAKER] and [ADDRESSEE] features. Since 1 INCL objects are only
+possible in combination with 3rd person subjects, and -ugsi is present in all 3>PART- PL environments, we
+do not know how 1 INCL ranks along the hierarchy in (18), and, as noted above, we do not know whether
+it would trigger 1st or 2nd person agreement in Slot 1 (cf. 1EXCL objects trigger 1 agreement, 2 PL objects
+trigger 2 agreement). We come back to this issue in section 5 below, turning first in section 4 to the Slot 1
+morpheme -ugsi.
+
+
+4. Puzzle 1: inverse and -ugsi
+
+The sentences in (21) have PART- PL objects, and non-PART (3rd person) subjects. In exactly these 3>PART-
+PL environments, the morpheme -ugsi appears in Slot 1. Recall from (14) and (15) above that when objects
+are singular or 3rd person, Slot 2 is simply subject agreement. In these -ugsi forms, however, Slot 2 is object
+agreement. There is no marker on the verb stem which can be identified as “subject agreement”, though the
+subject is known to be 3rd person because of the presence of -ugsi in Slot 1. The suffix -ugsi can thus be
+considered a portmanteau form, indexing features of both the subject and the object.
+(21)       A = NON - PART; P = PART- PL
+           a. Mu nem-ugsi-w-gw.
+               NEG see-3> PART. PL - NEG -1 INCL
+               ‘He doesn’t see usINCL
+           b. Mu nem-ugsi-w-eg.
+               NEG see-3> PART. PL - NEG -1 EXCL
+               ‘He doesn’t see usEXCL
+           c. Mu nem-ugsi-w-oq.
+               NEG see-3> PART. PL - NEG -2 PL
+               ‘He doesn’t see you PL
+Note that following a traditional person hierarchy (1/2 ≫ 3, or see (3) above), the suffix -ugsi is limited
+to “inverse” contexts, since it only appears when the lower-ranked 3rd person subject is acting on a 1st
+or 2nd person object. Indeed, -ugsi bears some resemblance to the Proto-Algonquian inverse -ekw (Oxford
+to appear).7 However, unlike more robust inverse systems, this is the only morpheme in the paradigm which
+   7
+    The [si] in -ugsi is reminiscent of the reflexive suffix of the same form, which would also appear in this slot. Thanks to Conor
+Quinn for pointing this out. In a previous version of this paper, we analyzed -ugsi as the requirement that v0 license π-features of the
+object twice, due to its plural nature. The form -ugsi would then be decomposed into an inverse (i.e. a morpheme which indicates
+π-agreement with a low argument) and the reflexive (a morpheme which indicates that a single argument is agreed with twice). We
+
+
+                                                                  90
+                                              J ESSICA C OON & A LAN BALE
+
+
+makes direct reference to the relative ranking or features of both subject and object arguments.8 Moreover,
+-ugsi does not occur in all environments in which third person subjects act on PART objects. Compare the
+3>1SG form in (14a) above with the 3>1INCL form in (21a), repeated together in (22).
+
+(22)      a.       Mu nem-i’li-w-g.
+                   NEG see-1 OBJ - NEG -3
+                   ‘She doesn’t see me.’                                                                                 = (14a)
+          b.       Mu nem-ugsi-w-gw.
+                   NEG see-3> PART -neg-1 INCL
+                   ‘She doesn’t see usINCL .’                                                                            = (21a)
+
+Though both forms in (22) involve a 3rd person subject acting on a 1st person object, the -ugsi pattern only
+appears when the object is plural. In the singular object form we find the simple object–subject agreement
+pattern. Note that Slot 2 is subject subject agreement in (22a), but object agreement in (22b).
+      Locating -ugsi in v0 is consistent with the Mirror Principle order proposed above, and also provides
+an account of how a single head could make reference to features of both the subject and the object. Even
+in familiar languages like English, v0 is credited with the dual duty of licensing the object and introducing
+the subject in its specifier (Chomsky 1995, Kratzer 1996).
+
+(23)
+                    vP
+
+
+           DP[3]            v’
+
+                     v0
+                                 VP
+                    -ugsi
+
+                            V DP[PART- PL ]
+
+
+See also Lochbihler 2012, who draws on Béjar and Rezac 2003, for one means of formalizing the spell-out
+of v0 in terms of features of both the object and the subject. We set this aside here, focusing on the relation
+between -ugsi and Slot 2 below.
+
+
+5. Puzzle 2: Competition for Slot 2
+
+To this point, we have focussed on the morphological realization of Slot 1, which we argued to be v0
+realizing either object agreement for π-features, or in the case of 3>PART- PL, the portmanteau suffix -ugsi.
+We now turn to the realization of Slot 2.
+            V0           –v0          –Neg0   –Infl0
+(24)
+            Stem         –Slot 1      –Neg    –Slot 2
+
+
+5.1. The facts
+
+Plural Speech Act Participant arguments are also important for the content of Slot 2. As seen above, if the
+object is not PART- PL, Slot 2 is simply subject agreement, repeated in (25).
+
+leave this as a possibility for future work.
+   8 A possible exception is found in forms in which an obviative 3rd person acts on a proximate 3rd person (4 > 3), not discussed
+
+here. See Hamilton 2013 for more on these forms.
+
+
+                                                               91
+                                            P ERSON AND NUMBER IN M I ’ GMAQ
+
+
+(25)       a.    Mu nem-i’li-w-g.
+                 NEG see-1 OBJ - NEG -3
+                 ‘She doesn’t see me.’
+           b.    Mu nem-u’ln-u-eg.
+                 NEG see-2 OBJ - NEG -1 EXCL
+                 ‘WeEXCL don’t see you.’
+           c.    Mu nemi-a-w-gw.
+                 NEG see-3 OBJ - NEG -1 INCL
+                 ‘WeINCL don’t see her.’                                                                                         = (14)
+
+When the object is PART- PL, and the subject is 3rd person (-ugsi environments), Slot 2 agrees with the
+object, repeated in (26) (§4).
+
+(26)       A = NON - PART; P = PART- PL
+           a. Mu nem-ugsi-w-gw.
+               NEG see-3> PART. PL - NEG -1 INCL
+               ‘He doesn’t see usINCL
+           b. Mu nem-ugsi-w-eg.
+               NEG see-3> PART. PL - NEG -1 EXCL
+               ‘He doesn’t see usEXCL
+           c. Mu nem-ugsi-w-oq.
+               NEG see-3> PART. PL - NEG -2 PL
+               ‘He doesn’t see youPL                                                                                             = (21)
+
+In environments in which PART subjects act on PART- PL objects (PART>PART- PL), then descriptively Slot
+2 is determined by the hierarchy in (27).
+
+(27)       S LOT 2 HIERARCHY
+           1EXCL ≫ 2PL ≫ { 1 SG , 2 SG , OR 3 SUBJECT }
+
+       In the forms in (28), Slot 1 agrees with the person features of the object, as above. Slot 2 agrees with
+either the subject or the object, depending on which is highest ranked according to the hierarchy in (27).
+
+(28)       A = PART ; P = PART- PL
+           a. Mu nem-i’li-w-eg.
+               NEG see-1 OBJ - NEG -1 EXCL
+               ‘You don’t see usEXCL .’                                                                           object agreement
+           b. Mu nem-u’ln-u-oq.
+               NEG see-2 OBJ - NEG -2 PL
+               ‘I don’t see youPL .’                                                                              object agreement
+           c. Mu nem-u’ln-u-eg.
+               NEG see-2 OBJ - NEG -1 EXCL
+               ‘WeEXCL don’t see youSG/PL .’                                                                     subject agreement
+
+In (28a) and (28b), Slot 2 agrees again with the object: there is no reflex of the subject’s features on the
+stem.9 In (28c), Slot 2 agrees with the higher-ranking subject; the number of the object is unspecified since
+    9 Note that in the constructions in (28a)–(28b), even though the features of the subject are never realized on the verb stem, these
+
+forms are still (nearly) unambiguous, by process of elimination. In (28b), for example, we know that the subject must not be 3rd
+person, because this would result in an -ugsi form (§4). We also know that the subject must not be 1st person inclusive or 2nd person
+singular, since feature overlap is banned. Finally, a 2nd person plural subject would result in a reflexive construction, leaving us with
+1st person singular as the only possible option for the un-agreed-with subject. A similar story can be told for (28a) except that the
+
+
+                                                                  92
+                                                    J ESSICA C OON & A LAN BALE
+
+
+Slot 1 indexes only π-features. Crictically, the ranking in (27) cannot be characterized by person or number
+features alone: 1st person plural outranks 2nd person singular, as shown in (28a). But 2nd person plural
+outranks 1st person singular, as shown in (28b).
+        The Slot 2 agreement facts can be summarized as in (29)–(32), where the boxed argument is the one
+which triggers agreement. Slot 2 agrees with a PART- PL argument whenever possible, regardless of whether
+it is the subject or object:
+
+              SUBJECT              >       OBJECT
+(29)
+              PART- PL                  { 1, 2, 3, 3PL}
+             SUBJECT                   >       OBJECT
+(30)
+             { 1, 2, 3, 3PL}                   PART- PL
+
+When both subject and object are PART- PL, 1st person exclusive beats out 2nd person plural for realization
+of Slot 2, as illustrated in (31) and (32).
+
+             SUBJECT           >       OBJECT
+(31)
+             2PL                       1EXCL
+              SUBJECT              >       OBJECT
+(32)
+             1EXCL                      2PL
+
+      Recall that there is no evidence for the relative ranking of 1st person inclusive because features of
+subject and object cannot overlap (§3); since a first person inclusive pronoun contains both [SPEAKER] and
+[ADDRESSEE] features, it cannot co-occur with either a 1st person exclusive or 2nd person plural argument.
+
+
+5.2. Towards a formalization
+
+Following Bruening’s 2005 analysis of the closely related Algonquian language Passamaquoddy, we assume
+that a single DP, either the subject or the object, raises to Spec,IP, as in (33).
+
+(33)
+                   IP
+
+
+                          I’
+
+
+                    I           ...
+
+
+                        ...             vP
+
+
+                               DPSUBJ          v’
+
+
+                                           v        VP
+
+
+                                               V     DPOBJ
+
+In Mi’gmaq, this raised DP triggers Slot 2 agreement. The question now becomes which DP moves to
+Spec,IP. Recall that the desiderata for which DP moves are as follows: (i) the highest-ranked PART- PL DP
+must move to Spec,IP (1EXCL≫2PL); (ii) if there is no PART- PL DP, the subject must move to Spec,IP.
+
+subject may be interpreted as either singular or plural.
+
+
+                                                                93
+                                                    P ERSON AND NUMBER IN M I ’ GMAQ
+
+
+      Note that since either the subject or object may raise (depending on their relative ranking), this must
+not be Case-driven movement. Rather, we assume that Infl0 has a [+EPP] feature which attracts the closest
+DP to its specifier position. In order to capture the fact that the subject is targeted if no PART- PL argument is
+present, we propose an intermediate functional projection, F(unctional)P, which attracts the highest ranking
+PART- PL DP to its specifier, as in (34) (where the highest-ranked PART- PL is the subject), or (35) (where the
+highest-ranked PART- PL is the object).
+
+(34)                                                                        (35)
+                         IP                                                                      IP
+
+
+            I[+ EPP ]                FP                                            I[+ EPP ]                FP
+
+
+                        DPPART- PL             F’                                              DPPART- PL         F’
+
+
+                                          F            vP                                                    F            vP
+
+
+                                              t SUBJ         v’                                                  DPSUBJ        v’
+
+
+                                                         v        VP                                                       v        VP
+
+
+                                                             V     DPOBJ                                                       V     t OBJ
+
+
+       FP is located above the projection introducing the subject, ensuring that if there is a raised PART- PL
+argument, it will be targeted by the [+EPP] feature on Infl0 (as above), and the subject will be targeted
+otherwise (as in (36)).10 This analysis rests on the proposal that a head with unvalued features must attempt
+to find a goal, but if it fails there is no “crash” in the syntax (Preminger 2014).
+
+(36)
+                        IP
+
+
+            I[+ EPP ]          FP
+
+
+                        F                 vP
+
+
+                              DPSUBJ                v’
+
+
+                                               v         VP
+
+
+                                                    V        DPOBJ
+
+The question we must now address is how the probe F0 targets PART- PL arguments (but not PART- SG argu-
+ments), and in cases where two PART- PL DPs appear in the same clause, how it determines which to select.
+This problem is not trivial. Take for instance, a clause with a 1st person singular subject and a 2nd person
+plural object, as in (37a). Here, F0 must skip over the subject to target the PART- PL object. However, in
+a configuration with a 2nd person plural subject and a 1st person exclusive object, shown (37b), F0 must
+know to skip over the PART- PL subject in search of the higher-ranking PART- PL object.
+   10 Note that our analysis predicts different c-command relationships between the subject and object depending on their relative
+
+ranking. Unfortunately, because the objects are proposed to move above the subject only when they are PART- PL, it is difficult to use
+binding or wh-movement diagnostics to detect this movement. An anonymous reviewer asks whether a proposal based solely on Agree
+(with no movement) would also work. Note that for us, it is crucial that the PART- PL object raise above the subject in order to be
+targeted by the probe on Infl0 . Whether movement to Infl0 takes place is open for question. A question for future work is how this
+system interacts with the calculation of which argument is available for Long Distance Agreement, discussed by Fry and Hamilton
+(to appear).
+
+
+                                                                           94
+                                       J ESSICA C OON & A LAN BALE
+
+
+(37)    a.     Mu nem-u’ln-u-oq.
+               NEG see-2 OBJ - NEG -2 PL
+               ‘I don’t see you PL .’
+        b.     Mu nem-i’li-w-eg.
+               NEG see-1 OBJ - NEG -1 EXCL
+               ‘YouSG/PL don’t see usEXCL .’
+
+
+We entertain and ultimately reject two possibilities for the nature of F0 (§5.2.1–5.2.2) before moving on to
+a new account in §5.3.1.
+
+
+5.2.1. Separating π0 and #0
+
+
+As a first attempt, we explore the possibility that “FP” actually consists of two separate π and # probes,
+ordered as in (38) (see Preminger 2012 for a discussion of this ordering of probes). In this tree, the π0 head
+would probe first, locating any pronoun with π-features and raising it above the subject. Next, the higher
+probe on #0 searches and would have access to only a DP which has already raised to Spec,πP (perhaps due
+to a vP phase); this would ensure that only pronouns specified for both π and # would raise all the way to
+Spec,#P. We could perhaps break πP further into [SPEAKER] and [ADDRESSEE] probes, in order to account
+for the ranking of 1EXCL≫2PL.
+
+(38)
+                      ...
+
+
+          I[+ EPP ]         #P
+
+
+                                 #’
+
+
+                            #0        πP
+
+
+                                            π’
+
+
+                                      π0            vP
+
+
+                                           DPSUBJ        v’
+
+
+                                                     v        ...
+
+
+This account would successfully raise PART- PL arguments above the subject, ensuring that when a PART- PL
+argument is present in the derivation, it would be targeted by the [+EPP] feature on Infl0 . However, this
+account faces a serious problem: there is no way to prevent PART singular arguments from raising above
+the subject to Spec,πP and thus also being targetted by the [+EPP] feature on Infl0 . Take, for example, the
+sentence in (39), repeated from (14a) above. The tree in (38) would predict that the 1st person object would
+trigger Slot 2 agreement, contra to fact.
+
+(39)    Mu nem-i’li-w-g.
+        NEG see-1 OBJ - NEG -3
+        ‘She doesn’t see me.’
+
+
+                                                          95
+                                            P ERSON AND NUMBER IN M I ’ GMAQ
+
+
+5.2.2. Exploding the clausal spine
+
+In order to capture the fact that only PART- PL arguments raise above the subject, we could simply replicate
+the Slot 2 hierarchy from (27) above in the spine of the tree, as in (45). 1st person inclusive could be
+ordered anywhere above the subject, since we cannot determine its relative ranking with the other PART- PL
+arguments.
+
+(40)
+                         ...
+
+
+            I[+ EPP ]          1EXCL-P
+
+
+                                         1EXCL’
+
+
+                                1EXCL0             2PL-P
+
+
+                                                            2PL’
+
+
+                                                    2PL0             vP
+
+
+                                                            DPSUBJ          v’
+
+
+                                                                        v        ...
+
+
+Technically, this account works: PART- PL arguments would raise above the subject and be targeted by
+the [+EPP] feature on Infl0 ; in the case of two PART- PL arguments, 2nd person plural would raise above
+1st person exclusive. Finally, in the absence of PART- PL, the subject raises to Spec,IP triggering Slot 2
+agreement.
+      This type of account is also not without precedent. Merchant (2006), for example, provides an anal-
+ysis of person-based split ergativity in which Silverstein’s prominence hierarchy is replicated in the spine
+of the tree. Note, however, that this ranking could not be universal: Merchant deals with languages in
+which 1/2≫3, regardless of number (as in the majority of hierarchy systems). For Mi’gmaq, as we have
+seen above, π and # must interact.11 In the section that follows, we build on feature geometric accounts of
+pronouns in order to capture the fact that the most highly specified pronouns—PART- PLs—are privileged
+for agreement.
+
+
+   11 Since PART- PL pronouns in Mi’gmaq involve different combinations of π features, it is tempting to try to capture the Slot 2
+
+hierarchy in terms of π alone. In Maxakalı́ and Kwakiutl, for example, there is no number distinction in 2nd and 3rd person pronoun
+forms, but there is nonetheless a three-way contrast in 1st persons: 1st person singular, 1st person inclusive, and 1st person exclusive.
+Harley and Ritter (2002) propose that these languages do not make a true number contrast, but that this distinction rather represents a
+distinction in person features alone:
+
+
+        “It is true of 1st person plural forms in general that they denote a mixed group consisting of the speaker and other
+        individuals. This is in marked contrast to 2nd and 3rd person plural forms, which may denote a group of addressees or
+        a group of other individuals, respectively. In natural language, there is no genuine 1st person plural—we never speak
+        in choruses” (Harley and Ritter 2002:503).
+
+
+   In Mi’gmaq, however, we find a distinction not only among 1st persons, but also between 2nd person singular and 2nd person plural,
+ruling out the possibility that the contrast is only about π. Thanks to Betsy Ritter for discussion of this possibility.
+
+
+                                                                   96
+                                               J ESSICA C OON & A LAN BALE
+
+
+5.3. Proposal
+
+5.3.1. Fused Probes
+
+As demonstrated in section 5.2.1, it is not possible to account for the Mi’gmaq agreement pattern if there
+is a split between the probes for number and person features. What is needed in order to account for the
+data is for the probes to be fused into a single head, thus searching for person and number simultaneously.
+For example, let’s suppose that the F0 head is comprised of a probe that is a combination of a #-probe that
+searches for [PLURAL] and π-probe that searches for [PARTICIPANT, SPEAKER] where there is a feature-
+geometric dependency between [PARTICIPANT] and [SPEAKER] such that [SPEAKER] → [PARTICPANT]
+(see e.g. Harley and Ritter 2002 for more on feature geometries generally, and Béjar and Rezac 2009 and
+Lochbihler 2012 for implementations in Algonquian). This fused probe permits searches for number and
+person to be separate (each having their own matching criteria) but for the conditions of a successful match
+to be fused together such that failure in one search results in failure for the entire probe.
+       Evidence from Mi’gmaq’s intransitive animate paradigm (“VAI” in Algoquianist terminology), sup-
+ports the existence of a dedicated #-probe below negation and above the subject which has fused with a
+π-ful F0 . The paradigm for VAIs is shown in (41).12 Interestingly, Mi’gmaq makes a three-way number
+distinction only in intransitives; there is no grammatical dual/plural contrast in the transitive paradigm ex-
+amined to this point. A three-way contrast with the intransitive verb stem amalga- ‘dance’, is shown in
+(42); the glosses will be explained below.
+
+(41)                                                                         (42)       a.    amalga-n
+                         SINGULAR          DUAL       PLURAL                                  dance-2
+            1INCL        -i                -igw       -a’t-igw                                ‘You dance.’
+            1EXCL                          -ieg       -a’t-i’eg                         b.    amalga-ioq
+            2            -n                -ioq       -a’t-ioq                                dance-2[#>1]
+            3            -t                -j-ig      -a’t-ij-ig                              ‘YouDU dance.’
+                                                                                        c.    amalga-a’t-ioq
+                                                                                              dance-[#>2]-2[#>1]
+                                                                                              ‘YouPL dance.’
+
+        A couple of points are in order. First, note that the final person suffixes in the VAI are identical to the
+Slot 2 suffixes from the transitive paradigm in (13) above.13 We assume that the realization of this suffix is
+the result of the intransitive subject raising to Spec IP, on par with the realization of Slot 2 in the transitive
+paradigm. When negation occurs, it appears between the # suffix -a’t and before the final (Slot 2) agreement
+morpheme. We thus assume that the # head hosting -a’t is located between Infl0 and the subject.14
+        Finally, note that there is no dedicated “dual” morpheme. In the transitive paradigm, an -oq ending
+indicates 2nd person plural, whereas in the intransitive, this same sequence is interpreted as dual. Instead,
+it is the addition of the suffix -a’t in the intransitive paradigm which introduces a three-way contrast. This
+is consistent with Cowper’s (2005) analysis of how number distinctions should be represented in a feature
+geometry, illustrated in (43) and (44).
+
+
+
+   12 This is what Pacifique (1939) (translated as Hewson and Francis (1990)) calls the “2nd conjugation” of the three conjugations for
+
+VAI. The main difference between the three is in the initial vowel (cf. “theme vowels”), as well as the form of the additional morpheme
+in the plural column; the final agreement endings relevant to the discussion here are identical.
+   13 The third person plural involves the addition of the omnivorous plural -ig for human third persons; the change of t to j preceding
+
+i in the bottom row of (41) is a regular phonological process in the language (orthographic j = IPA [dZ]).
+   14 Whereas the intermediate projection “FP” was required in transitives to ensure that high-ranking PART- PL DPs raise above the
+
+subject, we have no evidence for or against the presence FP in the VAI paradigm, since only a single argument (the intransitive subject)
+is available for the [+EPP] feature on Infl0 .
+
+
+                                                                   97
+                                        P ERSON AND NUMBER IN M I ’ GMAQ
+
+
+(43)    THREE - WAY NUMBER SYSTEM                                   (44)   TWO - WAY NUMBER SYSTEM
+          singular       dual     plural                                    singular   plural
+             [#]          [#]      [#]                                         [#]      [#]
+                           |        |                                                    |
+                         [>1]     [>1]                                                 [>1]
+                                     |
+                                  [>2]
+
+      As Cowper notes, this system explicitly encodes the observation that what it means to be “plural”
+varies depending on the number of other contrasts present in the grammar (Corbett 2000, Bale to appear).
+In Mi’gmaq, the 2nd person plural morpheme -oq can be glossed as “more than 1”; in the transitive paradigm
+the result is plural. In the intransitive paradigm, with the addition of the more highly-specified -a’t “more
+than 2” suffix, the -oq alone is interpreted as dual.
+      We assume that this same #P is present in the transitive clause, but that it has fused to FP, resulting
+in a complex FP probe which searches simultaneously for both person and number. The assumption that
+FP contains π features is needed to capture the more straightforward hierarchy effects (e.g. 2≫1≫3≫4)
+in other Algonquian languages. The proposal that these two probes have fused in Mi’gmaq allows us to
+capture both (i) the fact that a [DUAL] distinction is no longer possible in the transitive verbal paradigm;
+and (ii) the inseparability of π and # in the Mi’gmaq hierarchy.
+
+(45)
+                  IP
+
+           I
+                         NegP
+         Slot-2
+
+                  Neg            #P
+
+
+                          #             FP
+
+                        fusion   F-π             vP
+
+
+                                           DP             v’
+
+                                                   v
+                                       subject                 VP
+                                                 Slot-1
+
+                                                           V        DP
+
+
+                                                                object
+
+
+5.3.2. Best match
+
+The preceding section motivated the existence of a fused π and # probe below Infl0 and above the subject.
+We now turn to a formalization of how this probe attracts the correct argument. As described in section 2
+above, in Algonquian languages certain types of agreement operations target the highest ranked argument
+along some kind of hierarchy (see Macaulay 2005 on nuances in the hierarchy). Critically, if there are no
+arguments of the highest rank, the probes do not fail. Rather, they target the closest argument that has the
+features of the next highest rank.
+      A formal account of this type of feature hierarchy can be implemented in several ways. For the sake
+of simplicity, we will encode this idea of ranking directly in the search. In other words, with respect to a
+syntactic domain, the probe will assign a rank from 0 to 1 inclusive, where 1 is a perfect match with the
+
+                                                                98
+                                        J ESSICA C OON & A LAN BALE
+
+
+features in the probe and 0 is a complete lack of a match. Numbers in between will mark partial matches.
+This idea is defined more carefully in (46), where the value of n is determined by the number of features
+that the probe and potential goal have in common divided by the total number of features in the probe.
+
+(46)     Match of Rank n: A syntactic object σ with the features [ f1 . . . fi ] constitutes a match of rank n
+         for a probe ρ with features [g1 . . . g j ], where n = |{ f1 . . . fi } ∩ {g1 . . . g j }|/|{ f1 . . . fi }|.
+
+Note that any language with a person hierarchy effect will arguably have to implement some kind of formal
+mechanism that searches multiple arguments and selects the one that is the best match for the probe. For
+example, many Algonquian languages have agreement systems that prefer second person arguments over
+first person, but in turn prefer first person over third person (see §2). In such languages, if there is a first
+person subject, the probe would be required to evaluate the person features on the object before determining
+which argument to agree with (i.e., if the object is second person, then agreement is with the object, but if
+the object is third person then agreement is with the subject). Assigning a rank is a simple way of marking
+how many features in a particular syntactic object match the features in the probe. See Oxford 2014 for a
+discussion of this issue.
+       With respect to the Mi’gmaq hierarchy, one can hypothesize that the π-probe has the features [SPEAKER,
+PARTICIPANT ]. DPs that are first person (whether inclusive or exclusive) will perfectly match the probe
+since by definition they contain the feature [SPEAKER], and since [SPEAKER] → [PARTICIPANT] they will
+also contain the feature [PARTICIPANT] (i.e., |{SPEAKER, PARTICIPANT } ∩ {SPEAKER, PARTICIPANT, etc.}|
+/ |{SPEAKER, PARTICIPANT| = 2/2 = 1).
+       In contrast, second person DPs (whether singular or plural) will only partially match the π-probe.
+Such DPs will contain the features [ADDRESSEE] and [PARTICIPANT]. Thus, the overlap between the probe
+and the potential goal contains only one feature, and hence the resulting ranking will be .5 (|{PARTICIPANT}|
+/ |{SPEAKER, PARTICIPANT }| = 1/2 = .5). Once the ranking is established within a syntactic domain, the
+EPP feature on F0 would attract the closest highest ranked match to the specifier position of the FP.
+
+(47)     EPP Best Match: A probe ρ with an EPP feature and a search domain D moves the closest syntactic
+         object in D with a match of the highest rank n.
+
+      The interesting aspect of Mi’gmaq is not the person hierarchy itself, but rather the fact that this person
+hierarchy only surfaces with plural arguments. To explain this pattern, we hypothesize that the probes for
+number and person features are fused together and that the ranking of the potential goals are based on a
+combination of the rankings of the separate fused probes. More specifically, the fused F0 head contains not
+only the π-probe that searches for the features [SPEAKER, PARTICIPANT] but also a #-probe that searches
+for [PLURAL]. Since the number probe searches for only one feature, every potential goal will be ranked as
+1 or 0, 1 if the DP has the plural feature and 0 if it does not. However, the ranking of the potential goals is
+not determined by either the #-probe or π-probe alone. Rather, the ranking is determined by a combination
+of two probes. This can be done by multiplying the ranks of the two probes, as outlined in (48).
+
+(48)     Conjoined Match of Rank n: A syntactic object σ is a match of rank n for a fused probe ρ
+         composed of α and β, where i × j = n and where i is σ’s rank with respect to α and j is σ’s rank
+         with respect to β.
+
+If either probe ranks the potential goal as 0, then the rank of the potential goal will be 0 (for any number
+n, 0 × n = n × 0 = 0). Thus, failure with respect to one probe results in failure with respect to the fused
+probe and hence the person hierarchy effects as determined by the π-probe will only surface when the DP
+argument is a match for the #-probe.
+       As pointed out by an anonymous reviewer, there is a well-known homomorphism between propo-
+sitional conjunction and multiplication. For example, if 1 represents true and 0 false, then the results of
+multiplication mirror the results of conjunction (i.e., (1 × 1) = 1 = (1&1), (1 × 0) = 0 = (1&0), (0 × 1) =
+0 = (0&1), (0 × 0) = 0 = (0&0)). This homomorphism can be extended to multivalued logic, where propo-
+
+                                                         99
+                                        P ERSON AND NUMBER IN M I ’ GMAQ
+
+
+sitions are assigned values between 0 and 1, as equivalent to syntactic objects being assigned a match of
+rank n. Thus, the mechanics that underly a fused probe are identical to treating person and number features
+as predicates that apply to arguments (yielding a value between 0 and 1), and then conjoining the resulting
+propositional values.
+
+
+6. Summary and conclusions
+
+In this paper we presented a description and analysis of Mi’gmaq’s agreement system, with a focus on the
+interaction between person and number features. Specifically, we showed that a typical prominence hier-
+archy in which participant arguments outrank non-participants is unable to fully account for the Mi’gmaq
+facts. Rather, in Mi’gmaq, hierarchy effects depend on both person and number: the “Slot 2” agreement
+morpheme agrees with PART- PL arguments when present, and with the subject otherwise. To capture this
+we proposed a fused probe, which searches for both [PARTICIPANT] and [PLURAL] features. Independent
+evidence for the existence of this probe was found in the intransitive paradigm, in which an intermediate
+number probe is present.
+       An important part of our analysis is that though they may be useful descriptive tools, person hierar-
+chies are not part of the formal grammar. Rather, they arise as a epiphenomenon of a person probe that
+attracts the best matching argument to its specifier position. Nominals with more highly-specified features
+will naturally emerge as “higher ranked”. This explains the fact that the person hierarchy is not fixed cross-
+linguistically. Different hierarchies will emerge depending on whether the probe searches for the features
+[SPEAKER, PARTICIPANT] or [ADDRESSEE, PARTICIPANT] (1 P≫2 P vs. 2 P≫1 P). Additional variation may
+be possible when distinct probes fuse, as was shown for Mi’gmaq. Though this analysis permits us to cap-
+ture a wide range of hierarchy facts, it still makes clear predictions. Since the features for third person
+arguments are a subset of the features for participant arguments, it is not possible to have a probe that would
+produce the hierarchy 3 P≫ 1 P /2 P, for example.
+       Another consequence of our analysis is that person and number probes are not always completely
+separate. Rather, they are sometimes fused together. However, note that the fusion of the two probes is
+not equivalent to having a probe that searches for both person and number features. Such a probe could
+not account for the Mi’gmaq data. It is critical that the fused probes search and rank syntactic objects
+independently. The probes are only fused in the sense that failure to match in one probe entails failure
+for the complex probe. It is also important to note that fusion of the probes is context dependent. There
+is evidence that person and number probes remain separate in the intransitive paradigm even though they
+become fused in the transitive paradigm. Given the more widespread evidence for separating the two probes,
+a reasonable conjecture would be that the probes are always separate, and that the appearance of a single
+probe with both π and # features must always be the result of fusion, of the type we outline above.
+       One of the issues left open in the current paper is the status of -ugsi. As discussed, -ugsi marks a
+specific type of relationship between subject and object arguments, one that is similar to inverse marking in
+other Algonquian languages. In future work, we hope to address how the Mi’gmaq facts fit in to the larger
+Algonquian family, and whether number marking plays a role in these languages as well.
+
+                                                       References
+
+Anagnostopoulou, Elena. 2003. The Syntax of Ditransitives: Evidence From Clitics. Mouton de Gruyter, Berlin.
+Baker, Mark C. 1985. The Mirror Principle and morphosyntactic explanation. Linguistic Inquiry 16 3: 373–416.
+Baker, Mark C. 2011. When agreement is for number and gender but not person. Natural Language and Linguistic Theory 29 4:
+    875–915.
+Bale, Alan. to appear. To agree without AGREE: The case for semantic agreement. In Proceedings of 43rd North East Linguistics
+    Society.
+Béjar, Susana. 2003. Phi-syntax: A theory of agreement. Doctoral dissertation, University of Toronto.
+Béjar, Susana and Milan Rezac. 2003. Person Licensing and the Derivation of PCC Effects. In Romance Linguistics: Theory and
+    Acquisition, edited by Ana Teresa Perez-Leroux and Yves Roberge, pp. 49–62. John Benjamins, Amsterdam.
+Béjar, Susana and Milan Rezac. 2009. Cyclic Agree. Linguistic Inquiry 40 1: 35–73.
+
+
+                                                            100
+                                             J ESSICA C OON & A LAN BALE
+
+
+Brown, Jason, Karsten Koch, and Martina Wiltschko. 2003. The person hierarchy: primitive or epiphenomenal? evidence from
+    Halkomelem Salish. In Proceedings of 34th Northeast Linguistics Society (NELS 35). GLSA.
+Bruening, Benjamin. 2005. The Algonquian inverse is syntactic: Binding in Passamaquoddy. Ms. Delaware.
+Chomsky, Noam. 1995. The Minimalist Program. MIT Press, Cambridge, MA.
+Comrie, Bernard. 1978. Ergativity. In Syntactic Typology: Studies in the Phenomenology of Language,, pp. 329–394. University of
+    Texas Press, Austin, TX.
+Coon, Jessica and Omer Preminger. 2012. Towards a unified account of person splits. In The Proceedings of 29th West Coast
+    Conference on Formal Linguistics (WCCFL 29), edited by Jaehoon Choi, pp. 310–318. Cascadilla Press, Somerville, MA.
+Corbett, Greville G. 2000. Number. Cambridge University Press, Cambridge.
+Cowper, Elizabeth A. 2005. A note on number. Linguistic Inquiry 36 3: 441–455.
+Déchaine, Rose-Marie. 1999. What Algonquian morphology is really like: Hockett revisted. In Papers from the Workshop on Structure
+    and Constituency in Native American Langauges: MIT Occasional Papers in Linguistics, edited by Leora Bar-El, Rose-Marie
+    Déchaine, and Charlotte Reinholtz, vol. 17, pp. 25–72. MIT Working Papers in Linguistics, Cambridge, MA.
+Fry, Brandon and Michael David Hamilton. to appear. Long-distance agreement in Algonquian: Accounting for syntactic variation.
+    In Proceedings of the 50th Annual Meeting of the Chicago Linguistics Society. Chicago Linguistic Society.
+Hamilton, Michael David. 2013. An account of verbal person suffixes. Paper presented at the 45th Algonquian Conference.
+Harbour, Daniel. 2006. The elimination of geometry. Handout from talk presented at University of Toronto.
+Harley, Heidi and Elizabeth Ritter. 2002. Person and Number in Pronouns: A Feature-Geometric Analysis. Language 78 3: 482–526.
+Hewson, John. 1980. Sonorant and glide in Micmac and PIE. Regional Language Studies 9: 1–5.
+Hewson, John and Bernard Francis. 1990. The Micmac grammar of Father Pacifique. Algonquian and Iroquoian Linguistics 7.
+Kratzer, Angelika. 1996. Severing the external argument from its verb. In Phrase Structure and the Lexicon, edited by Johan Rooryck
+    and Laurie Zaring, pp. 109–137. Kluwer Academic Publishers, Dordrecht.
+Laka, Itziar. 1993. The structure of inflection: A case study in X0 syntax. In Generative Studies in Basque Linguistics, edited by
+    Jose Ignacio Hualde and Jon Ortiz de Urbina, pp. 21–70. John Benjamins, Amsterdam.
+Lasnik, Howard. 1981. On two recent treatments of disjoint reference. Journal of Linguistic Research 1 4: 48–58.
+Launey, Michel. 1981. Introduction à la langue et à la littérature aztèques, vol. 1. L’Harmatttan, Paris.
+Lochbihler, Bethany. 2012. Aspects of Argument Licensing. Ph.D. thesis, McGill University, Montréal, QC.
+Macaulay, Monica. 2005. On the 2>1 prominence hierarchy of Algonquian. In Proceedings of WIGL, pp. 1–24. LSO Working Papers
+    in Linguistics.
+McCulloch, Gretchen. 2013. Verb Stem Composition in Mi’gmaq. Master’s thesis, McGill University, Montreal, QC.
+Merchant, Jason. 2006. Polyvalent case, geometric hierarchies, and split ergativity. In Proceedings of the 42nd Annual Meeting of
+    the Chicago Linguistics Society, edited by Robert Peachey, Chris Straughn, Jackie Bunting, Sapna Desai, and Zuzana Tomkova.
+    Chicago Linguistic Society.
+Nevins, Andrew. 2011. Mulitple agree with clitics: person complementarity vs. omnivorous number. Natural Language and Linguistic
+    Theory 29: 939–971.
+Oxford, Will. 2014. Microparameters of agreement: A diachronic perspective on Algonquian verb inflection. Ph.D. thesis, University
+    of Toronto, Tortonto, Ontario.
+Oxford, Will. to appear. Multiple instances of agreement in the clausal spine: Evidence from Algonquian. In Proceedings of the 32nd
+    West Coast Conference on Formal Linguistics (WCCFL 10). Cascadilla Proceedings Project.
+Pacifique, Pére. 1939. Lecons grammaticales théoriques et pratiques de la langue micmaque. Global Language Press, Toronto.
+Preminger, Omer. 2012. Partial agreement and the direction of valuation. Paper presented at McGill Ling-Lunch.
+Preminger, Omer. 2014. Agreement and Its Failures. MIT Press, Cambridge, MA.
+Shlonsky, Ur. 1989. The hierarchical representation of subject-verb agreement. Ms. Haifa, Univeristy of Haifa.
+SigurDsson, Halldór Ármann. 1996. Icelandic Finite Verb Agreement. Working Papers in Scandinavian Syntax 57: 1–46.
+SigurDsson, Halldór Ármann and Anders Holmberg. 2008. Icelandic dative intervention: Person and Number are separate probes.
+    In Agreement Restrictions, edited by Roberta D’Alessandro, Susann Fischer, and Gunnar Hrafn Hrafnbjargarson, pp. 251–280.
+    Mouton de Gruyter, Berlin.
+Taraldsen, Knut Tarald. 1995. On agreement and nominative objects in Icelandic. In Studies in Comparative Germanic Syntax, edited
+    by Hubert Haider, Susan Olsen, and Sten Vikner, pp. 307–327. Kluwer Academic Publishers, Dordrecht: The Netherlands.
+Valentine, Rudolph J. 2001. Nishnaabemwin Reference Grammar. University of Toronto Press, Toronto.
+Wolfart, H. Christoph. 1973. Plains Cree: A grammatical study. Transactions of the American Philosophical Society 63 5.
+Wolfart, H. Christoph and Janet Carroll. 1981. Meet Cree: A guide to the Cree language. University of Nebraska Press, Lincoln.
+Zúñiga, Fernando. 2006. Deixis and alignment: Inverse systems in indigenous languages of the Americas. John Benjamins, Amster-
+    dam.
+
+
+
+
+                                                               101
+

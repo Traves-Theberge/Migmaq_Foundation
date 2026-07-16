@@ -1,0 +1,114 @@
+Alan Bale (Concordia University) & Jessica Coon (McGill University)                                         Saturday 11:45
+                        C LASSIFIERS ARE FOR NUMERALS , NOT FOR NOUNS :
+                              E VIDENCE FROM M I ’ GMAQ AND C HOL
+
+     Krifka (1995) and Chierchia (1998) provide two very different accounts of the theoretical distinction
+ between classifier and non-classifier languages. Chierchia links the distinction to the nominal system:
+ non-classifier languages have a mass-count distinction while classifier languages do not. Krifka suggests
+ that the difference lies in the the numeral system: classifier languages separate the measure function from
+ the numerals whereas non-classifier languages have a measure function incorporated into the numerals.
+ To account for languages that optionally use classifiers (as in Western Armenian (WA), Donabédian
+ 1993), both of these theories need to hypothesize massive ambiguities: Chierchia, ambiguities in
+ the nominal system, Krifka in the numeral system. However, if this type of ambiguity is permitted,
+ according to these theories, the same type of variation that exists across languages could exist within a
+ single language. As a result, the two theories make different predictions with respect to cross-linguistic
+ variation: Krifka predicts idiosyncratic behaviour among the numerals, whereas Chierchia’s theory is
+ inconsistent with such a pattern.
+     This paper brings original data to bear on this question from Chol, a Mayan language spoken
+ in southern Mexico, and Mi’gmaq, an Algonquian language of eastern Canada. We show that both
+ languages demonstrate idiosyncrasies in the numeral system that are uniquely consistent with Krifka’s
+ theory. Furthermore, these results have interesting consequences for the mass-count distinction. As
+ discussed in Wilhelm (2008), Krifka’s theory, unlike Chierchia’s, treats the classifier/non-classifier
+ distinction as being theoretically independent of the syntactic mass-count distinction. We claim,
+ however, that once classifier systems are treated as theoretically separate from the mass-count
+ distinction, the mass-count distinction is more accurately described as a division between singular and
+ non-singular denotations.
+ Nouns vs. Numerals: There are two main theoretical accounts of the contrast between languages with
+ a rich classifier system and those without. One, defended by Chierchia (1998), maintains a uniform
+ interpretation of the numerals but hypothesizes a difference in the nominal system. According to this
+ theory, languages like English have two categories of nouns, one that is directly compatible with numeral
+ modification (so-called count nouns) and another that is not (mass nouns). Languages like Mandarin
+ have only one category of noun, and this category is not directly compatible with numeral modification.
+ Classifiers are needed to convert nouns into a form that can combine with numerals. See (1), where liang
+ is Mandarin for ‘two’ and ge is a classifier.
+      (1)   Chierchia-like Numerals (simplified)                 (2)   Krifka-like Numerals (simplified)
+            Jtwo/liangK = λP : ∀x ∈ P(AT OM(x)).µ# (P) ≥ 2             JtwoK = λP : ∀x ∈ PATOM(x).µ# (P) ≥ 2,
+            JgeK is a function from kinds to sets of atoms             JliangK = λmλP.m(P) ≥ 2, JgeK = µ#
+
+ The other theory, defended by Krifka (1995) as well as Wilhelm (2008), hypothesizes that there are two
+ different types of numeral interpretations cross-linguistically. There are numerals that have a measure
+ function (or individuation function) as part of their semantic interpretations, and those that do not.
+ The ones that do not, require the introduction of a syntactically independent measure function, see (2).
+ Hence, this type numeral needs to combine with classifiers, whereas the other type does not. As noted
+ by Krifka, there is very little evidence internal to English and Mandarin that would favour one theory
+ over another.
+ Ambiguity: WA presents an interesting case study (Donabédian 1993). Unlike English or Mandarin,
+ the presence or absence of a classifier is completely optional. For example, the numeral yergu ‘two’ can
+ combine with d@gha ‘boy’ directly, see (3), or via a classifier, see (4).
+      (3)   yergu d@gha                                          (4)   yergu had d@gha
+            two boy                                                    two CL boy
+ If both the noun and numeral have a univocal (unambiguous) interpretation, then neither theory can
+ account for this data. However, if ambiguity is permitted, both theories can explain this optionality,
+ although via completely different means. Chierchia could hypothesize that the noun d@gha is ambiguous,
+ having one meaning that permits the noun to combine directly with numerals and another that requires
+ a classifier. Krifka could hypothesize that the numeral yergu is ambiguous, having one meaning that
+
+
+                                                             1
+Alan Bale (Concordia University) & Jessica Coon (McGill University)                          Saturday 11:45
+                     C LASSIFIERS ARE FOR NUMERALS , NOT FOR NOUNS :
+                           E VIDENCE FROM M I ’ GMAQ AND C HOL
+
+ incorporates a measure/individuation function and another that does not (see Borer 2005 for a similar
+ proposal). Data within WA itself, however, does not conclusively favour one theory over the other.
+ Chol and Mi’gmaq: Although the noun-centred and numeral-centred analyses largely make the same
+ predictions in languages like WA, where classifiers are optional, the two theories make different
+ predictions with respect to other languages. For example, the numeral-centred theory would predict the
+ possibility of idiosyncratic patterns in the numeral domain, where some numerals incorporate a measure
+ function and others do not. The noun-centred theory is inconsistent with such a pattern. Mi’gmaq bears
+ out the predictions of the numeral-centred account: numerals 1–5 do not appear with classifiers, while
+ numerals 6 and higher must. Compare the forms in (5) and (6): in (5a) the numeral na’n ‘five’ combines
+ directly with the noun and even acquires nominal agreement morphology, like other modifiers in the
+ language. The classifier te’s is impossible (5b). In contrast, the numeral asugom ‘six’ cannot combine
+ directly with a noun (6a) but rather must appear with the classifier te’s (6b).
+      (5)   a.     na’n-ijig jinm-ug                     (6)   a.   * asugom-ijig jinm-ug
+                   five-AGR man-PL                                    six-AGR     man-PL
+            b.   * na’n te’s-ijig jinm-ug                      b.    asugom te’s-ijig jinm-ug
+                   five CL - AGR man-PL                              six    CL - AGR man-PL
+
+ Chol is another language that demonstrates idiosyncratic behaviour in the numeral system. Although
+ many older speakers still command the full Mayan base-twenty numerical system, Spanish numerals
+ are increasingly used among younger speakers. These younger speakers generally know and use Chol
+ numerals only for numbers 1–6, 10, 20, 40, 60, 80, 100, and 400, the latter used for counting during the
+ corn harvest (Vázquez Álvarez 2011, 180). Otherwise they use number words borrowed from Spanish.
+ As shown in (7), the Mayan numerals, like cha` ‘two’, require a classifier (which morphologically
+ attaches to the numerals). In contrast, the Spanish-based numerals, like nuebe ‘nine’, cannot be used
+ with classifiers, as shown in (8).
+      (7)   a.     cha`-p’ej tyumuty                     (8)   a.   * nuebe-p’ej tyumuty
+                   two-CL egg                                         nine-CL    egg
+            b.   * cha` tyumuty                                b.    nuebe tyumuty
+                   two egg                                           nine egg
+ To account for the ungrammaticality of forms (5b), (6a), (7b) and (8a), Chierchia’s theory would need
+ to hypothesize that nouns in Mi’gmaq and Chol, like jinmug ‘men’ and tyumuty ‘egg’ are ambiguous,
+ having one interpretation that requires classifiers and another that does not. However, if these nouns
+ are ambiguous in this respect then the ungrammatical forms are unexpected. Under an ambiguity-in-
+ nominals account either noun interpretation option should be available.
+ Consequences: The numeral systems in Chol and Mi’gmaq provide support for Krifka’s account of
+ classifier systems, in which classifiers are required by the numerals, not by the nature of nouns. As noted
+ by Wilhelm, Krifka’s account does not depend on there being a syntactic mass-count distinction in the
+ nominal system. The need or lack of classifiers instead depends only on whether numerals incorporate
+ their measure function or not. Whether the incorporated or unincorporated measure functions require
+ their nominal argument to denote a set of atoms (“count”) or a kind (“mass”) relies on the nature of
+ measurement, rather than on the presence or absence of classifiers. This brings into question how useful
+ it is to identify a language as having or not having a grammatical mass-count distinction in the first
+ place. Traditionally, the mass-count distinction was thought to involve a cluster of properties, including
+ the distribution of numeral and quasi-numeral quantifiers as well as a contrast between singular and
+ plural denotations. We conclude that this distinction instead reduces to whether a noun can be lexically
+ interpreted as singular, not to a distinction based on a cluster of properties involving numerals and other
+ quantifier distributions.
+ Select References: Chierchia, G. 1998. Reference to kinds across languages. NLS 6:339–405. Krifka,
+ M. 1995. Common nouns: A contrastive analysis of English and Chinese. In The generic book, 398–411.
+ U Chicago Press. Wilhelm, A. 2008. Bare nouns and number in Dëne Su̧łiné. NLS 16:39–68.
+
+                                                     2
+

@@ -1,0 +1,148 @@
+:root {
+  --bg: #fbfaf7;
+  --fg: #20201c;
+  --muted: #68645c;
+  --accent: #75613b;
+  --line: #e2ddd1;
+  --code: #f0ece2;
+  --panel: #fffefa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171711;
+    --fg: #ece8dd;
+    --muted: #aaa397;
+    --accent: #d0b06f;
+    --line: #343126;
+    --code: #242117;
+    --panel: #1f1d15;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 58rem;
+  padding: 2rem 1.25rem 5rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2.1rem;
+}
+
+h2 {
+  margin-top: 2.4rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.45rem;
+}
+
+h3 {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+code {
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+  background: var(--code);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--code);
+}
+
+pre code {
+  padding: 0;
+  background: transparent;
+}
+
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--panel);
+}
+
+blockquote,
+#TOC {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+#TOC {
+  padding: 1rem 1.2rem;
+}
+
+#TOC::before {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+  content: "Contents";
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#TOC ul {
+  margin: 0.25rem 0;
+  padding-left: 1.25rem;
+}
+
+#TOC a {
+  text-decoration: none;
+}
+
+hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+}

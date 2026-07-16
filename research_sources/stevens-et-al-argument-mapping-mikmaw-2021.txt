@@ -1,0 +1,645 @@
+                       ARGUMENT MAPPING IN MI’KMAW*
+         Arlene Stevens, Yvonne Denny, Barbara Sylliboy, and Dianne Friesen
+Ta’n L’nuey Etl-mawlukwatmumk (TLE), Eskasoni Band, TLE, and University of Victoria
+
+
+This paper demonstrates how arguments are introduced and mapped to grammatical
+positions in Mi’kmaw. We build on insights from Piggott (1989), Wiltschko (2014), and
+Harley (2017) and use a corpus of over 150 verb stems in 1500+ clauses, focusing on 77
+verb stems in bivalent clauses. We propose that Mi’kmaw verb stems are unaccusative or
+unergative. Three functional categories, little v, Animacy agreement, and Voice,
+introduce the other argument and then map the arguments to grammatical positions. We
+illustrate active, passive, and antipassive constructions. This argument-building and
+mapping system works without exception throughout the language. Our work represents a
+fresh analysis of Mi’kmaw which accounts for transitivity and grammatical voice in a
+way that the traditional Bloomfieldian analysis has not.
+
+1.       Methodology
+
+The first three authors of this paper are speakers of Mi’kmaw as their first language and
+the fourth is a learner. Our research is done in the context of developing Mi’kmaw
+immersion curriculum at the TLE Centre1 and Friesen’s language learning. Our corpus of
+77 verb stems is part of a larger study of 150+ verb stems in 1500+ sentences (Friesen, to
+appear). The 77 stems are chosen because they occur with little v morphemes -a or -a’ in
+bivalent clauses. We elicit as many different sentences as possible with the same verb
+stem, focusing our attention on the morphemes between stem and inflection in different
+transitivity contexts. We use these as a base for further discussions to investigate the
+functions of the morphemes in the verb and how they relate to the participants in the
+clause. Specifically, for the 77 stems, we look at combinations of categories and the
+authors who are speakers discuss whether each combination is grammatical and what are
+the clausal elements. We consider only verbs in present indicative tense (Francis and
+Hewson 2016) / realis mood (Inglis 2002). Generative terminology is employed to be
+consistent with much Algonquian work.
+
+
+
+* We honour the life and work of our colleague Elizabeth Paul Ryan, who passed away in December 2019.
+Her expertise and insights as a speaker and teacher of the Mi’kmaw language and as an orthography
+consultant are invaluable and she is sorely missed. We are grateful to Friesen’s doctoral committee: Drs.
+Leslie Saxon, Heather Bliss, Charlotte Loppie, and Barbara Syllibo y for their guidance, insights, and
+encouragement and especially to Dr. Saxon for her input as Friesen’s supervisor. We appreciate the insights
+of others who have worked on Mi’kmaw verb morphology, especially Dr. Stephanie Inglis and the McGill
+group. This work is partially supported by a SSHRC doctoral fellowship.
+1 The TLE is a curriculum-building centre in Eskasoni, Nova Scotia.
+
+
+
+
+Actes du congrès annuel de l’Association canadienne de linguistique 2021.
+Proceedings of the 2021 annual conference of the Canadian Linguistic Association.
+© 2021 Arlene Stevens, Yvonne Denny, Barbara Sylliboy, and Dianne Friesen
+                                                                                           2
+
+
+
+         Three factors in our methodology are key to our results. First, we use Indigenous
+methodology involving a close collaboration between linguist and speakers as discussed
+in Wilson (2007), Czaykowska-Higgins (2009), Leonard and Haynes (2010), and Adams
+et al. (2015). Second, we systematically investigate how the three functional categories
+(little v, Animacy, and Voice) pattern with a large number of verb stems. Third, we study
+the syntax of the verbs in complete clauses. We study transitive and intransitive clauses
+that contain the same verb stem.
+
+2.     Findings
+
+We discuss bivalent clauses to limit the study to a manageable size. Section 2.1 discusses
+our analysis of three functional categories intervening between the verb stem and the
+inflection. Our diagnostics for bivalent clauses are shown in section 2.2. Section 2.3
+employs the diagnostics for the presence of an agent to demonstrate unergative and
+unaccusative verb classes in Mi’kmaw. Section 2.4 demonstrates that little v selects stems
+according to unaccusativity. Section 2.5 uses the diagnostics for valency to demonstrate
+that the little v-Animacy agreement combination introduces either an internal or external
+argument. The Animacy-Voice combination maps these arguments to grammatical roles
+(section 2.6).
+
+2.1     Three functional categories
+
+We parse three functional categories intervening between the verb stem and the
+inflection: little v, Animacy agreement, and Voice (cf. Stevens et al. 2021). Our analysis
+of three functional categories is in contrast to previous researchers in Mi’kmaw or in
+other Algonquian languages. The introduction of the Animacy category as distinct from v
+and Voice is suggested by the different manners that the Mi’kmaw verb is parsed by
+different researchers, as is illustrated in Table 1.
+
+               Table 1. Parsing of Mi’kmaw verb by different researchers
+
+ Reference                             Parsing                   Gloss
+ Inglis (1986:285)          amal-lukw    -at    -m               ‘decorate’
+ Fidelholtz (1999:101)      amallukwa-        -tm                ‘decorate up’
+ Hamilton (2015:34)         elukw-         -atm         -u-i-t   ‘s/he fixes it for me’
+ Our analysis               elukw-     -a -t -m                  ‘I am working [on] it.’
+
+        Inglis (1986) (and McCulloch 2013) follow the Bloomfieldian analysis in treating
+-at as one morpheme. Fidelholtz (1999) merges the -a with the verb stem and considers
+-tm as being one morpheme. Hamilton (2015, cf. Bruening 2001 for Passamaquoddy)
+considers -atm as one morpheme. Our analysis recognises all of these morpheme
+boundaries and parses stem-v-Animacy-Voice.
+                                                                                         3
+
+
+
+       The 77 stems in our study occur with two little v morphemes (-a and -a’), two
+Animacy morphemes (-t and -l), and three Voice morphemes (-m, -u, and -eke). Friesen
+(to appear) presents the more in-depth analysis.
+
+2.2     Diagnostics for agent and patient arguments
+
+We employ two diagnostics for the presence of an agent: (1) the ability of the intransitive
+verb to form an imperative and (2) the grammaticality of the intransitive form with an
+agent-oriented preverb. Crosslinguistic evidence shows that agents are invariably mapped
+to subject position (Dowty 1979, 1991), which is the position of the external argument.
+We assume that if we find evidence for an agent in Mi’kmaw in the intransitive form, we
+can conclude that the root is associated with an external argument. If we find no evidence
+for an agent, we assume the presence of an internal argument. The first diagnostic, ability
+of the intransitive verb to form an imperative, is based on the fact that semantically and
+pragmatically, imperatives require an agent, or equivalently under our assumptions, an
+external argument. Through this reasoning, it follows that imperatives are diagnostics for
+the presence of an external argument. If the imperative form of a particular verb root is
+grammatical in its intransitive form, then we conclude that the verb root is associated
+with an external argument; if the imperative is ungrammatical, we conclude that it lacks
+an external argument. For the second diagnostic, we employ the agentive adverbial
+preverb o’pli- ‘wrongly’ again with the intransitive verb. Using the same reasoning as
+above, we conclude that roots whose intransitive forms are not grammatical with this
+preverb are not associated with an external argument but instead are associated with an
+internal argument.
+        We use the patient-oriented preverb a’qati- ‘halfway’ as a diagnostic for the
+presence of a patient. We apply this diagnostic to antipassive clauses to demonstrate that
+they are associated with a patient argument, even though that argument is unspecified in
+the clause.
+        We determine the valence of clauses using two diagnostics. First, the Mi’kmaw-
+speaking coauthors judge the number of participants in each clause. Second, we
+determine the presence of an agent by compatibility of the verb with the agentive preverb
+o’pli- ‘wrongly.’ Likewise, we determine the presence of a patient argument by
+compatibility of the verb with the patientive preverb a’qati- ‘halfway.’
+
+2.3    Mi’kmaw stem classes: unaccusative and unergative
+
+We propose in Sylliboy et al. (in press) that Mi’kmaw verb stems are classified according
+to unaccusativity; verb stems are either unaccusative or unergative.
+       We review the results from the diagnostics for unergative and unaccusative stems
+from our previous work in Sylliboy et al. (in press). Diagnostics show the presence of an
+agent with some stems. (1) illustrates the stem wissukw- ‘cook.’ (1a) illustrates the
+imperative form and (1b) the intransitive form with the agentive preverb o’pli- ‘wrongly.’
+                                                                                                            4
+
+
+
+The grammaticality of these forms indicates the presence of an agent according to our
+diagnostics in section 2.2.2
+
+(1)     a.       wissukw-a-Ø
+                 cook-v-2sIMP
+                 ‘Cook!’
+
+        b.       o’pli-wissukw-a-Ø-Ø-y
+                 wrongly-cook-v-Animacy-Voice-1s
+                 ‘I am wrongly cooking.’
+
+        In contrast, the diagnostics show the absence of an agent with other stems. (2)
+illustrates the stem ik- ‘arrive’/’put.’ The imperative form is ungrammatical (2a) and an
+intransitive clause is incompatible with the agentive preverb (2b).
+
+(2)     a.       *ik-a’-Ø
+                 arrive-v-2sIMP
+                 Intended: ‘Arrive!’
+
+
+        b.       *o’pli-ik-a’-Ø-Ø-y
+                 wrongly-arrive-v-Animacy-Voice-1s
+                 Intended: ‘I am wrongly arriving.’
+
+       We conclude that the stem wissukw- ‘cook’ is associated with an external
+argument and the stem ik- ‘arrive’/’put’ is associated with an internal argument. Our
+corpus of 77 stems includes 14 ergative stems and 63 unaccusative stems.
+
+2.4     Little v selects stems according to unaccusativity
+
+The little v morphemes -a and -a’ select stems according to whether the stem is
+associated with an external or internal argument. -a selects unergative stems and is
+ungrammatical with unaccusative stems. In contrast, -a’ selects unaccusative stems and is
+ungrammatical with unergative stems (Table 2).
+
+
+
+
+2
+ Abbreviations are: 1 = first person, 3 = third person, 1s>3s = a 1s subject and 3s object, AN = Animate,
+IN = inanimate, IMP = imperative, LOC = locative suffix, s = singular, v = little v category.
+                                                                                                             5
+
+
+
+                      Table 2. -a and -a’ select different stems in bivalent verbs
+
+                          v-Animacy                     Stem class
+                                             unergative       unaccusative
+                          -a                 ✓                *
+                          -a’                *                ✓
+
+           (3) and (4) show two representative examples. 3
+
+(3)        a.        wissukw-a-l-Ø-k                               jakej
+                     cook-v-Animacy-Voice-1s>3s                    lobster(AN)
+                     ‘I am cooking lobster.’
+
+           b.        *wissukw-a’-l-Ø-k                             jakej
+                     cook-v-Animacy-Voice-1s>3s                    lobster(AN)
+                     Intended: ‘I am cooking lobster.’
+
+(4)        a.        ik-a’-l-Ø-k                           ila’skw                    pataluti-iktuk
+                     arrive-v-Animacy-Voice-1s>3s          card(AN)                   table-LOC
+                     ‘I am putting the card on the table.’
+
+           b.        *ik-a-l-Ø-k                           ila’skw                    pataluti-iktuk
+                     arrive-v-Animacy-Voice-1s>3s          card(AN)                   table-LOC
+                     Intended: ‘I am putting the card on the table.’
+
+      We conclude that the little v morphemes -a and -a’ select stems according to their
+unaccusativity.
+
+2.5        Little v-Animacy introduces either an external or internal argument
+
+We demonstrate in Sylliboy et al. (in press) that the Mi’kmaw “final” -at adds an internal
+argument to an unergative verb stem and -a’t adds a causer argument to an unaccusative
+verb root. Here we reproduce our results, parsing what Sylliboy et al. (in press) presented
+as a “final” as the little v-Animacy combinations -a-t and -a’-t.4
+      We compare the monovalent (a) and bivalent (b) forms of the unergative stem
+wissukw- ‘cook’ in (5).
+
+
+
+3
+    In (4) some speakers write pataluti and others petawti for ‘table.’ Likewise, for (6b), (8), and (12).
+4
+  In Sylliboy et al. (in press) we employ the standard Algonquian term “final” to conform to the
+terminology in the broader Algonquian literature. Here, we use our more articulated analysis which parses
+the Algonquian “final” as two functional categories: little v and Animacy agreement. This parsing is crucial
+to understanding the complete picture of argument-building and argument-mapping in Mi’kmaw verbs.
+                                                                                                               6
+
+
+
+(5)      a.       wissukw-a-Ø-Ø-y
+                  cook-v-Animacy-Voice-1s
+                  ‘I am cooking.’
+
+         b.       wissukw-a-t-m-Ø                       wius
+                  cook-v-Animacy-Voice-1s               meat(IN)
+                  ‘I am cooking meat.’
+
+       We conclude that -a-t introduces an internal argument to unergative verb stems. 5
+       (6) illustrates the unaccusative pattern with the unaccusative stem ik- ‘arrive’/’put.’
+
+(6)      a.       ik-a’-Ø-Ø-y               jikan-k
+                  arrive-v-Animacy-Voice-1s town-LOC
+                  ‘I arrive to town.’
+
+         b.       ik-a’-t-u-Ø                   wasuek                     pataluti-iktuk
+                  arrive-v-Animacy-Voice-1s flower(IN)                     table-LOC
+                  ‘I am putting the flower on the table.’
+
+     We conclude that -a’-t introduces an external (causer) argument to unaccusative
+stems. These clauses are prototypical causatives according to the criteria set out by
+Zúñiga and Kittilä (2019) (see Sylliboy et al. 2020 and Sylliboy et al. in press for
+argumentation).
+
+2.6      Animacy-Voice maps arguments to grammatical roles
+
+We demonstrate in this section that the Animacy-Voice combination expresses
+grammatical voice in Mi’kmaw; i.e., how the arguments are mapped to grammatical
+roles. We first demonstrate this system in Paul et al. (2019). Argument-mapping in
+Mi’kmaw is a straight-forward system where the combination of the Animacy morpheme
+with the Voice morpheme yields without exception a particular grammatical voice. We
+illustrate active, passive, and antipassive voice. We concentrate on bivalent constructions
+and show examples with each stem class.6
+
+5
+  We show in Sylliboy et al. (in press) that the Voice morpheme is not involved in the introduction of the
+internal argument.
+6
+  Grammatical voice is the mechanism by which noun phrases are assigned to syntactic positions in the
+clause (Gerdts 2011). A prototypical antipassive is defined by Zúñiga and Kittilä (2019:103) as having four
+characteristics: (1) the transitivity is one less than a non-antipassive counterpart, (2) the subject corresponds
+to the agent-like argument of a bivalent predicate of the non-antipassive, (3) its peripheral or optional
+argument corresponds to the patient-like argument of a bivalent predicate of the non-antipassive, and (4) it
+is formally coded on the predicate complex. We use the term ‘passive’ to identify a clause in which an
+unspecified Agent performs or causes the event expressed by the verb. The prototypical passive has four
+features according to Zúñiga and Kittilä (2019:83): (1) the clause has one less grammatical participant than
+the active counterpart, (2) the subject of the passive corresponds to the non-subject patient-like argument of
+                                                                                                              7
+
+
+
+       (7) illustrates the unergative stem wissukw- ‘cook’ in active (a), antipassive (b)
+and passive (c) voice.
+
+(7)      a.       wissukw-a-t-m-Ø                      wius
+                  cook-v-Animacy-Voice-1s              chair(IN)
+                  ‘I am cooking the meat.’
+
+         b.       wissukw-a-t-eke-y
+                  cook-v-Animacy-Voice-1s
+                  ‘I am cooking [stuff].’
+
+         c.       wissukw-a-l-u-t                jakej
+                  cook-v-Animacy-Voice-3s lobster(AN)
+                  ‘The lobster is being cooked.’
+
+        -t-m expresses active voice (a). The causer external argument is mapped to subject
+and the internal argument is mapped to object. -t-eke expresses antipassive voice. The
+causer external argument is mapped to subject and the internal argument is unspecified
+(b). -l-u expresses passive voice. The internal argument is mapped to subject and the
+causer external argument is unspecified (c).
+        (8) illustrates the unaccusative stem ik- ‘arrive’/’put’ in active (a), antipassive (b)
+and passive (c) voice.
+
+(8)      a.       ik-a’-t-u-Ø                    kutputi                 pataluti-iktuk
+                  arrive-v-Animacy-Voice-1s chair(IN)                    table-LOC
+                  ‘I am putting the chair onto the table.’
+
+         b.       ik-a’-t-eke-y
+                  arrive-v-Animacy-Voice-1s
+                  ‘I am putting [money] down.’ (betting)
+
+         c.       ik-a’-l-u-t                    ila’skw                 pataluti-iktuk
+                  clean-v-Animacy-Voice-3s card(AN)                      table-LOC
+                  ‘The card is being put on the table.’
+
+        -t-u expresses active voice (a). The causer external argument is mapped to subject
+and the internal argument is mapped to object. -t-eke expresses antipassive voice. The
+causer external argument is mapped to subject and the internal argument is unspecified
+(b). -l-u expresses passive voice. The internal argument is mapped to subject and the
+causer external argument is unspecified (c).
+
+
+the active, (3) a peripheral argument, if present, corresponds to the subject agent-like argument of active
+voice, and (4) passivization is formally coded on the predicate complex.
+                                                                                                          8
+
+
+
+        These are prototypical passive and antipassive constructions according to the
+criteria of Zúñiga and Kittilä (2019).
+        The antipassive and passive forms are both bivalent according to diagnostics from
+section 2.2. First, the Mi’kmaw-speaking coauthors judge that there is one participant in
+the clause in (5a) and (6a) from section 2.5 and two participants in the clause in ( 5b) and
+(6b) as well as all clauses in (7) and (8) above.
+       Second, compatibility with the patientive preverb a’qati- ‘halfway’ indicates
+presence of a patient argument in the antipassive and compatibility with the agentive
+preverb o’pli- ‘wrongly’ indicates presence of an agent argument in the passive. We
+illustrate using both stem classes in (9)-(12). First, we consider the antipassive of the
+stem wissukw- ‘cook’ shown in (7b). In this antipassive clause, only the 1s agent is
+specified. We need to establish that there is also a patient in the clause. We do it by
+showing that we can use the preverb a’qati- ‘halfway’ (9).
+
+(9)      a’qati-wissukw-a-t-eke-y
+         halfway-cook-v-Animacy-Voice-1s
+         ‘I am halfway cooking [stuff].’
+
+      The coauthors who are Mi’kmaw speakers indicate that they would use this
+sentence if they shut off the stove when things are only halfway cooked. Because the
+clause is compatible with a’qati-, we know the clause has a patient even though the
+patient is unspecified in the clause.7
+      The passive shown in (7c) is also compatible with the agentive preverb o’pli-
+‘wrongly’ (10).
+
+(10)     o’pli-wissukw-a-l-u-t               jakej
+         wrongly-cook-v-Animacy-Voice-3s lobster(AN)
+         ‘The lobster is being wrongly cooked.’
+
+      The compatibility implies the presence of an agent. We conclude that both
+antipassive and passive clauses are bivalent.
+      Similarly, we apply the diagnostics to the antipassive and passive voice clauses
+with the unaccusative stem ik- ‘arrive’/’put.’ (11) illustrates that the antipassive is
+compatible with the patientive preverb a’qati- ‘halfway.’
+
+(11)     a’qati-ik-a’-t-eke-y
+         halfway-cook-v-Animacy-Voice-1s
+         ‘I am halfway putting [money] down.’
+
+7
+  We thank Martha McGinnis (p.c. June 2021) for her comment during our conference presentation that it
+could be that the addition of the preverb a’qati- ‘halfway’ simply means that the goal of cooking is halfway
+reached, and not that a patient argument is diagnosed. Further discussions with speakers indicate that using
+the monovalent form with past tense/finished aspect is more compatible with the goal o f cooking being
+halfway reached, and a patient argument is indeed implied with the antipassive.
+                                                                                                            9
+
+
+
+      The coauthors who are Mi’kmaw speakers say that the context for (11) is where, for
+example, the speaker has 100 dollars and bets 50 of it.8 Because the clause is compatible
+with a’qati- ‘halfway,’ we conclude that the clause has a patient even though the patient
+is unspecified in the clause.
+      The passive is also compatible with the agentive preverb o’pli- ‘wrongly’ (12).
+
+(12)    o’pli-ik-a-l-u-t                     l’mu’j                    pataluti-iktuk
+        wrongly-arrive-v-Animacy-Voice-3s dog(AN)                      table-LOC
+        ‘The dog is being wrongly put on the table.
+
+      The Mi’kmaw-speaking coauthors indicate that someone might tell them this if the
+veterinarian asked them to put their dog on a table and they were putting the dog on the
+wrong table. The compatibility with the agentive preverb indicates that the clause has an
+agent.
+      We conclude that antipassive and passive clauses are bivalent. The Animacy-Voice
+combinations -t-u and -t-m express active voice. -t-eke expresses antipassive voice and
+-l-u expresses passive voice. Table 3 summarises.
+
+           Table 3. The Animacy-Voice combination expresses grammatical voice
+
+                    Animacy-Voice             Grammatical voice
+                    -t-u                      active
+                    -t-m                      active
+                    -t-eke                    antipassive
+                    -l-u                      passive
+
+      There are other active, passive, and antipassive constructions in Mi’kmaw (Friesen
+to appear).
+
+3.      Discussion
+
+In this paper we report on 77 stems in Mi’kmaw that occur in bivalent clauses with the
+little v morphemes -a and -a’, the Animacy morphemes -t and -l, and the Voice
+morphemes -m, -u, and -eke. We find that verb stems are classified as unergative or
+unaccusative. The little v morphemes -a and -a’ select these stems according to their
+unaccusativity: in bivalent clauses, -a selects unergative stems and -a’ selects
+unaccusative stems. The little v-Animacy combination introduces another argument.
+-a-t/-a-l introduces an internal argument to a stem that associates with an external
+argument. -a’-t/-a’-l introduces a causer external argument to a stem that associates with
+
+8
+ With regards to the comment in the previous footnote, an aspectual interpretation is much more difficult
+with this stem. There is no idea that the speaker has a goal of betting the entire $100 and so has only
+halfway reached that goal.
+                                                                                       10
+
+
+
+an internal argument. The Animacy-Voice combination maps these arguments to
+grammatical roles to yield grammatical voice.
+         This argument-building and mapping system works without exception throughout
+the language. To illustrate, we show minimal quintuplets from our larger study of 100
+verb stems (Friesen to appear) which also includes a larger number of little v, Animacy,
+and Voice morphemes. These are bolded in the examples. (13)-(17) illustrate the
+unergative stem kes- ‘like’/‘love’ selected by the little v morpheme -a. In each case, the
+little v-Animacy combinations -a-t and -a-l add an internal argument. (13) and (14) show
+active voice. The Animacy-Voice combinations -t-m and -l-Ø map the external argument
+to subject and the internal argument to object.
+
+(13)   kes-a-t-m-Ø                     wasuek
+       like-v-Animacy-Voice-1s         flower(IN)
+       ‘I like the flower.’
+
+(14)   kes-a-l-Ø-k                mijua’ji’j
+       like-v-Animacy-Voice-1s>3s child(AN)
+       ‘I like the child.’
+
+       (15) and (16) illustrate antipassive voice. The Animacy-Voice combinations -t-eke
+and -l-ue map the external argument to subject and render the internal argument
+unspecified.
+
+(15)   kes-a-t-eke-y
+       like-v-Animacy-Voice-1s
+       ‘I am having an affair.’ (‘I like [stuff]).’
+
+(16)   kes-a-l-ue-y
+       like-v-Animacy-Voice-1s
+       ‘I like [people].’
+
+      (17) shows passive voice. The Animacy-Voice combination -l-u maps the internal
+argument to subject and renders the external argument unspecified.
+
+(17)   kes-a-l-u-t                     mijua’ji’j
+       clean-v-Animacy-Voice-3s        child(AN)
+       ‘The child is loved.’
+
+        Next, we illustrate a minimal quintuplet using the unaccusative stem kesisp-
+‘wash’ selected by the little v morpheme -a’ (18)-(22). In each case, the little v-Animacy
+combinations -a’-t and -a’-l add an external (causer) argument. (18) and (19) show active
+voice. The Animacy-Voice combinations -t-u and -l-Ø map the external argument to
+subject and the internal argument to object.
+                                                                                          11
+
+
+
+(18)   kesisp-a’-t-u-Ø                        kutputi
+       wash-v-Animacy-Voice-1s                chair(IN)
+       ‘I am washing the chair.’
+
+(19)   kesisp-a’-l-Ø-k                        l’mu’j
+       wash-v-Animacy-Voice-1s>3s             dog(AN)
+       ‘I am washing the dog.’
+
+       (20) and (21) illustrate antipassive voice. The Animacy-Voice combinations -t-eke
+and -l-ue map the external argument to subject and render the internal argument
+unspecified.
+
+(20)   kesisp-a’-t-eke-y
+       wash-v-Animacy-Voice-1s
+       ‘I am washing [the floor].’
+
+(21)   kesisp-a’-l-ue-y
+       wash-v-Animacy-Voice-1s
+       ‘I am a person who washes [people].’
+
+      (22) shows passive voice. The Animacy-Voice combination -l-u maps the internal
+argument to subject and renders the external argument unspecified.
+
+(22)   kesisp-a’-l-u-t                l’mu’j
+       wash-v-Animacy-Voice-3s        dog(AN)
+       ‘The dog is being washed.’
+
+        We see that the system of grammatical voice works independently of the stem
+class and the little v morpheme.
+        Our work builds on and extends previous Algonquian research and represents a
+fresh analysis of Mi’kmaw verbs. To our knowledge, we are the first to present
+systematic evidence for unaccusativity as the basis for classifying verb stems in the
+Algonquian family. In several Algonquian languages, linguists argue that roots are
+associated with an argument in intransitive clauses (e.g., Hirose 2003 for Plains Cree,
+Ritter and Rosen 2010 for Blackfoot, Brittain and Acton 2014 for Northern East Cree,
+Brittain 2014 for Cree-Montagnais-Naskapi, and Tollan and Oxford 2018 for Plains Cree
+and Oji-Cree) and Piggott (1989) argues for argument structure in Ojibwe as a feature of
+the root. However, these authors and others state that verb stems are classified according
+to transitivity and animacy of one of their arguments (AI, II, TA, TI, etc.).
+        Our analysis accounts for transitivity and grammatical voice in a way that the
+traditional Bloomfieldian analysis has not. Most Algonquianists (cf. Goddard 1974, 1990
+for Algonquian in general and Inglis 1986, Fidelholtz 1999, and McCulloch 2013 for
+Mi’kmaw/Mi’gmaq) adopt the Bloomfield analysis of verb stem as root/initial-final and
+finals as indicators of transitivity and animacy of the object in transitive clauses. This is
+                                                                                                     12
+
+
+
+in spite of well-documented mismatches between the verb morphology and the syntax
+(Wolfart 1973, Dahlstrom 2014, Hamilton 2015, Oxford 2017). Our proposed analysis
+illustrates how, without exception, the verbal morphology determines the syntax of
+bivalent clauses; that is, the functional categories are syntactic.
+        We believe that these findings are only possible because of our methodology
+involving a close collaboration between linguist and speakers, a systematic investigation
+into how the functional categories pattern with a large number of stems, and our
+investigation of the syntax of complete clauses.
+
+4.      Conclusions
+
+We conclude that verb stems in Mi’kmaw are classified as unergative or unaccusative.
+The little v-Animacy agreement combination adds an argument and the Animacy-Voice
+combination maps those arguments to grammatical roles to yield grammatical voice. The
+argument building and argument mapping constructions overlap by both including the
+Animacy morpheme. This argument-building and mapping system works without
+exception throughout the language. Table 4 illustrates the verb classification and the two
+systems for adding and mapping arguments.
+
+           Table 4. Two overlapping systems for adding and mapping arguments
+
+                                         argument building
+                      stem               little v Animacy Voice
+                                                  argument mapping
+
+
+                                              References
+
+Adams, Megan S., Christina N. Service, Jennifer Walkus, Jennifer Carpenter, Jess A. Housty, Douglass
+          Neasloss, Paul C. Paquet, and Chris T. Darimont. 2015. De-centering the University from
+          Community-based Research: a Framework for Engagement between Academic and Indigenous
+          Collaborators in Natural Resource and Conservation Research. Toolbox on the Research
+          Principles in an Aboriginal Context. Issues in Research Ethics.
+Brittain, Julie. 2014. Root semantics as a determinant of syntactic representation: Evidence from Cree-
+          Montagnais Naskapi. In Papers of the 42nd Algonquian Conference, ed. J. Randolph Valentine. 34-
+          55. Albany: State University of New York Press.
+Brittain, Julie and Sara Acton. 2014. The lexicon–syntax interface: Root semantics as an indirect
+          determinant of intransitive verb syntax in Cree. International Journal of American Linguistics
+          80(4): 475-506.
+Bruening, Benjamin. 2001. Syntax at the edge: Cross-clausal phenomena and the syntax of
+          Passamaquoddy. Doctoral dissertation, Massachusetts Institute of Technology.
+Czaykowska-Higgins, Ewa. 2009. Research models, community engagement, and linguistic fieldwork:
+          Reflections on working within Canadian indigenous communities. Language Documentation and
+          Conservation 3(1): 15-50.
+Dahlstrom, Amy. 2013. Argument structure of quirky Algonquian verbs. In From quirky case to
+          representing space: Papers in honor of Annie Zaenen, ed. Tracy Holloway King and Valeria De
+          Paiva. 61-71. Stanford: CSLI.
+                                                                                                      13
+
+
+
+Dowty, David R. 1979. Word meaning and Montague grammar: The semantics of verbs and times in
+          generative semantics and in Montague's Ptq. Volume 7. Springer Science and Business Media.
+Dowty, David. 1991. Thematic proto-roles and argument selection. Language 67(3): 547-619.
+Fidelholtz, James L. 1999. Mi'kmaq transitive verbs and suppletion: Division of transitive verbs into
+          transitive animate and transitive inanimate. In Papers of the 30th Algonquian Conference, ed.
+          David H. Pentland. 95-107. Winnipeg: University of Manitoba.
+Friesen, Dianne. To appear. A grammar of relationship. How Mi’kmaw verbs indicate the relationship
+          between participants in a sentence. Doctoral dissertation, University of Victoria.
+Francis, Bernie and John Hewson. 2016. The Mi’kmaw grammar of Father Pacifique, New Edition.
+          Sydney: Cape Breton University Press.
+Gerdts, Donna B. 2010. Voice. In The Cambridge encyclopedia of the Language Sciences, ed. Patrick Colm
+          Hogan. 909-911. Cambridge University Press.
+Goddard, Ives. 1974. Remarks on the Algonquian independent indicative. International Journal of
+          American Linguistics 40(4, Part 1): 317-327.
+Goddard, Ives. 1990. Primary and secondary stem derivation in Algonquian. International Journal of
+          American Linguistics 56 (4): 449-483.
+Hamilton, Michael D. 2015. The syntax of Mi’gmaq: A configurational account. doctoral dissertation,
+          McGill University.
+Harley, Heidi. 2017. The “bundling” hypothesis and the disparate functions of little v. In The verbal
+          domain, ed. Roberta d’Alessandro, Irene Franco, and Angel J. Gallego. 64: 3-28. Oxford: Oxford
+          University Press.
+Hirose, Tomio. 2003. Origins of predicates: Evidence from Plains Cree. New York: Routledge.
+Inglis, Stephanie H. 1986. The fundamentals of Micmac word formation. Master’s thesis, Memorial
+          University of Newfoundland.
+Inglis, Stephanie H. 2002. Speaker's experience: A study of Mi'kmaq modality. Doctoral dissertation,
+          Memorial University of Newfoundland.
+Leonard, Wesley Y. and Erin Haynes. 2010. Making “collaboration” collaborative: An examination of
+          perspectives that frame linguistic field research. Language Documentation and Conservation 4:
+          269-293.
+McCulloch, Gretchen. 2013. Verb stem composition in Mi’gmaq. Master’s thesis, McGill University.
+Oxford, Will. 2017. Algonquian grammar myths. Toronto Working Papers in Linguistics 39: 1-37.
+Paul, Elizabeth, Stevens, Arlene, Denny, Yvonne, Sylliboy, Barbara, and Friesen, Dianne. 2019. Mapping
+          argument structure to grammatical roles with Mi'kmaw finals. Paper presented at the 51st
+          Algonquian Conference, October 24-27, 2019, McGill University, Montreal.
+Piggott, Glyne. 1989. Argument structure and the morphology of the Ojibwa verb. In Theoretical
+          perspectives on Native American languages, ed. Donna B. Gerdts and Karin Michelson, 176-208.
+          Albany: State University of New York Press.
+Ritter, Elizabeth and Sara Thomas Rosen. 2010. Animacy in Blackfoot: Implications for event structure and
+          clause structure. In Syntax, lexical semantics and event structure, ed. Malka Rappaport -Hovav,
+          Edit Doron, and Ivy Sichel, 124-152. Oxford: Oxford University Press.
+Stevens, Arlene, Denny, Yvonne, Sylliboy, Barbara, and Friesen, Dianne . 2021. Two pluractional
+          constructions in Mi'kmaw. In Proceedings of the 2020 annual conference of the Canadian
+          Linguistics Society, ed. Angelica Hernández and M. Emma Butterworth, 11pp. Toronto: Canadian
+          Linguistic Association. https://cla-acl.artsci.utoronto.ca/actes-2020-proceedings/
+Sylliboy, Barbara, Arlene Stevens, Yvonne Denny, and Dianne Friesen. (in press). Causative construction
+          in Mi’kmaq. In Proceedings of the 52nd Annual Algonquian Conference, ed. Monica MacAulay
+          and Margaret Noodin, 20pp. Madison WI: University of Wisconsin.
+Tollan, Rebecca and Will Oxford. 2018. Voice-less unergatives: Evidence from Algonquian. In
+          Proceedings of West Coast Conference on Formal Linguistics 35, ed. William G. Bennett, Lindsay
+          Hracs, and Dennis Ryan Storoshenko. 399-408. Somerville: Cascadilla Proceedings Project.
+Wilson, Shawn. 2007. Guest editorial: what is an Indigenist research paradigm? Canadian Journal of
+          Native Education 30(2): 193-195.
+                                                                                                  14
+
+
+
+Wiltschko, Martina. 2014. The universal structure of categories: Towards a formal typology. Cambridge
+        studies in linguistics vol. 142. Cambridge: Cambridge University Press.
+Wolfart, H. Christoph. 1973. Plains Cree: A grammatical study. Transactions of the American
+        Philosophical Society 63 (5): 1-90.
+Zúñiga, Fernando, and Seppo Kittilä. 2019. Grammatical voice. Cambridge: Cambridge University Press.
+
