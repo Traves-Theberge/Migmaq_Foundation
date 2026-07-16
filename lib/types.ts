@@ -3,6 +3,22 @@ export interface Usage {
     english: string;
 }
 
+export interface Recording {
+    file: string;
+    speaker: string;
+    kind: 'word' | 'example';
+    url: string;
+}
+
+export interface ResolvedAlternateForm {
+    raw: string;
+    migmaq: string;
+    gloss?: string;
+    note?: string;
+    /** Set only when `migmaq` resolves to its own dictionary entry. */
+    href?: string;
+}
+
 export interface Word {
     word: string;
     type?: string;
@@ -10,4 +26,12 @@ export interface Word {
     translations?: string[];
     usages?: Usage[];
     audio?: string;
+    pronunciation_guide?: string;
+    alternate_forms?: string[];
+    document_references?: string[];
+    entry_url?: string;
+    /** Populated by /api/word-details from the audio manifest. */
+    recordings?: Recording[];
+    /** Populated by /api/word-details: alternate_forms parsed, with hrefs where linkable. */
+    resolved_alternate_forms?: ResolvedAlternateForm[];
 }

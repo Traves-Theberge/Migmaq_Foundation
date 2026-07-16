@@ -46,3 +46,6 @@ node_modules/
 .next/
 dist/
 .turbo/
+
+# transient backup written by scripts/build-dictionary.mjs before each rebuild
+public/assets/dictionary.backup.json

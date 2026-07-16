@@ -61,7 +61,7 @@ export async function getQuizQuestions(count = 5) {
         const correctWord = validWords[correctIndex];
 
         // Pick 3 distractors
-        const distractors = [];
+        const distractors: any[] = [];
         while (distractors.length < 3) {
             const dIndex = Math.floor(Math.random() * validWords.length);
             if (dIndex !== correctIndex && !distractors.includes(validWords[dIndex])) {

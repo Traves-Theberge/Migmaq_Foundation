@@ -154,6 +154,30 @@ export default function EducationPage() {
                         </div>
                     </motion.section>
 
+                    {/* Storybooks Section */}
+                    <motion.section variants={item}>
+                        <h2 className="text-3xl sm:text-5xl font-black uppercase mb-6 tracking-tighter">Storybooks</h2>
+                        <Link
+                            href="/education/books"
+                            className="block bg-accent text-foreground p-6 sm:p-10 border-4 border-foreground hover:-translate-y-2 transition-transform group"
+                        >
+                            <div className="flex justify-between items-start mb-8 sm:mb-12">
+                                <div className="p-3 bg-white text-foreground border-2 border-foreground">
+                                    <BookOpen className="w-6 h-6 sm:w-8 sm:h-8" />
+                                </div>
+                                <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                            </div>
+                            <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">
+                                Illustrated Storybooks
+                            </h3>
+                            <p className="text-base sm:text-lg font-medium opacity-90 leading-relaxed">
+                                Animated, page-flipping bilingual books — starting with{' '}
+                                <em>Mui&apos;n, Mui&apos;n, Wen Nemi&apos;t?</em> (Bear, bear, who do you see?).
+                                Every word plays a speaker recording and links to its dictionary entry.
+                            </p>
+                        </Link>
+                    </motion.section>
+
                     {/* Lessons by Category */}
                     {lessonCategories.map((category: LessonCategory, categoryIndex: number) => {
                         const CategoryIcon = iconMap[category.icon] || BookOpen;

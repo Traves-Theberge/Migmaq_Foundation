@@ -1,0 +1,242 @@
+/* react-pageflip / StPageFlip ships its engine as JS only (no dist CSS) —
+   these base rules are required for its positioning and are copied verbatim
+   from page-flip's src/Style/stPageFlip.css. Scoped :global because the
+   library assigns these class names itself, outside our CSS Module scope. */
+:global(.stf__parent) {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    transform: translateZ(0);
+    touch-action: pan-y;
+}
+:global(.stf__wrapper) {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+:global(.stf__parent canvas) {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+:global(.stf__block) {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    perspective: 2000px;
+}
+:global(.stf__item) {
+    display: none;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+:global(.stf__outerShadow),
+:global(.stf__innerShadow),
+:global(.stf__hardShadow),
+:global(.stf__hardInnerShadow) {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Scoped "real book" skin for the storybook reader — deliberately its own
+   visual world, separate from the site's flat brutalist chrome. Warm paper,
+   a spine crease, soft elevation. Light values first; .dark overrides read
+   like a lamp-lit room rather than an inverted daytime palette. */
+
+/* Fine-grain noise (SVG feTurbulence) reused for paper fiber and cloth weave —
+   generated once, tinted/blended per surface via mix-blend-mode + opacity. */
+.stage {
+    --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    --weave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M0 0h6v6H0z' fill='none'/%3E%3Cpath d='M0 3h6M3 0v6' stroke='%23000' stroke-opacity='.35' stroke-width='0.6'/%3E%3C/svg%3E");
+
+    --paper: #fbf3e4;
+    --paper-shade: #f0e2c4;
+    --ink: #2b2118;
+    --ink-soft: #7c6a52;
+    --accent: #a8402c;
+    --accent-ink: #fbf3e4;
+    /* A deep, saturated oxblood leather rather than plain cardboard-brown. */
+    --cover: #5c1f1a;
+    --cover-light: #7a2e22;
+    --cover-ink: #f3e6c8;
+    /* The binding/frame is its own darker, cooler material — distinct from
+       the cover leaf, not the same color repeated. */
+    --frame: #2c1f18;
+    --frame-light: #3d2c22;
+    /* The classic real-book cue: warm gold/brass for rules, rings, foil edges. */
+    --gold: #c9a35a;
+    --gold-bright: #e6c987;
+    --spine: rgba(20, 10, 8, 0.35);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+}
+
+:global(.dark) .stage {
+    --paper: #efe3c8;
+    --paper-shade: #e4d3ab;
+    --ink: #2b2118;
+    --ink-soft: #6e5c42;
+    --accent: #e0805f;
+    --accent-ink: #2b2118;
+    --cover: #3d1512;
+    --cover-light: #55201a;
+    --cover-ink: #ecdcb2;
+    --frame: #171310;
+    --frame-light: #241d17;
+    --gold: #b8944e;
+    --gold-bright: #ddc07f;
+    --spine: rgba(10, 6, 4, 0.45);
+}
+
+.bookShadow {
+    filter: drop-shadow(0 28px 40px rgba(20, 12, 6, 0.28)) drop-shadow(0 4px 10px rgba(20, 12, 6, 0.18));
+}
+
+/* react-pageflip renders each child as a `.page`; we style the content inside. */
+.leaf {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--paper);
+    color: var(--ink);
+    overflow: hidden;
+    border-radius: 0.6rem;
+    background-image:
+        var(--noise),
+        radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.03) 0, transparent 40%),
+        radial-gradient(circle at 80% 75%, rgba(0, 0, 0, 0.03) 0, transparent 45%),
+        radial-gradient(ellipse 90% 70% at 50% 50%, transparent 55%, rgba(43, 33, 24, 0.05) 100%);
+    background-blend-mode: overlay, normal, normal, normal;
+    background-size: 180px 180px, auto, auto, auto;
+    box-shadow: inset 0 0 24px rgba(43, 33, 24, 0.06);
+}
+
+.leaf.imageLeaf::after,
+.leaf.textLeaf::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem;
+    pointer-events: none;
+}
+.leaf.imageLeaf::after {
+    right: 0;
+    background: linear-gradient(to right, transparent, var(--spine));
+}
+.leaf.textLeaf::before {
+    left: 0;
+    background: linear-gradient(to left, transparent, var(--spine));
+}
+/* A thin gilt line on each leaf's outward-facing edge — the classic
+   gold-edged-pages cue of a well-bound book. */
+.leaf.imageLeaf {
+    box-shadow: inset 2px 0 0 color-mix(in srgb, var(--gold) 55%, transparent), inset 0 0 24px rgba(43, 33, 24, 0.06);
+}
+.leaf.textLeaf {
+    box-shadow: inset -2px 0 0 color-mix(in srgb, var(--gold) 55%, transparent), inset 0 0 24px rgba(43, 33, 24, 0.06);
+}
+
+.hardCover {
+    width: 100%;
+    height: 100%;
+    background:
+        var(--weave),
+        radial-gradient(ellipse 140% 100% at 15% 0%, rgba(255, 255, 255, 0.1), transparent 60%),
+        radial-gradient(ellipse 120% 90% at 85% 100%, rgba(0, 0, 0, 0.3), transparent 65%),
+        linear-gradient(160deg, var(--cover-light), var(--cover) 55%, color-mix(in srgb, var(--cover) 70%, black));
+    background-size: 6px 6px, auto, auto, auto;
+    color: var(--cover-ink);
+    display: flex;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 0 2px color-mix(in srgb, var(--gold) 30%, transparent),
+        inset 0 0 60px rgba(0, 0, 0, 0.4);
+}
+.hardCoverColumn { flex-direction: column; }
+.hardCoverRow { flex-direction: row; }
+
+/* Ornamental frame just inside a cover's edge — book-plate gold foil rule. */
+.coverRule {
+    position: relative;
+}
+.coverRule::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 2.5rem;
+    margin: 0.5rem auto 0;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+/* A subtle gold outline on the title text itself, book-plate engraving style. */
+.titleOutline {
+    -webkit-text-stroke: 0.5px color-mix(in srgb, var(--gold) 70%, transparent);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 0 1px color-mix(in srgb, var(--gold) 45%, transparent);
+}
+
+/* Scrim behind the cover title, guaranteeing legibility over any art. */
+.coverScrim {
+    background: linear-gradient(to top, rgba(10, 6, 4, 0.88) 0%, rgba(10, 6, 4, 0.6) 55%, transparent 100%);
+}
+
+.sealButton {
+    background: linear-gradient(160deg, var(--gold-bright), var(--gold) 60%, color-mix(in srgb, var(--gold) 70%, black));
+    color: color-mix(in srgb, var(--cover) 85%, black);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 -2px 4px rgba(0, 0, 0, 0.25) inset,
+        0 6px 14px rgba(0, 0, 0, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.sealButton:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 -2px 4px rgba(0, 0, 0, 0.25) inset,
+        0 9px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* Big, bright, tactile — kid-friendly touch targets rather than a subtle
+   outline pill. */
+.navButton {
+    background: linear-gradient(160deg, var(--gold-bright), var(--gold) 70%);
+    color: color-mix(in srgb, var(--frame) 85%, black);
+    border: none;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 4px 0 color-mix(in srgb, var(--gold) 60%, black),
+        0 6px 14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.navButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 6px 0 color-mix(in srgb, var(--gold) 60%, black),
+        0 10px 18px rgba(0, 0, 0, 0.3);
+}
+.navButton:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 2px 0 color-mix(in srgb, var(--gold) 60%, black),
+        0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.pageDot {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.pageDot:hover {
+    transform: scale(1.25);
+}

@@ -4,8 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Word } from '@/lib/types';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Volume2, Share2, Bookmark } from 'lucide-react';
+import { ArrowLeft, Share2, Bookmark, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import AudioButton from '@/components/ui/AudioButton';
+
+const SPEAKER_NAMES: Record<string, string> = {
+    dmm: 'Speaker DMM',
+    ewm: 'Speaker EWM',
+    jnw: 'Speaker JNW',
+};
+const speakerLabel = (s: string) => SPEAKER_NAMES[s] ?? `Speaker ${s.toUpperCase()}`;
 
 export default function WordDetailsPage() {
     const { word } = useParams() as { word: string };
@@ -70,23 +78,30 @@ export default function WordDetailsPage() {
                                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none break-words">
                                     {data.word}
                                 </h1>
-                                {data.audio && (
-                                    <button className="p-3 sm:p-4 border-4 border-foreground rounded-full hover:bg-foreground hover:text-background transition-colors flex-shrink-0">
-                                        <Volume2 className="w-6 h-6 sm:w-8 sm:h-8" />
-                                    </button>
-                                )}
                             </div>
 
-                            <div className="flex flex-wrap gap-3">
+                            {data.pronunciation_guide && (
+                                <p className="text-xl sm:text-2xl font-bold text-muted-foreground mb-4 tracking-wide">
+                                    {data.pronunciation_guide}
+                                </p>
+                            )}
+
+                            <div className="flex flex-wrap gap-3 mb-4">
                                 {data.type && (
                                     <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-secondary text-white font-bold uppercase tracking-widest text-xs sm:text-sm">
                                         {data.type}
                                     </span>
                                 )}
-                                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-foreground text-background font-bold uppercase tracking-widest text-xs sm:text-sm">
-                                    Mi'gmaq
-                                </span>
                             </div>
+
+                            {/* Every available recording of the word, by speaker */}
+                            {data.recordings && data.recordings.some(r => r.kind === 'word') && (
+                                <div className="flex flex-wrap gap-2">
+                                    {data.recordings.filter(r => r.kind === 'word').map((rec) => (
+                                        <AudioButton key={rec.file} url={rec.url} label={speakerLabel(rec.speaker)} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         {/* Translations */}
@@ -142,7 +157,66 @@ export default function WordDetailsPage() {
                                             </li>
                                         ))}
                                     </ul>
+                                    {data.recordings && data.recordings.some(r => r.kind === 'example') && (
+                                        <div className="mt-6 pt-4 border-t-2 border-accent/30">
+                                            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">
+                                                Hear the example
+                                            </p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {data.recordings.filter(r => r.kind === 'example').map((rec) => (
+                                                    <AudioButton key={rec.file} url={rec.url} label={speakerLabel(rec.speaker)} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
+                            </div>
+                        )}
+
+                        {data.resolved_alternate_forms && data.resolved_alternate_forms.length > 0 && (
+                            <div className="border-4 border-foreground bg-background">
+                                <div className="bg-foreground p-4">
+                                    <h3 className="text-xl font-black uppercase text-background">Other Forms</h3>
+                                </div>
+                                <ul className="p-6 space-y-3">
+                                    {data.resolved_alternate_forms.map((form, idx) => {
+                                        // Most inflected forms (plurals, obviatives, etc.) aren't their
+                                        // own dictionary headword — only a note on the base entry. Rather
+                                        // than leave those unclickable, fall back to the word you're
+                                        // already viewing instead of a dead end.
+                                        const href = form.href ?? `/dictionary/${encodeURIComponent(data.word)}`;
+                                        return (
+                                            <li key={idx} className="text-base leading-snug">
+                                                <Link href={href} className="font-black hover:text-accent underline underline-offset-2 transition-colors">
+                                                    {form.migmaq}
+                                                </Link>
+                                                {form.gloss && <span className="text-muted-foreground"> — {form.gloss}</span>}
+                                                {form.note && <span className="text-muted-foreground text-sm"> {form.note}</span>}
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                        )}
+
+                        {data.document_references && data.document_references.length > 0 && (
+                            <div className="border-2 border-muted-foreground/40 bg-background p-6">
+                                <h3 className="text-sm font-black uppercase tracking-widest mb-3 text-muted-foreground">Sources</h3>
+                                <ul className="space-y-2">
+                                    {data.document_references.map((src, idx) => (
+                                        <li key={idx} className="text-sm text-muted-foreground leading-snug">{src}</li>
+                                    ))}
+                                </ul>
+                                {data.entry_url && (
+                                    <a
+                                        href={data.entry_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1 mt-4 text-sm font-bold uppercase tracking-wide hover:text-accent transition-colors"
+                                    >
+                                        mikmaqonline.org <ExternalLink className="w-3.5 h-3.5" />
+                                    </a>
+                                )}
                             </div>
                         )}
                     </div>
