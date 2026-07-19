@@ -35,5 +35,64 @@ export const bodyLessons: Lesson[] = [
                 description: "These words are useful for describing people and expressing yourself."
             }
         ]
+    },
+    {
+        id: 'body-parts',
+        title: 'Body Parts',
+        description: 'Hands, arms, and more',
+        difficulty: 'beginner',
+        estimatedMinutes: 5,
+        steps: [
+            {
+                type: 'info',
+                description: "Many Mi'gmaq body-part words already include a possessive prefix — ug- means \"his/her\" — because body parts are always thought of as belonging to someone."
+            },
+            {
+                type: 'vocabulary',
+                term: "ugpitn",
+                translation: "Hand",
+                pronunciation: "uk-pi-den"
+            },
+            {
+                type: 'vocabulary',
+                term: "ugpitnoqom",
+                translation: "Arm",
+                pronunciation: "uk-pi-de-nohk-om"
+            },
+            {
+                type: 'vocabulary',
+                term: "ugtluign",
+                translation: "Finger",
+                pronunciation: "uk-te-lu-i-gen"
+            },
+            {
+                type: 'vocabulary',
+                term: "unji",
+                translation: "Head",
+                pronunciation: "unn-ji"
+            },
+            {
+                type: 'vocabulary',
+                term: "ugs'tuaqan",
+                translation: "Ear",
+                pronunciation: "uk-se-du-a-hgan"
+            },
+            {
+                type: 'vocabulary',
+                term: "wipit",
+                translation: "Tooth",
+                pronunciation: "wi-bit"
+            },
+            {
+                type: 'vocabulary',
+                term: "usapun",
+                translation: "Hair",
+                pronunciation: "u-sa-bun"
+            },
+            {
+                type: 'info',
+                description: "Notice each word literally translates closer to \"his/her hand,\" \"his/her arm,\" and so on — the dictionary lists them this way because they're rarely said without an owner."
+            }
+        ]
     }
 ];

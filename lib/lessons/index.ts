@@ -7,6 +7,8 @@ import { bodyLessons } from './body';
 import { foodLessons } from './food';
 import { objectsLessons } from './objects';
 import { grammarLessons } from './grammar';
+import { actionsLessons } from './actions';
+import { cultureLessons } from './culture';
 
 export * from './types';
 
@@ -74,6 +76,22 @@ export const lessonCategories: LessonCategory[] = [
         icon: 'Puzzle',
         color: 'bg-accent',
         lessons: grammarLessons
+    },
+    {
+        id: 'actions',
+        title: 'Actions',
+        description: 'Everyday verbs and movement',
+        icon: 'Zap',
+        color: 'bg-secondary',
+        lessons: actionsLessons
+    },
+    {
+        id: 'culture',
+        title: 'Culture & Tradition',
+        description: 'Traditional items and practices',
+        icon: 'Feather',
+        color: 'bg-primary',
+        lessons: cultureLessons
     }
 ];
 

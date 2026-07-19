@@ -56,5 +56,48 @@ export const objectsLessons: Lesson[] = [
                 pronunciation: "ahp-toon"
             }
         ]
+    },
+    {
+        id: 'clothing',
+        title: 'Clothing',
+        description: 'Shirts, shoes, and moccasins',
+        difficulty: 'beginner',
+        estimatedMinutes: 4,
+        steps: [
+            {
+                type: 'info',
+                description: "Traditional Mi'gmaq clothing was often made from hide and decorated with quillwork and beadwork."
+            },
+            {
+                type: 'vocabulary',
+                term: "atlai",
+                translation: "Shirt",
+                pronunciation: "a-de-laay"
+            },
+            {
+                type: 'vocabulary',
+                term: "pita'qawe'l",
+                translation: "Pants / Trousers",
+                pronunciation: "bi-daa-hga-weel"
+            },
+            {
+                type: 'vocabulary',
+                term: "mg'sn",
+                translation: "Shoe",
+                pronunciation: "em-ke-sen"
+            },
+            {
+                type: 'vocabulary',
+                term: "ma'gn",
+                translation: "Moccasin",
+                pronunciation: "maa-gen"
+            },
+            {
+                type: 'vocabulary',
+                term: "a'gwesn",
+                translation: "Hat",
+                pronunciation: "aa-gwe-sen"
+            }
+        ]
     }
 ];

@@ -189,5 +189,91 @@ export const basicsLessons: Lesson[] = [
                 pronunciation: "ah-kwan-tee-oomg"
             }
         ]
+    },
+    {
+        id: 'days-of-the-week',
+        title: 'Days of the Week',
+        description: 'Monday through Sunday',
+        difficulty: 'beginner',
+        estimatedMinutes: 5,
+        steps: [
+            {
+                type: 'info',
+                description: "Some day names describe their place in the week — amgwes_elugutimg literally means \"first work day.\""
+            },
+            {
+                type: 'vocabulary',
+                term: "amgwes_elugutimg",
+                translation: "Monday",
+                pronunciation: "am-kwes-e-lu-gu-dimk"
+            },
+            {
+                type: 'vocabulary',
+                term: "ta'puowei",
+                translation: "Tuesday",
+                pronunciation: "daa-bu-o-wey"
+            },
+            {
+                type: 'vocabulary',
+                term: "si'stewei",
+                translation: "Wednesday",
+                pronunciation: "siis-te-wey"
+            },
+            {
+                type: 'vocabulary',
+                term: "ne'wowei",
+                translation: "Thursday",
+                pronunciation: "nee-wo-wey"
+            },
+            {
+                type: 'vocabulary',
+                term: "weltamultimg",
+                translation: "Friday",
+                pronunciation: "wel-ta-mul-timk"
+            },
+            {
+                type: 'vocabulary',
+                term: "gesp'teg",
+                translation: "Saturday",
+                pronunciation: "ges-pe-dek"
+            },
+            {
+                type: 'vocabulary',
+                term: "aqantie'umg",
+                translation: "Sunday / Holy day",
+                pronunciation: "ah-kwan-tee-oomg"
+            }
+        ]
+    },
+    {
+        id: 'today-and-tomorrow',
+        title: 'Today, Tomorrow & Yesterday',
+        description: 'Talking about when',
+        difficulty: 'beginner',
+        estimatedMinutes: 3,
+        steps: [
+            {
+                type: 'info',
+                description: "These three words let you place an action in time relative to today."
+            },
+            {
+                type: 'vocabulary',
+                term: "gisgug",
+                translation: "Today",
+                pronunciation: "gis-kuk"
+            },
+            {
+                type: 'vocabulary',
+                term: "sapo'nug",
+                translation: "Tomorrow",
+                pronunciation: "sa-boo-nuk"
+            },
+            {
+                type: 'vocabulary',
+                term: "ulagu",
+                translation: "Yesterday",
+                pronunciation: "u-la-gu"
+            }
+        ]
     }
 ];

@@ -70,5 +70,85 @@ export const familyLessons: Lesson[] = [
                 description: "Grandparents pass down stories, traditions, and language to younger generations."
             }
         ]
+    },
+    {
+        id: 'extended-family',
+        title: 'Extended Family',
+        description: 'Aunts, uncles, cousins, and more',
+        difficulty: 'beginner',
+        estimatedMinutes: 4,
+        steps: [
+            {
+                type: 'info',
+                description: "Extended family plays an important role in Mi'gmaq communities, often living close together and sharing responsibilities."
+            },
+            {
+                type: 'vocabulary',
+                term: "ugsugwisl",
+                translation: "Aunt",
+                pronunciation: "uk-su-gwi-sel"
+            },
+            {
+                type: 'vocabulary',
+                term: "ugtlamugsisl",
+                translation: "Uncle",
+                pronunciation: "uk-te-la-muk-si-sel"
+            },
+            {
+                type: 'vocabulary',
+                term: "wo'gumal",
+                translation: "Cousin / Relative",
+                pronunciation: "woo-gu-mal"
+            },
+            {
+                type: 'vocabulary',
+                term: "ulugsl",
+                translation: "Nephew",
+                pronunciation: "u-lug-sl"
+            },
+            {
+                type: 'vocabulary',
+                term: "ugsml",
+                translation: "Niece",
+                pronunciation: "uk-se-mel"
+            }
+        ]
+    },
+    {
+        id: 'marriage-and-children',
+        title: 'Marriage & Children',
+        description: 'Husband, wife, son, and daughter',
+        difficulty: 'beginner',
+        estimatedMinutes: 4,
+        steps: [
+            {
+                type: 'info',
+                description: "These words describe the closest family bonds beyond parents and siblings."
+            },
+            {
+                type: 'vocabulary',
+                term: "uggwisl",
+                translation: "Son",
+                pronunciation: "uk-kwi-sel"
+            },
+            {
+                type: 'vocabulary',
+                term: "ugtusl",
+                translation: "Daughter",
+                pronunciation: "uk-tu-sel"
+            },
+            {
+                type: 'vocabulary',
+                term: "ugji'nmuml",
+                translation: "Husband",
+                pronunciation: "uk-chii-ne-mu-mel"
+            },
+            {
+                type: 'vocabulary',
+                term: "ugte'piteml",
+                translation: "Wife",
+                pronunciation: "uk-tee-bi-de-mel"
+            }
+        ]
     }
 ];
