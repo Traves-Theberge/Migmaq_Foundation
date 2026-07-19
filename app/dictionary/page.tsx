@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
 
 export default function DictionaryPage() {
     const [words, setWords] = useState<Word[]>([]);
@@ -176,9 +177,10 @@ export default function DictionaryPage() {
                                                         {w.word}
                                                     </h2>
                                                     {w.type && (
-                                                        <span className="text-sm font-bold uppercase tracking-widest border border-current px-2 py-0.5 rounded-full">
-                                                            {w.type}
-                                                        </span>
+                                                        <PartOfSpeechBadge
+                                                            type={w.type}
+                                                            className="text-sm font-bold uppercase tracking-widest border border-current px-2 py-0.5 rounded-full"
+                                                        />
                                                     )}
                                                 </div>
                                                 {/* Translations */}

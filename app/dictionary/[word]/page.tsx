@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import AudioButton from '@/components/ui/AudioButton';
 import WordActions from '@/components/dictionary/WordActions';
+import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
 import { getWordDetails, resolveAlternateForms, getAdjacentWords } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
 
@@ -83,9 +84,10 @@ export default async function WordDetailsPage({ params }: PageProps) {
 
                             <div className="flex flex-wrap gap-3 mb-4">
                                 {data.type && (
-                                    <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-secondary text-white font-bold uppercase tracking-widest text-xs sm:text-sm">
-                                        {data.type}
-                                    </span>
+                                    <PartOfSpeechBadge
+                                        type={data.type}
+                                        className="px-3 py-1.5 sm:px-4 sm:py-2 bg-secondary text-white font-bold uppercase tracking-widest text-xs sm:text-sm"
+                                    />
                                 )}
                             </div>
 
