@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Gamepad2, GraduationCap, ArrowRight, Star, BrainCircuit, Clock, Users, Trees, Hand, Apple, Package } from 'lucide-react';
-import { lessonCategories, LessonCategory, Lesson } from '@/lib/lessons/index';
+import { BookOpen, Gamepad2, GraduationCap, ArrowRight, Star, BrainCircuit } from 'lucide-react';
+import { lessonCategories, getAllLessons } from '@/lib/lessons/index';
 
 const container = {
     hidden: { opacity: 0 },
@@ -21,23 +21,7 @@ const item = {
     show: { opacity: 1, y: 0 },
 };
 
-const iconMap: Record<string, any> = {
-    BookOpen,
-    Users,
-    Trees,
-    Squirrel: Star,
-    Gamepad2,
-    GraduationCap,
-    Hand,
-    Apple,
-    Package
-};
-
-const difficultyColors = {
-    beginner: 'bg-green-500',
-    intermediate: 'bg-yellow-500',
-    advanced: 'bg-red-500'
-};
+const totalLessons = getAllLessons().length;
 
 export default function EducationPage() {
     const [randomWord, setRandomWord] = useState<any>(null);
@@ -178,57 +162,28 @@ export default function EducationPage() {
                         </Link>
                     </motion.section>
 
-                    {/* Lessons by Category */}
-                    {lessonCategories.map((category: LessonCategory, categoryIndex: number) => {
-                        const CategoryIcon = iconMap[category.icon] || BookOpen;
-
-                        return (
-                            <motion.section key={category.id} variants={item}>
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className={`p-3 ${category.color} text-foreground border-2 border-foreground`}>
-                                        <CategoryIcon className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter">{category.title}</h2>
-                                        <p className="text-lg text-muted-foreground font-medium">{category.description}</p>
-                                    </div>
+                    {/* Lessons */}
+                    <motion.section variants={item}>
+                        <h2 className="text-3xl sm:text-5xl font-black uppercase mb-6 tracking-tighter">Lessons</h2>
+                        <Link
+                            href="/education/lessons"
+                            className="block bg-primary text-white p-6 sm:p-10 border-4 border-foreground hover:-translate-y-2 transition-transform group"
+                        >
+                            <div className="flex justify-between items-start mb-8 sm:mb-12">
+                                <div className="p-3 bg-white text-primary border-2 border-foreground">
+                                    <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8" />
                                 </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                                    {category.lessons.map((lesson: Lesson) => (
-                                        <Link
-                                            key={lesson.id}
-                                            href={`/education/lessons/${lesson.id}`}
-                                            className="block bg-white border-4 border-foreground p-6 hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all group"
-                                        >
-                                            <div className="flex items-start justify-between mb-3">
-                                                <span className={`px-2 py-1 ${difficultyColors[lesson.difficulty as keyof typeof difficultyColors]} text-white text-xs font-bold uppercase tracking-wide`}>
-                                                    {lesson.difficulty}
-                                                </span>
-                                                <div className="flex items-center text-muted-foreground text-sm">
-                                                    <Clock className="w-4 h-4 mr-1" />
-                                                    {lesson.estimatedMinutes}m
-                                                </div>
-                                            </div>
-
-                                            <h3 className="text-xl font-black uppercase mb-2 tracking-tight group-hover:text-primary transition-colors">
-                                                {lesson.title}
-                                            </h3>
-
-                                            <p className="text-sm text-muted-foreground font-medium mb-4 line-clamp-2">
-                                                {lesson.description}
-                                            </p>
-
-                                            <div className="flex items-center justify-between text-sm font-bold">
-                                                <span className="text-muted-foreground">{lesson.steps.length} steps</span>
-                                                <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                                            </div>
-                                        </Link>
-                                    ))}
-                                </div>
-                            </motion.section>
-                        );
-                    })}
+                                <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                            </div>
+                            <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">
+                                Guided Lessons
+                            </h3>
+                            <p className="text-base sm:text-lg font-medium opacity-90 leading-relaxed">
+                                {totalLessons} step-by-step lessons across {lessonCategories.length} topics —{' '}
+                                {lessonCategories.map((c) => c.title).join(', ')}. Searchable, filterable by topic and difficulty.
+                            </p>
+                        </Link>
+                    </motion.section>
                 </motion.div>
             </div>
         </div>

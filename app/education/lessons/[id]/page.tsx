@@ -18,8 +18,8 @@ export default function LessonPage() {
             <div className="min-h-screen flex items-center justify-center bg-background">
                 <div className="text-center">
                     <h1 className="text-4xl font-black uppercase mb-4">Lesson Not Found</h1>
-                    <Link href="/education" className="text-primary font-bold hover:underline">
-                        Return to Education
+                    <Link href="/education/lessons" className="text-primary font-bold hover:underline">
+                        Return to Lessons
                     </Link>
                 </div>
             </div>
@@ -31,7 +31,7 @@ export default function LessonPage() {
 
     const handleNext = () => {
         if (isLastStep) {
-            router.push('/education');
+            router.push('/education/lessons');
         } else {
             setCurrentStep(c => c + 1);
         }
@@ -48,7 +48,7 @@ export default function LessonPage() {
             <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8 sm:mb-12">
-                    <Link href="/education" className="flex items-center text-lg font-bold uppercase hover:text-primary transition-colors">
+                    <Link href="/education/lessons" className="flex items-center text-lg font-bold uppercase hover:text-primary transition-colors">
                         <ArrowLeft className="w-6 h-6 mr-2" />
                         Back
                     </Link>
@@ -61,6 +61,10 @@ export default function LessonPage() {
                 <div className="mb-6 flex items-center text-sm font-medium text-muted-foreground">
                     <Link href="/education" className="hover:text-foreground transition-colors">
                         Education
+                    </Link>
+                    <span className="mx-2">/</span>
+                    <Link href="/education/lessons" className="hover:text-foreground transition-colors">
+                        Lessons
                     </Link>
                     <span className="mx-2">/</span>
                     <span className="text-foreground">{lessonData.categoryTitle}</span>
