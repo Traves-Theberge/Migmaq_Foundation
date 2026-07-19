@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Gamepad2, GraduationCap, ArrowRight, Star, BrainCircuit } from 'lucide-react';
 import { lessonCategories, getAllLessons } from '@/lib/lessons/index';
+import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
 
 const container = {
     hidden: { opacity: 0 },
@@ -74,9 +75,10 @@ export default function EducationPage() {
                                         <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 mb-4">
                                             <h3 className="text-4xl sm:text-6xl font-black tracking-tighter">{randomWord.word}</h3>
                                             {randomWord.type && (
-                                                <span className="px-4 py-2 bg-secondary text-white font-bold uppercase tracking-widest text-sm">
-                                                    {randomWord.type}
-                                                </span>
+                                                <PartOfSpeechBadge
+                                                    type={randomWord.type}
+                                                    className="px-4 py-2 bg-secondary text-white font-bold uppercase tracking-widest text-sm"
+                                                />
                                             )}
                                         </div>
                                         {randomWord.definitions && randomWord.definitions.length > 0 && (
