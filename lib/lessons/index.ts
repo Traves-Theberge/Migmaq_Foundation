@@ -6,6 +6,7 @@ import { animalsLessons } from './animals';
 import { bodyLessons } from './body';
 import { foodLessons } from './food';
 import { objectsLessons } from './objects';
+import { grammarLessons } from './grammar';
 
 export * from './types';
 
@@ -65,6 +66,14 @@ export const lessonCategories: LessonCategory[] = [
         icon: 'Package',
         color: 'bg-primary',
         lessons: objectsLessons
+    },
+    {
+        id: 'grammar',
+        title: 'Words & Grammar',
+        description: 'Pronouns, question words, and other building blocks',
+        icon: 'Puzzle',
+        color: 'bg-accent',
+        lessons: grammarLessons
     }
 ];
 

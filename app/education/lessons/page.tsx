@@ -6,7 +6,7 @@ import Fuse from 'fuse.js';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowLeft, ArrowRight, Search, Clock,
-    BookOpen, Users, Trees, Star, Hand, Apple, Package, type LucideIcon,
+    BookOpen, Users, Trees, Star, Hand, Apple, Package, Puzzle, type LucideIcon,
 } from 'lucide-react';
 import { lessonCategories, getAllLessons } from '@/lib/lessons/index';
 import { cn } from '@/lib/utils';
@@ -19,6 +19,7 @@ const iconMap: Record<string, LucideIcon> = {
     Hand,
     Apple,
     Package,
+    Puzzle,
 };
 
 const difficultyColors: Record<string, string> = {
