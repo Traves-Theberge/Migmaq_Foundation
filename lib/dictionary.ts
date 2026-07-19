@@ -3,6 +3,7 @@ import path from 'path';
 
 let cache: any = null;
 let indexCache: Map<string, any> | null = null;
+let sortedWordsCache: string[] | null = null;
 let lastModified: number = 0;
 
 export async function getDictionary() {
@@ -13,6 +14,7 @@ export async function getDictionary() {
         const parsed = JSON.parse(data);
         cache = parsed.message.words;
         indexCache = new Map(cache.map((w: any) => [w.word.trim().toLowerCase(), w]));
+        sortedWordsCache = cache.map((w: any) => w.word).sort((a: string, b: string) => a.localeCompare(b));
         lastModified = stats.mtimeMs;
     }
     return cache;
@@ -21,6 +23,19 @@ export async function getDictionary() {
 async function getDictionaryIndex() {
     await getDictionary();
     return indexCache!;
+}
+
+/** Alphabetically adjacent headwords, for prev/next navigation on a word's detail page. */
+export async function getAdjacentWords(word: string): Promise<{ prev?: string; next?: string }> {
+    await getDictionary();
+    const sorted = sortedWordsCache!;
+    const target = word.trim().toLowerCase();
+    const idx = sorted.findIndex((w) => w.trim().toLowerCase() === target);
+    if (idx === -1) return {};
+    return {
+        prev: idx > 0 ? sorted[idx - 1] : undefined,
+        next: idx < sorted.length - 1 ? sorted[idx + 1] : undefined,
+    };
 }
 
 /** True if `word` has its own entry in the dictionary (case/whitespace-insensitive). */

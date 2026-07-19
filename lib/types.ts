@@ -30,8 +30,8 @@ export interface Word {
     alternate_forms?: string[];
     document_references?: string[];
     entry_url?: string;
-    /** Populated by /api/word-details from the audio manifest. */
+    /** Populated via getRecordings() from the audio manifest. */
     recordings?: Recording[];
-    /** Populated by /api/word-details: alternate_forms parsed, with hrefs where linkable. */
+    /** Populated via resolveAlternateForms(): alternate_forms parsed, with hrefs where linkable. */
     resolved_alternate_forms?: ResolvedAlternateForm[];
 }
