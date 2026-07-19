@@ -1,17 +1,47 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { getLessonById } from '@/lib/lessons/index';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Check, Home } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
+import AudioButton from '@/components/ui/AudioButton';
+import { speakerLabel } from '@/lib/speakers';
+import { Recording } from '@/lib/types';
 
 export default function LessonPage() {
     const { id } = useParams() as { id: string };
     const router = useRouter();
     const lessonData = getLessonById(id);
     const [currentStep, setCurrentStep] = useState(0);
+    const [audioByTerm, setAudioByTerm] = useState<Record<string, Recording[]>>({});
+
+    useEffect(() => {
+        const terms = Array.from(new Set(
+            (lessonData?.steps ?? [])
+                .filter((s) => (s.type === 'vocabulary' || s.type === 'phrase') && s.term)
+                .map((s) => s.term as string)
+        ));
+        if (terms.length === 0) return;
+
+        let cancelled = false;
+        Promise.all(terms.map(async (term) => {
+            try {
+                const res = await fetch(`/api/lesson-audio?word=${encodeURIComponent(term)}`);
+                const data = await res.json();
+                const recordings = ((data.recordings ?? []) as Recording[]).filter((r) => r.kind === 'word');
+                return [term, recordings] as const;
+            } catch {
+                return [term, []] as const;
+            }
+        })).then((entries) => {
+            if (cancelled) return;
+            setAudioByTerm(Object.fromEntries(entries.filter(([, recs]) => recs.length > 0)));
+        });
+
+        return () => { cancelled = true; };
+    }, [id, lessonData?.steps]);
 
     if (!lessonData) {
         return (
@@ -115,9 +145,17 @@ export default function LessonPage() {
                                         </h2>
 
                                         {step.pronunciation && (
-                                            <p className="text-xl text-muted-foreground font-mono mb-8">
+                                            <p className="text-xl text-muted-foreground font-mono mb-4">
                                                 /{step.pronunciation}/
                                             </p>
+                                        )}
+
+                                        {step.term && audioByTerm[step.term]?.length > 0 && (
+                                            <div className="flex flex-wrap justify-center gap-2 mb-8">
+                                                {audioByTerm[step.term].map((rec) => (
+                                                    <AudioButton key={rec.file} url={rec.url} label={speakerLabel(rec.speaker)} />
+                                                ))}
+                                            </div>
                                         )}
 
                                         <div className="w-16 h-2 bg-foreground mx-auto rounded-full mb-8" />

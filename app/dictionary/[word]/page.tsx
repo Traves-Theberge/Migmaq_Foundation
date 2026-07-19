@@ -7,13 +7,7 @@ import WordActions from '@/components/dictionary/WordActions';
 import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
 import { getWordDetails, resolveAlternateForms, getAdjacentWords } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
-
-const SPEAKER_NAMES: Record<string, string> = {
-    dmm: 'Speaker DMM',
-    ewm: 'Speaker EWM',
-    jnw: 'Speaker JNW',
-};
-const speakerLabel = (s: string) => SPEAKER_NAMES[s] ?? `Speaker ${s.toUpperCase()}`;
+import { speakerLabel } from '@/lib/speakers';
 
 interface PageProps {
     params: Promise<{ word: string }>;
