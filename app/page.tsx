@@ -37,14 +37,14 @@ export default function Home() {
   ];
 
   return (
-    <main className="h-screen bg-background pt-28 overflow-hidden flex flex-col">
+    <main className="min-h-screen md:h-screen bg-background pt-28 overflow-y-auto md:overflow-hidden flex flex-col">
       {/* Background Pattern */}
       <div className="fixed inset-0 bg-grid pointer-events-none" />
 
-      <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 flex flex-col justify-center">
+      <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 flex flex-col justify-start md:justify-center">
         {/* Hero Section */}
-        <div className="grid grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center mb-12">
-          <div className="space-y-4 sm:space-y-6 md:space-y-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center mb-12">
+          <div className="space-y-4 sm:space-y-6 md:space-y-8 text-center sm:text-left">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
