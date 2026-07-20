@@ -77,6 +77,11 @@
     flex-direction: column;
     align-items: center;
     gap: 1.75rem;
+    /* The single-leaf cover shift (StoryBook.tsx) and react-pageflip's own
+       rotateY flip animation both visually extend past this box's edges;
+       without clipping that here, the bleed enlarges the document's
+       scrollWidth and pops a page-level horizontal scrollbar mid-turn. */
+    overflow-x: clip;
 }
 
 :global(.dark) .stage {
