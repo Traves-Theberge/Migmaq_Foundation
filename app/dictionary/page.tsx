@@ -164,9 +164,14 @@ export default function DictionaryPage() {
 
                 {/* Results */}
                 {loading ? (
-                    <div className="flex justify-center py-20">
-                        <Loader2 className="w-16 h-16 animate-spin text-foreground" />
+                    <div className="flex justify-center py-20" role="status" aria-live="polite">
+                        <Loader2 className="w-16 h-16 animate-spin text-foreground" aria-hidden="true" />
+                        <span className="sr-only">{tr('title')}…</span>
                     </div>
+                ) : filtered.length === 0 ? (
+                    <p className="text-xl font-bold text-muted-foreground text-center py-20" role="status">
+                        {tr('noResults')}
+                    </p>
                 ) : (
                     <div className="space-y-0">
                         <AnimatePresence mode="popLayout">
