@@ -1,102 +1,35 @@
 import { Lesson } from './types';
+import { info, vocab, lesson } from './helpers';
 
 export const actionsLessons: Lesson[] = [
-    {
-        id: 'everyday-actions',
-        title: 'Everyday Actions',
-        description: 'Eat, sleep, speak, and work',
-        difficulty: 'beginner',
+    lesson({
+        id: "everyday-actions",
+        title: "Everyday Actions",
+        description: "Eat, sleep, speak, and work",
         estimatedMinutes: 4,
         steps: [
-            {
-                type: 'info',
-                description: "Verbs are at the heart of Mi'gmaq — these everyday actions are a great place to start."
-            },
-            {
-                type: 'vocabulary',
-                term: "etlatalg",
-                translation: "Eat",
-                pronunciation: "e-de-la-dalk"
-            },
-            {
-                type: 'vocabulary',
-                term: "nepat",
-                translation: "Sleep / Asleep",
-                pronunciation: "ne-bat"
-            },
-            {
-                type: 'vocabulary',
-                term: "gelusit",
-                translation: "Speak / Talk",
-                pronunciation: "ge-lu-sit"
-            },
-            {
-                type: 'vocabulary',
-                term: "elugwet",
-                translation: "Work",
-                pronunciation: "e-lu-gwet"
-            },
-            {
-                type: 'vocabulary',
-                term: "nemiatl",
-                translation: "See",
-                pronunciation: "ne-mi-a-del"
-            },
-            {
-                type: 'vocabulary',
-                term: "nutg",
-                translation: "Hear",
-                pronunciation: "nutk"
-            }
+            info("Verbs are at the heart of Mi'gmaq — these everyday actions are a great place to start."),
+            vocab("etlatalg", "Eat", "e-de-la-dalk"),
+            vocab("nepat", "Sleep / Asleep", "ne-bat"),
+            vocab("gelusit", "Speak / Talk", "ge-lu-sit"),
+            vocab("elugwet", "Work", "e-lu-gwet"),
+            vocab("nemiatl", "See", "ne-mi-a-del"),
+            vocab("nutg", "Hear", "nutk"),
         ]
-    },
-    {
-        id: 'movement-and-play',
-        title: 'Movement & Play',
-        description: 'Walk, run, dance, and sing',
-        difficulty: 'beginner',
+    }),
+    lesson({
+        id: "movement-and-play",
+        title: "Movement & Play",
+        description: "Walk, run, dance, and sing",
         estimatedMinutes: 4,
         steps: [
-            {
-                type: 'info',
-                description: "Movement, music, and play are part of everyday life and celebration in Mi'gmaq communities."
-            },
-            {
-                type: 'vocabulary',
-                term: "uggwata'q",
-                translation: "Walk",
-                pronunciation: "uk-kwa-daahk"
-            },
-            {
-                type: 'vocabulary',
-                term: "getgwi'g",
-                translation: "Run",
-                pronunciation: "get-kwiig"
-            },
-            {
-                type: 'vocabulary',
-                term: "tegismit",
-                translation: "Swim",
-                pronunciation: "de-gi-se-mit"
-            },
-            {
-                type: 'vocabulary',
-                term: "amalgat",
-                translation: "Dance",
-                pronunciation: "a-mal-kat"
-            },
-            {
-                type: 'vocabulary',
-                term: "etlintoq",
-                translation: "Sing",
-                pronunciation: "e-de-lin-tohk"
-            },
-            {
-                type: 'vocabulary',
-                term: "mila'sit",
-                translation: "Play",
-                pronunciation: "mi-laa-sit"
-            }
+            info("Movement, music, and play are part of everyday life and celebration in Mi'gmaq communities."),
+            vocab("uggwata'q", "Walk", "uk-kwa-daahk"),
+            vocab("getgwi'g", "Run", "get-kwiig"),
+            vocab("tegismit", "Swim", "de-gi-se-mit"),
+            vocab("amalgat", "Dance", "a-mal-kat"),
+            vocab("etlintoq", "Sing", "e-de-lin-tohk"),
+            vocab("mila'sit", "Play", "mi-laa-sit"),
         ]
-    }
+    })
 ];

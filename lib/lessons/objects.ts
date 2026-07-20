@@ -1,103 +1,42 @@
 import { Lesson } from './types';
+import { info, vocab, lesson } from './helpers';
 
 export const objectsLessons: Lesson[] = [
-    {
-        id: 'household',
-        title: 'Household Items',
-        description: 'Common objects and tools',
-        difficulty: 'beginner',
+    lesson({
+        id: "household",
+        title: "Household Items",
+        description: "Common objects and tools",
         estimatedMinutes: 3,
         steps: [
-            {
-                type: 'info',
-                description: "Traditional Mi'gmaq items reflect a deep connection to the land and craftsmanship."
-            },
-            {
-                type: 'vocabulary',
-                term: "a'su'n",
-                translation: "Blanket",
-                pronunciation: "ah-soon"
-            },
-            {
-                type: 'vocabulary',
-                term: "awa'qi'gn",
-                translation: "Crooked knife",
-                pronunciation: "ah-wah-keen"
-            }
+            info("Traditional Mi'gmaq items reflect a deep connection to the land and craftsmanship."),
+            vocab("a'su'n", "Blanket", "ah-soon"),
+            vocab("awa'qi'gn", "Crooked knife", "ah-wah-keen"),
         ]
-    },
-    {
-        id: 'transportation',
-        title: 'Transportation',
-        description: 'Boats, snowshoes, and travel',
-        difficulty: 'beginner',
+    }),
+    lesson({
+        id: "transportation",
+        title: "Transportation",
+        description: "Boats, snowshoes, and travel",
         estimatedMinutes: 4,
         steps: [
-            {
-                type: 'info',
-                description: "Mi'gmaq people developed ingenious ways to travel across land and water."
-            },
-            {
-                type: 'vocabulary',
-                term: "asoqomm'taqan",
-                translation: "Ferry / Boat",
-                pronunciation: "ah-so-kom-tah-kahn"
-            },
-            {
-                type: 'vocabulary',
-                term: "alaqami'g",
-                translation: "Snowshoe",
-                pronunciation: "ah-lah-kah-meeg"
-            },
-            {
-                type: 'vocabulary',
-                term: "aptu'n",
-                translation: "Walking stick / Cane",
-                pronunciation: "ahp-toon"
-            }
+            info("Mi'gmaq people developed ingenious ways to travel across land and water."),
+            vocab("asoqomm'taqan", "Ferry / Boat", "ah-so-kom-tah-kahn"),
+            vocab("alaqami'g", "Snowshoe", "ah-lah-kah-meeg"),
+            vocab("aptu'n", "Walking stick / Cane", "ahp-toon"),
         ]
-    },
-    {
-        id: 'clothing',
-        title: 'Clothing',
-        description: 'Shirts, shoes, and moccasins',
-        difficulty: 'beginner',
+    }),
+    lesson({
+        id: "clothing",
+        title: "Clothing",
+        description: "Shirts, shoes, and moccasins",
         estimatedMinutes: 4,
         steps: [
-            {
-                type: 'info',
-                description: "Traditional Mi'gmaq clothing was often made from hide and decorated with quillwork and beadwork."
-            },
-            {
-                type: 'vocabulary',
-                term: "atlai",
-                translation: "Shirt",
-                pronunciation: "a-de-laay"
-            },
-            {
-                type: 'vocabulary',
-                term: "pita'qawe'l",
-                translation: "Pants / Trousers",
-                pronunciation: "bi-daa-hga-weel"
-            },
-            {
-                type: 'vocabulary',
-                term: "mg'sn",
-                translation: "Shoe",
-                pronunciation: "em-ke-sen"
-            },
-            {
-                type: 'vocabulary',
-                term: "ma'gn",
-                translation: "Moccasin",
-                pronunciation: "maa-gen"
-            },
-            {
-                type: 'vocabulary',
-                term: "a'gwesn",
-                translation: "Hat",
-                pronunciation: "aa-gwe-sen"
-            }
+            info("Traditional Mi'gmaq clothing was often made from hide and decorated with quillwork and beadwork."),
+            vocab("atlai", "Shirt", "a-de-laay"),
+            vocab("pita'qawe'l", "Pants / Trousers", "bi-daa-hga-weel"),
+            vocab("mg'sn", "Shoe", "em-ke-sen"),
+            vocab("ma'gn", "Moccasin", "maa-gen"),
+            vocab("a'gwesn", "Hat", "aa-gwe-sen"),
         ]
-    }
+    })
 ];

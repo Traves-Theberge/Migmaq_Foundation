@@ -1,91 +1,40 @@
 import { Lesson } from './types';
+import { info, vocab, lesson } from './helpers';
 
 export const animalsLessons: Lesson[] = [
-    {
-        id: 'land-animals',
-        title: 'Land Animals',
-        description: 'Moose, rabbit, and more',
-        difficulty: 'beginner',
+    lesson({
+        id: "land-animals",
+        title: "Land Animals",
+        description: "Moose, rabbit, and more",
         estimatedMinutes: 3,
         steps: [
-            {
-                type: 'info',
-                description: "Animals are central to Mi'gmaq stories and teachings."
-            },
-            {
-                type: 'vocabulary',
-                term: "tia'm",
-                translation: "Moose",
-                pronunciation: "tee-ahm"
-            },
-            {
-                type: 'vocabulary',
-                term: "apli'gmuj",
-                translation: "Rabbit / Hare",
-                pronunciation: "ah-plee-gmoodge"
-            },
-            {
-                type: 'vocabulary',
-                term: "apalqaqamej",
-                translation: "Chipmunk / Ground squirrel",
-                pronunciation: "ah-pahl-kah-kah-medge"
-            }
+            info("Animals are central to Mi'gmaq stories and teachings."),
+            vocab("tia'm", "Moose", "tee-ahm"),
+            vocab("apli'gmuj", "Rabbit / Hare", "ah-plee-gmoodge"),
+            vocab("apalqaqamej", "Chipmunk / Ground squirrel", "ah-pahl-kah-kah-medge"),
         ]
-    },
-    {
-        id: 'water-animals',
-        title: 'Water Animals',
-        description: 'Fish and sea creatures',
-        difficulty: 'beginner',
+    }),
+    lesson({
+        id: "water-animals",
+        title: "Water Animals",
+        description: "Fish and sea creatures",
         estimatedMinutes: 3,
         steps: [
-            {
-                type: 'info',
-                description: "Fishing has always been vital to Mi'gmaq communities."
-            },
-            {
-                type: 'vocabulary',
-                term: "plamu",
-                translation: "Salmon",
-                pronunciation: "plah-moo"
-            },
-            {
-                type: 'vocabulary',
-                term: "atoqwa'su",
-                translation: "Trout",
-                pronunciation: "ah-tok-wah-soo"
-            }
+            info("Fishing has always been vital to Mi'gmaq communities."),
+            vocab("plamu", "Salmon", "plah-moo"),
+            vocab("atoqwa'su", "Trout", "ah-tok-wah-soo"),
         ]
-    },
-    {
-        id: 'birds',
-        title: 'Birds',
-        description: 'Eagle, crow, and duck',
-        difficulty: 'beginner',
+    }),
+    lesson({
+        id: "birds",
+        title: "Birds",
+        description: "Eagle, crow, and duck",
         estimatedMinutes: 4,
         steps: [
-            {
-                type: 'info',
-                description: "Birds hold special significance in Mi'gmaq culture and spirituality."
-            },
-            {
-                type: 'vocabulary',
-                term: "gitpu",
-                translation: "Eagle",
-                pronunciation: "git-poo"
-            },
-            {
-                type: 'vocabulary',
-                term: "ga'qaquj",
-                translation: "Crow",
-                pronunciation: "gah-kah-koodge"
-            },
-            {
-                type: 'vocabulary',
-                term: "apji'jgmuj",
-                translation: "Black duck",
-                pronunciation: "ah-pjee-jig-moodge"
-            }
+            info("Birds hold special significance in Mi'gmaq culture and spirituality."),
+            vocab("gitpu", "Eagle", "git-poo"),
+            vocab("ga'qaquj", "Crow", "gah-kah-koodge"),
+            vocab("apji'jgmuj", "Black duck", "ah-pjee-jig-moodge"),
         ]
-    }
+    })
 ];
