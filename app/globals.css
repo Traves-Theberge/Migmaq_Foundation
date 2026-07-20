@@ -117,6 +117,14 @@ body {
   @apply bg-background text-foreground antialiased;
 }
 
+/* Reserve the vertical scrollbar's width permanently. Without this, pages
+   whose content height crosses the viewport threshold (e.g. storybook
+   leaves of differing length) toggle the scrollbar on/off as you navigate,
+   which shifts the whole centered layout sideways by the scrollbar's width. */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Consistent keyboard-focus indicator across every interactive element,
    independent of any per-component focus styling. */
 :focus-visible {
