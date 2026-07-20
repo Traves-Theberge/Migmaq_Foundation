@@ -54,3 +54,4 @@ dist/
 
 # transient backup written by scripts/build-dictionary.mjs before each rebuild
 public/assets/dictionary.backup.json
+.env*.local
