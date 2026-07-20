@@ -76,7 +76,7 @@ export const messages = {
         },
         dictionaryWord: {
             backToDictionary: "Back to Dictionary",
-            englishTranslations: "English Translations",
+            englishTranslations: "Translations",
             definitions: "Definitions",
             usageExamples: "Usage Examples",
             hearExample: "Hear the example",
@@ -92,6 +92,7 @@ export const messages = {
             save: "Save",
             saved: "Saved",
             linkCopied: "Link copied to clipboard",
+            machineTranslated: "Machine-translated, not yet reviewed for accuracy.",
         },
         lessonDetail: {
             lessonNotFound: "Lesson Not Found",
@@ -246,7 +247,7 @@ export const messages = {
         },
         dictionaryWord: {
             backToDictionary: "Retour au dictionnaire",
-            englishTranslations: "Traductions anglaises",
+            englishTranslations: "Traductions",
             definitions: "Définitions",
             usageExamples: "Exemples d'utilisation",
             hearExample: "Écouter l'exemple",
@@ -262,6 +263,7 @@ export const messages = {
             save: "Enregistrer",
             saved: "Enregistré",
             linkCopied: "Lien copié dans le presse-papiers",
+            machineTranslated: "Traduction automatique, non encore vérifiée.",
         },
         lessonDetail: {
             lessonNotFound: "Leçon introuvable",

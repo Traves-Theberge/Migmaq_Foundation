@@ -8,10 +8,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
-import { useTranslations } from '@/lib/i18n/LocaleProvider';
+import { useTranslations, useLocale } from '@/lib/i18n/LocaleProvider';
 
 export default function DictionaryPage() {
     const tr = useTranslations('dictionary');
+    const common = useTranslations('common');
+    const { locale } = useLocale();
     const [words, setWords] = useState<Word[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filtered, setFiltered] = useState<Word[]>([]);
@@ -82,6 +84,9 @@ export default function DictionaryPage() {
                     <p className="text-xl sm:text-2xl font-medium max-w-2xl">
                         {tr('subtitlePrefix')} <span className="text-accent-ink font-bold">{words.length}</span> {tr('subtitleSuffix')}
                     </p>
+                    {locale === 'fr' && (
+                        <p className="text-sm italic text-muted-foreground mt-2">{common('machineTranslated')}</p>
+                    )}
                 </div>
 
                 {/* Search & Filter Section */}
@@ -201,26 +206,36 @@ export default function DictionaryPage() {
                                                     )}
                                                 </div>
                                                 {/* Translations */}
-                                                {w.translations && w.translations.length > 0 && (
-                                                    <div className="mb-2 flex flex-wrap gap-2">
-                                                        {w.translations.map((t, i) => (
-                                                            <span key={i} className="text-lg font-bold text-accent-ink">
-                                                                {t}{i < w.translations!.length - 1 ? ',' : ''}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                )}
+                                                {(() => {
+                                                    const shown = locale === 'fr' && w.fr_translations?.length === w.translations?.length
+                                                        ? w.fr_translations
+                                                        : w.translations;
+                                                    return shown && shown.length > 0 && (
+                                                        <div className="mb-2 flex flex-wrap gap-2">
+                                                            {shown.map((t, i) => (
+                                                                <span key={i} className="text-lg font-bold text-accent-ink">
+                                                                    {t}{i < shown.length - 1 ? ',' : ''}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    );
+                                                })()}
 
                                                 {/* Definitions */}
-                                                {w.definitions && w.definitions.length > 0 && (
-                                                    <div className="space-y-1">
-                                                        {w.definitions.map((def, i) => (
-                                                            <p key={i} className="text-lg font-medium opacity-80">
-                                                                {def}
-                                                            </p>
-                                                        ))}
-                                                    </div>
-                                                )}
+                                                {(() => {
+                                                    const shown = locale === 'fr' && w.fr_definitions?.length === w.definitions?.length
+                                                        ? w.fr_definitions
+                                                        : w.definitions;
+                                                    return shown && shown.length > 0 && (
+                                                        <div className="space-y-1">
+                                                            {shown.map((def, i) => (
+                                                                <p key={i} className="text-lg font-medium opacity-80">
+                                                                    {def}
+                                                                </p>
+                                                            ))}
+                                                        </div>
+                                                    );
+                                                })()}
                                             </div>
                                             <ArrowRight className="w-8 h-8 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all self-center" />
                                         </div>

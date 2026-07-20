@@ -5,6 +5,9 @@ import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import AudioButton from '@/components/ui/AudioButton';
 import WordActions from '@/components/dictionary/WordActions';
 import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
+import LocalizedDefinitions from '@/components/dictionary/LocalizedDefinitions';
+import LocalizedTranslations from '@/components/dictionary/LocalizedTranslations';
+import LocalizedUsages from '@/components/dictionary/LocalizedUsages';
 import T from '@/components/i18n/T';
 import { getWordDetails, resolveAlternateForms, getAdjacentWords } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
@@ -100,14 +103,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                         {data.translations && data.translations.length > 0 && (
                             <div className="mb-8 p-6 bg-secondary/10 border-4 border-secondary">
                                 <h2 className="text-2xl font-black uppercase mb-4"><T ns="dictionaryWord" k="englishTranslations" /></h2>
-                                <ul className="space-y-2">
-                                    {data.translations.map((translation: string, idx: number) => (
-                                        <li key={idx} className="text-xl font-bold flex items-start">
-                                            <span className="text-secondary mr-3">•</span>
-                                            {translation}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <LocalizedTranslations en={data.translations} fr={data.fr_translations} />
                             </div>
                         )}
 
@@ -115,16 +111,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                         {data.definitions && data.definitions.length > 0 && (
                             <div className="space-y-8">
                                 <h2 className="text-3xl font-black uppercase border-b-4 border-foreground pb-3"><T ns="dictionaryWord" k="definitions" /></h2>
-                                {data.definitions.map((def: string, idx: number) => (
-                                    <div key={idx} className="flex gap-6 items-start group">
-                                        <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary text-white flex items-center justify-center border-4 border-transparent group-hover:border-foreground transition-colors">
-                                            <span className="text-2xl sm:text-3xl font-black">{idx + 1}</span>
-                                        </div>
-                                        <p className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight pt-2">
-                                            {def}
-                                        </p>
-                                    </div>
-                                ))}
+                                <LocalizedDefinitions en={data.definitions} fr={data.fr_definitions} />
                             </div>
                         )}
 
@@ -167,14 +154,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                     </h3>
                                 </div>
                                 <div className="p-6">
-                                    <ul className="space-y-6">
-                                        {data.usages.map((usage: { translation: string; english: string }, idx: number) => (
-                                            <li key={idx} className="relative pl-4 border-l-4 border-accent/30">
-                                                <p className="text-lg sm:text-xl font-bold mb-2 leading-snug">{usage.translation}</p>
-                                                <p className="text-base sm:text-lg italic text-muted-foreground font-medium">{usage.english}</p>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <LocalizedUsages usages={data.usages} />
                                     {recordings.some(r => r.kind === 'example') && (
                                         <div className="mt-6 pt-4 border-t-2 border-accent/30">
                                             <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">

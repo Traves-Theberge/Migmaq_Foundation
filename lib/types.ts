@@ -1,6 +1,8 @@
 export interface Usage {
     translation: string;
     english: string;
+    /** Machine-translated French gloss of `english`, unreviewed. */
+    french?: string;
 }
 
 export interface Recording {
@@ -25,6 +27,10 @@ export interface Word {
     definitions: string[];
     translations?: string[];
     usages?: Usage[];
+    /** Machine-translated French glosses of `definitions`, unreviewed. */
+    fr_definitions?: string[];
+    /** Machine-translated French glosses of `translations`, unreviewed. */
+    fr_translations?: string[];
     audio?: string;
     pronunciation_guide?: string;
     alternate_forms?: string[];
