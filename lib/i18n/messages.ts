@@ -168,6 +168,10 @@ export const messages = {
         },
         common: {
             back: "Back",
+            skipToContent: "Skip to content",
+            play: "Play",
+            stop: "Stop",
+            playing: "Playing",
         },
     },
     fr: {
@@ -334,6 +338,10 @@ export const messages = {
         },
         common: {
             back: "Retour",
+            skipToContent: "Aller au contenu",
+            play: "Écouter",
+            stop: "Arrêter",
+            playing: "En cours de lecture",
         },
     },
 } as const;

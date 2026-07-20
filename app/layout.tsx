@@ -2,6 +2,7 @@ import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { LocaleProvider } from '@/lib/i18n/LocaleProvider';
 import Navbar from '@/components/ui/Navbar';
+import T from '@/components/i18n/T';
 
 export const metadata = {
   title: "Mi'gmaq Foundation",
@@ -31,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-background focus:text-foreground focus:px-4 focus:py-2 focus:border-2 focus:border-foreground focus:font-bold focus:uppercase"
         >
-          Skip to content
+          <T ns="common" k="skipToContent" />
         </a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <LocaleProvider>

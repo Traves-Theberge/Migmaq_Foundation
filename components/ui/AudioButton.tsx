@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Volume2, Square } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { playRecording, stopAudio } from '@/lib/play-audio';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 interface AudioButtonProps {
     url: string;
@@ -15,6 +16,7 @@ interface AudioButtonProps {
 export default function AudioButton({ url, label, className }: AudioButtonProps) {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [playing, setPlaying] = useState(false);
+    const t = useTranslations('common');
 
     useEffect(() => {
         const onOtherPlay = () => setPlaying(false);
@@ -47,7 +49,7 @@ export default function AudioButton({ url, label, className }: AudioButtonProps)
             type="button"
             onClick={toggle}
             aria-pressed={playing}
-            aria-label={playing ? `Stop ${label}` : `Play ${label}`}
+            aria-label={playing ? `${t('stop')} ${label}` : `${t('play')} ${label}`}
             className={cn(
                 "inline-flex items-center gap-2 px-3 py-1.5 border-2 border-foreground font-bold uppercase text-xs tracking-widest transition-colors",
                 playing
@@ -59,7 +61,7 @@ export default function AudioButton({ url, label, className }: AudioButtonProps)
             {playing ? <Square className="w-3.5 h-3.5" aria-hidden="true" /> : <Volume2 className="w-3.5 h-3.5" aria-hidden="true" />}
             {label}
             <span className="sr-only" aria-live="polite">
-                {playing ? `Playing ${label}` : ''}
+                {playing ? `${t('playing')} ${label}` : ''}
             </span>
         </button>
     );
