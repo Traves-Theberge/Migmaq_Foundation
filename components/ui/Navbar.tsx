@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun, Hexagon } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
 
 // lucide-react 1.x removed brand icons; inline GitHub mark (from simple-icons).
 const GithubIcon = ({ className }: { className?: string }) => (
@@ -14,20 +14,23 @@ const GithubIcon = ({ className }: { className?: string }) => (
 );
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
-
-const navItems = [
-    { name: "Home", href: "/" },
-    { name: "Dictionary", href: "/dictionary" },
-    { name: "Education", href: "/education" },
-];
+import { useTranslations } from "@/lib/i18n/LocaleProvider";
+import LanguageToggle from "./LanguageToggle";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = React.useState(false);
     const pathname = usePathname();
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = React.useState(false);
+    const t = useTranslations('nav');
 
     React.useEffect(() => setMounted(true), []);
+
+    const navItems = [
+        { name: t('home'), href: "/" },
+        { name: t('dictionary'), href: "/dictionary" },
+        { name: t('education'), href: "/education" },
+    ];
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b-4 border-foreground">
@@ -43,7 +46,7 @@ export default function Navbar() {
                             />
                         </div>
                         <span className="text-2xl font-black tracking-tighter uppercase">
-                            Language Dictionary
+                            {t('brand')}
                         </span>
                     </Link>
 
@@ -54,7 +57,7 @@ export default function Navbar() {
                                 const isActive = pathname === item.href;
                                 return (
                                     <Link
-                                        key={item.name}
+                                        key={item.href}
                                         href={item.href}
                                         className={cn(
                                             "relative text-lg font-bold uppercase tracking-wide hover:text-accent-ink transition-colors",
@@ -80,25 +83,28 @@ export default function Navbar() {
                             href="https://github.com/Traves-Theberge/Migmaq_Foundation"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="View source on GitHub (opens in a new tab)"
+                            aria-label={t('github')}
                             className="p-2 border-2 border-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors"
                         >
                             <GithubIcon className="w-5 h-5" />
                         </a>
                         {mounted && (
-                            <button
-                                type="button"
-                                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-                                aria-pressed={theme === "dark"}
-                                className="p-2 border-2 border-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors"
-                            >
-                                {theme === "dark" ? (
-                                    <Sun className="w-5 h-5" />
-                                ) : (
-                                    <Moon className="w-5 h-5" />
-                                )}
-                            </button>
+                            <>
+                                <LanguageToggle />
+                                <button
+                                    type="button"
+                                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                    aria-label={theme === "dark" ? t('lightMode') : t('darkMode')}
+                                    aria-pressed={theme === "dark"}
+                                    className="p-2 border-2 border-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors"
+                                >
+                                    {theme === "dark" ? (
+                                        <Sun className="w-5 h-5" />
+                                    ) : (
+                                        <Moon className="w-5 h-5" />
+                                    )}
+                                </button>
+                            </>
                         )}
                     </div>
 
@@ -107,7 +113,7 @@ export default function Navbar() {
                         <button
                             type="button"
                             onClick={() => setIsOpen(!isOpen)}
-                            aria-label={isOpen ? "Close menu" : "Open menu"}
+                            aria-label={isOpen ? t('closeMenu') : t('openMenu')}
                             aria-expanded={isOpen}
                             aria-controls="mobile-menu"
                             className="p-2 border-2 border-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors"
@@ -131,7 +137,7 @@ export default function Navbar() {
                         <div className="px-4 py-6 space-y-4">
                             {navItems.map((item) => (
                                 <Link
-                                    key={item.name}
+                                    key={item.href}
                                     href={item.href}
                                     onClick={() => setIsOpen(false)}
                                     className={cn(
@@ -142,6 +148,24 @@ export default function Navbar() {
                                     {item.name}
                                 </Link>
                             ))}
+                            {mounted && (
+                                <div className="flex items-center gap-4 pt-2">
+                                    <LanguageToggle />
+                                    <button
+                                        type="button"
+                                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                        aria-label={theme === "dark" ? t('lightMode') : t('darkMode')}
+                                        aria-pressed={theme === "dark"}
+                                        className="p-2 border-2 border-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors"
+                                    >
+                                        {theme === "dark" ? (
+                                            <Sun className="w-5 h-5" />
+                                        ) : (
+                                            <Moon className="w-5 h-5" />
+                                        )}
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 )}

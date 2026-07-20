@@ -4,35 +4,38 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Book, Gamepad2, GraduationCap, ArrowRight, Star } from "lucide-react";
 import { SpellingCycler } from "@/components/ui/SpellingCycler";
-
-const features = [
-  {
-    title: "DICTIONARY",
-    description: "Explore the lexicon. Thousands of words. Precise definitions.",
-    icon: Book,
-    href: "/dictionary",
-    bg: "bg-white",
-    fg: "text-black",
-  },
-  {
-    title: "EDUCATION",
-    description: "Structured paths. Lessons designed for mastery.",
-    icon: GraduationCap,
-    href: "/education",
-    bg: "bg-accent",
-    fg: "text-black",
-  },
-  {
-    title: "GAMES",
-    description: "Play to learn. Interactive challenges for memory retention.",
-    icon: Gamepad2,
-    href: "/education",
-    bg: "bg-secondary",
-    fg: "text-white",
-  },
-];
+import { useTranslations } from "@/lib/i18n/LocaleProvider";
 
 export default function Home() {
+  const t = useTranslations('home');
+
+  const features = [
+    {
+      title: t('dictionaryCardTitle'),
+      description: t('dictionaryCardBody'),
+      icon: Book,
+      href: "/dictionary",
+      bg: "bg-white",
+      fg: "text-black",
+    },
+    {
+      title: t('educationCardTitle'),
+      description: t('educationCardBody'),
+      icon: GraduationCap,
+      href: "/education",
+      bg: "bg-accent",
+      fg: "text-black",
+    },
+    {
+      title: t('gamesCardTitle'),
+      description: t('gamesCardBody'),
+      icon: Gamepad2,
+      href: "/education",
+      bg: "bg-secondary",
+      fg: "text-white",
+    },
+  ];
+
   return (
     <main className="h-screen bg-background pt-28 overflow-hidden flex flex-col">
       {/* Background Pattern */}
@@ -48,7 +51,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 px-2 py-1 sm:px-3 sm:py-1.5 bg-foreground text-background font-bold uppercase tracking-widest text-[10px] sm:text-xs"
             >
               <Star className="w-2 h-2 sm:w-3 sm:h-3 fill-current" />
-              Language Revitalization
+              {t('badge')}
             </motion.div>
 
             <motion.h1
@@ -57,11 +60,11 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.95] tracking-tighter"
             >
-              THE <br />
+              {t('titleLine1')} <br />
               <span className="text-accent-ink relative inline-block">
                 <SpellingCycler />
               </span> <br />
-              LANGUAGE DICTIONARY
+              {t('titleLine3')}
             </motion.h1>
           </div>
 
@@ -86,7 +89,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <motion.div
-              key={feature.title}
+              key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + index * 0.1 }}
@@ -99,7 +102,7 @@ export default function Home() {
                   <div className="p-2 bg-white/20 backdrop-blur-sm border-2 border-current rounded-none">
                     <feature.icon className="w-6 h-6 sm:w-8 sm:h-8" />
                   </div>
-                  <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" aria-hidden="true" />
                 </div>
                 <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-black mb-2 tracking-tighter">{feature.title}</h2>
                 <p className="text-xs sm:text-sm md:text-base font-bold opacity-90 leading-relaxed">

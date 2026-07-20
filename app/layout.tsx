@@ -1,5 +1,6 @@
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
+import { LocaleProvider } from '@/lib/i18n/LocaleProvider';
 import Navbar from '@/components/ui/Navbar';
 
 export const metadata = {
@@ -33,8 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <Navbar />
-          <div id="main-content">{children}</div>
+          <LocaleProvider>
+            <Navbar />
+            <div id="main-content">{children}</div>
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

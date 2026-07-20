@@ -8,8 +8,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 export default function DictionaryPage() {
+    const tr = useTranslations('dictionary');
     const [words, setWords] = useState<Word[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filtered, setFiltered] = useState<Word[]>([]);
@@ -75,10 +77,10 @@ export default function DictionaryPage() {
                 {/* Header */}
                 <div className="mb-16 border-b-4 border-foreground pb-8">
                     <h1 className="text-5xl sm:text-8xl font-black tracking-tighter mb-4 uppercase break-words">
-                        Dictionary
+                        {tr('title')}
                     </h1>
                     <p className="text-xl sm:text-2xl font-medium max-w-2xl">
-                        The complete lexicon. <span className="text-accent-ink font-bold">{words.length}</span> words archived.
+                        {tr('subtitlePrefix')} <span className="text-accent-ink font-bold">{words.length}</span> {tr('subtitleSuffix')}
                     </p>
                 </div>
 
@@ -88,12 +90,12 @@ export default function DictionaryPage() {
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="relative flex-1">
                             <label htmlFor="dictionary-search" className="sr-only">
-                                Search the dictionary
+                                {tr('searchLabel')}
                             </label>
                             <input
                                 id="dictionary-search"
                                 type="text"
-                                placeholder="Search the archive..."
+                                placeholder={tr('searchPlaceholder')}
                                 value={searchTerm}
                                 onChange={(e) => {
                                     setSearchTerm(e.target.value);
@@ -105,16 +107,16 @@ export default function DictionaryPage() {
                         </div>
 
                         {/* Search Mode Dropdown */}
-                        <div className="relative md:w-64">
+                        <div className="relative md:w-80">
                             <select
                                 value={searchMode}
                                 onChange={(e) => setSearchMode(e.target.value as any)}
-                                aria-label="Search fields"
-                                className="w-full h-full bg-background border-4 border-foreground p-4 sm:px-8 sm:py-8 text-xl font-bold uppercase focus:outline-none focus:border-accent appearance-none cursor-pointer"
+                                aria-label={tr('fieldsLabel')}
+                                className="w-full h-full bg-background border-4 border-foreground p-4 pr-10 sm:pl-6 sm:pr-12 sm:py-8 text-lg sm:text-xl font-bold uppercase focus:outline-none focus:border-accent appearance-none cursor-pointer"
                             >
-                                <option value="all">All Fields</option>
-                                <option value="word">Mi'gmaq</option>
-                                <option value="english">English</option>
+                                <option value="all">{tr('fieldAll')}</option>
+                                <option value="word">{tr('fieldWord')}</option>
+                                <option value="english">{tr('fieldEnglish')}</option>
                             </select>
                             <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
                                 <svg className="w-6 h-6 fill-current" viewBox="0 0 20 20">
@@ -125,7 +127,7 @@ export default function DictionaryPage() {
                     </div>
 
                     {/* Alphabet Filter */}
-                    <div className="flex flex-wrap gap-2 justify-center" role="group" aria-label="Filter by letter">
+                    <div className="flex flex-wrap gap-2 justify-center" role="group" aria-label={tr('filterByLetter')}>
                         <button
                             type="button"
                             onClick={() => setSelectedLetter(null)}
@@ -135,7 +137,7 @@ export default function DictionaryPage() {
                                 !selectedLetter ? "bg-foreground text-background" : "bg-background hover:bg-muted"
                             )}
                         >
-                            All
+                            {tr('allLetters')}
                         </button>
                         {availableLetters.map((letter) => (
                             <button
@@ -146,7 +148,7 @@ export default function DictionaryPage() {
                                     setSearchTerm(''); // Clear search term when picking a letter
                                 }}
                                 aria-pressed={selectedLetter === letter}
-                                aria-label={`Filter by letter ${letter}`}
+                                aria-label={`${tr('filterByLetter')} ${letter}`}
                                 className={cn(
                                     "w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold border-2 border-foreground transition-all text-lg sm:text-xl",
                                     selectedLetter === letter
@@ -226,10 +228,11 @@ export default function DictionaryPage() {
                         {paginatedWords.length < filtered.length && (
                             <div className="flex justify-center pt-20">
                                 <button
+                                    type="button"
                                     onClick={() => setPage((p) => p + 1)}
                                     className="px-12 py-4 bg-foreground text-background font-black text-xl uppercase tracking-wide hover:bg-accent hover:text-foreground transition-colors"
                                 >
-                                    Load More
+                                    {tr('loadMore')}
                                 </button>
                             </div>
                         )}

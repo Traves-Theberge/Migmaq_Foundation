@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { BookOpen, Gamepad2, GraduationCap, ArrowRight, Star, BrainCircuit } from 'lucide-react';
 import { lessonCategories, getAllLessons } from '@/lib/lessons/index';
 import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 const container = {
     hidden: { opacity: 0 },
@@ -25,6 +26,7 @@ const item = {
 const totalLessons = getAllLessons().length;
 
 export default function EducationPage() {
+    const t = useTranslations('education');
     const [randomWord, setRandomWord] = useState<any>(null);
 
     useEffect(() => {
@@ -43,10 +45,10 @@ export default function EducationPage() {
             <div className="max-w-7xl mx-auto">
                 <div className="mb-16 border-b-4 border-foreground pb-8">
                     <h1 className="text-5xl sm:text-8xl font-black uppercase tracking-tighter mb-4">
-                        Education
+                        {t('title')}
                     </h1>
                     <p className="text-xl sm:text-2xl font-medium max-w-3xl leading-relaxed">
-                        Fun ways to learn. <span className="text-secondary font-bold">Play games</span> and explore the language together!
+                        {t('subtitlePrefix')} <span className="text-secondary font-bold">{t('subtitleHighlight')}</span> {t('subtitleSuffix')}
                     </p>
                 </div>
 
@@ -67,7 +69,7 @@ export default function EducationPage() {
                                     <div className="p-3 bg-white text-accent border-2 border-foreground">
                                         <BookOpen className="w-6 h-6 sm:w-8 sm:h-8" />
                                     </div>
-                                    <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight">Learn a New Word</h2>
+                                    <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight">{t('learnNewWord')}</h2>
                                 </div>
 
                                 {randomWord ? (
@@ -87,7 +89,7 @@ export default function EducationPage() {
                                             </p>
                                         )}
                                         <div className="mt-6 flex items-center text-accent-ink font-black uppercase tracking-wide">
-                                            View Details <ArrowRight className="w-6 h-6 ml-2" aria-hidden="true" />
+                                            {t('viewDetails')} <ArrowRight className="w-6 h-6 ml-2" aria-hidden="true" />
                                         </div>
                                     </Link>
                                 ) : (
@@ -102,7 +104,7 @@ export default function EducationPage() {
 
                     {/* Games Section */}
                     <motion.section variants={item}>
-                        <h2 className="text-3xl sm:text-5xl font-black uppercase mb-6 tracking-tighter">Games</h2>
+                        <h2 className="text-3xl sm:text-5xl font-black uppercase mb-6 tracking-tighter">{t('games')}</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* Memory Game */}
                             <Link
@@ -115,9 +117,9 @@ export default function EducationPage() {
                                     </div>
                                     <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                                 </div>
-                                <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">Memory</h3>
+                                <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">{t('memoryTitle')}</h3>
                                 <p className="text-base sm:text-lg font-medium leading-relaxed">
-                                    Match words to their English translations.
+                                    {t('memoryBody')}
                                 </p>
                             </Link>
 
@@ -132,9 +134,9 @@ export default function EducationPage() {
                                     </div>
                                     <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                                 </div>
-                                <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">Quiz</h3>
+                                <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">{t('quizTitle')}</h3>
                                 <p className="text-base sm:text-lg font-medium opacity-90 leading-relaxed">
-                                    Test your vocabulary with multiple choice questions.
+                                    {t('quizBody')}
                                 </p>
                             </Link>
                         </div>
@@ -142,7 +144,7 @@ export default function EducationPage() {
 
                     {/* Storybooks Section */}
                     <motion.section variants={item}>
-                        <h2 className="text-3xl sm:text-5xl font-black uppercase mb-6 tracking-tighter">Storybooks</h2>
+                        <h2 className="text-3xl sm:text-5xl font-black uppercase mb-6 tracking-tighter">{t('storybooks')}</h2>
                         <Link
                             href="/education/books"
                             className="block bg-accent text-foreground p-6 sm:p-10 border-4 border-foreground hover:-translate-y-2 transition-transform group"
@@ -154,7 +156,7 @@ export default function EducationPage() {
                                 <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                             </div>
                             <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">
-                                Illustrated Storybooks
+                                {t('storybooksCardTitle')}
                             </h3>
                             <p className="text-base sm:text-lg font-medium opacity-90 leading-relaxed">
                                 Animated, page-flipping bilingual books — starting with{' '}
@@ -166,7 +168,7 @@ export default function EducationPage() {
 
                     {/* Lessons */}
                     <motion.section variants={item}>
-                        <h2 className="text-3xl sm:text-5xl font-black uppercase mb-6 tracking-tighter">Lessons</h2>
+                        <h2 className="text-3xl sm:text-5xl font-black uppercase mb-6 tracking-tighter">{t('lessonsHeading')}</h2>
                         <Link
                             href="/education/lessons"
                             className="block bg-primary text-white p-6 sm:p-10 border-4 border-foreground hover:-translate-y-2 transition-transform group"
@@ -178,7 +180,7 @@ export default function EducationPage() {
                                 <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                             </div>
                             <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">
-                                Guided Lessons
+                                {t('lessonsCardTitle')}
                             </h3>
                             <p className="text-base sm:text-lg font-medium opacity-90 leading-relaxed">
                                 {totalLessons} step-by-step lessons across {lessonCategories.length} topics —{' '}

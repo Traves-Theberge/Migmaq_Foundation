@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { lessonCategories, getAllLessons } from '@/lib/lessons/index';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 const iconMap: Record<string, LucideIcon> = {
     BookOpen,
@@ -35,6 +36,7 @@ const difficultyColors: Record<string, string> = {
 const allLessons = getAllLessons();
 
 export default function LessonsPage() {
+    const t = useTranslations('lessons');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);
@@ -60,16 +62,16 @@ export default function LessonsPage() {
                     className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-primary transition-colors group mb-8"
                 >
                     <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" />
-                    Back to Education
+                    {t('backToEducation')}
                 </Link>
 
                 <div className="mb-12 border-b-4 border-foreground pb-8">
                     <h1 className="text-5xl sm:text-8xl font-black uppercase tracking-tighter mb-4">
-                        Lessons
+                        {t('title')}
                     </h1>
                     <p className="text-xl sm:text-2xl font-medium max-w-2xl">
-                        <span className="text-primary font-bold">{allLessons.length}</span> guided lessons across{' '}
-                        <span className="text-primary font-bold">{lessonCategories.length}</span> topics.
+                        <span className="text-primary font-bold">{allLessons.length}</span> {t('countMiddle')}{' '}
+                        <span className="text-primary font-bold">{lessonCategories.length}</span> {t('countSuffix')}
                     </p>
                 </div>
 
@@ -78,28 +80,30 @@ export default function LessonsPage() {
                     <div className="relative">
                         <input
                             type="text"
-                            placeholder="Search lessons..."
+                            placeholder={t('searchPlaceholder')}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full bg-background border-4 border-foreground p-4 sm:p-6 text-lg sm:text-2xl font-bold normal-case placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                         />
-                        <Search className="absolute right-6 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 text-foreground" />
+                        <Search className="absolute right-6 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 text-foreground" aria-hidden="true" />
                     </div>
 
                     <div className="flex flex-wrap gap-2">
                         <button
+                            type="button"
                             onClick={() => setSelectedCategory(null)}
                             className={cn(
                                 "px-4 py-2 font-bold border-2 border-foreground transition-all uppercase text-sm",
                                 !selectedCategory ? "bg-foreground text-background" : "bg-background hover:bg-muted"
                             )}
                         >
-                            All Topics
+                            {t('allTopics')}
                         </button>
                         {lessonCategories.map((category) => {
                             const CategoryIcon = iconMap[category.icon] || BookOpen;
                             return (
                                 <button
+                                    type="button"
                                     key={category.id}
                                     onClick={() => setSelectedCategory((c) => (c === category.id ? null : category.id))}
                                     className={cn(
@@ -117,6 +121,7 @@ export default function LessonsPage() {
                     <div className="flex flex-wrap gap-2">
                         {(['beginner', 'intermediate', 'advanced'] as const).map((difficulty) => (
                             <button
+                                type="button"
                                 key={difficulty}
                                 onClick={() => setSelectedDifficulty((d) => (d === difficulty ? null : difficulty))}
                                 className={cn(
@@ -126,7 +131,7 @@ export default function LessonsPage() {
                                         : "bg-background hover:bg-muted"
                                 )}
                             >
-                                {difficulty}
+                                {t(difficulty)}
                             </button>
                         ))}
                     </div>
@@ -135,7 +140,7 @@ export default function LessonsPage() {
                 {/* Results */}
                 {filtered.length === 0 ? (
                     <div className="py-20 text-center">
-                        <p className="text-2xl font-bold text-muted-foreground">No lessons match your search.</p>
+                        <p className="text-2xl font-bold text-muted-foreground">{t('noResults')}</p>
                     </div>
                 ) : (
                     <motion.div
@@ -157,7 +162,7 @@ export default function LessonsPage() {
                                     >
                                         <div className="flex items-start justify-between mb-3">
                                             <span className={`px-2 py-1 ${difficultyColors[lesson.difficulty]} text-white text-xs font-bold uppercase tracking-wide`}>
-                                                {lesson.difficulty}
+                                                {t(lesson.difficulty as 'beginner' | 'intermediate' | 'advanced')}
                                             </span>
                                             <div className="flex items-center text-muted-foreground text-sm">
                                                 <Clock className="w-4 h-4 mr-1" />
@@ -178,8 +183,8 @@ export default function LessonsPage() {
                                         </p>
 
                                         <div className="flex items-center justify-between text-sm font-bold">
-                                            <span className="text-muted-foreground">{lesson.steps.length} steps</span>
-                                            <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                            <span className="text-muted-foreground">{lesson.steps.length} {t('steps')}</span>
+                                            <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" aria-hidden="true" />
                                         </div>
                                     </Link>
                                 </motion.div>

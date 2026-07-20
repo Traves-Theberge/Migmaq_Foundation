@@ -11,6 +11,7 @@
     "data:audio-manifest": "node scripts/build-audio-manifest.mjs",
     "data:audio-upload": "node scripts/upload-audio-blob.mjs",
     "data:validate-lessons": "tsx scripts/validate-lessons.ts",
+    "data:validate-i18n": "tsx scripts/validate-i18n.ts",
     "test:a11y": "playwright test e2e/a11y.spec.ts"
   },
   "dependencies": {
