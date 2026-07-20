@@ -52,7 +52,7 @@ export default function WordActions({ word }: { word: string }) {
                 onClick={share}
                 className="inline-flex items-center px-4 py-2 border-2 border-foreground font-bold uppercase text-sm hover:bg-foreground hover:text-background transition-colors"
             >
-                <Share2 className="w-4 h-4 mr-2" />
+                <Share2 className="w-4 h-4 mr-2" aria-hidden="true" />
                 {copied ? 'Copied!' : 'Share'}
             </button>
             <button
@@ -64,9 +64,12 @@ export default function WordActions({ word }: { word: string }) {
                     saved ? "bg-foreground text-background" : "hover:bg-foreground hover:text-background"
                 )}
             >
-                {saved ? <Check className="w-4 h-4 mr-2" /> : <Bookmark className="w-4 h-4 mr-2" />}
+                {saved ? <Check className="w-4 h-4 mr-2" aria-hidden="true" /> : <Bookmark className="w-4 h-4 mr-2" aria-hidden="true" />}
                 {saved ? 'Saved' : 'Save'}
             </button>
+            <span className="sr-only" aria-live="polite">
+                {copied ? 'Link copied to clipboard' : ''}
+            </span>
         </div>
     );
 }

@@ -173,10 +173,12 @@ export default function FlashcardGame() {
                             <div className="text-2xl sm:text-3xl md:text-4xl font-black tabular-nums">{formatTime(timer)}</div>
                         </div>
                         <button
+                            type="button"
                             onClick={fetchGameData}
+                            aria-label="Restart game"
                             className="p-3 md:p-4 bg-foreground text-background hover:bg-primary hover:text-white transition-colors"
                         >
-                            <RefreshCw className="w-6 h-6 md:w-8 md:h-8" />
+                            <RefreshCw className="w-6 h-6 md:w-8 md:h-8" aria-hidden="true" />
                         </button>
                     </div>
                 </div>
@@ -192,6 +194,22 @@ export default function FlashcardGame() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: index * 0.05 }}
                                     onClick={() => handleCardClick(index)}
+                                    role="button"
+                                    tabIndex={0}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            handleCardClick(index);
+                                        }
+                                    }}
+                                    aria-label={
+                                        card.isMatched
+                                            ? `${card.type === 'word' ? "Mi'gmaq" : 'English'} card, matched: ${card.content}`
+                                            : card.isFlipped
+                                                ? `${card.type === 'word' ? "Mi'gmaq" : 'English'} card: ${card.content}`
+                                                : `Card ${index + 1}, face down`
+                                    }
+                                    aria-disabled={card.isMatched}
                                     className="aspect-square cursor-pointer w-full"
                                     style={{ perspective: '1000px' }}
                                 >

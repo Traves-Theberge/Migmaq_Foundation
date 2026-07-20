@@ -18,7 +18,7 @@ export default function BooksIndexPage() {
             <div className="max-w-6xl mx-auto">
                 <Link
                     href="/education"
-                    className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent transition-colors group mb-10"
+                    className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent-ink transition-colors group mb-10"
                 >
                     <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" />
                     Back to Education

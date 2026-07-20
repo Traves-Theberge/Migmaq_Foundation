@@ -78,7 +78,7 @@ export default function DictionaryPage() {
                         Dictionary
                     </h1>
                     <p className="text-xl sm:text-2xl font-medium max-w-2xl">
-                        The complete lexicon. <span className="text-accent font-bold">{words.length}</span> words archived.
+                        The complete lexicon. <span className="text-accent-ink font-bold">{words.length}</span> words archived.
                     </p>
                 </div>
 
@@ -87,7 +87,11 @@ export default function DictionaryPage() {
                     {/* Search Bar & Mode */}
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="relative flex-1">
+                            <label htmlFor="dictionary-search" className="sr-only">
+                                Search the dictionary
+                            </label>
                             <input
+                                id="dictionary-search"
                                 type="text"
                                 placeholder="Search the archive..."
                                 value={searchTerm}
@@ -97,7 +101,7 @@ export default function DictionaryPage() {
                                 }}
                                 className="w-full bg-background border-4 border-foreground p-4 sm:p-8 text-xl sm:text-3xl font-bold normal-case placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent transition-colors"
                             />
-                            <Search className="absolute right-8 top-1/2 -translate-y-1/2 w-10 h-10 text-foreground" />
+                            <Search className="absolute right-8 top-1/2 -translate-y-1/2 w-10 h-10 text-foreground" aria-hidden="true" />
                         </div>
 
                         {/* Search Mode Dropdown */}
@@ -105,6 +109,7 @@ export default function DictionaryPage() {
                             <select
                                 value={searchMode}
                                 onChange={(e) => setSearchMode(e.target.value as any)}
+                                aria-label="Search fields"
                                 className="w-full h-full bg-background border-4 border-foreground p-4 sm:px-8 sm:py-8 text-xl font-bold uppercase focus:outline-none focus:border-accent appearance-none cursor-pointer"
                             >
                                 <option value="all">All Fields</option>
@@ -120,9 +125,11 @@ export default function DictionaryPage() {
                     </div>
 
                     {/* Alphabet Filter */}
-                    <div className="flex flex-wrap gap-2 justify-center">
+                    <div className="flex flex-wrap gap-2 justify-center" role="group" aria-label="Filter by letter">
                         <button
+                            type="button"
                             onClick={() => setSelectedLetter(null)}
+                            aria-pressed={!selectedLetter}
                             className={cn(
                                 "px-4 py-2 font-bold border-2 border-foreground transition-all uppercase",
                                 !selectedLetter ? "bg-foreground text-background" : "bg-background hover:bg-muted"
@@ -132,11 +139,14 @@ export default function DictionaryPage() {
                         </button>
                         {availableLetters.map((letter) => (
                             <button
+                                type="button"
                                 key={letter}
                                 onClick={() => {
                                     setSelectedLetter(letter);
                                     setSearchTerm(''); // Clear search term when picking a letter
                                 }}
+                                aria-pressed={selectedLetter === letter}
+                                aria-label={`Filter by letter ${letter}`}
                                 className={cn(
                                     "w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center font-bold border-2 border-foreground transition-all text-lg sm:text-xl",
                                     selectedLetter === letter
@@ -187,7 +197,7 @@ export default function DictionaryPage() {
                                                 {w.translations && w.translations.length > 0 && (
                                                     <div className="mb-2 flex flex-wrap gap-2">
                                                         {w.translations.map((t, i) => (
-                                                            <span key={i} className="text-lg font-bold text-accent">
+                                                            <span key={i} className="text-lg font-bold text-accent-ink">
                                                                 {t}{i < w.translations!.length - 1 ? ',' : ''}
                                                             </span>
                                                         ))}

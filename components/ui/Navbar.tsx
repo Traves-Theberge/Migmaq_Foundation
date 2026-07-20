@@ -57,8 +57,8 @@ export default function Navbar() {
                                         key={item.name}
                                         href={item.href}
                                         className={cn(
-                                            "relative text-lg font-bold uppercase tracking-wide hover:text-accent transition-colors",
-                                            isActive ? "text-accent" : "text-foreground"
+                                            "relative text-lg font-bold uppercase tracking-wide hover:text-accent-ink transition-colors",
+                                            isActive ? "text-accent-ink" : "text-foreground"
                                         )}
                                     >
                                         {item.name}
@@ -80,13 +80,17 @@ export default function Navbar() {
                             href="https://github.com/Traves-Theberge/Migmaq_Foundation"
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="View source on GitHub (opens in a new tab)"
                             className="p-2 border-2 border-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors"
                         >
                             <GithubIcon className="w-5 h-5" />
                         </a>
                         {mounted && (
                             <button
+                                type="button"
                                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                                aria-pressed={theme === "dark"}
                                 className="p-2 border-2 border-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors"
                             >
                                 {theme === "dark" ? (
@@ -101,7 +105,11 @@ export default function Navbar() {
                     {/* Mobile menu button */}
                     <div className="md:hidden flex items-center">
                         <button
+                            type="button"
                             onClick={() => setIsOpen(!isOpen)}
+                            aria-label={isOpen ? "Close menu" : "Open menu"}
+                            aria-expanded={isOpen}
+                            aria-controls="mobile-menu"
                             className="p-2 border-2 border-foreground rounded-lg hover:bg-foreground hover:text-background transition-colors"
                         >
                             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -114,6 +122,7 @@ export default function Navbar() {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
+                        id="mobile-menu"
                         initial={{ height: 0 }}
                         animate={{ height: "auto" }}
                         exit={{ height: 0 }}
@@ -126,8 +135,8 @@ export default function Navbar() {
                                     href={item.href}
                                     onClick={() => setIsOpen(false)}
                                     className={cn(
-                                        "block text-2xl font-black uppercase tracking-tight hover:text-accent transition-colors",
-                                        pathname === item.href ? "text-accent" : "text-foreground"
+                                        "block text-2xl font-black uppercase tracking-tight hover:text-accent-ink transition-colors",
+                                        pathname === item.href ? "text-accent-ink" : "text-foreground"
                                     )}
                                 >
                                     {item.name}

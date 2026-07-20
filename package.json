@@ -10,7 +10,8 @@
     "data:dictionary": "node scripts/build-dictionary.mjs",
     "data:audio-manifest": "node scripts/build-audio-manifest.mjs",
     "data:audio-upload": "node scripts/upload-audio-blob.mjs",
-    "data:validate-lessons": "tsx scripts/validate-lessons.ts"
+    "data:validate-lessons": "tsx scripts/validate-lessons.ts",
+    "test:a11y": "playwright test e2e/a11y.spec.ts"
   },
   "dependencies": {
     "@types/canvas-confetti": "^1.9.0",
@@ -27,6 +28,8 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24.13.3",
     "@types/react": "^19",

@@ -47,6 +47,7 @@ export default function AudioButton({ url, label, className }: AudioButtonProps)
             type="button"
             onClick={toggle}
             aria-pressed={playing}
+            aria-label={playing ? `Stop ${label}` : `Play ${label}`}
             className={cn(
                 "inline-flex items-center gap-2 px-3 py-1.5 border-2 border-foreground font-bold uppercase text-xs tracking-widest transition-colors",
                 playing
@@ -55,8 +56,11 @@ export default function AudioButton({ url, label, className }: AudioButtonProps)
                 className
             )}
         >
-            {playing ? <Square className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            {playing ? <Square className="w-3.5 h-3.5" aria-hidden="true" /> : <Volume2 className="w-3.5 h-3.5" aria-hidden="true" />}
             {label}
+            <span className="sr-only" aria-live="polite">
+                {playing ? `Playing ${label}` : ''}
+            </span>
         </button>
     );
 }

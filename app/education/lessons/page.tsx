@@ -24,10 +24,12 @@ const iconMap: Record<string, LucideIcon> = {
     Feather,
 };
 
+// One shade darker than the Tailwind 500s so white badge text clears
+// WCAG AA contrast (500s only manage ~2.2:1 here).
 const difficultyColors: Record<string, string> = {
-    beginner: 'bg-green-500',
-    intermediate: 'bg-yellow-500',
-    advanced: 'bg-red-500',
+    beginner: 'bg-green-700',
+    intermediate: 'bg-yellow-700',
+    advanced: 'bg-red-700',
 };
 
 const allLessons = getAllLessons();

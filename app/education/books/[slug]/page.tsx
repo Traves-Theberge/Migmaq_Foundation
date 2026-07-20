@@ -31,7 +31,7 @@ export default async function BookPage({ params }: { params: Promise<{ slug: str
             <div className="max-w-5xl mx-auto mb-10">
                 <Link
                     href="/education/books"
-                    className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent transition-colors group"
+                    className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent-ink transition-colors group"
                 >
                     <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" />
                     All Storybooks

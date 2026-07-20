@@ -86,8 +86,8 @@ export default function EducationPage() {
                                                 {randomWord.definitions[0]}
                                             </p>
                                         )}
-                                        <div className="mt-6 flex items-center text-accent font-black uppercase tracking-wide">
-                                            View Details <ArrowRight className="w-6 h-6 ml-2" />
+                                        <div className="mt-6 flex items-center text-accent-ink font-black uppercase tracking-wide">
+                                            View Details <ArrowRight className="w-6 h-6 ml-2" aria-hidden="true" />
                                         </div>
                                     </Link>
                                 ) : (
@@ -116,7 +116,7 @@ export default function EducationPage() {
                                     <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                                 </div>
                                 <h3 className="text-3xl sm:text-4xl font-black uppercase mb-4 tracking-tighter">Memory</h3>
-                                <p className="text-base sm:text-lg font-medium opacity-90 leading-relaxed">
+                                <p className="text-base sm:text-lg font-medium leading-relaxed">
                                     Match words to their English translations.
                                 </p>
                             </Link>

@@ -47,5 +47,10 @@ node_modules/
 dist/
 .turbo/
 
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+
 # transient backup written by scripts/build-dictionary.mjs before each rebuild
 public/assets/dictionary.backup.json

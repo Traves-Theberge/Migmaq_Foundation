@@ -45,7 +45,7 @@ export default function GlossWord({ word, display, data }: GlossWordProps) {
         <span
             className={`group relative inline-block border-b-2 border-dotted border-current transition-colors ${
                 data.audioUrl ? 'cursor-pointer' : 'cursor-help'
-            } ${playing ? 'text-accent' : ''}`}
+            } ${playing ? 'text-accent-ink' : ''}`}
             tabIndex={0}
             role={data.audioUrl ? 'button' : undefined}
             aria-label={data.audioUrl ? `${text}: ${data.gloss}. Play recording.` : `${text}: ${data.gloss}`}

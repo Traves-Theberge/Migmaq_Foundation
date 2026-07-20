@@ -192,7 +192,8 @@ export default function QuizGame() {
                                 {option}
                                 {showResult && (
                                     <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                                        {isCorrect ? <Check className="w-8 h-8" /> : <X className="w-8 h-8" />}
+                                        {isCorrect ? <Check className="w-8 h-8" aria-hidden="true" /> : <X className="w-8 h-8" aria-hidden="true" />}
+                                        <span className="sr-only">{isCorrect ? 'Correct answer' : 'Incorrect answer'}</span>
                                     </div>
                                 )}
                             </motion.button>

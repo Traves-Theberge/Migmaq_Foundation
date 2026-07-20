@@ -25,9 +25,8 @@ export default function PartOfSpeechBadge({ type, className }: PartOfSpeechBadge
 
     return (
         <span className="relative inline-block">
-            <span
-                tabIndex={0}
-                role="button"
+            <button
+                type="button"
                 aria-describedby={description ? tooltipId : undefined}
                 aria-expanded={open}
                 onClick={toggle}
@@ -35,13 +34,10 @@ export default function PartOfSpeechBadge({ type, className }: PartOfSpeechBadge
                 onMouseLeave={() => setOpen(false)}
                 onFocus={() => setOpen(true)}
                 onBlur={() => setOpen(false)}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') toggle(e);
-                }}
                 className={cn(className, description && 'cursor-help')}
             >
                 {type}
-            </span>
+            </button>
             {description && open && (
                 <span
                     id={tooltipId}

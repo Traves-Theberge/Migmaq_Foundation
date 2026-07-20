@@ -82,7 +82,7 @@ export default function LessonPage() {
                         <ArrowLeft className="w-6 h-6 mr-2" />
                         Back
                     </Link>
-                    <div className="text-sm font-bold uppercase tracking-widest opacity-50">
+                    <div className="text-sm font-bold uppercase tracking-widest text-muted-foreground" aria-live="polite">
                         Step {currentStep + 1} of {lessonData.steps.length}
                     </div>
                 </div>
@@ -103,7 +103,14 @@ export default function LessonPage() {
                 </div>
 
                 {/* Progress Bar */}
-                <div className="w-full h-4 bg-foreground/10 mb-12 rounded-full overflow-hidden">
+                <div
+                    className="w-full h-4 bg-foreground/10 mb-12 rounded-full overflow-hidden"
+                    role="progressbar"
+                    aria-label={`Lesson progress: step ${currentStep + 1} of ${lessonData.steps.length}`}
+                    aria-valuenow={currentStep + 1}
+                    aria-valuemin={1}
+                    aria-valuemax={lessonData.steps.length}
+                >
                     <motion.div
                         className="h-full bg-primary"
                         initial={{ width: 0 }}

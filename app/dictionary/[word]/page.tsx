@@ -51,7 +51,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <Link
                         href="/dictionary"
-                        className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent transition-colors group"
+                        className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent-ink transition-colors group"
                     >
                         <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" />
                         Back to Dictionary
@@ -133,7 +133,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                 {adjacent.prev ? (
                                     <Link
                                         href={`/dictionary/${encodeURIComponent(adjacent.prev)}`}
-                                        className="inline-flex items-center gap-2 font-bold uppercase text-sm sm:text-base hover:text-accent transition-colors group"
+                                        className="inline-flex items-center gap-2 font-bold uppercase text-sm sm:text-base hover:text-accent-ink transition-colors group"
                                     >
                                         <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                                         <span className="truncate max-w-[10rem] sm:max-w-none">{adjacent.prev}</span>
@@ -142,7 +142,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                 {adjacent.next ? (
                                     <Link
                                         href={`/dictionary/${encodeURIComponent(adjacent.next)}`}
-                                        className="inline-flex items-center gap-2 font-bold uppercase text-sm sm:text-base hover:text-accent transition-colors group text-right"
+                                        className="inline-flex items-center gap-2 font-bold uppercase text-sm sm:text-base hover:text-accent-ink transition-colors group text-right"
                                     >
                                         <span className="truncate max-w-[10rem] sm:max-w-none">{adjacent.next}</span>
                                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -197,7 +197,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                             {form.href ? (
                                                 <Link
                                                     href={form.href}
-                                                    className="font-black hover:text-accent underline underline-offset-2 transition-colors"
+                                                    className="font-black hover:text-accent-ink underline underline-offset-2 transition-colors"
                                                 >
                                                     {form.migmaq}
                                                 </Link>
@@ -225,7 +225,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                         href={data.entry_url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1 mt-4 text-sm font-bold uppercase tracking-wide hover:text-accent transition-colors"
+                                        className="inline-flex items-center gap-1 mt-4 text-sm font-bold uppercase tracking-wide hover:text-accent-ink transition-colors"
                                     >
                                         mikmaqonline.org <ExternalLink className="w-3.5 h-3.5" />
                                     </a>

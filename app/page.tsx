@@ -58,7 +58,7 @@ export default function Home() {
               className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.95] tracking-tighter"
             >
               THE <br />
-              <span className="text-accent relative inline-block">
+              <span className="text-accent-ink relative inline-block">
                 <SpellingCycler />
               </span> <br />
               LANGUAGE DICTIONARY
