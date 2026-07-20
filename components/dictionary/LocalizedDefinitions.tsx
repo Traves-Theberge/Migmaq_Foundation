@@ -10,7 +10,7 @@ interface LocalizedDefinitionsProps {
 /** Numbered definitions list; swaps to the machine-translated French set in French mode, when available. */
 export default function LocalizedDefinitions({ en, fr }: LocalizedDefinitionsProps) {
     const { locale } = useLocale();
-    const t = useTranslations('common');
+    const t = useTranslations('dictionaryWord');
     const showFr = locale === 'fr' && !!fr && fr.length === en.length;
     const items = showFr ? fr! : en;
 

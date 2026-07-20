@@ -12,7 +12,7 @@ import { useTranslations, useLocale } from '@/lib/i18n/LocaleProvider';
 
 export default function DictionaryPage() {
     const tr = useTranslations('dictionary');
-    const common = useTranslations('common');
+    const dw = useTranslations('dictionaryWord');
     const { locale } = useLocale();
     const [words, setWords] = useState<Word[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -85,7 +85,7 @@ export default function DictionaryPage() {
                         {tr('subtitlePrefix')} <span className="text-accent-ink font-bold">{words.length}</span> {tr('subtitleSuffix')}
                     </p>
                     {locale === 'fr' && (
-                        <p className="text-sm italic text-muted-foreground mt-2">{common('machineTranslated')}</p>
+                        <p className="text-sm italic text-muted-foreground mt-2">{dw('machineTranslated')}</p>
                     )}
                 </div>
 

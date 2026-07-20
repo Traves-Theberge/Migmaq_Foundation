@@ -13,7 +13,7 @@ interface LocalizedUsagesProps {
  */
 export default function LocalizedUsages({ usages }: LocalizedUsagesProps) {
     const { locale } = useLocale();
-    const t = useTranslations('common');
+    const t = useTranslations('dictionaryWord');
     const anyFrench = locale === 'fr' && usages.some((u) => u.french);
 
     return (

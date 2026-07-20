@@ -31,9 +31,13 @@ const dict = JSON.parse(fs.readFileSync(DICT, 'utf8'));
 const words = dict.message.words;
 
 const resultFiles = fs.readdirSync(resultsDir).filter((f) => f.endsWith('.json'));
-let applied = 0;
+let touchedWords = 0;
 let skippedMissingWord = 0;
-let skippedLengthMismatch = 0;
+const fieldStats = {
+    fr_definitions: { applied: 0, mismatched: 0 },
+    fr_translations: { applied: 0, mismatched: 0 },
+    fr_usages: { applied: 0, mismatched: 0 },
+};
 
 for (const file of resultFiles) {
     const batch = JSON.parse(fs.readFileSync(path.join(resultsDir, file), 'utf8'));
@@ -41,24 +45,45 @@ for (const file of resultFiles) {
         const word = words[entry.idx];
         if (!word) { skippedMissingWord++; continue; }
 
-        let ok = true;
-        if (Array.isArray(entry.fr_definitions) && entry.fr_definitions.length === (word.definitions?.length ?? 0)) {
-            word.fr_definitions = entry.fr_definitions;
-        } else if (entry.fr_definitions) { ok = false; }
+        let touched = false;
 
-        if (Array.isArray(entry.fr_translations) && entry.fr_translations.length === (word.translations?.length ?? 0)) {
-            word.fr_translations = entry.fr_translations;
-        } else if (entry.fr_translations) { ok = false; }
+        if (Array.isArray(entry.fr_definitions)) {
+            if (entry.fr_definitions.length === (word.definitions?.length ?? 0)) {
+                word.fr_definitions = entry.fr_definitions;
+                fieldStats.fr_definitions.applied++;
+                touched = true;
+            } else {
+                fieldStats.fr_definitions.mismatched++;
+            }
+        }
 
-        if (Array.isArray(entry.fr_usages) && word.usages && entry.fr_usages.length === word.usages.length) {
-            word.usages = word.usages.map((u, i) => entry.fr_usages[i] ? { ...u, french: entry.fr_usages[i] } : u);
-        } else if (entry.fr_usages?.length) { ok = false; }
+        if (Array.isArray(entry.fr_translations)) {
+            if (entry.fr_translations.length === (word.translations?.length ?? 0)) {
+                word.fr_translations = entry.fr_translations;
+                fieldStats.fr_translations.applied++;
+                touched = true;
+            } else {
+                fieldStats.fr_translations.mismatched++;
+            }
+        }
 
-        if (ok) applied++; else skippedLengthMismatch++;
+        if (Array.isArray(entry.fr_usages)) {
+            if (word.usages && entry.fr_usages.length === word.usages.length) {
+                word.usages = word.usages.map((u, i) => entry.fr_usages[i] ? { ...u, french: entry.fr_usages[i] } : u);
+                fieldStats.fr_usages.applied++;
+                touched = true;
+            } else {
+                fieldStats.fr_usages.mismatched++;
+            }
+        }
+
+        if (touched) touchedWords++;
     }
 }
 
 fs.writeFileSync(DICT, JSON.stringify(dict));
-console.log(`Applied French fields to ${applied} words.`);
+console.log(`Touched ${touchedWords} words.`);
+for (const [field, { applied, mismatched }] of Object.entries(fieldStats)) {
+    if (applied || mismatched) console.log(`  ${field}: ${applied} applied, ${mismatched} skipped (length mismatch)`);
+}
 if (skippedMissingWord) console.log(`Skipped ${skippedMissingWord} entries with no matching word (idx out of range).`);
-if (skippedLengthMismatch) console.log(`Skipped ${skippedLengthMismatch} entries with an array-length mismatch.`);
