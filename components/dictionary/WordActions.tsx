@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Share2, Bookmark, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 const STORAGE_KEY = 'migmaq-saved-words';
 
@@ -18,6 +19,7 @@ function readSaved(): string[] {
 export default function WordActions({ word }: { word: string }) {
     const [saved, setSaved] = useState(false);
     const [copied, setCopied] = useState(false);
+    const t = useTranslations('dictionaryWord');
 
     useEffect(() => {
         setSaved(readSaved().includes(word));
@@ -53,7 +55,7 @@ export default function WordActions({ word }: { word: string }) {
                 className="inline-flex items-center px-4 py-2 border-2 border-foreground font-bold uppercase text-sm hover:bg-foreground hover:text-background transition-colors"
             >
                 <Share2 className="w-4 h-4 mr-2" aria-hidden="true" />
-                {copied ? 'Copied!' : 'Share'}
+                {copied ? t('shareCopied') : t('share')}
             </button>
             <button
                 type="button"
@@ -65,10 +67,10 @@ export default function WordActions({ word }: { word: string }) {
                 )}
             >
                 {saved ? <Check className="w-4 h-4 mr-2" aria-hidden="true" /> : <Bookmark className="w-4 h-4 mr-2" aria-hidden="true" />}
-                {saved ? 'Saved' : 'Save'}
+                {saved ? t('saved') : t('save')}
             </button>
             <span className="sr-only" aria-live="polite">
-                {copied ? 'Link copied to clipboard' : ''}
+                {copied ? t('linkCopied') : ''}
             </span>
         </div>
     );

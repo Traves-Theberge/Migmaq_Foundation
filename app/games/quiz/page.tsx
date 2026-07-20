@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, Trophy, RefreshCw, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 interface Question {
     word: string;
@@ -20,6 +21,8 @@ export default function QuizGame() {
     const [isAnswered, setIsAnswered] = useState(false);
     const [loading, setLoading] = useState(true);
     const [gameOver, setGameOver] = useState(false);
+    const t = useTranslations('quiz');
+    const completeHeadingRef = useRef<HTMLHeadingElement>(null);
 
     const fetchQuestions = async () => {
         setLoading(true);
@@ -43,6 +46,10 @@ export default function QuizGame() {
     useEffect(() => {
         fetchQuestions();
     }, []);
+
+    useEffect(() => {
+        if (gameOver) completeHeadingRef.current?.focus();
+    }, [gameOver]);
 
     const handleAnswer = (answer: string) => {
         if (isAnswered) return;
@@ -88,7 +95,7 @@ export default function QuizGame() {
     if (loading) return (
         <div className="min-h-screen flex items-center justify-center bg-background">
             <div className="text-4xl font-black uppercase tracking-tighter animate-pulse">
-                Loading Quiz...
+                {t('loading')}
             </div>
         </div>
     );
@@ -100,25 +107,31 @@ export default function QuizGame() {
                 animate={{ scale: 1, opacity: 1 }}
                 className="max-w-lg w-full bg-background border-4 border-foreground p-12 text-center hard-shadow"
             >
-                <Trophy className="w-24 h-24 mx-auto mb-6 text-primary" />
-                <h1 className="text-6xl font-black uppercase mb-4 tracking-tighter">
-                    Quiz Complete!
+                <Trophy className="w-24 h-24 mx-auto mb-6 text-primary" aria-hidden="true" />
+                <h1
+                    ref={completeHeadingRef}
+                    tabIndex={-1}
+                    className="text-6xl font-black uppercase mb-4 tracking-tighter outline-none"
+                >
+                    {t('complete')}
                 </h1>
                 <p className="text-3xl font-bold mb-8">
-                    Score: {score} / {questions.length}
+                    {t('scoreLabel')} {score} / {questions.length}
                 </p>
                 <div className="space-y-4">
                     <button
+                        type="button"
                         onClick={fetchQuestions}
                         className="w-full py-4 bg-primary text-white font-black text-xl uppercase tracking-wide hover:bg-blue-600 transition-colors border-2 border-foreground"
                     >
-                        Play Again
+                        {t('playAgain')}
                     </button>
                     <button
+                        type="button"
                         onClick={() => window.location.href = '/education'}
                         className="w-full py-4 bg-muted text-foreground font-black text-xl uppercase tracking-wide hover:bg-muted-foreground/20 transition-colors border-2 border-foreground"
                     >
-                        Back to Education
+                        {t('backToEducation')}
                     </button>
                 </div>
             </motion.div>
@@ -134,21 +147,21 @@ export default function QuizGame() {
                 <div className="flex justify-between items-end mb-16 border-b-4 border-foreground pb-8">
                     <div>
                         <h1 className="text-6xl font-black uppercase tracking-tighter leading-none mb-2">
-                            Quiz Mode
+                            {t('title')}
                         </h1>
                         <p className="text-xl font-bold uppercase tracking-wide text-primary">
-                            Question {currentQuestion + 1} of {questions.length}
+                            {t('question')} {currentQuestion + 1} {t('of')} {questions.length}
                         </p>
                     </div>
                     <div className="text-4xl font-black">
-                        {score} pts
+                        {score} {t('pts')}
                     </div>
                 </div>
 
                 {/* Question Card */}
                 <div className="mb-12">
                     <h2 className="text-4xl md:text-5xl font-black mb-8 text-center">
-                        What is the meaning of <br />
+                        {t('whatIsMeaning')} <br />
                         <span className="text-primary inline-block mt-2">{question.word}</span>?
                     </h2>
                 </div>
@@ -193,7 +206,7 @@ export default function QuizGame() {
                                 {showResult && (
                                     <div className="absolute right-4 top-1/2 -translate-y-1/2">
                                         {isCorrect ? <Check className="w-8 h-8" aria-hidden="true" /> : <X className="w-8 h-8" aria-hidden="true" />}
-                                        <span className="sr-only">{isCorrect ? 'Correct answer' : 'Incorrect answer'}</span>
+                                        <span className="sr-only">{isCorrect ? t('correctAnswer') : t('incorrectAnswer')}</span>
                                     </div>
                                 )}
                             </motion.button>
@@ -210,10 +223,11 @@ export default function QuizGame() {
                             className="mt-12 flex justify-end"
                         >
                             <button
+                                type="button"
                                 onClick={nextQuestion}
                                 className="px-12 py-4 bg-foreground text-background font-black text-xl uppercase tracking-wide hover:bg-primary hover:text-white transition-colors flex items-center gap-4"
                             >
-                                Next Question <ArrowRight className="w-6 h-6" />
+                                {t('nextQuestion')} <ArrowRight className="w-6 h-6" aria-hidden="true" />
                             </button>
                         </motion.div>
                     )}

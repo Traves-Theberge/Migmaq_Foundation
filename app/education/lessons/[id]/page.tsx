@@ -9,6 +9,7 @@ import Link from 'next/link';
 import AudioButton from '@/components/ui/AudioButton';
 import { speakerLabel } from '@/lib/speakers';
 import { Recording } from '@/lib/types';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 export default function LessonPage() {
     const { id } = useParams() as { id: string };
@@ -16,6 +17,7 @@ export default function LessonPage() {
     const lessonData = getLessonById(id);
     const [currentStep, setCurrentStep] = useState(0);
     const [audioByTerm, setAudioByTerm] = useState<Record<string, Recording[]>>({});
+    const t = useTranslations('lessonDetail');
 
     useEffect(() => {
         const terms = Array.from(new Set(
@@ -47,9 +49,9 @@ export default function LessonPage() {
         return (
             <div className="min-h-screen flex items-center justify-center bg-background">
                 <div className="text-center">
-                    <h1 className="text-4xl font-black uppercase mb-4">Lesson Not Found</h1>
+                    <h1 className="text-4xl font-black uppercase mb-4">{t('lessonNotFound')}</h1>
                     <Link href="/education/lessons" className="text-primary font-bold hover:underline">
-                        Return to Lessons
+                        {t('returnToLessons')}
                     </Link>
                 </div>
             </div>
@@ -79,22 +81,22 @@ export default function LessonPage() {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8 sm:mb-12">
                     <Link href="/education/lessons" className="flex items-center text-lg font-bold uppercase hover:text-primary transition-colors">
-                        <ArrowLeft className="w-6 h-6 mr-2" />
-                        Back
+                        <ArrowLeft className="w-6 h-6 mr-2" aria-hidden="true" />
+                        {t('back')}
                     </Link>
                     <div className="text-sm font-bold uppercase tracking-widest text-muted-foreground" aria-live="polite">
-                        Step {currentStep + 1} of {lessonData.steps.length}
+                        {t('step')} {currentStep + 1} {t('of')} {lessonData.steps.length}
                     </div>
                 </div>
 
                 {/* Breadcrumb */}
                 <div className="mb-6 flex items-center text-sm font-medium text-muted-foreground">
                     <Link href="/education" className="hover:text-foreground transition-colors">
-                        Education
+                        {t('education')}
                     </Link>
                     <span className="mx-2">/</span>
                     <Link href="/education/lessons" className="hover:text-foreground transition-colors">
-                        Lessons
+                        {t('lessons')}
                     </Link>
                     <span className="mx-2">/</span>
                     <span className="text-foreground">{lessonData.categoryTitle}</span>
@@ -106,7 +108,7 @@ export default function LessonPage() {
                 <div
                     className="w-full h-4 bg-foreground/10 mb-12 rounded-full overflow-hidden"
                     role="progressbar"
-                    aria-label={`Lesson progress: step ${currentStep + 1} of ${lessonData.steps.length}`}
+                    aria-label={`${t('step')} ${currentStep + 1} ${t('of')} ${lessonData.steps.length}`}
                     aria-valuenow={currentStep + 1}
                     aria-valuemin={1}
                     aria-valuemax={lessonData.steps.length}
@@ -133,7 +135,7 @@ export default function LessonPage() {
                                 {step.type === 'info' && (
                                     <div className="space-y-6">
                                         <div className="inline-block px-4 py-2 bg-primary text-white font-bold uppercase tracking-widest text-sm mb-4">
-                                            Info
+                                            {t('info')}
                                         </div>
                                         <p className="text-xl sm:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
                                             {step.description}
@@ -144,7 +146,7 @@ export default function LessonPage() {
                                 {(step.type === 'vocabulary' || step.type === 'phrase') && (
                                     <div className="space-y-8">
                                         <div className="inline-block px-4 py-2 bg-foreground text-background font-bold uppercase tracking-widest text-sm mb-4">
-                                            {step.type}
+                                            {step.type === 'vocabulary' ? t('vocabulary') : t('phrase')}
                                         </div>
 
                                         <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter text-primary mb-4">
@@ -186,19 +188,21 @@ export default function LessonPage() {
                 {/* Navigation */}
                 <div className="mt-12 flex justify-between items-center">
                     <button
+                        type="button"
                         onClick={handlePrev}
                         disabled={currentStep === 0}
                         className="px-8 py-4 font-bold uppercase tracking-wide disabled:opacity-30 hover:text-primary transition-colors disabled:cursor-not-allowed"
                     >
-                        Previous
+                        {t('previous')}
                     </button>
 
                     <button
+                        type="button"
                         onClick={handleNext}
                         className="px-12 py-4 bg-primary text-white border-4 border-foreground font-black text-xl uppercase tracking-wide hover:brightness-110 transition-all flex items-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-none"
                     >
-                        {isLastStep ? 'Complete' : 'Next'}
-                        {isLastStep ? <Check className="w-6 h-6 ml-2" /> : <ArrowRight className="w-6 h-6 ml-2" />}
+                        {isLastStep ? t('complete') : t('next')}
+                        {isLastStep ? <Check className="w-6 h-6 ml-2" aria-hidden="true" /> : <ArrowRight className="w-6 h-6 ml-2" aria-hidden="true" />}
                     </button>
                 </div>
             </div>

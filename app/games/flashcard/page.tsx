@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, Trophy, Timer, Sparkles, Hexagon } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 interface GameCardData {
     id: string;
@@ -27,6 +28,8 @@ export default function FlashcardGame() {
     const [error, setError] = useState<string | null>(null);
     const [timer, setTimer] = useState(0);
     const [gameActive, setGameActive] = useState(false);
+    const t = useTranslations('flashcard');
+    const victoryHeadingRef = useRef<HTMLHeadingElement>(null);
 
     useEffect(() => {
         let interval: NodeJS.Timeout;
@@ -68,6 +71,12 @@ export default function FlashcardGame() {
     useEffect(() => {
         fetchGameData();
     }, []);
+
+    const isVictory = cards.length > 0 && matches === cards.length / 2;
+
+    useEffect(() => {
+        if (isVictory) victoryHeadingRef.current?.focus();
+    }, [isVictory]);
 
     const handleCardClick = (index: number) => {
         if (
@@ -138,14 +147,14 @@ export default function FlashcardGame() {
     if (loading) return (
         <div className="min-h-screen flex items-center justify-center bg-background">
             <div className="text-4xl font-black uppercase tracking-tighter animate-pulse">
-                Shuffling Deck...
+                {t('shuffling')}
             </div>
         </div>
     );
 
     if (error) return (
         <div className="min-h-screen flex items-center justify-center bg-background text-red-600 font-bold text-2xl">
-            Error: {error}
+            {t('errorPrefix')} {error}
         </div>
     );
 
@@ -156,26 +165,26 @@ export default function FlashcardGame() {
                 <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-4 md:mb-8 border-b-4 border-foreground pb-4 md:pb-8">
                     <div>
                         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-2">
-                            Memory
+                            {t('title')}
                         </h1>
                         <p className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-wide text-secondary">
-                            Match the pairs
+                            {t('subtitle')}
                         </p>
                     </div>
 
                     <div className="flex gap-4 sm:gap-6 md:gap-8 mt-4 md:mt-0">
                         <div className="text-right">
-                            <div className="text-xs sm:text-sm font-bold uppercase tracking-widest text-muted-foreground">Score</div>
+                            <div className="text-xs sm:text-sm font-bold uppercase tracking-widest text-muted-foreground">{t('score')}</div>
                             <div className="text-2xl sm:text-3xl md:text-4xl font-black">{matches} / {cards.length / 2}</div>
                         </div>
                         <div className="text-right">
-                            <div className="text-xs sm:text-sm font-bold uppercase tracking-widest text-muted-foreground">Time</div>
+                            <div className="text-xs sm:text-sm font-bold uppercase tracking-widest text-muted-foreground">{t('time')}</div>
                             <div className="text-2xl sm:text-3xl md:text-4xl font-black tabular-nums">{formatTime(timer)}</div>
                         </div>
                         <button
                             type="button"
                             onClick={fetchGameData}
-                            aria-label="Restart game"
+                            aria-label={t('restartGame')}
                             className="p-3 md:p-4 bg-foreground text-background hover:bg-primary hover:text-white transition-colors"
                         >
                             <RefreshCw className="w-6 h-6 md:w-8 md:h-8" aria-hidden="true" />
@@ -184,7 +193,7 @@ export default function FlashcardGame() {
                 </div>
 
                 {/* Grid Container - fits within viewport */}
-                <div className="flex-1">
+                <div className="flex-1" inert={isVictory ? true : undefined}>
                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                         <AnimatePresence>
                             {cards.map((card, index) => (
@@ -204,10 +213,10 @@ export default function FlashcardGame() {
                                     }}
                                     aria-label={
                                         card.isMatched
-                                            ? `${card.type === 'word' ? "Mi'gmaq" : 'English'} card, matched: ${card.content}`
+                                            ? `${card.type === 'word' ? t('migmaq') : t('english')} ${t('card').toLowerCase()}, ${t('matched')}: ${card.content}`
                                             : card.isFlipped
-                                                ? `${card.type === 'word' ? "Mi'gmaq" : 'English'} card: ${card.content}`
-                                                : `Card ${index + 1}, face down`
+                                                ? `${card.type === 'word' ? t('migmaq') : t('english')} ${t('card').toLowerCase()}: ${card.content}`
+                                                : `${t('card')} ${index + 1}, ${t('faceDown')}`
                                     }
                                     aria-disabled={card.isMatched}
                                     className="aspect-square cursor-pointer w-full"
@@ -248,7 +257,7 @@ export default function FlashcardGame() {
                                                 card.type === 'word' ? "text-base sm:text-xl md:text-2xl" : "text-sm sm:text-lg md:text-xl",
                                                 card.isMatched ? "text-white" : card.type === 'translation' ? "text-gray-600" : "text-black"
                                             )}>
-                                                {card.type === 'word' ? "Mi'gmaq" : "English"}
+                                                {card.type === 'word' ? t('migmaq') : t('english')}
                                             </p>
                                             <p className={cn(
                                                 "text-base sm:text-xl md:text-2xl font-bold leading-tight break-words w-full",
@@ -266,37 +275,47 @@ export default function FlashcardGame() {
 
                 {/* Victory Modal */}
                 <AnimatePresence>
-                    {matches === cards.length / 2 && (
+                    {isVictory && (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/90"
+                            role="dialog"
+                            aria-modal="true"
+                            aria-labelledby="victory-heading"
                         >
                             <motion.div
                                 initial={{ scale: 0.9, y: 20 }}
                                 animate={{ scale: 1, y: 0 }}
                                 className="bg-background p-12 max-w-lg w-full text-center border-4 border-white hard-shadow shadow-white"
                             >
-                                <Trophy className="w-20 h-20 mx-auto mb-6 text-accent" />
-                                <h2 className="text-6xl font-black uppercase mb-4 tracking-tighter">
-                                    Victory!
+                                <Trophy className="w-20 h-20 mx-auto mb-6 text-accent" aria-hidden="true" />
+                                <h2
+                                    id="victory-heading"
+                                    ref={victoryHeadingRef}
+                                    tabIndex={-1}
+                                    className="text-6xl font-black uppercase mb-4 tracking-tighter outline-none"
+                                >
+                                    {t('victory')}
                                 </h2>
                                 <p className="text-2xl font-bold mb-8">
-                                    Time: {formatTime(timer)}
+                                    {t('timeLabel')} {formatTime(timer)}
                                 </p>
                                 <div className="space-y-4">
                                     <button
+                                        type="button"
                                         onClick={fetchGameData}
                                         className="w-full py-4 bg-accent text-foreground font-black text-xl uppercase tracking-wide hover:bg-accent/80 transition-colors border-2 border-foreground"
                                     >
-                                        Play Again
+                                        {t('playAgain')}
                                     </button>
                                     <button
+                                        type="button"
                                         onClick={() => window.location.href = '/education'}
                                         className="w-full py-4 bg-muted text-foreground font-black text-xl uppercase tracking-wide hover:bg-muted-foreground/20 transition-colors border-2 border-foreground"
                                     >
-                                        Back to Education
+                                        {t('backToEducation')}
                                     </button>
                                 </div>
                             </motion.div>

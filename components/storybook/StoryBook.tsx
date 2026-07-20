@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { CoverLeaf, ImageLeaf, TextLeaf, BackCoverLeaf } from './BookLeaves';
 import styles from './StoryBook.module.css';
 import { cn } from '@/lib/utils';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 import type { BookDefinition, ResolvedWord } from '@/lib/books/types';
 
 // react-pageflip manipulates the DOM directly and has no meaningful SSR output.
@@ -43,6 +44,7 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
     const [leafIndex, setLeafIndex] = useState(0);
     const [ready, setReady] = useState(false);
     const reduceMotion = useReducedMotion();
+    const t = useTranslations('storybook');
 
     const totalLeaves = book.pages.length * 2 + 2;
     const lastLeaf = totalLeaves - 1;
@@ -72,12 +74,16 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
             if (!ready) return;
+            const target = e.target as HTMLElement | null;
+            if (target?.closest('input, textarea, select, [contenteditable="true"]')) return;
             if (e.key === 'ArrowRight') flipRef.current?.pageFlip().flipNext();
             if (e.key === 'ArrowLeft') flipRef.current?.pageFlip().flipPrev();
         };
         window.addEventListener('keydown', onKey);
         return () => window.removeEventListener('keydown', onKey);
     }, [ready]);
+
+    const currentPage = currentPageOfBook >= 0 ? book.pages[currentPageOfBook] : null;
 
     return (
         <div className={styles.stage}>
@@ -131,19 +137,22 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
             {/* Controls */}
             <div className="flex items-center justify-between gap-4 w-full" style={{ maxWidth: 1040 }}>
                 <button
+                    type="button"
                     onClick={() => flipRef.current?.pageFlip().flipPrev()}
                     disabled={leafIndex === 0}
                     className={cn(styles.navButton, 'inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
                         'disabled:opacity-30 disabled:cursor-not-allowed')}
                 >
-                    <ChevronLeft className="w-5 h-5" /> Back
+                    <ChevronLeft className="w-5 h-5" aria-hidden="true" /> {t('back')}
                 </button>
 
                 <div className="flex items-center gap-2.5">
                     {book.pages.map((page, i) => (
                         <button
+                            type="button"
                             key={page.id}
-                            aria-label={`Go to page ${i + 1}: ${page.label}`}
+                            aria-label={`${t('goToPage')} ${i + 1}: ${page.label}`}
+                            aria-current={i === currentPageOfBook ? 'page' : undefined}
                             onClick={() => goToLeaf(1 + i * 2)}
                             className={cn(styles.pageDot, 'w-3.5 h-3.5 rounded-full')}
                             style={{
@@ -156,18 +165,23 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
                 </div>
 
                 <button
+                    type="button"
                     onClick={() => flipRef.current?.pageFlip().flipNext()}
                     disabled={leafIndex === lastLeaf}
                     className={cn(styles.navButton, 'inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
                         'disabled:opacity-30 disabled:cursor-not-allowed')}
                 >
-                    Next <ChevronRight className="w-5 h-5" />
+                    {t('next')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
                 </button>
             </div>
 
-            <p className="text-xs italic text-center" style={{ color: 'var(--ink-soft)', opacity: 0.7 }}>
-                Drag a page corner to turn it, or use the arrow keys.
+            <p className="text-xs italic text-center" style={{ color: 'var(--ink-soft)' }}>
+                {t('dragHint')}
             </p>
+
+            <span className="sr-only" aria-live="polite">
+                {currentPage ? `${t('page')} ${currentPageOfBook + 1} ${t('of')} ${book.pages.length}: ${currentPage.label}` : ''}
+            </span>
         </div>
     );
 }

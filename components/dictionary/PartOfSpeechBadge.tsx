@@ -3,6 +3,7 @@
 import { useId, useState } from 'react';
 import { getPosDescription } from '@/lib/pos-glossary';
 import { cn } from '@/lib/utils';
+import { useLocale } from '@/lib/i18n/LocaleProvider';
 
 interface PartOfSpeechBadgeProps {
     type: string;
@@ -13,7 +14,8 @@ interface PartOfSpeechBadgeProps {
 export default function PartOfSpeechBadge({ type, className }: PartOfSpeechBadgeProps) {
     const [open, setOpen] = useState(false);
     const tooltipId = useId();
-    const description = getPosDescription(type);
+    const { locale } = useLocale();
+    const description = getPosDescription(type, locale);
 
     const toggle = (e: React.SyntheticEvent) => {
         // The badge can sit inside a <Link> (dictionary list rows) — don't let

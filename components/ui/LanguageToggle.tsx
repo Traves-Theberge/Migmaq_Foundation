@@ -12,6 +12,7 @@ export default function LanguageToggle() {
             type="button"
             onClick={() => setLocale(locale === 'en' ? 'fr' : 'en')}
             aria-label={locale === 'en' ? t('french') : t('english')}
+            aria-pressed={locale === 'fr'}
             className="px-3 py-2 border-2 border-foreground rounded-lg font-black text-sm tracking-wide hover:bg-foreground hover:text-background transition-colors"
         >
             {locale === 'en' ? 'FR' : 'EN'}

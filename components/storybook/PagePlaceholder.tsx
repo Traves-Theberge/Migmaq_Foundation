@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { Feather, Sparkles } from 'lucide-react';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
 interface PagePlaceholderProps {
     alt: string;
@@ -28,6 +29,7 @@ const INK = '#f3e6c8';
  */
 export default function PagePlaceholder({ alt, imageUrl, seed = 0 }: PagePlaceholderProps) {
     const reduceMotion = useReducedMotion();
+    const t = useTranslations('storybook');
 
     if (imageUrl) {
         return (
@@ -46,7 +48,7 @@ export default function PagePlaceholder({ alt, imageUrl, seed = 0 }: PagePlaceho
                 animate={reduceMotion ? undefined : { y: [0, -6, 0] }}
                 transition={reduceMotion ? undefined : { duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
             >
-                <div className="relative">
+                <div className="relative" aria-hidden="true">
                     <Feather className="w-10 h-10 opacity-80" strokeWidth={1.5} style={{ color: INK }} />
                     <motion.span
                         className="absolute -top-2 -right-4"
@@ -57,7 +59,7 @@ export default function PagePlaceholder({ alt, imageUrl, seed = 0 }: PagePlaceho
                     </motion.span>
                 </div>
                 <p className="text-[0.65rem] font-bold uppercase tracking-widest opacity-90" style={{ color: INK }}>
-                    Illustration on its way
+                    {t('illustrationComing')}
                 </p>
                 <p className="text-sm italic opacity-95 max-w-[20rem]" style={{ color: INK }}>{alt}</p>
             </motion.div>

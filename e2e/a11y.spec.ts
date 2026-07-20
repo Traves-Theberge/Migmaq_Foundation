@@ -15,6 +15,8 @@ const ROUTES: Array<[name: string, path: string]> = [
     ['education', '/education'],
     ['lessons list', '/education/lessons'],
     ['lesson detail', '/education/lessons/personal-pronouns'],
+    ['storybooks list', '/education/books'],
+    ['storybook reader', '/education/books/muin-muin'],
     ['games index', '/games'],
     ['flashcard game', '/games/flashcard'],
     ['quiz game', '/games/quiz'],

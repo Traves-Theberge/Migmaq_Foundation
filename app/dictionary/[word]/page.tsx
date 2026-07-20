@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import AudioButton from '@/components/ui/AudioButton';
 import WordActions from '@/components/dictionary/WordActions';
 import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
+import T from '@/components/i18n/T';
 import { getWordDetails, resolveAlternateForms, getAdjacentWords } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
 import { speakerLabel } from '@/lib/speakers';
@@ -53,8 +54,8 @@ export default async function WordDetailsPage({ params }: PageProps) {
                         href="/dictionary"
                         className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent-ink transition-colors group"
                     >
-                        <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" />
-                        Back to Dictionary
+                        <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" aria-hidden="true" />
+                        <T ns="dictionaryWord" k="backToDictionary" />
                     </Link>
 
                     <WordActions word={data.word} />
@@ -98,7 +99,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                         {/* Translations */}
                         {data.translations && data.translations.length > 0 && (
                             <div className="mb-8 p-6 bg-secondary/10 border-4 border-secondary">
-                                <h2 className="text-2xl font-black uppercase mb-4">English Translations</h2>
+                                <h2 className="text-2xl font-black uppercase mb-4"><T ns="dictionaryWord" k="englishTranslations" /></h2>
                                 <ul className="space-y-2">
                                     {data.translations.map((translation: string, idx: number) => (
                                         <li key={idx} className="text-xl font-bold flex items-start">
@@ -113,7 +114,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                         {/* Definitions */}
                         {data.definitions && data.definitions.length > 0 && (
                             <div className="space-y-8">
-                                <h2 className="text-3xl font-black uppercase border-b-4 border-foreground pb-3">Definitions</h2>
+                                <h2 className="text-3xl font-black uppercase border-b-4 border-foreground pb-3"><T ns="dictionaryWord" k="definitions" /></h2>
                                 {data.definitions.map((def: string, idx: number) => (
                                     <div key={idx} className="flex gap-6 items-start group">
                                         <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary text-white flex items-center justify-center border-4 border-transparent group-hover:border-foreground transition-colors">
@@ -135,7 +136,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                         href={`/dictionary/${encodeURIComponent(adjacent.prev)}`}
                                         className="inline-flex items-center gap-2 font-bold uppercase text-sm sm:text-base hover:text-accent-ink transition-colors group"
                                     >
-                                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
                                         <span className="truncate max-w-[10rem] sm:max-w-none">{adjacent.prev}</span>
                                     </Link>
                                 ) : <span />}
@@ -145,7 +146,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                         className="inline-flex items-center gap-2 font-bold uppercase text-sm sm:text-base hover:text-accent-ink transition-colors group text-right"
                                     >
                                         <span className="truncate max-w-[10rem] sm:max-w-none">{adjacent.next}</span>
-                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                                     </Link>
                                 ) : <span />}
                             </div>
@@ -153,12 +154,16 @@ export default async function WordDetailsPage({ params }: PageProps) {
                     </div>
 
                     {/* Sidebar */}
-                    <div className="lg:col-span-4 space-y-6">
+                    <aside className="lg:col-span-4 space-y-6" aria-labelledby="word-sidebar-heading">
+                        <h2 id="word-sidebar-heading" className="sr-only">
+                            <T ns="dictionaryWord" k="moreAboutWord" />
+                        </h2>
+
                         {data.usages && data.usages.length > 0 && (
                             <div className="border-4 border-accent bg-background overflow-hidden relative">
                                 <div className="bg-accent p-4 border-b-4 border-accent">
                                     <h3 className="text-xl font-black uppercase text-foreground">
-                                        Usage Examples
+                                        <T ns="dictionaryWord" k="usageExamples" />
                                     </h3>
                                 </div>
                                 <div className="p-6">
@@ -173,7 +178,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                     {recordings.some(r => r.kind === 'example') && (
                                         <div className="mt-6 pt-4 border-t-2 border-accent/30">
                                             <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">
-                                                Hear the example
+                                                <T ns="dictionaryWord" k="hearExample" />
                                             </p>
                                             <div className="flex flex-wrap gap-2">
                                                 {recordings.filter(r => r.kind === 'example').map((rec) => (
@@ -189,7 +194,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
                         {resolved_alternate_forms.length > 0 && (
                             <div className="border-4 border-foreground bg-background">
                                 <div className="bg-foreground p-4">
-                                    <h3 className="text-xl font-black uppercase text-background">Other Forms</h3>
+                                    <h3 className="text-xl font-black uppercase text-background"><T ns="dictionaryWord" k="otherForms" /></h3>
                                 </div>
                                 <ul className="p-6 space-y-3">
                                     {resolved_alternate_forms.map((form, idx) => (
@@ -214,7 +219,7 @@ export default async function WordDetailsPage({ params }: PageProps) {
 
                         {data.document_references && data.document_references.length > 0 && (
                             <div className="border-2 border-muted-foreground/40 bg-background p-6">
-                                <h3 className="text-sm font-black uppercase tracking-widest mb-3 text-muted-foreground">Sources</h3>
+                                <h3 className="text-sm font-black uppercase tracking-widest mb-3 text-muted-foreground"><T ns="dictionaryWord" k="sources" /></h3>
                                 <ul className="space-y-2">
                                     {data.document_references.map((src: string, idx: number) => (
                                         <li key={idx} className="text-sm text-muted-foreground leading-snug">{src}</li>
@@ -227,12 +232,13 @@ export default async function WordDetailsPage({ params }: PageProps) {
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-1 mt-4 text-sm font-bold uppercase tracking-wide hover:text-accent-ink transition-colors"
                                     >
-                                        mikmaqonline.org <ExternalLink className="w-3.5 h-3.5" />
+                                        mikmaqonline.org <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                                        <span className="sr-only"> <T ns="dictionaryWord" k="opensInNewTab" /></span>
                                     </a>
                                 )}
                             </div>
                         )}
-                    </div>
+                    </aside>
                 </div>
             </div>
         </div>

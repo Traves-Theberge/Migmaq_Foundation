@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { GlossLine } from './GlossWord';
 import PagePlaceholder from './PagePlaceholder';
 import styles from './StoryBook.module.css';
+import { useTranslations } from '@/lib/i18n/LocaleProvider';
 import type { BookDefinition, ResolvedWord } from '@/lib/books/types';
 
 /**
@@ -28,12 +29,12 @@ export const CoverLeaf = forwardRef<HTMLDivElement, {
                 {/* Title block sits over the art, like a printed cover, on a
                     scrim that guarantees legibility regardless of the art. */}
                 <div className={`${styles.coverScrim} absolute inset-x-0 bottom-0 px-6 sm:px-8 pt-20 pb-8 text-center`}>
-                    <h1
+                    <p
                         className={`${styles.titleOutline} text-2xl sm:text-3xl font-bold leading-tight mb-3 text-balance`}
                         style={{ fontFamily: 'var(--font-display)', color: 'var(--cover-ink)' }}
                     >
                         <GlossLine tokens={book.title} glosses={glosses} />
-                    </h1>
+                    </p>
                     <p className="italic text-base sm:text-lg opacity-90" style={{ color: 'var(--cover-ink)' }}>
                         {book.subtitle}
                     </p>
@@ -87,12 +88,13 @@ export const TextLeaf = forwardRef<HTMLDivElement, {
 export const BackCoverLeaf = forwardRef<HTMLDivElement, { note?: string; onRestart: () => void }>(
     function BackCoverLeaf({ note, onRestart }, ref) {
         const paragraphs = (note ?? '').split('\n\n');
+        const t = useTranslations('storybook');
         return (
             <div ref={ref} className="page" data-density="hard">
                 <div className={`${styles.hardCover} ${styles.hardCoverColumn} overflow-y-auto`}>
                     <div className="px-8 py-10 sm:px-10">
                         <h2 className="text-lg font-bold uppercase tracking-widest mb-5 opacity-90">
-                            For parents and teachers
+                            {t('forParentsTeachers')}
                         </h2>
                         {paragraphs.map((p, i) => (
                             <p
@@ -106,11 +108,12 @@ export const BackCoverLeaf = forwardRef<HTMLDivElement, { note?: string; onResta
                             />
                         ))}
                         <motion.button
+                            type="button"
                             whileTap={{ scale: 0.96 }}
                             onClick={onRestart}
                             className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-current/40 font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-colors"
                         >
-                            Read Again
+                            {t('readAgain')}
                         </motion.button>
                     </div>
                 </div>

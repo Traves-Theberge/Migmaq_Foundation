@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { getBook, BOOKS } from '@/lib/books/registry';
 import { resolveBookWords } from '@/lib/books/resolve';
 import StoryBook from '@/components/storybook/StoryBook';
+import T from '@/components/i18n/T';
 
 export function generateStaticParams() {
     return BOOKS.map((b) => ({ slug: b.slug }));
@@ -33,10 +34,11 @@ export default async function BookPage({ params }: { params: Promise<{ slug: str
                     href="/education/books"
                     className="inline-flex items-center text-lg font-bold uppercase tracking-wide hover:text-accent-ink transition-colors group"
                 >
-                    <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" />
-                    All Storybooks
+                    <ArrowLeft className="w-6 h-6 mr-2 group-hover:-translate-x-2 transition-transform" aria-hidden="true" />
+                    <T ns="books" k="allStorybooks" />
                 </Link>
             </div>
+            <h1 className="sr-only">{book.subtitle}</h1>
             <StoryBook book={book} glosses={glosses} />
         </div>
     );
