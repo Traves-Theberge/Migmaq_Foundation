@@ -26,6 +26,11 @@ export default function Navbar() {
 
     React.useEffect(() => setMounted(true), []);
 
+    // The admin section is a distinct application with its own chrome
+    // (components/admin/AdminSidebar.tsx) — it doesn't use the public
+    // site's nav at all.
+    if (pathname?.startsWith('/admin')) return null;
+
     const navItems = [
         { name: t('home'), href: "/" },
         { name: t('dictionary'), href: "/dictionary" },
