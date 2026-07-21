@@ -8,7 +8,7 @@ import CommandPalette from './CommandPalette';
 import { signOutAction } from '@/app/admin/login/actions';
 import {
     HomeIcon, DictionaryIcon, LessonsIcon, BooksIcon, AudioIcon,
-    ActivityIcon, UsersIcon, ExternalLinkIcon, MenuIcon, CloseIcon, LogOutIcon,
+    ActivityIcon, UsersIcon, ApiDocsIcon, ExternalLinkIcon, MenuIcon, CloseIcon, LogOutIcon,
 } from './icons';
 import type { SessionProfile } from '@/lib/supabase/auth';
 
@@ -121,6 +121,17 @@ export default function AdminSidebar({ profile, counts }: { profile: SessionProf
                                 <span className="flex-1">{label}</span>
                             </Link>
                         ))}
+                        {profile.role === 'super_admin' && (
+                            <Link
+                                href="/admin/api-docs"
+                                className={navItemClass(isActive('/admin/api-docs'))}
+                                onClick={() => setOpen(false)}
+                                title="Interactive OpenAPI/Swagger documentation — super_admin only"
+                            >
+                                <ApiDocsIcon className="opacity-85 shrink-0" />
+                                <span className="flex-1">API Docs</span>
+                            </Link>
+                        )}
                     </nav>
 
                     <Link href="/" target="_blank" className="flex items-center gap-2 mt-1 px-3 py-2 text-[11.5px] font-bold uppercase tracking-wide text-foreground/60 hover:text-foreground">

@@ -28,9 +28,18 @@ export async function requireStaffProfile(): Promise<SessionProfile> {
         .eq('id', user.id)
         .single();
 
-    if (!profile || (profile.role !== 'admin' && profile.role !== 'editor')) {
+    if (!profile || (profile.role !== 'admin' && profile.role !== 'editor' && profile.role !== 'super_admin')) {
         redirect('/admin/login?error=not-authorized');
     }
 
+    return profile;
+}
+
+/** Gate for super_admin-only screens (currently just /admin/api-docs). Assumes requireStaffProfile()-level auth already passed (e.g. via the (dashboard) layout). */
+export async function requireSuperAdmin(): Promise<SessionProfile> {
+    const profile = await requireStaffProfile();
+    if (profile.role !== 'super_admin') {
+        redirect('/admin');
+    }
     return profile;
 }

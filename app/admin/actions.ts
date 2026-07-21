@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
+import { AvatarUploadFormSchema } from '@/lib/validation/auth';
 
 export interface AvatarUploadState {
     error?: string;
@@ -10,18 +11,14 @@ export interface AvatarUploadState {
 
 /** Uploads a profile photo and points profiles.avatar_url at it — used both for "my own photo" and, by staff, another user's row from Users & Roles. */
 export async function uploadAvatarAction(_prev: AvatarUploadState, formData: FormData): Promise<AvatarUploadState> {
-    const file = formData.get('file');
-    const targetUserId = String(formData.get('userId') ?? '');
-
-    if (!(file instanceof File) || file.size === 0) {
-        return { error: 'Choose an image first.' };
+    const parsed = AvatarUploadFormSchema.safeParse({
+        file: formData.get('file'),
+        userId: formData.get('userId'),
+    });
+    if (!parsed.success) {
+        return { error: parsed.error.issues[0]?.message ?? 'Invalid upload.' };
     }
-    if (!file.type.startsWith('image/')) {
-        return { error: 'That file isn\'t an image.' };
-    }
-    if (!targetUserId) {
-        return { error: 'Missing user id.' };
-    }
+    const { file, userId: targetUserId } = parsed.data;
 
     const supabase = await createClient();
     const ext = file.name.split('.').pop() ?? 'png';

@@ -2,19 +2,23 @@
 
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { SignInFormSchema } from '@/lib/validation/auth';
 
 export interface LoginState {
     error?: string;
 }
 
 export async function signInAction(_prevState: LoginState, formData: FormData): Promise<LoginState> {
-    const email = String(formData.get('email') ?? '').trim();
-    const password = String(formData.get('password') ?? '');
-    const next = String(formData.get('next') ?? '/admin');
+    const parsed = SignInFormSchema.safeParse({
+        email: formData.get('email'),
+        password: formData.get('password'),
+        next: formData.get('next') ?? undefined,
+    });
 
-    if (!email || !password) {
-        return { error: 'Enter your email and password.' };
+    if (!parsed.success) {
+        return { error: parsed.error.issues[0]?.message ?? 'Enter your email and password.' };
     }
+    const { email, password, next } = parsed.data;
 
     const supabase = await createClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -23,7 +27,7 @@ export async function signInAction(_prevState: LoginState, formData: FormData): 
         return { error: 'Incorrect email or password.' };
     }
 
-    redirect(next.startsWith('/admin') ? next : '/admin');
+    redirect(next);
 }
 
 export async function signOutAction() {

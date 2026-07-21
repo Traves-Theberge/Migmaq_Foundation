@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
+import { AudioFileParamSchema } from '@/lib/validation/audio';
 
 /**
  * Local-development fallback: streams recordings straight from the Micmac
@@ -15,11 +16,11 @@ export async function GET(
     { params }: { params: Promise<{ file: string }> }
 ) {
     const { file } = await params;
-    const name = decodeURIComponent(file);
-    // Only serve flat .mp3 filenames from the archive — no path traversal.
-    if (!/^[^/\\]+\.mp3$/.test(name) || name.includes('..')) {
+    const parsed = AudioFileParamSchema.safeParse({ file: decodeURIComponent(file) });
+    if (!parsed.success) {
         return NextResponse.json({ error: 'Invalid file' }, { status: 400 });
     }
+    const name = parsed.data.file;
     try {
         const data = await fs.readFile(path.join(AUDIO_DIR, name));
         return new NextResponse(new Uint8Array(data), {

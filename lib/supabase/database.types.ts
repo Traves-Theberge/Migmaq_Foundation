@@ -11,7 +11,7 @@
  * degrades every `.from(...)` call elsewhere to `never` row types.
  */
 
-export type AppRole = 'admin' | 'editor';
+export type AppRole = 'admin' | 'editor' | 'super_admin';
 export type LessonDifficulty = 'beginner' | 'intermediate' | 'advanced';
 export type LessonStepType = 'vocabulary' | 'phrase' | 'info';
 export type RecordingKind = 'word' | 'example';

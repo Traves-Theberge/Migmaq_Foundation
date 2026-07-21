@@ -16,6 +16,7 @@
     "test:a11y": "playwright test e2e/a11y.spec.ts"
   },
   "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^9.1.0",
     "@supabase/ssr": "^0.12.3",
     "@supabase/supabase-js": "^2.110.7",
     "@types/canvas-confetti": "^1.9.0",
@@ -29,8 +30,10 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-pageflip": "^2.0.3",
+    "swagger-ui-react": "^5.32.9",
     "tailwind-merge": "^3.4.0",
-    "vercel": "^56.3.2"
+    "vercel": "^56.3.2",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
@@ -39,6 +42,7 @@
     "@types/node": "^24.13.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/swagger-ui-react": "^5.18.0",
     "@vercel/blob": "^2.6.1",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.2.10",

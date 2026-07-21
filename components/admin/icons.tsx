@@ -136,6 +136,17 @@ export function TrashIcon({ className, size = 13 }: IconProps) {
     );
 }
 
+export function ApiDocsIcon({ className, size = 17 }: IconProps) {
+    return (
+        <svg className={className} width={size} height={size} viewBox="0 0 20 20" {...base}>
+            <path d="M6 2.5h6l4 4V16a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16V4A1.5 1.5 0 0 1 5.5 2.5z" />
+            <path d="M12 2.5V6a1 1 0 0 0 1 1h3.4" />
+            <path d="M7 11l-2 2 2 2" />
+            <path d="M11 11l2 2-2 2" />
+        </svg>
+    );
+}
+
 export function CameraIcon({ className, size = 13 }: IconProps) {
     return (
         <svg className={className} width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
