@@ -1,6 +1,7 @@
 /**
  * Hand-written to match supabase/migrations/0001_init_schema.sql through
- * 0004_avatar_storage.sql exactly. Once a live project exists, prefer
+ * 0009_performance_indexes.sql exactly (indexes/RLS-only migrations don't
+ * change this file's shape). Once a live project exists, prefer
  * regenerating this with `supabase gen types typescript` and diffing
  * against this file — but keep the shape identical either way, since
  * lib/supabase/server.ts and client.ts are typed against it.
@@ -155,6 +156,18 @@ export interface Database {
                     pronunciation: string | null;
                     description: string | null;
                 };
+                // Not a discriminated union: the DB's lesson_steps_shape
+                // check constraint (0001) requires 'info' steps to carry
+                // only `description`, and 'vocabulary'/'phrase' steps to
+                // carry both `term` and `translation` — this type doesn't
+                // encode that, so an invalid combination still type-checks
+                // here. The real enforcement is
+                // lib/validation/admin-lessons.ts's LessonStepFormSchema
+                // (superRefine mirrors the same rule with a friendly Zod
+                // error) in front of the DB constraint itself as the
+                // backstop; a discriminated union here would need the Zod
+                // schema to produce a matching discriminated output type
+                // to avoid fighting itself at every call site.
                 Insert: {
                     lesson_id: string;
                     sort_order?: number;
