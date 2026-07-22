@@ -10,7 +10,9 @@ const STATIC_ROUTES: Array<{ path: string; changeFrequency: MetadataRoute.Sitema
     { path: '/education', changeFrequency: 'monthly', priority: 0.8 },
     { path: '/education/lessons', changeFrequency: 'monthly', priority: 0.8 },
     { path: '/education/books', changeFrequency: 'monthly', priority: 0.7 },
-    { path: '/games', changeFrequency: 'monthly', priority: 0.6 },
+    // /games itself only redirects to /education (see app/games/page.tsx) —
+    // deliberately excluded here; a sitemap should list final destination
+    // URLs, not a redirect.
     { path: '/games/flashcard', changeFrequency: 'monthly', priority: 0.5 },
     { path: '/games/quiz', changeFrequency: 'monthly', priority: 0.5 },
 ];
