@@ -26,7 +26,10 @@ export async function GET(
         return new NextResponse(new Uint8Array(data), {
             headers: {
                 'Content-Type': 'audio/mpeg',
-                'Cache-Control': 'public, max-age=86400',
+                // Recordings never change once uploaded (a rename produces
+                // a new filename, per migration 0008's audio-word-sync
+                // trigger) — safe to cache for as long as browsers allow.
+                'Cache-Control': 'public, max-age=31536000, immutable',
             },
         });
     } catch {
