@@ -9,10 +9,11 @@ export interface LoginState {
 }
 
 export async function signInAction(_prevState: LoginState, formData: FormData): Promise<LoginState> {
+    const rawNext = formData.get('next');
     const parsed = SignInFormSchema.safeParse({
-        email: formData.get('email'),
-        password: formData.get('password'),
-        next: formData.get('next') ?? undefined,
+        email: String(formData.get('email') ?? ''),
+        password: String(formData.get('password') ?? ''),
+        next: rawNext != null ? String(rawNext) : undefined,
     });
 
     if (!parsed.success) {

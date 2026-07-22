@@ -23,6 +23,7 @@ export const DictionaryEntrySchema = z
         entry_url: z.string().nullable().optional(),
         fr_definitions: z.array(z.string()).nullable().optional(),
         fr_translations: z.array(z.string()).nullable().optional(),
+        document_references: z.array(z.string()).nullable().optional(),
     })
     .openapi('DictionaryEntry');
 
