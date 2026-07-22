@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
@@ -26,6 +27,11 @@ export default function Navbar() {
 
     React.useEffect(() => setMounted(true), []);
 
+    // The admin section is a distinct application with its own chrome
+    // (components/admin/AdminSidebar.tsx) — it doesn't use the public
+    // site's nav at all.
+    if (pathname?.startsWith('/admin')) return null;
+
     const navItems = [
         { name: t('home'), href: "/" },
         { name: t('dictionary'), href: "/dictionary" },
@@ -39,9 +45,12 @@ export default function Navbar() {
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3 group">
                         <div className="relative w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:rotate-360">
-                            <img
+                            <Image
                                 src="/assets/Images/fn_logo.png"
                                 alt="Mi'gmaq Foundation"
+                                width={40}
+                                height={40}
+                                priority
                                 className="w-10 h-10 object-contain"
                             />
                         </div>

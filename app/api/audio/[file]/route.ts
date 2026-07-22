@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
+import { AudioFileParamSchema } from '@/lib/validation/audio';
 
 /**
  * Local-development fallback: streams recordings straight from the Micmac
@@ -15,17 +16,20 @@ export async function GET(
     { params }: { params: Promise<{ file: string }> }
 ) {
     const { file } = await params;
-    const name = decodeURIComponent(file);
-    // Only serve flat .mp3 filenames from the archive — no path traversal.
-    if (!/^[^/\\]+\.mp3$/.test(name) || name.includes('..')) {
+    const parsed = AudioFileParamSchema.safeParse({ file: decodeURIComponent(file) });
+    if (!parsed.success) {
         return NextResponse.json({ error: 'Invalid file' }, { status: 400 });
     }
+    const name = parsed.data.file;
     try {
         const data = await fs.readFile(path.join(AUDIO_DIR, name));
         return new NextResponse(new Uint8Array(data), {
             headers: {
                 'Content-Type': 'audio/mpeg',
-                'Cache-Control': 'public, max-age=86400',
+                // Recordings never change once uploaded (a rename produces
+                // a new filename, per migration 0008's audio-word-sync
+                // trigger) — safe to cache for as long as browsers allow.
+                'Cache-Control': 'public, max-age=31536000, immutable',
             },
         });
     } catch {

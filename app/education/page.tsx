@@ -31,12 +31,16 @@ export default function EducationPage() {
 
     useEffect(() => {
         fetch('/api/dictionary')
-            .then(res => res.json())
+            .then(res => res.ok ? res.json() : Promise.reject(new Error('Failed to fetch dictionary')))
             .then(data => {
                 if (data && data.length > 0) {
                     const random = data[Math.floor(Math.random() * data.length)];
                     setRandomWord(random);
                 }
+            })
+            .catch(() => {
+                // Leaves randomWord null — the "learn a new word" widget
+                // just stays hidden rather than crashing the whole page.
             });
     }, []);
 
@@ -159,9 +163,8 @@ export default function EducationPage() {
                                 {t('storybooksCardTitle')}
                             </h3>
                             <p className="text-base sm:text-lg font-medium opacity-90 leading-relaxed">
-                                Animated, page-flipping bilingual books — starting with{' '}
-                                <em>Mui&apos;n, Mui&apos;n, Wen Nemi&apos;t?</em> (Bear, bear, who do you see?).
-                                Every word plays a speaker recording and links to its dictionary entry.
+                                {t('storybooksBodyPrefix')}{' '}
+                                <em>Mui&apos;n, Mui&apos;n, Wen Nemi&apos;t?</em> {t('storybooksBodySuffix')}
                             </p>
                         </Link>
                     </motion.section>
@@ -183,8 +186,8 @@ export default function EducationPage() {
                                 {t('lessonsCardTitle')}
                             </h3>
                             <p className="text-base sm:text-lg font-medium opacity-90 leading-relaxed">
-                                {totalLessons} step-by-step lessons across {lessonCategories.length} topics —{' '}
-                                {lessonCategories.map((c) => c.title).join(', ')}. Searchable, filterable by topic and difficulty.
+                                {totalLessons} {t('lessonsBodyPrefix')} {lessonCategories.length} {t('lessonsBodyTopicsSuffix')}{' '}
+                                {lessonCategories.map((c) => c.title).join(', ')}. {t('lessonsBodyFooter')}
                             </p>
                         </Link>
                     </motion.section>

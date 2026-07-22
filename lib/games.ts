@@ -1,23 +1,7 @@
-import fs from 'fs/promises';
-import path from 'path';
-
-let cache: any = null;
-let lastModified: number = 0;
-
-async function loadDictionary() {
-    const filePath = path.join(process.cwd(), 'public', 'assets', 'dictionary.json');
-    const stats = await fs.stat(filePath);
-    if (!cache || stats.mtimeMs > lastModified) {
-        const data = await fs.readFile(filePath, 'utf8');
-        const parsed = JSON.parse(data);
-        cache = parsed.message.words;
-        lastModified = stats.mtimeMs;
-    }
-    return cache;
-}
+import { getDictionary } from './dictionary';
 
 export async function getRandomWords(count = 6) {
-    const words = await loadDictionary();
+    const words = await getDictionary();
     if (!Array.isArray(words) || words.length === 0) {
         throw new Error('Dictionary is empty');
     }
@@ -50,8 +34,15 @@ export async function getRandomWords(count = 6) {
 }
 
 export async function getQuizQuestions(count = 5) {
-    const words = await loadDictionary();
+    const words = await getDictionary();
     const validWords = words.filter((w: any) => w.translations && w.translations.length > 0);
+
+    // A quiz question needs 1 correct answer + 3 distinct distractors — with
+    // fewer than 4 valid words, the distractor loop below can never fill up
+    // and would spin forever.
+    if (validWords.length < 4) {
+        throw new Error('Not enough dictionary words with translations to build a quiz');
+    }
 
     const questions = [];
 

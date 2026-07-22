@@ -9,9 +9,11 @@ import LocalizedDefinitions from '@/components/dictionary/LocalizedDefinitions';
 import LocalizedTranslations from '@/components/dictionary/LocalizedTranslations';
 import LocalizedUsages from '@/components/dictionary/LocalizedUsages';
 import T from '@/components/i18n/T';
-import { getWordDetails, resolveAlternateForms, getAdjacentWords } from '@/lib/dictionary';
+import { getWordDetails, resolveAlternateForms, getAdjacentWords, WordNotFoundError } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
 import { speakerLabel } from '@/lib/speakers';
+import JsonLd from '@/components/seo/JsonLd';
+import { SITE_URL, SITE_NAME } from '@/lib/site';
 
 interface PageProps {
     params: Promise<{ word: string }>;
@@ -22,14 +24,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     try {
         const data = await getWordDetails(word);
         const description = data.definitions?.[0] ?? data.translations?.[0] ?? `Mi'gmaq dictionary entry for ${data.word}.`;
-        const title = `${data.word} — Mi'gmaq Language Dictionary`;
         return {
-            title,
+            title: `${data.word} — Mi'gmaq Dictionary`,
             description,
-            openGraph: { title, description },
+            alternates: { canonical: `/dictionary/${encodeURIComponent(data.word)}` },
+            openGraph: { title: `${data.word} — Mi'gmaq Dictionary`, description, type: 'article' },
+            twitter: { card: 'summary_large_image', title: `${data.word} — Mi'gmaq Dictionary`, description },
         };
     } catch {
-        return { title: "Word Not Found — Mi'gmaq Language Dictionary" };
+        return { title: 'Word Not Found' };
     }
 }
 
@@ -39,8 +42,12 @@ export default async function WordDetailsPage({ params }: PageProps) {
     let data;
     try {
         data = await getWordDetails(word);
-    } catch {
-        notFound();
+    } catch (err) {
+        // Only a genuine "no such word" renders the 404 UI — any other
+        // failure (e.g. dictionary.json unreadable) rethrows so it surfaces
+        // as a real error instead of masquerading as a missing entry.
+        if (err instanceof WordNotFoundError) notFound();
+        throw err;
     }
 
     const [recordings, resolved_alternate_forms, adjacent] = await Promise.all([
@@ -51,6 +58,16 @@ export default async function WordDetailsPage({ params }: PageProps) {
 
     return (
         <div className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+            <JsonLd
+                data={{
+                    '@context': 'https://schema.org',
+                    '@type': 'DefinedTerm',
+                    name: data.word,
+                    description: data.definitions?.[0] ?? data.translations?.[0] ?? undefined,
+                    inDefinedTermSet: { '@type': 'DefinedTermSet', name: `${SITE_NAME} Dictionary`, url: `${SITE_URL}/dictionary` },
+                    url: `${SITE_URL}/dictionary/${encodeURIComponent(data.word)}`,
+                }}
+            />
             <div className="max-w-5xl mx-auto">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <Link

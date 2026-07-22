@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-display: 'Playfair Display', serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-playfair), serif;
 
   /* Malika Palette: Bold, Flat, Unapologetic */
   --color-primary: #7c3aed;
@@ -23,6 +23,12 @@
      the vivid #f59e0b marigold only has ~1.9:1 contrast there, which
      fails WCAG AA. Solid accent fills (buttons, badges) keep using
      --color-accent as-is; this is only for text-on-background usage. */
+
+  --color-success: #15803d;
+  /* Admin-only semantic color (e.g. "FR reviewed" status pills) — distinct
+     from the brand accent, kept readable on both the light background and
+     the warm-cream dark mode below without needing a separate override. */
+  --color-success-foreground: #ffffff;
 
   --color-background: #ffffff;
   --color-foreground: #000000;
@@ -63,6 +69,23 @@
     to {
       clip-path: inset(0 0 0 0);
     }
+  }
+
+  /* Admin toast stack (components/admin/ToastProvider.tsx) */
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes toast-out {
+    from { opacity: 1; }
+    to { opacity: 0; transform: translateX(12px); }
+  }
+
+  /* Admin view transition (app/admin pages) */
+  @keyframes admin-view-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
@@ -130,6 +153,16 @@ html {
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+.admin-view {
+  animation: admin-view-in 0.22s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-view {
+    animation: none;
+  }
 }
 
 /* Geometric Patterns */

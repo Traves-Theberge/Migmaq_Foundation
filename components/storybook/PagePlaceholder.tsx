@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from 'framer-motion';
+import Image from 'next/image';
 import { Feather, Sparkles } from 'lucide-react';
 import { useTranslations } from '@/lib/i18n/LocaleProvider';
 
@@ -33,8 +34,9 @@ export default function PagePlaceholder({ alt, imageUrl, seed = 0 }: PagePlaceho
 
     if (imageUrl) {
         return (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={imageUrl} alt={alt} className="w-full h-full object-cover" />
+            <div className="relative w-full h-full">
+                <Image src={imageUrl} alt={alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+            </div>
         );
     }
 
