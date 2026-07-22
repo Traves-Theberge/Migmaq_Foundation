@@ -12,6 +12,8 @@ import T from '@/components/i18n/T';
 import { getWordDetails, resolveAlternateForms, getAdjacentWords, WordNotFoundError } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
 import { speakerLabel } from '@/lib/speakers';
+import JsonLd from '@/components/seo/JsonLd';
+import { SITE_URL, SITE_NAME } from '@/lib/site';
 
 interface PageProps {
     params: Promise<{ word: string }>;
@@ -56,6 +58,16 @@ export default async function WordDetailsPage({ params }: PageProps) {
 
     return (
         <div className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+            <JsonLd
+                data={{
+                    '@context': 'https://schema.org',
+                    '@type': 'DefinedTerm',
+                    name: data.word,
+                    description: data.definitions?.[0] ?? data.translations?.[0] ?? undefined,
+                    inDefinedTermSet: { '@type': 'DefinedTermSet', name: `${SITE_NAME} Dictionary`, url: `${SITE_URL}/dictionary` },
+                    url: `${SITE_URL}/dictionary/${encodeURIComponent(data.word)}`,
+                }}
+            />
             <div className="max-w-5xl mx-auto">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <Link

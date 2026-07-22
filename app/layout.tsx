@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import { LocaleProvider } from '@/lib/i18n/LocaleProvider';
 import Navbar from '@/components/ui/Navbar';
 import T from '@/components/i18n/T';
+import JsonLd from '@/components/seo/JsonLd';
 import { SITE_URL, SITE_NAME } from '@/lib/site';
 
 const DESCRIPTION = "A searchable Mi'gmaq–English–French dictionary, guided lessons, illustrated storybooks, and games for learning the Mi'gmaq language.";
@@ -52,7 +53,31 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: SITE_NAME,
+            url: SITE_URL,
+            description: DESCRIPTION,
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/dictionary?q={search_term_string}` },
+              'query-input': 'required name=search_term_string',
+            },
+          }}
+        />
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'EducationalOrganization',
+            name: SITE_NAME,
+            url: SITE_URL,
+            description: DESCRIPTION,
+          }}
+        />
+      </head>
       <body className="antialiased transition-colors">
         <a
           href="#main-content"
