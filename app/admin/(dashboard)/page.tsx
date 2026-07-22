@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { requireStaffProfile } from '@/lib/supabase/auth';
+import { relativeTime, AUDIT_ACTION_LABEL } from '@/lib/admin/format';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,17 +50,6 @@ async function getStats() {
         recentActivity: recentActivity.data ?? [],
     };
 }
-
-function relativeTime(iso: string) {
-    const diffMs = Date.now() - new Date(iso).getTime();
-    const mins = Math.round(diffMs / 60000);
-    if (mins < 60) return `${mins}m ago`;
-    const hours = Math.round(mins / 60);
-    if (hours < 24) return `${hours}h ago`;
-    return `${Math.round(hours / 24)}d ago`;
-}
-
-const ACTION_LABEL: Record<string, string> = { insert: 'Created', update: 'Updated', delete: 'Deleted' };
 
 export default async function AdminHomePage() {
     const profile = await requireStaffProfile();
@@ -123,7 +113,7 @@ export default async function AdminHomePage() {
                                     <span className={`text-[10px] font-bold uppercase tracking-wide rounded-full px-2 py-0.5 shrink-0 ${
                                         row.action === 'insert' ? 'bg-success/10 text-success' : row.action === 'delete' ? 'bg-secondary/10 text-secondary' : 'bg-primary/10 text-primary'
                                     }`}>
-                                        {ACTION_LABEL[row.action] ?? row.action}
+                                        {AUDIT_ACTION_LABEL[row.action] ?? row.action}
                                     </span>
                                     <span className="flex-1 min-w-0 truncate">
                                         {row.actor_email ?? 'System'} · {row.table_name}
