@@ -10,6 +10,7 @@ import {
     LessonStepFormSchema,
     LessonStepIdSchema,
 } from '@/lib/validation/admin-lessons';
+import { logError } from '@/lib/log';
 
 export interface FormState {
     error?: string;
@@ -39,6 +40,7 @@ export async function saveCategoryAction(_prev: FormState, formData: FormData): 
         ? await supabase.from('lesson_categories').insert(parsed.data)
         : await supabase.from('lesson_categories').update(parsed.data).eq('id', parsed.data.id);
     if (error) {
+        if (!error.message.includes('duplicate')) logError('saveCategoryAction', 'save to lesson_categories failed', error, { categoryId: parsed.data.id });
         return { error: error.message.includes('duplicate') ? 'That category id is already taken.' : 'Could not save the category.' };
     }
 
@@ -51,7 +53,10 @@ export async function deleteCategoryAction(id: string): Promise<FormState> {
     await requireStaffProfile();
     const supabase = await createClient();
     const { error } = await supabase.from('lesson_categories').delete().eq('id', id);
-    if (error) return { error: 'Could not delete the category.' };
+    if (error) {
+        logError('deleteCategoryAction', 'delete from lesson_categories failed', error, { categoryId: id });
+        return { error: 'Could not delete the category.' };
+    }
     revalidatePath('/admin/lessons');
     return {};
 }
@@ -79,6 +84,7 @@ export async function saveLessonAction(_prev: FormState, formData: FormData): Pr
         ? await supabase.from('lessons').insert(parsed.data)
         : await supabase.from('lessons').update(parsed.data).eq('id', parsed.data.id);
     if (error) {
+        if (!error.message.includes('duplicate')) logError('saveLessonAction', 'save to lessons failed', error, { lessonId: parsed.data.id });
         return { error: error.message.includes('duplicate') ? 'That lesson id is already taken.' : 'Could not save the lesson.' };
     }
 
@@ -91,7 +97,10 @@ export async function deleteLessonAction(id: string, categoryId: string): Promis
     await requireStaffProfile();
     const supabase = await createClient();
     const { error } = await supabase.from('lessons').delete().eq('id', id);
-    if (error) return { error: 'Could not delete the lesson.' };
+    if (error) {
+        logError('deleteLessonAction', 'delete from lessons failed', error, { lessonId: id, categoryId });
+        return { error: 'Could not delete the lesson.' };
+    }
     revalidatePath(`/admin/lessons/${categoryId}`);
     return {};
 }
@@ -119,6 +128,7 @@ export async function saveStepAction(_prev: FormState, formData: FormData): Prom
         ? await supabase.from('lesson_steps').update(parsed.data).eq('id', stepId)
         : await supabase.from('lesson_steps').insert(parsed.data);
     if (error) {
+        logError('saveStepAction', 'save to lesson_steps failed', error, { stepId, lessonId: parsed.data.lesson_id });
         return { error: 'Could not save the step.' };
     }
 
@@ -134,7 +144,10 @@ export async function deleteStepAction(id: string, lessonId: string, categoryId:
     }
     const supabase = await createClient();
     const { error } = await supabase.from('lesson_steps').delete().eq('id', idResult.data);
-    if (error) return { error: 'Could not delete the step.' };
+    if (error) {
+        logError('deleteStepAction', 'delete from lesson_steps failed', error, { stepId: idResult.data, lessonId });
+        return { error: 'Could not delete the step.' };
+    }
     revalidatePath(`/admin/lessons/${categoryId}/${lessonId}`);
     return {};
 }
@@ -148,7 +161,10 @@ export async function moveStepAction(stepId: string, lessonId: string, categoryI
         .select('id, sort_order')
         .eq('lesson_id', lessonId)
         .order('sort_order', { ascending: true });
-    if (readError) return { error: 'Could not reorder — try reloading the page.' };
+    if (readError) {
+        logError('moveStepAction', 'reading lesson_steps for reorder failed', readError, { lessonId });
+        return { error: 'Could not reorder — try reloading the page.' };
+    }
     if (!steps) return {};
 
     const index = steps.findIndex((s) => s.id === stepId);
@@ -162,6 +178,7 @@ export async function moveStepAction(stepId: string, lessonId: string, categoryI
         supabase.from('lesson_steps').update({ sort_order: a.sort_order }).eq('id', b.id),
     ]);
     if (r1.error || r2.error) {
+        logError('moveStepAction', 'reorder update failed partway', r1.error ?? r2.error, { lessonId, stepId });
         return { error: 'Reorder failed partway — reload the page and check the step order.' };
     }
 

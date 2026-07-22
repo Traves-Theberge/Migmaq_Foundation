@@ -9,6 +9,7 @@ import {
     DictionaryWordIdSchema,
     DictionaryWordUsagesFormSchema,
 } from '@/lib/validation/admin-dictionary';
+import { logError } from '@/lib/log';
 
 export interface DictionaryFormState {
     error?: string;
@@ -82,11 +83,13 @@ export async function createDictionaryWordAction(_prev: DictionaryFormState, for
     const supabase = await createClient();
     const { data, error } = await supabase.from('dictionary_words').insert(parsed.data).select('id').single();
     if (error) {
+        if (!error.message.includes('duplicate')) logError('createDictionaryWordAction', 'insert into dictionary_words failed', error, { word: parsed.data.word });
         return { error: error.message.includes('duplicate') ? 'That word already exists.' : 'Could not create the word.' };
     }
 
     const usagesError = await replaceUsages(supabase, data.id, usagesResult.data);
     if (usagesError) {
+        logError('createDictionaryWordAction', 'saving usage examples failed', usagesError, { wordId: data.id });
         return { error: 'Word created, but saving the usage examples failed.' };
     }
 
@@ -112,11 +115,13 @@ export async function updateDictionaryWordAction(_prev: DictionaryFormState, for
     const supabase = await createClient();
     const { error } = await supabase.from('dictionary_words').update(parsed.data).eq('id', idResult.data);
     if (error) {
+        logError('updateDictionaryWordAction', 'update to dictionary_words failed', error, { wordId: idResult.data });
         return { error: 'Could not save changes.' };
     }
 
     const usagesError = await replaceUsages(supabase, idResult.data, usagesResult.data);
     if (usagesError) {
+        logError('updateDictionaryWordAction', 'saving usage examples failed', usagesError, { wordId: idResult.data });
         return { error: 'Word saved, but saving the usage examples failed.' };
     }
 
@@ -140,6 +145,7 @@ export async function deleteDictionaryWordAction(id: string): Promise<Dictionary
     const supabase = await createClient();
     const { error } = await supabase.from('dictionary_words').delete().eq('id', idResult.data);
     if (error) {
+        logError('deleteDictionaryWordAction', 'delete from dictionary_words failed', error, { wordId: idResult.data });
         return { error: 'Could not delete the word.' };
     }
 

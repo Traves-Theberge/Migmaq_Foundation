@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDictionary } from '@/lib/dictionary';
 import { DictionaryListResponseSchema } from '@/lib/validation/dictionary';
+import { logError } from '@/lib/log';
 
 export async function GET() {
     try {
@@ -15,7 +16,7 @@ export async function GET() {
             headers: { 'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400' },
         });
     } catch (error) {
-        console.error('GET /api/dictionary failed:', error);
+        logError('GET /api/dictionary', 'loading the dictionary failed', error);
         return NextResponse.json({ error: 'The dictionary could not be loaded.' }, { status: 500 });
     }
 }

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { HealthResponseSchema } from '@/lib/validation/health';
+import { logError } from '@/lib/log';
 
 const DB_CHECK_TIMEOUT_MS = 3000;
 
@@ -13,7 +14,7 @@ async function checkDatabase(): Promise<'ok' | 'error'> {
         const { error } = await Promise.race([query, timeout]);
         return error ? 'error' : 'ok';
     } catch (error) {
-        console.error('GET /api/health: database check failed:', error);
+        logError('GET /api/health', 'database check failed', error);
         return 'error';
     }
 }

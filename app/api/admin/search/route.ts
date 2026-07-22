@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiClient } from '@/lib/supabase/api-auth';
 import { AdminSearchQuerySchema, AdminSearchResponseSchema, type SearchResultSchema } from '@/lib/validation/admin-search';
+import { logError } from '@/lib/log';
 import type { z } from 'zod';
 
 export type SearchResult = z.infer<typeof SearchResultSchema>;
@@ -44,6 +45,10 @@ export async function GET(request: Request) {
             .ilike('subtitle', pattern)
             .limit(3),
     ]);
+
+    if (words.error) logError('GET /api/admin/search', 'dictionary_words query failed', words.error, { q });
+    if (lessons.error) logError('GET /api/admin/search', 'lessons query failed', lessons.error, { q });
+    if (books.error) logError('GET /api/admin/search', 'books query failed', books.error, { q });
 
     const results: SearchResult[] = [
         ...(words.data ?? []).map((w) => ({ kind: 'dictionary' as const, id: w.id, title: w.word, subtitle: w.type ?? '', href: `/admin/dictionary/${w.id}` })),

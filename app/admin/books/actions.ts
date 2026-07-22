@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { requireStaffProfile } from '@/lib/supabase/auth';
 import { BookFormSchema, BookPageFormSchema, BookPageIdSchema } from '@/lib/validation/admin-books';
+import { logError } from '@/lib/log';
 
 export interface FormState {
     error?: string;
@@ -37,6 +38,7 @@ export async function saveBookAction(_prev: FormState, formData: FormData): Prom
         ? await supabase.from('books').insert(parsed.data)
         : await supabase.from('books').update(parsed.data).eq('slug', parsed.data.slug);
     if (error) {
+        if (!error.message.includes('duplicate')) logError('saveBookAction', 'save to books failed', error, { slug: parsed.data.slug });
         return { error: error.message.includes('duplicate') ? 'That slug is already taken.' : 'Could not save the book.' };
     }
 
@@ -49,7 +51,10 @@ export async function deleteBookAction(slug: string): Promise<FormState> {
     await requireStaffProfile();
     const supabase = await createClient();
     const { error } = await supabase.from('books').delete().eq('slug', slug);
-    if (error) return { error: 'Could not delete the book.' };
+    if (error) {
+        logError('deleteBookAction', 'delete from books failed', error, { slug });
+        return { error: 'Could not delete the book.' };
+    }
     revalidatePath('/admin/books');
     return {};
 }
@@ -76,6 +81,7 @@ export async function savePageAction(_prev: FormState, formData: FormData): Prom
         ? await supabase.from('book_pages').update(parsed.data).eq('id', pageId)
         : await supabase.from('book_pages').insert(parsed.data);
     if (error) {
+        if (!error.message.includes('duplicate')) logError('savePageAction', 'save to book_pages failed', error, { pageId, bookSlug: parsed.data.book_slug });
         return { error: error.message.includes('duplicate') ? 'That sort order is already used by another page.' : 'Could not save the page.' };
     }
 
@@ -91,7 +97,10 @@ export async function deletePageAction(id: string, bookSlug: string): Promise<Fo
     }
     const supabase = await createClient();
     const { error } = await supabase.from('book_pages').delete().eq('id', idResult.data);
-    if (error) return { error: 'Could not delete the page.' };
+    if (error) {
+        logError('deletePageAction', 'delete from book_pages failed', error, { pageId: idResult.data, bookSlug });
+        return { error: 'Could not delete the page.' };
+    }
     revalidatePath(`/admin/books/${bookSlug}`);
     return {};
 }
@@ -105,7 +114,10 @@ export async function movePageAction(pageId: string, bookSlug: string, direction
         .select('id, sort_order')
         .eq('book_slug', bookSlug)
         .order('sort_order', { ascending: true });
-    if (readError) return { error: 'Could not reorder — try reloading the page.' };
+    if (readError) {
+        logError('movePageAction', 'reading book_pages for reorder failed', readError, { bookSlug });
+        return { error: 'Could not reorder — try reloading the page.' };
+    }
     if (!pages) return {};
 
     const index = pages.findIndex((p) => p.id === pageId);
@@ -121,16 +133,21 @@ export async function movePageAction(pageId: string, bookSlug: string, direction
     // than leaving it stuck at the temporary value.
     const TEMP_SORT_ORDER = -1;
     const step1 = await supabase.from('book_pages').update({ sort_order: TEMP_SORT_ORDER }).eq('id', a.id);
-    if (step1.error) return { error: 'Could not reorder — try again.' };
+    if (step1.error) {
+        logError('movePageAction', 'reorder step 1 (temp sort_order) failed', step1.error, { bookSlug, pageId: a.id });
+        return { error: 'Could not reorder — try again.' };
+    }
 
     const step2 = await supabase.from('book_pages').update({ sort_order: a.sort_order }).eq('id', b.id);
     if (step2.error) {
+        logError('movePageAction', 'reorder step 2 failed, reverting', step2.error, { bookSlug, pageId: b.id });
         await supabase.from('book_pages').update({ sort_order: a.sort_order }).eq('id', a.id);
         return { error: 'Reorder failed partway — reload the page and check the page order.' };
     }
 
     const step3 = await supabase.from('book_pages').update({ sort_order: b.sort_order }).eq('id', a.id);
     if (step3.error) {
+        logError('movePageAction', 'reorder step 3 failed', step3.error, { bookSlug, pageId: a.id });
         return { error: 'Reorder failed partway — reload the page and check the page order.' };
     }
 

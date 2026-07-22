@@ -3,6 +3,7 @@ import type { User } from '@supabase/supabase-js';
 import { createClient as createCookieClient } from './server';
 import { supabaseUrl, supabaseAnonKey } from './env';
 import type { Database } from './database.types';
+import { logWarn } from '@/lib/log';
 
 export interface ApiAuthResult {
     supabase: SupabaseClient<Database>;
@@ -28,11 +29,13 @@ export async function createApiClient(request: Request): Promise<ApiAuthResult> 
             global: { headers: { Authorization: `Bearer ${bearerToken}` } },
             auth: { persistSession: false, autoRefreshToken: false },
         });
-        const { data: { user } } = await supabase.auth.getUser(bearerToken);
+        const { data: { user }, error } = await supabase.auth.getUser(bearerToken);
+        if (error) logWarn('createApiClient', 'bearer token rejected by Supabase Auth', { reason: error.message });
         return { supabase, user };
     }
 
     const supabase = await createCookieClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error) logWarn('createApiClient', 'session cookie rejected by Supabase Auth', { reason: error.message });
     return { supabase, user };
 }

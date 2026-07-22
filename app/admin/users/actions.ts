@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { requireSuperAdmin } from '@/lib/supabase/auth';
 import { UpdateUserRoleSchema } from '@/lib/validation/users';
+import { logError } from '@/lib/log';
 
 export interface UpdateUserRoleState {
     error?: string;
@@ -36,6 +37,7 @@ export async function updateUserRoleAction(_prev: UpdateUserRoleState, formData:
     const supabase = await createClient();
     const { error } = await supabase.from('profiles').update({ role }).eq('id', userId);
     if (error) {
+        logError('updateUserRoleAction', 'update to profiles.role failed', error, { userId, role, actorId: actor.id });
         return { error: 'Role change failed — it may have been blocked by a database safety check.' };
     }
 

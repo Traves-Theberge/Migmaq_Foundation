@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getWordDetails, resolveAlternateForms, WordNotFoundError } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
 import { WordDetailsQuerySchema, WordDetailsResponseSchema } from '@/lib/validation/dictionary';
+import { logError } from '@/lib/log';
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
@@ -18,7 +19,7 @@ export async function GET(request: Request) {
         if (e instanceof WordNotFoundError) {
             return NextResponse.json({ error: 'Word not found' }, { status: 404 });
         }
-        console.error('GET /api/word-details failed:', e);
+        logError('GET /api/word-details', 'lookup failed', e, { word: parsed.data.word });
         return NextResponse.json({ error: 'Could not load the word.' }, { status: 500 });
     }
 }
