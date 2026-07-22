@@ -9,6 +9,7 @@ import {
     type DictionaryFormState,
 } from '@/app/admin/dictionary/actions';
 import { useToast } from './ToastProvider';
+import UsagesEditor, { type UsageRow } from './UsagesEditor';
 
 const initialState: DictionaryFormState = {};
 
@@ -25,7 +26,10 @@ export interface DictionaryWordFormValues {
     entry_url: string | null;
     fr_definitions: string[] | null;
     fr_translations: string[] | null;
+    alternate_forms: string[] | null;
+    document_references: string[] | null;
     fr_reviewed: boolean;
+    usages: UsageRow[];
 }
 
 export default function DictionaryWordForm({ word }: { word: DictionaryWordFormValues }) {
@@ -90,10 +94,25 @@ export default function DictionaryWordForm({ word }: { word: DictionaryWordFormV
                 <input id="pronunciation_guide" name="pronunciation_guide" defaultValue={word.pronunciation_guide ?? ''} className={fieldClass} />
             </div>
 
+            <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                    <label className={labelClass} htmlFor="alternate_forms">
+                        Alternate forms (one per line — <code>word -- gloss -- note</code>)
+                    </label>
+                    <textarea id="alternate_forms" name="alternate_forms" rows={3} defaultValue={(word.alternate_forms ?? []).join('\n')} className={fieldClass} />
+                </div>
+                <div>
+                    <label className={labelClass} htmlFor="document_references">Source document references (one per line)</label>
+                    <textarea id="document_references" name="document_references" rows={3} defaultValue={(word.document_references ?? []).join('\n')} className={fieldClass} />
+                </div>
+            </div>
+
             <div>
                 <label className={labelClass} htmlFor="entry_url">Source entry URL</label>
                 <input id="entry_url" name="entry_url" type="url" defaultValue={word.entry_url ?? ''} className={fieldClass} />
             </div>
+
+            <UsagesEditor initialUsages={word.usages} />
 
             <div className="flex items-center gap-3 pt-2 border-t-2 border-muted">
                 <button type="submit" className="bg-foreground text-background text-xs font-bold uppercase tracking-wide px-5 py-2.5 hover:opacity-90">

@@ -11,7 +11,10 @@ const BLANK = {
     entry_url: null,
     fr_definitions: null,
     fr_translations: null,
+    alternate_forms: null,
+    document_references: null,
     fr_reviewed: false,
+    usages: [],
 };
 
 export default async function NewDictionaryWordPage() {

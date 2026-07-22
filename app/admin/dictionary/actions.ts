@@ -4,7 +4,11 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { requireStaffProfile } from '@/lib/supabase/auth';
-import { DictionaryWordFormSchema, DictionaryWordIdSchema } from '@/lib/validation/admin-dictionary';
+import {
+    DictionaryWordFormSchema,
+    DictionaryWordIdSchema,
+    DictionaryWordUsagesFormSchema,
+} from '@/lib/validation/admin-dictionary';
 
 export interface DictionaryFormState {
     error?: string;
@@ -21,21 +25,49 @@ function readForm(formData: FormData) {
         entry_url: str('entry_url'),
         fr_definitions: str('fr_definitions'),
         fr_translations: str('fr_translations'),
+        alternate_forms: str('alternate_forms'),
+        document_references: str('document_references'),
         fr_reviewed: formData.get('fr_reviewed') === 'on' ? 'on' as const : 'off' as const,
     };
+}
+
+/** Replaces every dictionary_word_usages row for `wordId` with `usages` — simpler than diffing, and safe given there are only ever a handful per word. */
+async function replaceUsages(supabase: Awaited<ReturnType<typeof createClient>>, wordId: string, usages: { migmaq: string; english: string; french?: string }[]) {
+    const { error: delError } = await supabase.from('dictionary_word_usages').delete().eq('word_id', wordId);
+    if (delError) return delError;
+    if (usages.length === 0) return null;
+
+    const rows = usages.map((u, i) => ({
+        word_id: wordId,
+        sort_order: i,
+        migmaq: u.migmaq,
+        english: u.english,
+        french: u.french ?? null,
+    }));
+    const { error: insError } = await supabase.from('dictionary_word_usages').insert(rows);
+    return insError;
 }
 
 export async function createDictionaryWordAction(_prev: DictionaryFormState, formData: FormData): Promise<DictionaryFormState> {
     await requireStaffProfile();
     const parsed = DictionaryWordFormSchema.safeParse(readForm(formData));
+    const usagesResult = DictionaryWordUsagesFormSchema.safeParse(String(formData.get('usages') ?? '[]'));
     if (!parsed.success) {
         return { error: parsed.error.issues[0]?.message ?? 'Check the form for errors.' };
+    }
+    if (!usagesResult.success) {
+        return { error: usagesResult.error.issues[0]?.message ?? 'Check the usage examples for errors.' };
     }
 
     const supabase = await createClient();
     const { data, error } = await supabase.from('dictionary_words').insert(parsed.data).select('id').single();
     if (error) {
         return { error: error.message.includes('duplicate') ? 'That word already exists.' : 'Could not create the word.' };
+    }
+
+    const usagesError = await replaceUsages(supabase, data.id, usagesResult.data);
+    if (usagesError) {
+        return { error: 'Word created, but saving the usage examples failed.' };
     }
 
     revalidatePath('/admin/dictionary');
@@ -49,14 +81,23 @@ export async function updateDictionaryWordAction(_prev: DictionaryFormState, for
         return { error: idResult.error.issues[0]?.message ?? 'Missing word id.' };
     }
     const parsed = DictionaryWordFormSchema.safeParse(readForm(formData));
+    const usagesResult = DictionaryWordUsagesFormSchema.safeParse(String(formData.get('usages') ?? '[]'));
     if (!parsed.success) {
         return { error: parsed.error.issues[0]?.message ?? 'Check the form for errors.' };
+    }
+    if (!usagesResult.success) {
+        return { error: usagesResult.error.issues[0]?.message ?? 'Check the usage examples for errors.' };
     }
 
     const supabase = await createClient();
     const { error } = await supabase.from('dictionary_words').update(parsed.data).eq('id', idResult.data);
     if (error) {
         return { error: 'Could not save changes.' };
+    }
+
+    const usagesError = await replaceUsages(supabase, idResult.data, usagesResult.data);
+    if (usagesError) {
+        return { error: 'Word saved, but saving the usage examples failed.' };
     }
 
     revalidatePath('/admin/dictionary');

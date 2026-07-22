@@ -39,7 +39,43 @@ export const DictionaryWordFormSchema = z.object({
     entry_url: optionalText,
     fr_definitions: optionalLines,
     fr_translations: optionalLines,
+    alternate_forms: optionalLines,
+    document_references: optionalLines,
     fr_reviewed: z.enum(['on', 'off']).transform((v) => v === 'on'),
 });
 
 export const DictionaryWordIdSchema = z.string().uuid('Missing word id.');
+
+/**
+ * dictionary_word_usages rows for one word, authored in the form as a
+ * small repeatable-row editor (see UsagesEditor.tsx) rather than a raw
+ * textarea — unlike the text[] columns above, each usage is a structured
+ * {migmaq, english, french?} triplet. The client serializes the current
+ * rows to JSON in a hidden field; the whole set replaces the word's
+ * existing usages on save (delete + reinsert) rather than being diffed,
+ * since there are only ever a handful per word.
+ */
+export const DictionaryWordUsagesFormSchema = z
+    .string()
+    .transform((raw, ctx) => {
+        let parsed: unknown;
+        try {
+            parsed = JSON.parse(raw || '[]');
+        } catch {
+            ctx.addIssue({ code: 'custom', message: 'Usages: not valid JSON.' });
+            return z.NEVER;
+        }
+        const shape = z.array(
+            z.object({
+                migmaq: z.string().trim().min(1),
+                english: z.string().trim().min(1),
+                french: z.string().trim().optional(),
+            }),
+        );
+        const result = shape.safeParse(parsed);
+        if (!result.success) {
+            ctx.addIssue({ code: 'custom', message: `Usages: ${result.error.issues[0]?.message ?? 'invalid shape'}` });
+            return z.NEVER;
+        }
+        return result.data;
+    });
