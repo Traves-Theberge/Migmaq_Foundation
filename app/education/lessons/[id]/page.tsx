@@ -1,211 +1,33 @@
-"use client";
-
-import React, { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import type { Metadata } from 'next';
 import { getLessonById } from '@/lib/lessons/index';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
-import Link from 'next/link';
-import AudioButton from '@/components/ui/AudioButton';
-import { speakerLabel } from '@/lib/speakers';
-import { Recording } from '@/lib/types';
-import { useTranslations } from '@/lib/i18n/LocaleProvider';
+import LessonPageClient from './LessonPageClient';
+
+interface PageProps {
+    params: Promise<{ id: string }>;
+}
+
+/**
+ * Split out from the interactive lesson player (LessonPageClient, "use
+ * client") specifically so this route can export generateMetadata —
+ * a client component can't. Every lesson previously inherited the
+ * site-wide default title/description instead of its own.
+ */
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { id } = await params;
+    const lesson = getLessonById(id);
+    if (!lesson) return { title: 'Lesson Not Found' };
+
+    const title = `${lesson.title} — ${lesson.categoryTitle}`;
+    const description = lesson.description || `A ${lesson.difficulty} Mi'gmaq lesson: ${lesson.title}, part of the ${lesson.categoryTitle} category.`;
+    return {
+        title,
+        description,
+        alternates: { canonical: `/education/lessons/${lesson.id}` },
+        openGraph: { title, description, type: 'article' },
+        twitter: { card: 'summary_large_image', title, description },
+    };
+}
 
 export default function LessonPage() {
-    const { id } = useParams() as { id: string };
-    const router = useRouter();
-    const lessonData = getLessonById(id);
-    const [currentStep, setCurrentStep] = useState(0);
-    const [audioByTerm, setAudioByTerm] = useState<Record<string, Recording[]>>({});
-    const t = useTranslations('lessonDetail');
-
-    useEffect(() => {
-        const terms = Array.from(new Set(
-            (lessonData?.steps ?? [])
-                .filter((s) => (s.type === 'vocabulary' || s.type === 'phrase') && s.term)
-                .map((s) => s.term as string)
-        ));
-        if (terms.length === 0) return;
-
-        let cancelled = false;
-        Promise.all(terms.map(async (term) => {
-            try {
-                const res = await fetch(`/api/lesson-audio?word=${encodeURIComponent(term)}`);
-                const data = await res.json();
-                const recordings = ((data.recordings ?? []) as Recording[]).filter((r) => r.kind === 'word');
-                return [term, recordings] as const;
-            } catch {
-                return [term, []] as const;
-            }
-        })).then((entries) => {
-            if (cancelled) return;
-            setAudioByTerm(Object.fromEntries(entries.filter(([, recs]) => recs.length > 0)));
-        });
-
-        return () => { cancelled = true; };
-    }, [id, lessonData?.steps]);
-
-    if (!lessonData) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-background">
-                <div className="text-center">
-                    <h1 className="text-4xl font-black uppercase mb-4">{t('lessonNotFound')}</h1>
-                    <Link href="/education/lessons" className="text-primary font-bold hover:underline">
-                        {t('returnToLessons')}
-                    </Link>
-                </div>
-            </div>
-        );
-    }
-
-    const step = lessonData.steps[currentStep];
-    const isLastStep = currentStep === lessonData.steps.length - 1;
-
-    const handleNext = () => {
-        if (isLastStep) {
-            router.push('/education/lessons');
-        } else {
-            setCurrentStep(c => c + 1);
-        }
-    };
-
-    const handlePrev = () => {
-        if (currentStep > 0) {
-            setCurrentStep(c => c - 1);
-        }
-    };
-
-    return (
-        <div className="min-h-screen bg-background pt-28 pb-20 px-4 sm:px-6 lg:px-8 flex flex-col">
-            <div className="max-w-4xl mx-auto w-full flex-1 flex flex-col">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-8 sm:mb-12">
-                    <Link href="/education/lessons" className="flex items-center text-lg font-bold uppercase hover:text-primary transition-colors">
-                        <ArrowLeft className="w-6 h-6 mr-2" aria-hidden="true" />
-                        {t('back')}
-                    </Link>
-                    <div className="text-sm font-bold uppercase tracking-widest text-muted-foreground" aria-live="polite">
-                        {t('step')} {currentStep + 1} {t('of')} {lessonData.steps.length}
-                    </div>
-                </div>
-
-                {/* Breadcrumb */}
-                <div className="mb-6 flex items-center text-sm font-medium text-muted-foreground">
-                    <Link href="/education" className="hover:text-foreground transition-colors">
-                        {t('education')}
-                    </Link>
-                    <span className="mx-2">/</span>
-                    <Link href="/education/lessons" className="hover:text-foreground transition-colors">
-                        {t('lessons')}
-                    </Link>
-                    <span className="mx-2">/</span>
-                    <span className="text-foreground">{lessonData.categoryTitle}</span>
-                    <span className="mx-2">/</span>
-                    <span className="text-foreground font-bold">{lessonData.title}</span>
-                </div>
-
-                {/* Progress Bar */}
-                <div
-                    className="w-full h-4 bg-foreground/10 mb-12 rounded-full overflow-hidden"
-                    role="progressbar"
-                    aria-label={`${t('step')} ${currentStep + 1} ${t('of')} ${lessonData.steps.length}`}
-                    aria-valuenow={currentStep + 1}
-                    aria-valuemin={1}
-                    aria-valuemax={lessonData.steps.length}
-                >
-                    <motion.div
-                        className="h-full bg-primary"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${((currentStep + 1) / lessonData.steps.length) * 100}%` }}
-                        transition={{ duration: 0.5 }}
-                    />
-                </div>
-
-                {/* Content Card */}
-                <div className="flex-1 flex items-center justify-center">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentStep}
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -50 }}
-                            className="w-full"
-                        >
-                            <div className="bg-white border-4 border-foreground p-8 sm:p-12 md:p-16 text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                                {step.type === 'info' && (
-                                    <div className="space-y-6">
-                                        <div className="inline-block px-4 py-2 bg-primary text-white font-bold uppercase tracking-widest text-sm mb-4">
-                                            {t('info')}
-                                        </div>
-                                        <p className="text-xl sm:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
-                                            {step.description}
-                                        </p>
-                                    </div>
-                                )}
-
-                                {(step.type === 'vocabulary' || step.type === 'phrase') && (
-                                    <div className="space-y-8">
-                                        <div className="inline-block px-4 py-2 bg-foreground text-background font-bold uppercase tracking-widest text-sm mb-4">
-                                            {step.type === 'vocabulary' ? t('vocabulary') : t('phrase')}
-                                        </div>
-
-                                        <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter text-primary mb-4">
-                                            {step.term}
-                                        </h2>
-
-                                        {step.pronunciation && (
-                                            <p className="text-xl text-muted-foreground font-mono mb-4">
-                                                /{step.pronunciation}/
-                                            </p>
-                                        )}
-
-                                        {step.term && audioByTerm[step.term]?.length > 0 && (
-                                            <div className="flex flex-wrap justify-center gap-2 mb-8">
-                                                {audioByTerm[step.term].map((rec) => (
-                                                    <AudioButton key={rec.file} url={rec.url} label={speakerLabel(rec.speaker)} />
-                                                ))}
-                                            </div>
-                                        )}
-
-                                        <div className="w-16 h-2 bg-foreground mx-auto rounded-full mb-8" />
-
-                                        <p className="text-3xl sm:text-4xl font-bold uppercase">
-                                            {step.translation}
-                                        </p>
-
-                                        {step.description && (
-                                            <p className="text-lg sm:text-xl font-medium opacity-70 mt-6 max-w-xl mx-auto">
-                                                {step.description}
-                                            </p>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-
-                {/* Navigation */}
-                <div className="mt-12 flex justify-between items-center">
-                    <button
-                        type="button"
-                        onClick={handlePrev}
-                        disabled={currentStep === 0}
-                        className="px-8 py-4 font-bold uppercase tracking-wide disabled:opacity-30 hover:text-primary transition-colors disabled:cursor-not-allowed"
-                    >
-                        {t('previous')}
-                    </button>
-
-                    <button
-                        type="button"
-                        onClick={handleNext}
-                        className="px-12 py-4 bg-primary text-white border-4 border-foreground font-black text-xl uppercase tracking-wide hover:brightness-110 transition-all flex items-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-none"
-                    >
-                        {isLastStep ? t('complete') : t('next')}
-                        {isLastStep ? <Check className="w-6 h-6 ml-2" aria-hidden="true" /> : <ArrowRight className="w-6 h-6 ml-2" aria-hidden="true" />}
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
+    return <LessonPageClient />;
 }
