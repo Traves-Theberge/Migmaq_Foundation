@@ -1,0 +1,52 @@
+import Link from 'next/link';
+import { createClient } from '@/lib/supabase/server';
+import { requireStaffProfile } from '@/lib/supabase/auth';
+
+export const dynamic = 'force-dynamic';
+
+export default async function BooksListPage() {
+    await requireStaffProfile();
+    const supabase = await createClient();
+
+    const [{ data: books }, { data: pages }] = await Promise.all([
+        supabase.from('books').select('slug, subtitle, teaser, sort_order').order('sort_order', { ascending: true }),
+        supabase.from('book_pages').select('book_slug'),
+    ]);
+
+    const pageCounts = new Map<string, number>();
+    for (const p of pages ?? []) {
+        pageCounts.set(p.book_slug, (pageCounts.get(p.book_slug) ?? 0) + 1);
+    }
+
+    return (
+        <div>
+            <div className="flex items-start justify-between gap-4 mb-6">
+                <div>
+                    <h1 className="text-3xl font-black uppercase tracking-tight">Storybooks</h1>
+                    <p className="text-sm text-muted-foreground mt-1">{(books ?? []).length} books</p>
+                </div>
+                <Link href="/admin/books/new" className="bg-foreground text-background text-xs font-bold uppercase tracking-wide px-4 py-2.5 shrink-0 hover:opacity-90">
+                    + New book
+                </Link>
+            </div>
+
+            <div className="border-[3px] border-foreground bg-card">
+                {(books ?? []).length === 0 ? (
+                    <p className="text-sm text-muted-foreground p-6 text-center">No storybooks yet.</p>
+                ) : (
+                    <div className="divide-y-2 divide-muted">
+                        {(books ?? []).map((b) => (
+                            <Link key={b.slug} href={`/admin/books/${b.slug}`} className="flex items-center gap-3 px-4 py-3 hover:bg-muted">
+                                <div className="flex-1 min-w-0">
+                                    <div className="text-sm font-bold truncate">{b.subtitle}</div>
+                                    {b.teaser && <div className="text-[11.5px] text-muted-foreground truncate">{b.teaser}</div>}
+                                </div>
+                                <span className="text-[11px] tabular-nums text-muted-foreground shrink-0">{pageCounts.get(b.slug) ?? 0} pages</span>
+                            </Link>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
