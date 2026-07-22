@@ -97,29 +97,43 @@ export async function deletePageAction(id: string, bookSlug: string): Promise<Fo
 }
 
 /** Swaps sort_order with the adjacent page — same reorder primitive as lesson steps. */
-export async function movePageAction(pageId: string, bookSlug: string, direction: 'up' | 'down') {
+export async function movePageAction(pageId: string, bookSlug: string, direction: 'up' | 'down'): Promise<FormState> {
     await requireStaffProfile();
     const supabase = await createClient();
-    const { data: pages } = await supabase
+    const { data: pages, error: readError } = await supabase
         .from('book_pages')
         .select('id, sort_order')
         .eq('book_slug', bookSlug)
         .order('sort_order', { ascending: true });
-    if (!pages) return;
+    if (readError) return { error: 'Could not reorder — try reloading the page.' };
+    if (!pages) return {};
 
     const index = pages.findIndex((p) => p.id === pageId);
     const swapIndex = direction === 'up' ? index - 1 : index + 1;
-    if (index === -1 || swapIndex < 0 || swapIndex >= pages.length) return;
+    if (index === -1 || swapIndex < 0 || swapIndex >= pages.length) return {};
 
     const a = pages[index];
     const b = pages[swapIndex];
     // Swap through a temporary value first — (book_slug, sort_order) is
     // unique, so writing b's sort_order onto a while b still holds it would
-    // violate the constraint mid-swap.
+    // violate the constraint mid-swap. Each step is checked; if step 2 or 3
+    // fails, best-effort revert `a` back to its original sort_order rather
+    // than leaving it stuck at the temporary value.
     const TEMP_SORT_ORDER = -1;
-    await supabase.from('book_pages').update({ sort_order: TEMP_SORT_ORDER }).eq('id', a.id);
-    await supabase.from('book_pages').update({ sort_order: a.sort_order }).eq('id', b.id);
-    await supabase.from('book_pages').update({ sort_order: b.sort_order }).eq('id', a.id);
+    const step1 = await supabase.from('book_pages').update({ sort_order: TEMP_SORT_ORDER }).eq('id', a.id);
+    if (step1.error) return { error: 'Could not reorder — try again.' };
+
+    const step2 = await supabase.from('book_pages').update({ sort_order: a.sort_order }).eq('id', b.id);
+    if (step2.error) {
+        await supabase.from('book_pages').update({ sort_order: a.sort_order }).eq('id', a.id);
+        return { error: 'Reorder failed partway — reload the page and check the page order.' };
+    }
+
+    const step3 = await supabase.from('book_pages').update({ sort_order: b.sort_order }).eq('id', a.id);
+    if (step3.error) {
+        return { error: 'Reorder failed partway — reload the page and check the page order.' };
+    }
 
     revalidatePath(`/admin/books/${bookSlug}`);
+    return {};
 }

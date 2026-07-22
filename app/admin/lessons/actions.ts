@@ -140,26 +140,31 @@ export async function deleteStepAction(id: string, lessonId: string, categoryId:
 }
 
 /** Swaps sort_order with the adjacent step in the given direction — the simplest correct reorder primitive without a full drag-and-drop UI. */
-export async function moveStepAction(stepId: string, lessonId: string, categoryId: string, direction: 'up' | 'down') {
+export async function moveStepAction(stepId: string, lessonId: string, categoryId: string, direction: 'up' | 'down'): Promise<FormState> {
     await requireStaffProfile();
     const supabase = await createClient();
-    const { data: steps } = await supabase
+    const { data: steps, error: readError } = await supabase
         .from('lesson_steps')
         .select('id, sort_order')
         .eq('lesson_id', lessonId)
         .order('sort_order', { ascending: true });
-    if (!steps) return;
+    if (readError) return { error: 'Could not reorder — try reloading the page.' };
+    if (!steps) return {};
 
     const index = steps.findIndex((s) => s.id === stepId);
     const swapIndex = direction === 'up' ? index - 1 : index + 1;
-    if (index === -1 || swapIndex < 0 || swapIndex >= steps.length) return;
+    if (index === -1 || swapIndex < 0 || swapIndex >= steps.length) return {};
 
     const a = steps[index];
     const b = steps[swapIndex];
-    await Promise.all([
+    const [r1, r2] = await Promise.all([
         supabase.from('lesson_steps').update({ sort_order: b.sort_order }).eq('id', a.id),
         supabase.from('lesson_steps').update({ sort_order: a.sort_order }).eq('id', b.id),
     ]);
+    if (r1.error || r2.error) {
+        return { error: 'Reorder failed partway — reload the page and check the step order.' };
+    }
 
     revalidatePath(`/admin/lessons/${categoryId}/${lessonId}`);
+    return {};
 }

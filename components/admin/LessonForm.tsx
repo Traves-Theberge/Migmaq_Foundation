@@ -29,7 +29,7 @@ export default function LessonForm({ lesson, isNew }: { lesson: LessonFormValues
         if (state.error && state.error !== lastErrorRef.current) {
             lastErrorRef.current = state.error;
             showToast(state.error);
-        } else if (!state.error && !isNew) {
+        } else if (state !== initialState && !state.error && !isNew) {
             showToast('Saved');
         }
     }, [state, showToast, isNew]);

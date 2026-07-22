@@ -1,6 +1,6 @@
 /**
  * Hand-written to match supabase/migrations/0001_init_schema.sql through
- * 0009_performance_indexes.sql exactly (indexes/RLS-only migrations don't
+ * 0010_fix_audio_word_sync_trigger.sql exactly (indexes/RLS/trigger-only migrations don't
  * change this file's shape). Once a live project exists, prefer
  * regenerating this with `supabase gen types typescript` and diffing
  * against this file — but keep the shape identical either way, since

@@ -86,8 +86,26 @@ function StepRow({
     return (
         <div className="flex items-start gap-3 border-2 border-muted p-3">
             <div className="flex flex-col shrink-0 gap-0.5 pt-0.5">
-                <button type="button" disabled={!canMoveUp} onClick={() => moveStepAction(step.id, lessonId, categoryId, 'up')} className="w-5 h-5 flex items-center justify-center disabled:opacity-20" aria-label="Move step up">▲</button>
-                <button type="button" disabled={!canMoveDown} onClick={() => moveStepAction(step.id, lessonId, categoryId, 'down')} className="w-5 h-5 flex items-center justify-center disabled:opacity-20" aria-label="Move step down">▼</button>
+                <button
+                    type="button"
+                    disabled={!canMoveUp}
+                    onClick={async () => {
+                        const result = await moveStepAction(step.id, lessonId, categoryId, 'up');
+                        if (result.error) showToast(result.error);
+                    }}
+                    className="w-5 h-5 flex items-center justify-center disabled:opacity-20"
+                    aria-label="Move step up"
+                >▲</button>
+                <button
+                    type="button"
+                    disabled={!canMoveDown}
+                    onClick={async () => {
+                        const result = await moveStepAction(step.id, lessonId, categoryId, 'down');
+                        if (result.error) showToast(result.error);
+                    }}
+                    className="w-5 h-5 flex items-center justify-center disabled:opacity-20"
+                    aria-label="Move step down"
+                >▼</button>
             </div>
             <div className="flex-1 min-w-0">
                 <span className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground">{step.type}</span>

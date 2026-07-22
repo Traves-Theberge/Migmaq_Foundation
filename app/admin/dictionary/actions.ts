@@ -31,11 +31,21 @@ function readForm(formData: FormData) {
     };
 }
 
-/** Replaces every dictionary_word_usages row for `wordId` with `usages` — simpler than diffing, and safe given there are only ever a handful per word. */
+/**
+ * Replaces every dictionary_word_usages row for `wordId` with `usages` —
+ * simpler than diffing, and safe given there are only ever a handful per
+ * word. Inserts the new rows *before* deleting the old ones (there's no
+ * unique constraint on word_id/sort_order, so the two sets can briefly
+ * coexist) and only deletes rows outside the newly-inserted ids — if the
+ * insert fails, the delete never runs and the word's existing usages are
+ * left untouched instead of being silently wiped with nothing to show
+ * for it.
+ */
 async function replaceUsages(supabase: Awaited<ReturnType<typeof createClient>>, wordId: string, usages: { migmaq: string; english: string; french?: string }[]) {
-    const { error: delError } = await supabase.from('dictionary_word_usages').delete().eq('word_id', wordId);
-    if (delError) return delError;
-    if (usages.length === 0) return null;
+    if (usages.length === 0) {
+        const { error } = await supabase.from('dictionary_word_usages').delete().eq('word_id', wordId);
+        return error;
+    }
 
     const rows = usages.map((u, i) => ({
         word_id: wordId,
@@ -44,8 +54,18 @@ async function replaceUsages(supabase: Awaited<ReturnType<typeof createClient>>,
         english: u.english,
         french: u.french ?? null,
     }));
-    const { error: insError } = await supabase.from('dictionary_word_usages').insert(rows);
-    return insError;
+    const { data: inserted, error: insError } = await supabase.from('dictionary_word_usages').insert(rows).select('id');
+    if (insError) return insError;
+
+    const newIds = (inserted ?? []).map((r) => r.id);
+    if (newIds.length === 0) return null;
+
+    const { error: delError } = await supabase
+        .from('dictionary_word_usages')
+        .delete()
+        .eq('word_id', wordId)
+        .not('id', 'in', `(${newIds.join(',')})`);
+    return delError;
 }
 
 export async function createDictionaryWordAction(_prev: DictionaryFormState, formData: FormData): Promise<DictionaryFormState> {

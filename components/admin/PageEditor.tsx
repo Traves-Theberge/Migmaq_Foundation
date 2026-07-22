@@ -59,8 +59,26 @@ function PageRow({ page, bookSlug, canMoveUp, canMoveDown }: { page: PageValues;
     return (
         <div className="flex items-start gap-3 border-2 border-muted p-3">
             <div className="flex flex-col shrink-0 gap-0.5 pt-0.5">
-                <button type="button" disabled={!canMoveUp} onClick={() => movePageAction(page.id, bookSlug, 'up')} className="w-5 h-5 flex items-center justify-center disabled:opacity-20" aria-label="Move page up">▲</button>
-                <button type="button" disabled={!canMoveDown} onClick={() => movePageAction(page.id, bookSlug, 'down')} className="w-5 h-5 flex items-center justify-center disabled:opacity-20" aria-label="Move page down">▼</button>
+                <button
+                    type="button"
+                    disabled={!canMoveUp}
+                    onClick={async () => {
+                        const result = await movePageAction(page.id, bookSlug, 'up');
+                        if (result.error) showToast(result.error);
+                    }}
+                    className="w-5 h-5 flex items-center justify-center disabled:opacity-20"
+                    aria-label="Move page up"
+                >▲</button>
+                <button
+                    type="button"
+                    disabled={!canMoveDown}
+                    onClick={async () => {
+                        const result = await movePageAction(page.id, bookSlug, 'down');
+                        if (result.error) showToast(result.error);
+                    }}
+                    className="w-5 h-5 flex items-center justify-center disabled:opacity-20"
+                    aria-label="Move page down"
+                >▼</button>
             </div>
             <div className="flex-1 min-w-0">
                 <p className="text-sm font-bold">{page.label}</p>

@@ -26,13 +26,21 @@ export default function UsagesEditor({ initialUsages }: { initialUsages: UsageRo
         setRows((prev) => prev.map((row, i) => (i === index ? { ...row, [field]: value } : row)));
     };
 
+    // A row with nothing typed in it yet is a harmless placeholder and gets
+    // dropped silently on submit. A row with only ONE of the two required
+    // fields filled in is a real mistake — kept in the payload (so the
+    // server's Zod schema rejects it with a clear error) and flagged here
+    // so the user doesn't have to find out via a round trip.
+    const isEmpty = (row: UsageRow) => !row.migmaq.trim() && !row.english.trim();
+    const isIncomplete = (row: UsageRow) => !isEmpty(row) && (!row.migmaq.trim() || !row.english.trim());
+
     return (
         <div>
-            <input type="hidden" name="usages" value={JSON.stringify(rows.filter((r) => r.migmaq.trim() && r.english.trim()))} />
+            <input type="hidden" name="usages" value={JSON.stringify(rows.filter((r) => !isEmpty(r)))} />
             <label className={labelClass}>Usage examples</label>
             <div className="flex flex-col gap-3">
                 {rows.map((row, i) => (
-                    <div key={i} className="border-2 border-muted p-3 flex flex-col gap-2">
+                    <div key={i} className={`border-2 p-3 flex flex-col gap-2 ${isIncomplete(row) ? 'border-secondary' : 'border-muted'}`}>
                         <div className="grid sm:grid-cols-2 gap-2">
                             <div>
                                 <label className={labelClass} htmlFor={`usage-migmaq-${i}`}>Mi&apos;gmaq sentence</label>
@@ -43,6 +51,9 @@ export default function UsagesEditor({ initialUsages }: { initialUsages: UsageRo
                                 <input id={`usage-english-${i}`} value={row.english} onChange={(e) => update(i, 'english', e.target.value)} className={fieldClass} />
                             </div>
                         </div>
+                        {isIncomplete(row) && (
+                            <p className="text-[11px] font-bold text-secondary">Both Mi&apos;gmaq and English are required for this example — or clear both to remove it.</p>
+                        )}
                         <div className="flex items-end gap-2">
                             <div className="flex-1">
                                 <label className={labelClass} htmlFor={`usage-french-${i}`}>French (optional)</label>
