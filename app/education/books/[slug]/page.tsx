@@ -15,8 +15,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const book = getBook(slug);
     if (!book) return {};
     return {
-        title: `${book.subtitle} — Mi'gmaq Foundation`,
+        title: book.subtitle,
         description: book.teaser,
+        alternates: { canonical: `/education/books/${book.slug}` },
+        openGraph: { title: book.subtitle, description: book.teaser, type: 'article' },
+        twitter: { card: 'summary_large_image', title: book.subtitle, description: book.teaser },
     };
 }
 

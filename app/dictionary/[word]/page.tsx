@@ -22,14 +22,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     try {
         const data = await getWordDetails(word);
         const description = data.definitions?.[0] ?? data.translations?.[0] ?? `Mi'gmaq dictionary entry for ${data.word}.`;
-        const title = `${data.word} — Mi'gmaq Language Dictionary`;
         return {
-            title,
+            title: `${data.word} — Mi'gmaq Dictionary`,
             description,
-            openGraph: { title, description },
+            alternates: { canonical: `/dictionary/${encodeURIComponent(data.word)}` },
+            openGraph: { title: `${data.word} — Mi'gmaq Dictionary`, description, type: 'article' },
+            twitter: { card: 'summary_large_image', title: `${data.word} — Mi'gmaq Dictionary`, description },
         };
     } catch {
-        return { title: "Word Not Found — Mi'gmaq Language Dictionary" };
+        return { title: 'Word Not Found' };
     }
 }
 

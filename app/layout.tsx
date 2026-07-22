@@ -1,12 +1,34 @@
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { LocaleProvider } from '@/lib/i18n/LocaleProvider';
 import Navbar from '@/components/ui/Navbar';
 import T from '@/components/i18n/T';
+import { SITE_URL, SITE_NAME } from '@/lib/site';
 
-export const metadata = {
-  title: "Mi'gmaq Foundation",
-  description: "Educational resources for the Mi'gmaq language",
+const DESCRIPTION = "A searchable Mi'gmaq–English–French dictionary, guided lessons, illustrated storybooks, and games for learning the Mi'gmaq language.";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DESCRIPTION,
+  manifest: '/site.webmanifest',
+  openGraph: {
+    type: 'website',
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_NAME,
+    description: DESCRIPTION,
+  },
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -21,6 +43,10 @@ export const metadata = {
       { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' }
     ]
   }
+};
+
+export const viewport: Viewport = {
+  themeColor: '#f59e0b',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
