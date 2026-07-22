@@ -14,7 +14,9 @@
     "data:validate-i18n": "tsx scripts/validate-i18n.ts",
     "data:fr-coverage": "node scripts/report-fr-coverage.mjs",
     "data:migrate-to-supabase": "tsx scripts/migrate-to-supabase.ts",
-    "test:a11y": "playwright test e2e/a11y.spec.ts"
+    "test:a11y": "playwright test e2e/a11y.spec.ts",
+    "test:admin-auth": "playwright test e2e/admin-auth.spec.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^9.1.0",
