@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, Trophy, Timer, Sparkles, Hexagon } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -233,9 +234,11 @@ export default function FlashcardGame() {
                                             className="absolute inset-0 bg-accent flex items-center justify-center border-2 sm:border-4 border-accent rounded-sm sm:rounded-none"
                                             style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
                                         >
-                                            <img
+                                            <Image
                                                 src="/assets/Images/fn_logo.png"
                                                 alt="Mi'gmaq Foundation"
+                                                width={64}
+                                                height={64}
                                                 className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
                                             />
                                         </div>

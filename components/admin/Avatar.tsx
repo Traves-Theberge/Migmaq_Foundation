@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { uploadAvatarAction, type AvatarUploadState } from '@/app/admin/actions';
 import { useToast } from './ToastProvider';
 import { CameraIcon } from './icons';
@@ -32,11 +33,11 @@ export default function Avatar({ userId, src, size = 30, editable = false, title
     }, [state, showToast]);
 
     const image = (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
             src={state.url ?? src ?? '/assets/Images/fn_logo.png'}
             alt=""
-            style={{ width: size, height: size }}
+            width={size}
+            height={size}
             className="rounded-full object-cover border border-foreground shrink-0"
         />
     );

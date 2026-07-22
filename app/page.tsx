@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Book, Gamepad2, GraduationCap, ArrowRight, Star } from "lucide-react";
 import { SpellingCycler } from "@/components/ui/SpellingCycler";
@@ -76,10 +77,13 @@ export default function Home() {
             className="relative w-full"
           >
             <div className="relative w-full aspect-square max-w-[200px] sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] mx-auto rounded-2xl overflow-hidden">
-              <img
+              <Image
                 src="/assets/Images/fn_hero.png"
                 alt="Mi'gmaq Foundation"
-                className="w-full h-full object-contain"
+                fill
+                priority
+                sizes="(min-width: 1024px) 500px, (min-width: 768px) 400px, (min-width: 640px) 300px, 200px"
+                className="object-contain"
               />
             </div>
           </motion.div>

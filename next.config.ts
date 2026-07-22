@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  images: {
+    // Supabase Storage serves the avatars bucket (migration 0004) from
+    // <project-ref>.supabase.co — wildcarded since the project ref varies
+    // per environment/deploy rather than being a fixed value in code.
+    remotePatterns: [
+      { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
+    ],
+  },
 };
 
 export default nextConfig;
