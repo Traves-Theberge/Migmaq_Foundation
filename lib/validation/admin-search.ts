@@ -18,6 +18,14 @@ export const SearchResultSchema = z
         id: z.string(),
         title: z.string(),
         subtitle: z.string(),
+        /**
+         * Server-computed admin destination path. A lesson's URL needs its
+         * parent category id (/admin/lessons/{categoryId}/{lessonId}), which
+         * isn't derivable from `id` alone — computing it here, once, means
+         * the client never has to reconstruct per-kind route shapes itself
+         * and can't drift out of sync with them.
+         */
+        href: z.string(),
     })
     .openapi('SearchResult');
 

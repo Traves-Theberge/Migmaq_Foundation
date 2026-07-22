@@ -46,9 +46,9 @@ export async function GET(request: Request) {
     ]);
 
     const results: SearchResult[] = [
-        ...(words.data ?? []).map((w) => ({ kind: 'dictionary' as const, id: w.id, title: w.word, subtitle: w.type ?? '' })),
-        ...(lessons.data ?? []).map((l) => ({ kind: 'lesson' as const, id: l.id, title: l.title, subtitle: l.category_id })),
-        ...(books.data ?? []).map((b) => ({ kind: 'book' as const, id: b.slug, title: b.subtitle, subtitle: '' })),
+        ...(words.data ?? []).map((w) => ({ kind: 'dictionary' as const, id: w.id, title: w.word, subtitle: w.type ?? '', href: `/admin/dictionary/${w.id}` })),
+        ...(lessons.data ?? []).map((l) => ({ kind: 'lesson' as const, id: l.id, title: l.title, subtitle: l.category_id, href: `/admin/lessons/${l.category_id}/${l.id}` })),
+        ...(books.data ?? []).map((b) => ({ kind: 'book' as const, id: b.slug, title: b.subtitle, subtitle: '', href: `/admin/books/${b.slug}` })),
     ];
 
     return NextResponse.json(AdminSearchResponseSchema.parse({ results }));

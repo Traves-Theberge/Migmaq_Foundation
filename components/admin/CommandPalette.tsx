@@ -16,12 +16,6 @@ const KIND_ICON: Record<SearchResult['kind'], typeof DictionaryIcon> = {
     book: BooksIcon,
 };
 
-const KIND_HREF: Record<SearchResult['kind'], (id: string) => string> = {
-    dictionary: (id) => `/admin/dictionary/${id}`,
-    lesson: (id) => `/admin/lessons/${id}`,
-    book: (id) => `/admin/books/${id}`,
-};
-
 export default function CommandPalette() {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
@@ -124,7 +118,7 @@ export default function CommandPalette() {
                                                     <button
                                                         key={r.id}
                                                         type="button"
-                                                        onClick={() => go(KIND_HREF[kind](r.id))}
+                                                        onClick={() => go(r.href)}
                                                         className="w-full flex items-center gap-2.5 px-2.5 py-2 text-sm hover:bg-muted rounded-sm text-left"
                                                     >
                                                         <Icon size={15} className="opacity-60 shrink-0" />
