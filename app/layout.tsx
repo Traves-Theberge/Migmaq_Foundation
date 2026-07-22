@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { LocaleProvider } from '@/lib/i18n/LocaleProvider';
@@ -8,6 +9,15 @@ import JsonLd from '@/components/seo/JsonLd';
 import { SITE_URL, SITE_NAME } from '@/lib/site';
 
 const DESCRIPTION = "A searchable Mi'gmaq–English–French dictionary, guided lessons, illustrated storybooks, and games for learning the Mi'gmaq language.";
+
+// globals.css declares --font-sans: 'Inter' and --font-display: 'Playfair
+// Display' as Tailwind theme tokens, but nothing ever loaded either font —
+// the whole site silently fell back to system-ui/serif. next/font
+// self-hosts both (no external request, no FOUT/FOIT) and exposes them as
+// CSS variables that globals.css's tokens reference instead of bare family
+// names.
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const playfairDisplay = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -52,7 +62,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfairDisplay.variable}`}>
       <head>
         <JsonLd
           data={{
