@@ -9,7 +9,7 @@ import LocalizedDefinitions from '@/components/dictionary/LocalizedDefinitions';
 import LocalizedTranslations from '@/components/dictionary/LocalizedTranslations';
 import LocalizedUsages from '@/components/dictionary/LocalizedUsages';
 import T from '@/components/i18n/T';
-import { getWordDetails, resolveAlternateForms, getAdjacentWords } from '@/lib/dictionary';
+import { getWordDetails, resolveAlternateForms, getAdjacentWords, WordNotFoundError } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
 import { speakerLabel } from '@/lib/speakers';
 
@@ -39,8 +39,12 @@ export default async function WordDetailsPage({ params }: PageProps) {
     let data;
     try {
         data = await getWordDetails(word);
-    } catch {
-        notFound();
+    } catch (err) {
+        // Only a genuine "no such word" renders the 404 UI — any other
+        // failure (e.g. dictionary.json unreadable) rethrows so it surfaces
+        // as a real error instead of masquerading as a missing entry.
+        if (err instanceof WordNotFoundError) notFound();
+        throw err;
     }
 
     const [recordings, resolved_alternate_forms, adjacent] = await Promise.all([

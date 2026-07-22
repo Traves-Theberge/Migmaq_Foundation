@@ -1,6 +1,14 @@
 import fs from 'fs/promises';
 import path from 'path';
 
+/** Thrown only for "no such headword" — lets callers (API routes) return a clean 404 instead of conflating it with a real failure (unreadable/corrupt dictionary.json), which should surface as a 500 instead. */
+export class WordNotFoundError extends Error {
+    constructor(word: string) {
+        super(`No dictionary entry for "${word}"`);
+        this.name = 'WordNotFoundError';
+    }
+}
+
 let cache: any = null;
 let indexCache: Map<string, any> | null = null;
 let sortedWordsCache: string[] | null = null;
@@ -80,6 +88,6 @@ export async function getWordDetails(word: string) {
     const index = await getDictionaryIndex();
     const target = word.trim().toLowerCase();
     const result = index.get(target);
-    if (!result) throw new Error('Word not found');
+    if (!result) throw new WordNotFoundError(word);
     return result;
 }

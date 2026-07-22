@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getWordDetails, resolveAlternateForms } from '@/lib/dictionary';
+import { getWordDetails, resolveAlternateForms, WordNotFoundError } from '@/lib/dictionary';
 import { getRecordings } from '@/lib/audio';
 import { WordDetailsQuerySchema, WordDetailsResponseSchema } from '@/lib/validation/dictionary';
 
@@ -14,7 +14,11 @@ export async function GET(request: Request) {
         const recordings = await getRecordings(result.word);
         const resolved_alternate_forms = await resolveAlternateForms(result.alternate_forms);
         return NextResponse.json(WordDetailsResponseSchema.parse({ ...result, recordings, resolved_alternate_forms }));
-    } catch (e: any) {
-        return NextResponse.json({ error: e.message }, { status: 404 });
+    } catch (e) {
+        if (e instanceof WordNotFoundError) {
+            return NextResponse.json({ error: 'Word not found' }, { status: 404 });
+        }
+        console.error('GET /api/word-details failed:', e);
+        return NextResponse.json({ error: 'Could not load the word.' }, { status: 500 });
     }
 }

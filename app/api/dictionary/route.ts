@@ -6,7 +6,8 @@ export async function GET() {
     try {
         const dict = await getDictionary();
         return NextResponse.json(DictionaryListResponseSchema.parse(dict));
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error) {
+        console.error('GET /api/dictionary failed:', error);
+        return NextResponse.json({ error: 'The dictionary could not be loaded.' }, { status: 500 });
     }
 }

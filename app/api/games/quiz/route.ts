@@ -6,7 +6,8 @@ export async function GET() {
     try {
         const questions = await getQuizQuestions(5);
         return NextResponse.json(QuizResponseSchema.parse(questions));
-    } catch (e: any) {
-        return NextResponse.json({ error: e.message }, { status: 500 });
+    } catch (error) {
+        console.error('GET /api/games/quiz failed:', error);
+        return NextResponse.json({ error: 'Could not build a quiz round.' }, { status: 500 });
     }
 }
