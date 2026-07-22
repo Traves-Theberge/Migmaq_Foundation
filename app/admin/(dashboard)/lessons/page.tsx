@@ -4,12 +4,20 @@ import { requireStaffProfile } from '@/lib/supabase/auth';
 
 export const dynamic = 'force-dynamic';
 
-export default async function LessonsListPage() {
+interface PageProps {
+    searchParams: Promise<{ q?: string }>;
+}
+
+export default async function LessonsListPage({ searchParams }: PageProps) {
     await requireStaffProfile();
+    const { q } = await searchParams;
     const supabase = await createClient();
 
+    let categoryQuery = supabase.from('lesson_categories').select('id, title, description, sort_order').order('sort_order', { ascending: true });
+    if (q) categoryQuery = categoryQuery.ilike('title', `%${q.replace(/[%_\\]/g, (c) => `\\${c}`)}%`);
+
     const [{ data: categories, error: categoriesError }, { data: lessons }] = await Promise.all([
-        supabase.from('lesson_categories').select('id, title, description, sort_order').order('sort_order', { ascending: true }),
+        categoryQuery,
         supabase.from('lessons').select('id, category_id'),
     ]);
     if (categoriesError) console.error('LessonsListPage: categories query failed:', categoriesError);
@@ -31,13 +39,18 @@ export default async function LessonsListPage() {
                 </Link>
             </div>
 
+            <form action="/admin/lessons" className="mb-5 max-w-sm">
+                <label className="sr-only" htmlFor="q">Search categories</label>
+                <input id="q" name="q" defaultValue={q ?? ''} placeholder="Search categories…" className="w-full border-2 border-foreground bg-card px-3 py-2 text-sm" />
+            </form>
+
             <div className="border-[3px] border-foreground bg-card">
                 {categoriesError ? (
                     <p className="text-sm font-bold text-secondary p-6 text-center" role="alert">
                         Couldn&apos;t load categories — try reloading the page.
                     </p>
                 ) : (categories ?? []).length === 0 ? (
-                    <p className="text-sm text-muted-foreground p-6 text-center">No categories yet.</p>
+                    <p className="text-sm text-muted-foreground p-6 text-center">{q ? 'No categories match.' : 'No categories yet.'}</p>
                 ) : (
                     <div className="divide-y-2 divide-muted">
                         {(categories ?? []).map((c) => (

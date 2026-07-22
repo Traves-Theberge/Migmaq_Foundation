@@ -4,12 +4,20 @@ import { requireStaffProfile } from '@/lib/supabase/auth';
 
 export const dynamic = 'force-dynamic';
 
-export default async function BooksListPage() {
+interface PageProps {
+    searchParams: Promise<{ q?: string }>;
+}
+
+export default async function BooksListPage({ searchParams }: PageProps) {
     await requireStaffProfile();
+    const { q } = await searchParams;
     const supabase = await createClient();
 
+    let bookQuery = supabase.from('books').select('slug, subtitle, teaser, sort_order').order('sort_order', { ascending: true });
+    if (q) bookQuery = bookQuery.ilike('subtitle', `%${q.replace(/[%_\\]/g, (c) => `\\${c}`)}%`);
+
     const [{ data: books, error: booksError }, { data: pages }] = await Promise.all([
-        supabase.from('books').select('slug, subtitle, teaser, sort_order').order('sort_order', { ascending: true }),
+        bookQuery,
         supabase.from('book_pages').select('book_slug'),
     ]);
     if (booksError) console.error('BooksListPage: books query failed:', booksError);
@@ -31,13 +39,18 @@ export default async function BooksListPage() {
                 </Link>
             </div>
 
+            <form action="/admin/books" className="mb-5 max-w-sm">
+                <label className="sr-only" htmlFor="q">Search storybooks</label>
+                <input id="q" name="q" defaultValue={q ?? ''} placeholder="Search storybooks…" className="w-full border-2 border-foreground bg-card px-3 py-2 text-sm" />
+            </form>
+
             <div className="border-[3px] border-foreground bg-card">
                 {booksError ? (
                     <p className="text-sm font-bold text-secondary p-6 text-center" role="alert">
                         Couldn&apos;t load storybooks — try reloading the page.
                     </p>
                 ) : (books ?? []).length === 0 ? (
-                    <p className="text-sm text-muted-foreground p-6 text-center">No storybooks yet.</p>
+                    <p className="text-sm text-muted-foreground p-6 text-center">{q ? 'No storybooks match.' : 'No storybooks yet.'}</p>
                 ) : (
                     <div className="divide-y-2 divide-muted">
                         {(books ?? []).map((b) => (
