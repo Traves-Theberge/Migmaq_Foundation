@@ -43,6 +43,8 @@ export const messages = {
             filterByLetter: "Filter by letter",
             loadMore: "Load More",
             noResults: "No words match your search.",
+            loadFailed: "Could not load the dictionary. Please try again.",
+            retry: "Try Again",
         },
         education: {
             title: "Education",
@@ -166,6 +168,9 @@ export const messages = {
             nextQuestion: "Next Question",
             correctAnswer: "Correct answer",
             incorrectAnswer: "Incorrect answer",
+            errorPrefix: "Error:",
+            loadFailed: "Could not load the quiz. Please try again.",
+            retry: "Try Again",
         },
         common: {
             back: "Back",
@@ -214,6 +219,8 @@ export const messages = {
             filterByLetter: "Filtrer par lettre",
             loadMore: "Charger plus",
             noResults: "Aucun mot ne correspond à votre recherche.",
+            loadFailed: "Impossible de charger le dictionnaire. Veuillez réessayer.",
+            retry: "Réessayer",
         },
         education: {
             title: "Éducation",
@@ -337,6 +344,9 @@ export const messages = {
             nextQuestion: "Question suivante",
             correctAnswer: "Bonne réponse",
             incorrectAnswer: "Mauvaise réponse",
+            errorPrefix: "Erreur :",
+            loadFailed: "Impossible de charger le quiz. Veuillez réessayer.",
+            retry: "Réessayer",
         },
         common: {
             back: "Retour",

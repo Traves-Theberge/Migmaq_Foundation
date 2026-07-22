@@ -18,20 +18,31 @@ export default function DictionaryPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filtered, setFiltered] = useState<Word[]>([]);
     const [loading, setLoading] = useState(true);
+    const [loadError, setLoadError] = useState(false);
     const [page, setPage] = useState(1);
     const itemsPerPage = 20;
     const [searchMode, setSearchMode] = useState<'all' | 'word' | 'english'>('all');
     const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
 
-    useEffect(() => {
+    const loadDictionary = React.useCallback(() => {
+        setLoading(true);
+        setLoadError(false);
         fetch('/api/dictionary')
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) throw new Error('Failed to fetch dictionary');
+                return res.json();
+            })
             .then((data) => {
                 setWords(data);
                 setFiltered(data);
-                setLoading(false);
-            });
+            })
+            .catch(() => setLoadError(true))
+            .finally(() => setLoading(false));
     }, []);
+
+    useEffect(() => {
+        loadDictionary();
+    }, [loadDictionary]);
 
     // Extract unique starting letters
     const availableLetters = React.useMemo(() => {
@@ -172,6 +183,17 @@ export default function DictionaryPage() {
                     <div className="flex justify-center py-20" role="status" aria-live="polite">
                         <Loader2 className="w-16 h-16 animate-spin text-foreground" aria-hidden="true" />
                         <span className="sr-only">{tr('title')}…</span>
+                    </div>
+                ) : loadError ? (
+                    <div className="flex flex-col items-center gap-4 py-20 text-center" role="alert">
+                        <p className="text-xl font-bold text-muted-foreground">{tr('loadFailed')}</p>
+                        <button
+                            type="button"
+                            onClick={loadDictionary}
+                            className="px-6 py-2.5 bg-foreground text-background font-bold uppercase tracking-wide text-sm hover:bg-primary transition-colors"
+                        >
+                            {tr('retry')}
+                        </button>
                     </div>
                 ) : filtered.length === 0 ? (
                     <p className="text-xl font-bold text-muted-foreground text-center py-20" role="status">

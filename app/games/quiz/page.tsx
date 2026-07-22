@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, Trophy, RefreshCw, ArrowRight } from 'lucide-react';
+import { Check, X, Trophy, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { cn } from '@/lib/utils';
 import { useTranslations } from '@/lib/i18n/LocaleProvider';
@@ -20,12 +20,14 @@ export default function QuizGame() {
     const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
     const [isAnswered, setIsAnswered] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [gameOver, setGameOver] = useState(false);
     const t = useTranslations('quiz');
     const completeHeadingRef = useRef<HTMLHeadingElement>(null);
 
     const fetchQuestions = async () => {
         setLoading(true);
+        setError(null);
         setGameOver(false);
         setCurrentQuestion(0);
         setScore(0);
@@ -34,10 +36,12 @@ export default function QuizGame() {
 
         try {
             const res = await fetch('/api/games/quiz');
-            const data = await res.json();
+            if (!res.ok) throw new Error('Failed to fetch quiz questions');
+            const data: Question[] = await res.json();
+            if (!Array.isArray(data) || data.length === 0) throw new Error('No quiz questions available');
             setQuestions(data);
-        } catch (e) {
-            console.error(e);
+        } catch {
+            setError(t('loadFailed'));
         } finally {
             setLoading(false);
         }
@@ -97,6 +101,19 @@ export default function QuizGame() {
             <div className="text-4xl font-black uppercase tracking-tighter animate-pulse">
                 {t('loading')}
             </div>
+        </div>
+    );
+
+    if (error) return (
+        <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-background text-center px-4">
+            <p className="text-red-600 font-bold text-2xl">{t('errorPrefix')} {error}</p>
+            <button
+                type="button"
+                onClick={fetchQuestions}
+                className="px-8 py-3 bg-foreground text-background font-black uppercase tracking-wide hover:bg-primary transition-colors"
+            >
+                {t('retry')}
+            </button>
         </div>
     );
 

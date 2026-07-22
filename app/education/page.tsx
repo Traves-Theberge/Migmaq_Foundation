@@ -31,12 +31,16 @@ export default function EducationPage() {
 
     useEffect(() => {
         fetch('/api/dictionary')
-            .then(res => res.json())
+            .then(res => res.ok ? res.json() : Promise.reject(new Error('Failed to fetch dictionary')))
             .then(data => {
                 if (data && data.length > 0) {
                     const random = data[Math.floor(Math.random() * data.length)];
                     setRandomWord(random);
                 }
+            })
+            .catch(() => {
+                // Leaves randomWord null — the "learn a new word" widget
+                // just stays hidden rather than crashing the whole page.
             });
     }, []);
 
