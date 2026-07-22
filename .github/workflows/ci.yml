@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    name: Typecheck, lint, validate data, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      # Non-blocking: the codebase currently carries pre-existing lint debt
+      # (react-hooks/set-state-in-effect and no-explicit-any violations
+      # predating this workflow) that would otherwise make this step red
+      # from day one on every PR, training people to ignore CI rather than
+      # catching real regressions. Remove continue-on-error once that debt
+      # is paid down and this can be a real gate.
+      - name: Lint (non-blocking until pre-existing debt is cleared)
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Validate lesson data
+        run: npm run data:validate-lessons
+
+      - name: Validate i18n message parity
+        run: npm run data:validate-i18n
+
+      - name: Build
+        run: npm run build
+
+  a11y:
+    name: Accessibility regression tests
+    runs-on: ubuntu-latest
+    # middleware.ts runs on every route (including the public pages these
+    # tests cover) and refreshes the Supabase session on each request, so
+    # the dev server needs *some* well-formed Supabase URL/key to boot even
+    # though these tests never sign in or touch real data — no session
+    # cookie means supabase-js's getUser() resolves to null locally without
+    # a network round-trip. Placeholder values are enough; nothing here
+    # requires real project secrets.
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run a11y tests
+        run: npm run test:a11y
