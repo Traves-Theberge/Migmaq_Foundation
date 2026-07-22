@@ -8,10 +8,11 @@ export default async function LessonsListPage() {
     await requireStaffProfile();
     const supabase = await createClient();
 
-    const [{ data: categories }, { data: lessons }] = await Promise.all([
+    const [{ data: categories, error: categoriesError }, { data: lessons }] = await Promise.all([
         supabase.from('lesson_categories').select('id, title, description, sort_order').order('sort_order', { ascending: true }),
         supabase.from('lessons').select('id, category_id'),
     ]);
+    if (categoriesError) console.error('LessonsListPage: categories query failed:', categoriesError);
 
     const lessonCounts = new Map<string, number>();
     for (const l of lessons ?? []) {
@@ -31,7 +32,11 @@ export default async function LessonsListPage() {
             </div>
 
             <div className="border-[3px] border-foreground bg-card">
-                {(categories ?? []).length === 0 ? (
+                {categoriesError ? (
+                    <p className="text-sm font-bold text-secondary p-6 text-center" role="alert">
+                        Couldn&apos;t load categories — try reloading the page.
+                    </p>
+                ) : (categories ?? []).length === 0 ? (
                     <p className="text-sm text-muted-foreground p-6 text-center">No categories yet.</p>
                 ) : (
                     <div className="divide-y-2 divide-muted">

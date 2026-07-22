@@ -53,7 +53,8 @@ export default async function ActivityPage({ searchParams }: PageProps) {
     if (table) query = query.eq('table_name', table);
     if (action === 'insert' || action === 'update' || action === 'delete') query = query.eq('action', action);
 
-    const { data, count } = await query;
+    const { data, count, error } = await query;
+    if (error) console.error('ActivityPage: audit_log query failed:', error);
     const rows = (data ?? []) as unknown as AuditRow[];
     const total = count ?? 0;
     const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
@@ -94,7 +95,11 @@ export default async function ActivityPage({ searchParams }: PageProps) {
             </div>
 
             <div className="border-[3px] border-foreground bg-card">
-                {rows.length === 0 ? (
+                {error ? (
+                    <p className="text-sm font-bold text-secondary p-6 text-center" role="alert">
+                        Couldn&apos;t load activity — try reloading the page.
+                    </p>
+                ) : rows.length === 0 ? (
                     <p className="text-sm text-muted-foreground p-6 text-center">No matching activity.</p>
                 ) : (
                     <div className="divide-y-2 divide-muted">

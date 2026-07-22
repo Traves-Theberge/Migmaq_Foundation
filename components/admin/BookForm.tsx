@@ -92,10 +92,13 @@ export default function BookForm({ book, isNew }: { book: BookFormValues; isNew:
                     <button
                         type="button"
                         onClick={async () => {
-                            if (confirm(`Delete "${book.subtitle}" and every page inside it? This can't be undone.`)) {
-                                await deleteBookAction(book.slug);
-                                router.push('/admin/books');
+                            if (!confirm(`Delete "${book.subtitle}" and every page inside it? This can't be undone.`)) return;
+                            const result = await deleteBookAction(book.slug);
+                            if (result.error) {
+                                showToast(result.error);
+                                return;
                             }
+                            router.push('/admin/books');
                         }}
                         className="text-xs font-bold uppercase tracking-wide text-secondary hover:underline ml-auto"
                     >

@@ -45,11 +45,13 @@ export async function saveBookAction(_prev: FormState, formData: FormData): Prom
     return {};
 }
 
-export async function deleteBookAction(slug: string) {
+export async function deleteBookAction(slug: string): Promise<FormState> {
     await requireStaffProfile();
     const supabase = await createClient();
-    await supabase.from('books').delete().eq('slug', slug);
+    const { error } = await supabase.from('books').delete().eq('slug', slug);
+    if (error) return { error: 'Could not delete the book.' };
     revalidatePath('/admin/books');
+    return {};
 }
 
 // ── Pages ────────────────────────────────────────────────────────────────
@@ -81,13 +83,17 @@ export async function savePageAction(_prev: FormState, formData: FormData): Prom
     return {};
 }
 
-export async function deletePageAction(id: string, bookSlug: string) {
+export async function deletePageAction(id: string, bookSlug: string): Promise<FormState> {
     await requireStaffProfile();
     const idResult = BookPageIdSchema.safeParse(id);
-    if (!idResult.success) return;
+    if (!idResult.success) {
+        return { error: idResult.error.issues[0]?.message ?? 'Missing page id.' };
+    }
     const supabase = await createClient();
-    await supabase.from('book_pages').delete().eq('id', idResult.data);
+    const { error } = await supabase.from('book_pages').delete().eq('id', idResult.data);
+    if (error) return { error: 'Could not delete the page.' };
     revalidatePath(`/admin/books/${bookSlug}`);
+    return {};
 }
 
 /** Swaps sort_order with the adjacent page — same reorder primitive as lesson steps. */

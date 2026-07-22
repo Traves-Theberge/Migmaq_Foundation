@@ -43,6 +43,7 @@ export default function AudioRecordingEditor({ recordings }: { recordings: Recor
 
 function RecordingRow({ recording }: { recording: RecordingValues }) {
     const [editing, setEditing] = useState(false);
+    const showToast = useToast();
 
     if (editing) {
         return (
@@ -63,8 +64,10 @@ function RecordingRow({ recording }: { recording: RecordingValues }) {
                 <button type="button" onClick={() => setEditing(true)} className="text-[11px] font-bold uppercase tracking-wide text-primary hover:underline">Edit</button>
                 <button
                     type="button"
-                    onClick={() => {
-                        if (confirm(`Delete the recording for "${recording.word}"?`)) deleteRecordingAction(recording.id);
+                    onClick={async () => {
+                        if (!confirm(`Delete the recording for "${recording.word}"?`)) return;
+                        const result = await deleteRecordingAction(recording.id);
+                        if (result.error) showToast(result.error);
                     }}
                     className="text-[11px] font-bold uppercase tracking-wide text-secondary hover:underline"
                 >

@@ -37,11 +37,17 @@ export async function saveRecordingAction(_prev: FormState, formData: FormData):
     return {};
 }
 
-export async function deleteRecordingAction(id: string) {
+export async function deleteRecordingAction(id: string): Promise<FormState> {
     await requireStaffProfile();
     const idResult = AudioRecordingIdSchema.safeParse(id);
-    if (!idResult.success) return;
+    if (!idResult.success) {
+        return { error: idResult.error.issues[0]?.message ?? 'Missing recording id.' };
+    }
     const supabase = await createClient();
-    await supabase.from('audio_recordings').delete().eq('id', idResult.data);
+    const { error } = await supabase.from('audio_recordings').delete().eq('id', idResult.data);
+    if (error) {
+        return { error: 'Could not delete the recording.' };
+    }
     revalidatePath('/admin/audio');
+    return {};
 }

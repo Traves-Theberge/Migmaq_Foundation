@@ -18,7 +18,7 @@ export interface CategoryFormValues {
     sort_order: number;
 }
 
-export default function CategoryForm({ category, isNew }: { category: CategoryFormValues; isNew: boolean }) {
+export default function CategoryForm({ category, isNew, lessonCount = 0 }: { category: CategoryFormValues; isNew: boolean; lessonCount?: number }) {
     const [state, formAction] = useActionState(saveCategoryAction, initialState);
     const showToast = useToast();
     const router = useRouter();
@@ -69,18 +69,31 @@ export default function CategoryForm({ category, isNew }: { category: CategoryFo
                     {isNew ? 'Create category' : 'Save changes'}
                 </button>
                 {!isNew && (
-                    <button
-                        type="button"
-                        onClick={async () => {
-                            if (confirm(`Delete "${category.title}" and every lesson inside it? This can't be undone.`)) {
-                                await deleteCategoryAction(category.id);
+                    <div className="ml-auto flex flex-col items-end gap-1">
+                        <button
+                            type="button"
+                            onClick={async () => {
+                                const warning = lessonCount > 0
+                                    ? `Delete "${category.title}"? This also permanently deletes all ${lessonCount} lesson${lessonCount === 1 ? '' : 's'} inside it, and every step in each of those lessons. This can't be undone.`
+                                    : `Delete "${category.title}"? This can't be undone.`;
+                                if (!confirm(warning)) return;
+                                const result = await deleteCategoryAction(category.id);
+                                if (result.error) {
+                                    showToast(result.error);
+                                    return;
+                                }
                                 router.push('/admin/lessons');
-                            }
-                        }}
-                        className="text-xs font-bold uppercase tracking-wide text-secondary hover:underline ml-auto"
-                    >
-                        Delete category
-                    </button>
+                            }}
+                            className="text-xs font-bold uppercase tracking-wide text-secondary hover:underline"
+                        >
+                            Delete category
+                        </button>
+                        {lessonCount > 0 && (
+                            <span className="text-[10.5px] text-muted-foreground">
+                                Also deletes {lessonCount} lesson{lessonCount === 1 ? '' : 's'} inside it
+                            </span>
+                        )}
+                    </div>
                 )}
             </div>
         </form>

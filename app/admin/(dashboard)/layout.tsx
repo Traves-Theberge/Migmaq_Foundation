@@ -19,6 +19,17 @@ async function getNavCounts() {
         supabase.from('dictionary_words').select('id', { count: 'exact', head: true }).eq('fr_reviewed', false).not('fr_definitions', 'is', null),
     ]);
 
+    // A failed count query silently degrading to a "0" badge (rather than
+    // an error) is fine for the UI — it's not worth a banner on every admin
+    // page for a sidebar count — but it should never be silent in the
+    // server logs, or a DB outage looks identical to "nothing here yet."
+    for (const [label, result] of [
+        ['dictionary', dictionary], ['lessons', lessons], ['books', books],
+        ['audio', audio], ['dictionaryNeedsReview', frNeedsReview],
+    ] as const) {
+        if (result.error) console.error(`getNavCounts: ${label} query failed:`, result.error);
+    }
+
     return {
         dictionary: dictionary.count ?? 0,
         lessons: lessons.count ?? 0,

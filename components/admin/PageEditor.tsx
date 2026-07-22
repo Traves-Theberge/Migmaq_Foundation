@@ -44,6 +44,7 @@ export default function PageEditor({ bookSlug, pages }: { bookSlug: string; page
 
 function PageRow({ page, bookSlug, canMoveUp, canMoveDown }: { page: PageValues; bookSlug: string; canMoveUp: boolean; canMoveDown: boolean }) {
     const [editing, setEditing] = useState(false);
+    const showToast = useToast();
 
     if (editing) {
         return (
@@ -69,8 +70,10 @@ function PageRow({ page, bookSlug, canMoveUp, canMoveDown }: { page: PageValues;
                 <button type="button" onClick={() => setEditing(true)} className="text-[11px] font-bold uppercase tracking-wide text-primary hover:underline">Edit</button>
                 <button
                     type="button"
-                    onClick={() => {
-                        if (confirm('Delete this page?')) deletePageAction(page.id, bookSlug);
+                    onClick={async () => {
+                        if (!confirm('Delete this page?')) return;
+                        const result = await deletePageAction(page.id, bookSlug);
+                        if (result.error) showToast(result.error);
                     }}
                     className="text-[11px] font-bold uppercase tracking-wide text-secondary hover:underline"
                 >

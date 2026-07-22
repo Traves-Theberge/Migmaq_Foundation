@@ -28,7 +28,8 @@ export default async function DictionaryListPage({ searchParams }: PageProps) {
     if (filter === 'missing-fr') query = query.is('fr_definitions', null);
     if (filter === 'unreviewed') query = query.eq('fr_reviewed', false).not('fr_definitions', 'is', null);
 
-    const { data, count } = await query;
+    const { data, count, error } = await query;
+    if (error) console.error('DictionaryListPage: words query failed:', error);
     const words = data ?? [];
     const total = count ?? 0;
     const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
@@ -73,7 +74,11 @@ export default async function DictionaryListPage({ searchParams }: PageProps) {
             </div>
 
             <div className="border-[3px] border-foreground bg-card">
-                {words.length === 0 ? (
+                {error ? (
+                    <p className="text-sm font-bold text-secondary p-6 text-center" role="alert">
+                        Couldn&apos;t load the dictionary — try reloading the page.
+                    </p>
+                ) : words.length === 0 ? (
                     <p className="text-sm text-muted-foreground p-6 text-center">No words match.</p>
                 ) : (
                     <div className="divide-y-2 divide-muted">

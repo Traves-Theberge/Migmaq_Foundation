@@ -78,10 +78,13 @@ export default function LessonForm({ lesson, isNew }: { lesson: LessonFormValues
                     <button
                         type="button"
                         onClick={async () => {
-                            if (confirm(`Delete "${lesson.title}"? This can't be undone.`)) {
-                                await deleteLessonAction(lesson.id, lesson.category_id);
-                                router.push(`/admin/lessons/${lesson.category_id}`);
+                            if (!confirm(`Delete "${lesson.title}"? This can't be undone.`)) return;
+                            const result = await deleteLessonAction(lesson.id, lesson.category_id);
+                            if (result.error) {
+                                showToast(result.error);
+                                return;
                             }
+                            router.push(`/admin/lessons/${lesson.category_id}`);
                         }}
                         className="text-xs font-bold uppercase tracking-wide text-secondary hover:underline ml-auto"
                     >

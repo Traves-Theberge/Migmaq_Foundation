@@ -29,7 +29,7 @@ export default async function CategoryDetailPage({ params }: PageProps) {
             </Link>
             <h1 className="text-3xl font-black uppercase tracking-tight mt-2 mb-6">{category.title}</h1>
 
-            <CategoryForm category={category} isNew={false} />
+            <CategoryForm category={category} isNew={false} lessonCount={(lessons ?? []).length} />
 
             <div className="mt-9 max-w-xl">
                 <div className="flex items-center justify-between mb-3">

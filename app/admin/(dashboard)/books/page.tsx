@@ -8,10 +8,11 @@ export default async function BooksListPage() {
     await requireStaffProfile();
     const supabase = await createClient();
 
-    const [{ data: books }, { data: pages }] = await Promise.all([
+    const [{ data: books, error: booksError }, { data: pages }] = await Promise.all([
         supabase.from('books').select('slug, subtitle, teaser, sort_order').order('sort_order', { ascending: true }),
         supabase.from('book_pages').select('book_slug'),
     ]);
+    if (booksError) console.error('BooksListPage: books query failed:', booksError);
 
     const pageCounts = new Map<string, number>();
     for (const p of pages ?? []) {
@@ -31,7 +32,11 @@ export default async function BooksListPage() {
             </div>
 
             <div className="border-[3px] border-foreground bg-card">
-                {(books ?? []).length === 0 ? (
+                {booksError ? (
+                    <p className="text-sm font-bold text-secondary p-6 text-center" role="alert">
+                        Couldn&apos;t load storybooks — try reloading the page.
+                    </p>
+                ) : (books ?? []).length === 0 ? (
                     <p className="text-sm text-muted-foreground p-6 text-center">No storybooks yet.</p>
                 ) : (
                     <div className="divide-y-2 divide-muted">

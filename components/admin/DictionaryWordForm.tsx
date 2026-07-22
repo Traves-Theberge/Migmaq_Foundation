@@ -103,10 +103,13 @@ export default function DictionaryWordForm({ word }: { word: DictionaryWordFormV
                     <button
                         type="button"
                         onClick={async () => {
-                            if (confirm(`Delete "${word.word}"? This can't be undone.`)) {
-                                await deleteDictionaryWordAction(word.id!);
-                                router.push('/admin/dictionary');
+                            if (!confirm(`Delete "${word.word}"? This can't be undone.`)) return;
+                            const result = await deleteDictionaryWordAction(word.id!);
+                            if (result.error) {
+                                showToast(result.error);
+                                return;
                             }
+                            router.push('/admin/dictionary');
                         }}
                         className="text-xs font-bold uppercase tracking-wide text-secondary hover:underline ml-auto"
                     >

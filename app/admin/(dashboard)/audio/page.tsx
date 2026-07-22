@@ -27,7 +27,8 @@ export default async function AudioListPage({ searchParams }: PageProps) {
 
     if (q) query = query.ilike('word', `%${q.replace(/[%_\\]/g, (c) => `\\${c}`)}%`);
 
-    const { data, count } = await query;
+    const { data, count, error } = await query;
+    if (error) console.error('AudioListPage: recordings query failed:', error);
     const recordings = data ?? [];
     const total = count ?? 0;
     const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
@@ -53,7 +54,13 @@ export default async function AudioListPage({ searchParams }: PageProps) {
                 <input id="q" name="q" defaultValue={q ?? ''} placeholder="Search by word…" className="w-full border-2 border-foreground bg-card px-3 py-2 text-sm" />
             </form>
 
-            <AudioRecordingEditor recordings={recordings} />
+            {error ? (
+                <p className="text-sm font-bold text-secondary border-2 border-secondary/40 bg-secondary/5 px-4 py-3" role="alert">
+                    Couldn&apos;t load recordings — try reloading the page.
+                </p>
+            ) : (
+                <AudioRecordingEditor recordings={recordings} />
+            )}
 
             {totalPages > 1 && (
                 <div className="flex items-center justify-between mt-5 text-xs font-bold uppercase tracking-wide">

@@ -73,6 +73,7 @@ function StepRow({
     canMoveDown: boolean;
 }) {
     const [editing, setEditing] = useState(false);
+    const showToast = useToast();
 
     if (editing) {
         return (
@@ -103,8 +104,10 @@ function StepRow({
                 <button type="button" onClick={() => setEditing(true)} className="text-[11px] font-bold uppercase tracking-wide text-primary hover:underline">Edit</button>
                 <button
                     type="button"
-                    onClick={() => {
-                        if (confirm('Delete this step?')) deleteStepAction(step.id, lessonId, categoryId);
+                    onClick={async () => {
+                        if (!confirm('Delete this step?')) return;
+                        const result = await deleteStepAction(step.id, lessonId, categoryId);
+                        if (result.error) showToast(result.error);
                     }}
                     className="text-[11px] font-bold uppercase tracking-wide text-secondary hover:underline"
                 >

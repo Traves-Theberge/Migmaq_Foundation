@@ -64,13 +64,24 @@ export async function updateDictionaryWordAction(_prev: DictionaryFormState, for
     return {};
 }
 
-/** Deliberately does not redirect() — it's called directly from a client onClick handler (see DictionaryWordForm), which navigates itself after the delete resolves. */
-export async function deleteDictionaryWordAction(id: string) {
+/**
+ * Deliberately does not redirect() — it's called directly from a client
+ * onClick handler (see DictionaryWordForm), which navigates itself only
+ * after confirming the delete actually succeeded.
+ */
+export async function deleteDictionaryWordAction(id: string): Promise<DictionaryFormState> {
     await requireStaffProfile();
     const idResult = DictionaryWordIdSchema.safeParse(id);
-    if (!idResult.success) return;
+    if (!idResult.success) {
+        return { error: idResult.error.issues[0]?.message ?? 'Missing word id.' };
+    }
 
     const supabase = await createClient();
-    await supabase.from('dictionary_words').delete().eq('id', idResult.data);
+    const { error } = await supabase.from('dictionary_words').delete().eq('id', idResult.data);
+    if (error) {
+        return { error: 'Could not delete the word.' };
+    }
+
     revalidatePath('/admin/dictionary');
+    return {};
 }

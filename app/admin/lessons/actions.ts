@@ -47,11 +47,13 @@ export async function saveCategoryAction(_prev: FormState, formData: FormData): 
     return {};
 }
 
-export async function deleteCategoryAction(id: string) {
+export async function deleteCategoryAction(id: string): Promise<FormState> {
     await requireStaffProfile();
     const supabase = await createClient();
-    await supabase.from('lesson_categories').delete().eq('id', id);
+    const { error } = await supabase.from('lesson_categories').delete().eq('id', id);
+    if (error) return { error: 'Could not delete the category.' };
     revalidatePath('/admin/lessons');
+    return {};
 }
 
 // ── Lessons ──────────────────────────────────────────────────────────────
@@ -85,11 +87,13 @@ export async function saveLessonAction(_prev: FormState, formData: FormData): Pr
     return {};
 }
 
-export async function deleteLessonAction(id: string, categoryId: string) {
+export async function deleteLessonAction(id: string, categoryId: string): Promise<FormState> {
     await requireStaffProfile();
     const supabase = await createClient();
-    await supabase.from('lessons').delete().eq('id', id);
+    const { error } = await supabase.from('lessons').delete().eq('id', id);
+    if (error) return { error: 'Could not delete the lesson.' };
     revalidatePath(`/admin/lessons/${categoryId}`);
+    return {};
 }
 
 // ── Steps ────────────────────────────────────────────────────────────────
@@ -122,13 +126,17 @@ export async function saveStepAction(_prev: FormState, formData: FormData): Prom
     return {};
 }
 
-export async function deleteStepAction(id: string, lessonId: string, categoryId: string) {
+export async function deleteStepAction(id: string, lessonId: string, categoryId: string): Promise<FormState> {
     await requireStaffProfile();
     const idResult = LessonStepIdSchema.safeParse(id);
-    if (!idResult.success) return;
+    if (!idResult.success) {
+        return { error: idResult.error.issues[0]?.message ?? 'Missing step id.' };
+    }
     const supabase = await createClient();
-    await supabase.from('lesson_steps').delete().eq('id', idResult.data);
+    const { error } = await supabase.from('lesson_steps').delete().eq('id', idResult.data);
+    if (error) return { error: 'Could not delete the step.' };
     revalidatePath(`/admin/lessons/${categoryId}/${lessonId}`);
+    return {};
 }
 
 /** Swaps sort_order with the adjacent step in the given direction — the simplest correct reorder primitive without a full drag-and-drop UI. */
