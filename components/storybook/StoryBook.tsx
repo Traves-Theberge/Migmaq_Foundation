@@ -156,18 +156,27 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
             </div>
 
             {/* Controls */}
-            <div className="flex items-center justify-between gap-4 w-full" style={{ maxWidth: 1040 }}>
+            <div className="flex items-center justify-between gap-2 sm:gap-4 w-full" style={{ maxWidth: 1040 }}>
                 <button
                     type="button"
                     onClick={() => flipRef.current?.pageFlip().flipPrev()}
                     disabled={leafIndex === 0}
-                    className={cn(styles.navButton, 'inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
+                    className={cn(styles.navButton, 'shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
                         'disabled:opacity-30 disabled:cursor-not-allowed')}
                 >
                     <ChevronLeft className="w-5 h-5" aria-hidden="true" /> {t('back')}
                 </button>
 
-                <div className="flex items-center gap-2.5">
+                {/*
+                  min-w-0 lets this shrink below its content size inside the
+                  flex row (the default min-width:auto would otherwise force
+                  the row wider than the viewport, same bug as the dots
+                  pushing Next off-screen entirely on mobile — confirmed via
+                  a real bounding-box check, not just visual inspection).
+                  overflow-x-auto makes the dot trail scrollable instead once
+                  it doesn't fit, rather than clipping any dots outright.
+                */}
+                <div className="flex items-center gap-2.5 min-w-0 overflow-x-auto px-1 py-1">
                     {book.pages.map((page, i) => (
                         <button
                             type="button"
@@ -175,7 +184,7 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
                             aria-label={`${t('goToPage')} ${i + 1}: ${page.label}`}
                             aria-current={i === currentPageOfBook ? 'page' : undefined}
                             onClick={() => goToLeaf(1 + i * 2)}
-                            className={cn(styles.pageDot, 'w-3.5 h-3.5 rounded-full')}
+                            className={cn(styles.pageDot, 'shrink-0 w-3.5 h-3.5 rounded-full')}
                             style={{
                                 background: i === currentPageOfBook ? 'var(--accent)' : DOT_COLORS[i % DOT_COLORS.length],
                                 opacity: i === currentPageOfBook ? 1 : 0.55,
@@ -189,7 +198,7 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
                     type="button"
                     onClick={() => flipRef.current?.pageFlip().flipNext()}
                     disabled={leafIndex === lastLeaf}
-                    className={cn(styles.navButton, 'inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
+                    className={cn(styles.navButton, 'shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
                         'disabled:opacity-30 disabled:cursor-not-allowed')}
                 >
                     {t('next')} <ChevronRight className="w-5 h-5" aria-hidden="true" />
