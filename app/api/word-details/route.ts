@@ -3,8 +3,12 @@ import { getWordDetails, resolveAlternateForms, WordNotFoundError } from '@/lib/
 import { getRecordings } from '@/lib/audio';
 import { WordDetailsQuerySchema, WordDetailsResponseSchema } from '@/lib/validation/dictionary';
 import { logError } from '@/lib/log';
+import { rateLimit } from '@/lib/rate-limit';
 
 export async function GET(request: Request) {
+    const limited = rateLimit(request, 'word-details', 120);
+    if (limited) return limited;
+
     const { searchParams } = new URL(request.url);
     const parsed = WordDetailsQuerySchema.safeParse({ word: searchParams.get('word') ?? undefined });
     if (!parsed.success) {

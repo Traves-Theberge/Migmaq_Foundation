@@ -38,6 +38,7 @@ registry.registerPath({
     responses: {
         200: { description: 'Recordings for the word (empty array if none exist).', content: { 'application/json': { schema: LessonAudioResponseSchema } } },
         400: { description: '`word` query parameter was missing.', content: { 'application/json': { schema: ErrorResponseSchema } } },
+        429: { description: 'Rate limit exceeded (120 requests/minute per client IP). Retry after the `Retry-After` header value, in seconds.', content: { 'application/json': { schema: ErrorResponseSchema } } },
     },
 });
 
@@ -54,5 +55,6 @@ registry.registerPath({
         200: { description: 'The raw audio/mpeg file bytes.', content: { 'audio/mpeg': { schema: { type: 'string', format: 'binary' } } } },
         400: { description: 'Filename failed the flat-.mp3 / no-path-traversal check.', content: { 'application/json': { schema: ErrorResponseSchema } } },
         404: { description: 'No such file in the audio archive.', content: { 'application/json': { schema: ErrorResponseSchema } } },
+        429: { description: 'Rate limit exceeded (180 requests/minute per client IP). Retry after the `Retry-After` header value, in seconds.', content: { 'application/json': { schema: ErrorResponseSchema } } },
     },
 });

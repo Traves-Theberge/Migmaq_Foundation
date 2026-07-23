@@ -79,12 +79,15 @@ npm start
 | `npm run dev` / `build` / `start` | Standard Next.js dev/build/start |
 | `npm run lint` | ESLint |
 | `npm run test:a11y` | Playwright + axe-core accessibility regression tests |
+| `npm run test:admin-auth` | Confirms every admin route/API endpoint refuses an unauthenticated visitor |
+| `npm run test:e2e` | Runs the full Playwright suite (`test:a11y` + `test:admin-auth`) |
 | `npm run data:validate-lessons` | Checks `lib/lessons/**` against the dictionary/audio data it references |
 | `npm run data:validate-i18n` | Checks `lib/i18n/messages.ts` for missing/mismatched EN/FR keys |
 | `npm run data:migrate-to-supabase` | One-time (re-runnable) load of local content into Supabase — see above |
 | `npm run data:dictionary` / `data:audio-manifest` / `data:audio-upload` / `data:fr-coverage` | Content-pipeline scripts for rebuilding `public/assets/*.json` from source archives — see each script's header comment |
+| `npm run data:merge-fr-translations -- <results-dir>` | Merges a batch of machine-translated French fields into `public/assets/dictionary.json` — see the script's header comment |
 
-CI (`.github/workflows/ci.yml`) runs typecheck, data validation, build, and the a11y suite on every push/PR.
+CI (`.github/workflows/ci.yml`) runs two jobs on every push/PR: typecheck, data validation, and build; and the Playwright suite (accessibility regressions + admin auth-gating checks).
 
 ## Project Structure
 

@@ -39,12 +39,68 @@ interface PageFlipHandle {
  * curl; each story page contributes an image leaf and a text leaf, which
  * pair up into a two-page spread whenever the viewport is wide enough.
  */
+// react-pageflip's own switch point (page-flip's Render.calculateBoundsRect,
+// size="stretch" branch): below `minWidth * 2`, it renders one leaf at a
+// time (portrait) instead of a two-page spread (landscape). The single-leaf
+// shift below only makes sense in landscape — in portrait the leaf already
+// fills the widget, so the same shift pushes it partway off-screen instead
+// of centering it. Mirrors the `minWidth={280}` passed to HTMLFlipBook.
+const FLIPBOOK_MIN_WIDTH = 280;
+
+// Fixed CSS values the dot trail is drawn with (styles.pageDot's
+// `w-3.5 h-3.5` + the row's `gap-2.5`) — kept as constants here so the fit
+// check below can compute the trail's needed width directly instead of
+// measuring a conditionally-hidden element (which can't measure its own
+// natural size once it's hidden, and flickers back and forth as a result).
+const DOT_DIAMETER_PX = 14;
+const DOT_GAP_PX = 10;
+
 export default function StoryBook({ book, glosses }: StoryBookProps) {
     const flipRef = useRef<PageFlipHandle | null>(null);
+    const shiftContainerRef = useRef<HTMLDivElement | null>(null);
+    const controlsRowRef = useRef<HTMLDivElement | null>(null);
+    const backButtonRef = useRef<HTMLButtonElement | null>(null);
+    const nextButtonRef = useRef<HTMLButtonElement | null>(null);
     const [leafIndex, setLeafIndex] = useState(0);
     const [ready, setReady] = useState(false);
+    const [isLandscape, setIsLandscape] = useState(true);
+    // Whether the page-dot trail actually fits the space left over between
+    // Back and Next. With enough pages (this only bites once a book has
+    // ~9+ of them — plenty fit fine), the dots need more width than a phone
+    // screen leaves behind. A scrollable dot row is technically reachable
+    // but reads as broken — it clips a dot mid-shape right at the edge —
+    // so once it doesn't fit, a plain "current / total" counter replaces
+    // it instead.
+    const [dotsFit, setDotsFit] = useState(true);
     const reduceMotion = useReducedMotion();
     const t = useTranslations('storybook');
+
+    useEffect(() => {
+        const el = shiftContainerRef.current;
+        if (!el) return;
+        const observer = new ResizeObserver(([entry]) => {
+            setIsLandscape(entry.contentRect.width >= FLIPBOOK_MIN_WIDTH * 2);
+        });
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        const row = controlsRowRef.current;
+        if (!row) return;
+        const neededDotsWidth = book.pages.length * DOT_DIAMETER_PX + Math.max(0, book.pages.length - 1) * DOT_GAP_PX;
+        const recompute = () => {
+            const back = backButtonRef.current?.getBoundingClientRect().width ?? 0;
+            const next = nextButtonRef.current?.getBoundingClientRect().width ?? 0;
+            const rowStyle = getComputedStyle(row);
+            const gap = parseFloat(rowStyle.columnGap || rowStyle.gap || '0') || 0;
+            const available = row.clientWidth - back - next - gap * 2;
+            setDotsFit(neededDotsWidth <= available);
+        };
+        const observer = new ResizeObserver(recompute);
+        observer.observe(row);
+        return () => observer.disconnect();
+    }, [book.pages.length]);
 
     const totalLeaves = book.pages.length * 2 + 2;
     const lastLeaf = totalLeaves - 1;
@@ -64,7 +120,7 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
     // math, so this is safe.
     const isFrontCover = leafIndex === 0;
     const isBackCover = leafIndex === lastLeaf;
-    const isSingleLeaf = isFrontCover || isBackCover;
+    const isSingleLeaf = isLandscape && (isFrontCover || isBackCover);
     const singleLeafShift = isFrontCover ? '-25%' : isBackCover ? '25%' : '0%';
 
     const goToLeaf = useCallback((leaf: number) => {
@@ -88,6 +144,7 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
     return (
         <div className={styles.stage}>
             <div
+                ref={shiftContainerRef}
                 className={cn('w-full flex justify-center', styles.bookShadow)}
                 style={{ maxWidth: 1040 }}
             >
@@ -135,40 +192,52 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
             </div>
 
             {/* Controls */}
-            <div className="flex items-center justify-between gap-4 w-full" style={{ maxWidth: 1040 }}>
+            <div ref={controlsRowRef} className="flex items-center justify-between gap-2 sm:gap-4 w-full" style={{ maxWidth: 1040 }}>
                 <button
+                    ref={backButtonRef}
                     type="button"
                     onClick={() => flipRef.current?.pageFlip().flipPrev()}
                     disabled={leafIndex === 0}
-                    className={cn(styles.navButton, 'inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
+                    className={cn(styles.navButton, 'shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
                         'disabled:opacity-30 disabled:cursor-not-allowed')}
                 >
                     <ChevronLeft className="w-5 h-5" aria-hidden="true" /> {t('back')}
                 </button>
 
-                <div className="flex items-center gap-2.5">
-                    {book.pages.map((page, i) => (
-                        <button
-                            type="button"
-                            key={page.id}
-                            aria-label={`${t('goToPage')} ${i + 1}: ${page.label}`}
-                            aria-current={i === currentPageOfBook ? 'page' : undefined}
-                            onClick={() => goToLeaf(1 + i * 2)}
-                            className={cn(styles.pageDot, 'w-3.5 h-3.5 rounded-full')}
-                            style={{
-                                background: i === currentPageOfBook ? 'var(--accent)' : DOT_COLORS[i % DOT_COLORS.length],
-                                opacity: i === currentPageOfBook ? 1 : 0.55,
-                                transform: i === currentPageOfBook ? 'scale(1.5)' : 'scale(1)',
-                            }}
-                        />
-                    ))}
-                </div>
+                {dotsFit ? (
+                    <div className="flex items-center gap-2.5 min-w-0">
+                        {book.pages.map((page, i) => (
+                            <button
+                                type="button"
+                                key={page.id}
+                                aria-label={`${t('goToPage')} ${i + 1}: ${page.label}`}
+                                aria-current={i === currentPageOfBook ? 'page' : undefined}
+                                onClick={() => goToLeaf(1 + i * 2)}
+                                className={cn(styles.pageDot, 'shrink-0 w-3.5 h-3.5 rounded-full')}
+                                style={{
+                                    background: i === currentPageOfBook ? 'var(--accent)' : DOT_COLORS[i % DOT_COLORS.length],
+                                    opacity: i === currentPageOfBook ? 1 : 0.55,
+                                    transform: i === currentPageOfBook ? 'scale(1.5)' : 'scale(1)',
+                                }}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    // Too many pages to draw as discrete dots in the space
+                    // Back/Next leave behind (see the dotsFit fit-check
+                    // above) — a plain counter fits tightly instead of a
+                    // dot trail that would clip mid-shape.
+                    <p className="shrink-0 text-sm font-bold tabular-nums" style={{ color: 'var(--ink-soft)' }}>
+                        {(currentPageOfBook >= 0 ? currentPageOfBook + 1 : isBackCover ? book.pages.length : 1)} {t('of')} {book.pages.length}
+                    </p>
+                )}
 
                 <button
+                    ref={nextButtonRef}
                     type="button"
                     onClick={() => flipRef.current?.pageFlip().flipNext()}
                     disabled={leafIndex === lastLeaf}
-                    className={cn(styles.navButton, 'inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
+                    className={cn(styles.navButton, 'shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-3.5 rounded-full font-bold uppercase text-sm tracking-wide',
                         'disabled:opacity-30 disabled:cursor-not-allowed')}
                 >
                     {t('next')} <ChevronRight className="w-5 h-5" aria-hidden="true" />

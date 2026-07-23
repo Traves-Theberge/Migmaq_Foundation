@@ -39,6 +39,7 @@ registry.registerPath({
     tags: ['Games'],
     responses: {
         200: { description: 'Shuffled flashcard pairs.', content: { 'application/json': { schema: FlashcardResponseSchema } } },
+        429: { description: 'Rate limit exceeded (30 requests/minute per client IP). Retry after the `Retry-After` header value, in seconds.', content: { 'application/json': { schema: ErrorResponseSchema } } },
         500: { description: 'The dictionary is empty or unreadable.', content: { 'application/json': { schema: ErrorResponseSchema } } },
     },
 });
@@ -53,6 +54,7 @@ registry.registerPath({
     tags: ['Games'],
     responses: {
         200: { description: 'Quiz questions.', content: { 'application/json': { schema: QuizResponseSchema } } },
+        429: { description: 'Rate limit exceeded (30 requests/minute per client IP). Retry after the `Retry-After` header value, in seconds.', content: { 'application/json': { schema: ErrorResponseSchema } } },
         500: { description: 'The dictionary is empty or unreadable.', content: { 'application/json': { schema: ErrorResponseSchema } } },
     },
 });

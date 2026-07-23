@@ -2,8 +2,12 @@ import { NextResponse } from 'next/server';
 import { getDictionary } from '@/lib/dictionary';
 import { DictionaryListResponseSchema } from '@/lib/validation/dictionary';
 import { logError } from '@/lib/log';
+import { rateLimit } from '@/lib/rate-limit';
 
-export async function GET() {
+export async function GET(request: Request) {
+    const limited = rateLimit(request, 'dictionary', 30);
+    if (limited) return limited;
+
     try {
         const dict = await getDictionary();
         return NextResponse.json(DictionaryListResponseSchema.parse(dict), {

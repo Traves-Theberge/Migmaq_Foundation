@@ -68,6 +68,10 @@ registry.registerPath({
             description: 'The full dictionary word list.',
             content: { 'application/json': { schema: DictionaryListResponseSchema } },
         },
+        429: {
+            description: 'Rate limit exceeded (30 requests/minute per client IP). Retry after the `Retry-After` header value, in seconds.',
+            content: { 'application/json': { schema: ErrorResponseSchema } },
+        },
         500: {
             description: 'The dictionary file could not be read or parsed.',
             content: { 'application/json': { schema: ErrorResponseSchema } },
@@ -91,6 +95,10 @@ registry.registerPath({
         },
         404: {
             description: 'No dictionary entry matches `word`.',
+            content: { 'application/json': { schema: ErrorResponseSchema } },
+        },
+        429: {
+            description: 'Rate limit exceeded (120 requests/minute per client IP). Retry after the `Retry-After` header value, in seconds.',
             content: { 'application/json': { schema: ErrorResponseSchema } },
         },
     },

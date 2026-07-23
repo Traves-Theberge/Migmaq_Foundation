@@ -30,12 +30,20 @@ export async function createApiClient(request: Request): Promise<ApiAuthResult> 
             auth: { persistSession: false, autoRefreshToken: false },
         });
         const { data: { user }, error } = await supabase.auth.getUser(bearerToken);
-        if (error) logWarn('createApiClient', 'bearer token rejected by Supabase Auth', { reason: error.message });
+        // "Auth session missing!" is the routine, expected result for a
+        // request with no valid session at all — not worth a log line on
+        // every anonymous hit. Anything else (malformed token, auth-service
+        // failure) is worth knowing about.
+        if (error && error.message !== 'Auth session missing!') {
+            logWarn('createApiClient', 'bearer token rejected by Supabase Auth', { reason: error.message });
+        }
         return { supabase, user };
     }
 
     const supabase = await createCookieClient();
     const { data: { user }, error } = await supabase.auth.getUser();
-    if (error) logWarn('createApiClient', 'session cookie rejected by Supabase Auth', { reason: error.message });
+    if (error && error.message !== 'Auth session missing!') {
+        logWarn('createApiClient', 'session cookie rejected by Supabase Auth', { reason: error.message });
+    }
     return { supabase, user };
 }

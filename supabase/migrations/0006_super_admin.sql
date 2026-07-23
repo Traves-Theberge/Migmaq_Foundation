@@ -7,6 +7,20 @@
 
 alter type app_role add value 'super_admin';
 
+-- Postgres will not let a newly-added enum value be referenced anywhere
+-- (a function body, a `role in (...)` list) within the same transaction
+-- that added it — everything below uses 'super_admin', so the ADD VALUE
+-- above must commit first. Confirmed via `supabase start` against a real
+-- local stack: without this commit, applying this file fails with
+-- "unsafe use of new value \"super_admin\" of enum type app_role
+-- (SQLSTATE 55P04)". (If this statement ever fails partway after the
+-- commit — unlikely, everything below is DDL with no external
+-- dependency — the enum value itself would still be permanently added on
+-- retry; `alter type app_role add value 'super_admin'` is safe to leave
+-- as-is since re-running this whole file addresses that by re-applying
+-- the rest against the now-committed enum value.)
+commit;
+
 -- is_editor() already gates all content-table writes; super_admin must
 -- pass that check too (a super_admin who can't edit the dictionary would
 -- be a strange product decision), so it's redefined to include the new

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+### Admin CMS, accessibility, i18n, and platform hardening (2026-07-20 – 2026-07-23)
+- **Supabase-backed admin CMS**: full schema/RLS/audit-log migrations (`supabase/migrations/0001`–`0010`), auth-gated `/admin` shell, and full CRUD pages for the dictionary, lessons (categories → lessons → steps), storybooks (books → pages), and audio recordings.
+- **Roles & security**: `editor`/`admin`/`super_admin` roles enforced by Postgres RLS (not just UI-hidden), role-escalation and cross-user-profile-edit prevention triggers, an audit log of every content change (`/admin/activity`), and a Users & Roles page. Multiple follow-up security audits fixed real gaps (RLS scoping, error-message leakage, missing auth gates).
+- **API layer**: every route validated at runtime with Zod, the same schemas generating an OpenAPI 3.1 spec served at `/api/openapi.json` and rendered as Swagger UI at `/admin/api-docs` (`super_admin` only). Dual cookie/bearer auth for programmatic clients.
+- **Accessibility**: axe-core regression suite (`npm run test:a11y`) covering every public route family; fixes for keyboard operability, focus-visible styling, a skip-to-content link, ARIA labeling, and color-only state indication.
+- **Internationalization**: English/French UI toggle (dictionary/lesson content itself stays Mi'gmaq/English) with a message-parity validator (`npm run data:validate-i18n`).
+- **Lesson data integrity**: `npm run data:validate-lessons` checks lesson vocabulary against the real dictionary/audio data it references.
+- **SEO & social sharing**: `robots.ts`/`sitemap.ts` (previously nonexistent), `metadataBase`/title templates/OG+Twitter defaults, dynamic OG image generation, JSON-LD structured data, per-page metadata across every public route (including the games and index pages), and self-hosted fonts (previously declared but never loaded).
+- **Performance**: `next/image` adopted everywhere, `Cache-Control` headers on public API routes, missing database indexes added.
+- **Operability**: `/api/health` now performs a real, timeout-bounded Supabase connectivity check instead of a static stub; structured server-side error logging (`lib/log.ts`) wired into every admin write path and API route.
+- **CI**: typecheck, lint, data validation, build, the full Playwright suite (accessibility + admin auth-gating), and a job that applies every `supabase/migrations/*.sql` file against a real local Supabase stack, run on every push/PR — the migration check caught a real bug on its first run (`0006_super_admin.sql` referenced a newly-added Postgres enum value in the same transaction that added it).
+- **Rate limiting**: every public API route now rejects excessive requests from a single client IP with `429 Too Many Requests` (`lib/rate-limit.ts` — dependency-free, per-instance).
+- **Documentation**: `docs/DATA_MODEL.md` — full schema/RLS/trigger reference cross-referenced against the Zod validation layer and API surface.
 - Refined home page layout to fit within a single viewport height.
 - Updated hero section spacing, image size, and added responsive text scaling.
 - Changed rotating "Mi'gmaq" text color to orange and made it larger.
