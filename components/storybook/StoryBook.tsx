@@ -39,12 +39,32 @@ interface PageFlipHandle {
  * curl; each story page contributes an image leaf and a text leaf, which
  * pair up into a two-page spread whenever the viewport is wide enough.
  */
+// react-pageflip's own switch point (page-flip's Render.calculateBoundsRect,
+// size="stretch" branch): below `minWidth * 2`, it renders one leaf at a
+// time (portrait) instead of a two-page spread (landscape). The single-leaf
+// shift below only makes sense in landscape — in portrait the leaf already
+// fills the widget, so the same shift pushes it partway off-screen instead
+// of centering it. Mirrors the `minWidth={280}` passed to HTMLFlipBook.
+const FLIPBOOK_MIN_WIDTH = 280;
+
 export default function StoryBook({ book, glosses }: StoryBookProps) {
     const flipRef = useRef<PageFlipHandle | null>(null);
+    const shiftContainerRef = useRef<HTMLDivElement | null>(null);
     const [leafIndex, setLeafIndex] = useState(0);
     const [ready, setReady] = useState(false);
+    const [isLandscape, setIsLandscape] = useState(true);
     const reduceMotion = useReducedMotion();
     const t = useTranslations('storybook');
+
+    useEffect(() => {
+        const el = shiftContainerRef.current;
+        if (!el) return;
+        const observer = new ResizeObserver(([entry]) => {
+            setIsLandscape(entry.contentRect.width >= FLIPBOOK_MIN_WIDTH * 2);
+        });
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
 
     const totalLeaves = book.pages.length * 2 + 2;
     const lastLeaf = totalLeaves - 1;
@@ -64,7 +84,7 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
     // math, so this is safe.
     const isFrontCover = leafIndex === 0;
     const isBackCover = leafIndex === lastLeaf;
-    const isSingleLeaf = isFrontCover || isBackCover;
+    const isSingleLeaf = isLandscape && (isFrontCover || isBackCover);
     const singleLeafShift = isFrontCover ? '-25%' : isBackCover ? '25%' : '0%';
 
     const goToLeaf = useCallback((leaf: number) => {
@@ -88,6 +108,7 @@ export default function StoryBook({ book, glosses }: StoryBookProps) {
     return (
         <div className={styles.stage}>
             <div
+                ref={shiftContainerRef}
                 className={cn('w-full flex justify-center', styles.bookShadow)}
                 style={{ maxWidth: 1040 }}
             >
