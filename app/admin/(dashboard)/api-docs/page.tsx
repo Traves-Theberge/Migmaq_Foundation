@@ -4,7 +4,7 @@ import SwaggerUIClient from '@/components/admin/SwaggerUIClient';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-    title: "API Docs — Admin — Mi'gmaq Foundation",
+    title: 'API Docs — Admin',
 };
 
 /**

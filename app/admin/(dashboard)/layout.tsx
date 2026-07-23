@@ -3,9 +3,10 @@ import { createClient } from '@/lib/supabase/server';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminViewTransition from '@/components/admin/AdminViewTransition';
 import ToastProvider from '@/components/admin/ToastProvider';
+import { logError } from '@/lib/log';
 
 export const metadata = {
-    title: "Admin — Mi'gmaq Foundation",
+    title: 'Admin',
 };
 
 async function getNavCounts() {
@@ -27,7 +28,7 @@ async function getNavCounts() {
         ['dictionary', dictionary], ['lessons', lessons], ['books', books],
         ['audio', audio], ['dictionaryNeedsReview', frNeedsReview],
     ] as const) {
-        if (result.error) console.error(`getNavCounts: ${label} query failed:`, result.error);
+        if (result.error) logError('getNavCounts', `${label} query failed`, result.error);
     }
 
     return {

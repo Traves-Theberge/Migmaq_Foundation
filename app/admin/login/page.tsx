@@ -1,7 +1,7 @@
 import LoginForm from './LoginForm';
 
 export const metadata = {
-    title: "Admin Sign In — Mi'gmaq Foundation",
+    title: 'Admin Sign In',
 };
 
 interface PageProps {

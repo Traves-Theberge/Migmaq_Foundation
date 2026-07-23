@@ -13,6 +13,7 @@
     "data:validate-lessons": "tsx scripts/validate-lessons.ts",
     "data:validate-i18n": "tsx scripts/validate-i18n.ts",
     "data:fr-coverage": "node scripts/report-fr-coverage.mjs",
+    "data:merge-fr-translations": "node scripts/merge-fr-translations.mjs",
     "data:migrate-to-supabase": "tsx scripts/migrate-to-supabase.ts",
     "test:a11y": "playwright test e2e/a11y.spec.ts",
     "test:admin-auth": "playwright test e2e/admin-auth.spec.ts",

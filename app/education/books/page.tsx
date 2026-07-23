@@ -3,10 +3,12 @@ import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
 import { BOOKS } from '@/lib/books/registry';
 import type { LineToken } from '@/lib/books/types';
 import T from '@/components/i18n/T';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata = {
-    title: "Storybooks — Mi'gmaq Foundation",
+    title: 'Storybooks',
     description: "Illustrated Mi'gmaq storybooks with speaker recordings and dictionary glosses.",
+    alternates: { canonical: `${SITE_URL}/education/books` },
 };
 
 function plainText(tokens: LineToken[]): string {
