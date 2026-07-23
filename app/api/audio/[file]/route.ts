@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import { AudioFileParamSchema } from '@/lib/validation/audio';
+import { rateLimit } from '@/lib/rate-limit';
 
 /**
  * Local-development fallback: streams recordings straight from the Micmac
@@ -12,9 +13,12 @@ const AUDIO_DIR = process.env.MICMAC_AUDIO_DIR
     ?? path.resolve(process.cwd(), '..', 'Micmac', 'audio');
 
 export async function GET(
-    _request: Request,
+    request: Request,
     { params }: { params: Promise<{ file: string }> }
 ) {
+    const limited = rateLimit(request, 'audio-file', 180);
+    if (limited) return limited;
+
     const { file } = await params;
     const parsed = AudioFileParamSchema.safeParse({ file: decodeURIComponent(file) });
     if (!parsed.success) {

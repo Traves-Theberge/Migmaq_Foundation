@@ -14,7 +14,8 @@ All notable changes to this project will be documented in this file.
 - **SEO & social sharing**: `robots.ts`/`sitemap.ts` (previously nonexistent), `metadataBase`/title templates/OG+Twitter defaults, dynamic OG image generation, JSON-LD structured data, per-page metadata across every public route (including the games and index pages), and self-hosted fonts (previously declared but never loaded).
 - **Performance**: `next/image` adopted everywhere, `Cache-Control` headers on public API routes, missing database indexes added.
 - **Operability**: `/api/health` now performs a real, timeout-bounded Supabase connectivity check instead of a static stub; structured server-side error logging (`lib/log.ts`) wired into every admin write path and API route.
-- **CI**: typecheck, lint, data validation, build, and the full Playwright suite (accessibility + admin auth-gating) run on every push/PR.
+- **CI**: typecheck, lint, data validation, build, the full Playwright suite (accessibility + admin auth-gating), and a job that applies every `supabase/migrations/*.sql` file against a real local Supabase stack, run on every push/PR — the migration check caught a real bug on its first run (`0006_super_admin.sql` referenced a newly-added Postgres enum value in the same transaction that added it).
+- **Rate limiting**: every public API route now rejects excessive requests from a single client IP with `429 Too Many Requests` (`lib/rate-limit.ts` — dependency-free, per-instance).
 - **Documentation**: `docs/DATA_MODEL.md` — full schema/RLS/trigger reference cross-referenced against the Zod validation layer and API surface.
 - Refined home page layout to fit within a single viewport height.
 - Updated hero section spacing, image size, and added responsive text scaling.

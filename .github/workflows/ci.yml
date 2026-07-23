@@ -73,3 +73,31 @@ jobs:
 
       - name: Run e2e tests
         run: npm run test:e2e
+
+  db-migrations:
+    name: Migrations apply cleanly
+    runs-on: ubuntu-latest
+    # Verifies every file in supabase/migrations/*.sql still applies, in
+    # order, against a real local Supabase stack — not a vanilla Postgres
+    # container, since profiles/storage policies reference auth.users and
+    # storage.objects, which only exist under the Supabase CLI's stack.
+    # Only db/auth/rest/kong are started (--exclude everything else) since
+    # this job only needs a working Postgres + migration runner, not
+    # Studio/Storage/Edge Functions/etc — verified locally that excluding
+    # them doesn't affect whether migrations apply.
+    #
+    # This job caught a real bug on its first real run: 0006_super_admin.sql
+    # added an enum value with `alter type app_role add value` and used
+    # that same value later in the same file — Postgres rejects using a
+    # newly-added enum value before the transaction that added it commits,
+    # so the migration failed outright. Fixed with an explicit `commit;`
+    # mid-file (see that migration's comments).
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Start local Supabase stack (applies every migration in order)
+        run: supabase start --exclude edge-runtime,imgproxy,logflare,mailpit,postgres-meta,realtime,storage-api,studio,supavisor,vector
