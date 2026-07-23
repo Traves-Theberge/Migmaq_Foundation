@@ -6,7 +6,7 @@
 export const messages = {
     en: {
         nav: {
-            brand: "Language Dictionary",
+            brand: "Mi'gmaq Foundation",
             home: "Home",
             dictionary: "Dictionary",
             education: "Education",
@@ -187,7 +187,7 @@ export const messages = {
     },
     fr: {
         nav: {
-            brand: "Dictionnaire de langue",
+            brand: "Mi'gmaq Foundation",
             home: "Accueil",
             dictionary: "Dictionnaire",
             education: "Éducation",
