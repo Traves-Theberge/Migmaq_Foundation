@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RefreshCw, Trophy, Timer, Sparkles, Hexagon } from 'lucide-react';
+import { RefreshCw, Trophy } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { cn } from '@/lib/utils';
 import { useTranslations } from '@/lib/i18n/LocaleProvider';
@@ -62,15 +62,18 @@ export default function FlashcardGameClient() {
             setMatches(0);
             setFlippedIndices([]);
             setGameActive(true);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : String(err));
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchGameData();
+        // Deferred to a microtask — fetchGameData resets loading/error/timer
+        // state synchronously before it fetches, which an effect body
+        // shouldn't do directly (react-hooks/set-state-in-effect).
+        queueMicrotask(fetchGameData);
     }, []);
 
     const isVictory = cards.length > 0 && matches === cards.length / 2;
@@ -116,7 +119,7 @@ export default function FlashcardGameClient() {
                             const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
                             const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
-                            const interval: any = setInterval(function () {
+                            const interval: ReturnType<typeof setInterval> = setInterval(function () {
                                 const timeLeft = animationEnd - Date.now();
                                 if (timeLeft <= 0) return clearInterval(interval);
                                 const particleCount = 50 * (timeLeft / duration);

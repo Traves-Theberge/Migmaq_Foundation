@@ -19,8 +19,14 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     const [locale, setLocaleState] = useState<Locale>('en');
 
     useEffect(() => {
-        const stored = window.localStorage.getItem(STORAGE_KEY);
-        if (stored === 'en' || stored === 'fr') setLocaleState(stored);
+        // Deferred to a microtask — reading localStorage has to happen
+        // client-side only, which is exactly what an effect is for, but
+        // the setState call itself still can't run synchronously within
+        // the effect body (react-hooks/set-state-in-effect).
+        queueMicrotask(() => {
+            const stored = window.localStorage.getItem(STORAGE_KEY);
+            if (stored === 'en' || stored === 'fr') setLocaleState(stored);
+        });
     }, []);
 
     useEffect(() => {

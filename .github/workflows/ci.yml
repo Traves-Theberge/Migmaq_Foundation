@@ -22,15 +22,8 @@ jobs:
       - name: Typecheck
         run: npx tsc --noEmit
 
-      # Non-blocking: the codebase currently carries pre-existing lint debt
-      # (react-hooks/set-state-in-effect and no-explicit-any violations
-      # predating this workflow) that would otherwise make this step red
-      # from day one on every PR, training people to ignore CI rather than
-      # catching real regressions. Remove continue-on-error once that debt
-      # is paid down and this can be a real gate.
-      - name: Lint (non-blocking until pre-existing debt is cleared)
+      - name: Lint
         run: npm run lint
-        continue-on-error: true
 
       - name: Validate lesson data
         run: npm run data:validate-lessons

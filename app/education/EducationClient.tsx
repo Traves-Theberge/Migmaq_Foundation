@@ -7,6 +7,7 @@ import { BookOpen, Gamepad2, GraduationCap, ArrowRight, Star, BrainCircuit } fro
 import { lessonCategories, getAllLessons } from '@/lib/lessons/index';
 import PartOfSpeechBadge from '@/components/dictionary/PartOfSpeechBadge';
 import { useTranslations } from '@/lib/i18n/LocaleProvider';
+import type { Word } from '@/lib/types';
 
 const container = {
     hidden: { opacity: 0 },
@@ -27,7 +28,7 @@ const totalLessons = getAllLessons().length;
 
 export default function EducationClient() {
     const t = useTranslations('education');
-    const [randomWord, setRandomWord] = useState<any>(null);
+    const [randomWord, setRandomWord] = useState<Word | null>(null);
 
     useEffect(() => {
         fetch('/api/dictionary')

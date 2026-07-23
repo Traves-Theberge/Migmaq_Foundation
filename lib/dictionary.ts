@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import type { Word } from './types';
 
 /** Thrown only for "no such headword" — lets callers (API routes) return a clean 404 instead of conflating it with a real failure (unreadable/corrupt dictionary.json), which should surface as a 500 instead. */
 export class WordNotFoundError extends Error {
@@ -9,20 +10,20 @@ export class WordNotFoundError extends Error {
     }
 }
 
-let cache: any = null;
-let indexCache: Map<string, any> | null = null;
+let cache: Word[] | null = null;
+let indexCache: Map<string, Word> | null = null;
 let sortedWordsCache: string[] | null = null;
 let lastModified: number = 0;
 
-export async function getDictionary() {
+export async function getDictionary(): Promise<Word[]> {
     const filePath = path.join(process.cwd(), 'public', 'assets', 'dictionary.json');
     const stats = await fs.stat(filePath);
     if (!cache || stats.mtimeMs > lastModified) {
         const data = await fs.readFile(filePath, 'utf8');
-        const parsed = JSON.parse(data);
+        const parsed = JSON.parse(data) as { message: { words: Word[] } };
         cache = parsed.message.words;
-        indexCache = new Map(cache.map((w: any) => [w.word.trim().toLowerCase(), w]));
-        sortedWordsCache = cache.map((w: any) => w.word).sort((a: string, b: string) => a.localeCompare(b));
+        indexCache = new Map(cache.map((w) => [w.word.trim().toLowerCase(), w]));
+        sortedWordsCache = cache.map((w) => w.word).sort((a, b) => a.localeCompare(b));
         lastModified = stats.mtimeMs;
     }
     return cache;

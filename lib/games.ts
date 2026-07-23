@@ -1,4 +1,11 @@
 import { getDictionary } from './dictionary';
+import type { Word } from './types';
+
+type WordWithTranslations = Word & { translations: string[] };
+
+function hasTranslations(w: Word): w is WordWithTranslations {
+    return Array.isArray(w.translations) && w.translations.length > 0;
+}
 
 export async function getRandomWords(count = 6) {
     const words = await getDictionary();
@@ -7,7 +14,7 @@ export async function getRandomWords(count = 6) {
     }
 
     // Filter words that have translations
-    const validWords = words.filter((w: any) => w.translations && w.translations.length > 0);
+    const validWords = words.filter(hasTranslations);
 
     // Shuffle using Fisher-Yates
     const shuffled = [...validWords];
@@ -19,7 +26,7 @@ export async function getRandomWords(count = 6) {
     const selected = shuffled.slice(0, count);
 
     // Create pairs: one with word, one with translation
-    const pairs = selected.flatMap((w: any, idx: number) => [
+    const pairs = selected.flatMap((w, idx) => [
         { id: `word_${idx}`, content: w.word, type: 'word', matchId: `pair_${idx}` },
         { id: `trans_${idx}`, content: w.translations[0], type: 'translation', matchId: `pair_${idx}` }
     ]);
@@ -35,7 +42,7 @@ export async function getRandomWords(count = 6) {
 
 export async function getQuizQuestions(count = 5) {
     const words = await getDictionary();
-    const validWords = words.filter((w: any) => w.translations && w.translations.length > 0);
+    const validWords = words.filter(hasTranslations);
 
     // A quiz question needs 1 correct answer + 3 distinct distractors — with
     // fewer than 4 valid words, the distractor loop below can never fill up
@@ -52,7 +59,7 @@ export async function getQuizQuestions(count = 5) {
         const correctWord = validWords[correctIndex];
 
         // Pick 3 distractors
-        const distractors: any[] = [];
+        const distractors: WordWithTranslations[] = [];
         while (distractors.length < 3) {
             const dIndex = Math.floor(Math.random() * validWords.length);
             if (dIndex !== correctIndex && !distractors.includes(validWords[dIndex])) {

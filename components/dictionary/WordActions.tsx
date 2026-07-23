@@ -22,7 +22,11 @@ export default function WordActions({ word }: { word: string }) {
     const t = useTranslations('dictionaryWord');
 
     useEffect(() => {
-        setSaved(readSaved().includes(word));
+        // Deferred to a microtask — reading localStorage has to happen
+        // client-side only, which is exactly what an effect is for, but
+        // the setState call itself still can't run synchronously within
+        // the effect body (react-hooks/set-state-in-effect).
+        queueMicrotask(() => setSaved(readSaved().includes(word)));
     }, [word]);
 
     const toggleSave = () => {

@@ -25,7 +25,12 @@ export default function Navbar() {
     const [mounted, setMounted] = React.useState(false);
     const t = useTranslations('nav');
 
-    React.useEffect(() => setMounted(true), []);
+    // Deferred to a microtask — an effect body shouldn't call setState
+    // synchronously (react-hooks/set-state-in-effect). This is the
+    // standard next-themes hydration-safety flag: theme-dependent UI only
+    // renders after the client has mounted, so SSR output can't mismatch
+    // the client's actual theme.
+    React.useEffect(() => queueMicrotask(() => setMounted(true)), []);
 
     // The admin section is a distinct application with its own chrome
     // (components/admin/AdminSidebar.tsx) — it doesn't use the public

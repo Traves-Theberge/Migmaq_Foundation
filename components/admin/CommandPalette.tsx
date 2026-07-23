@@ -37,14 +37,19 @@ export default function CommandPalette() {
 
     useEffect(() => {
         if (open) {
-            setQuery('');
-            setResults([]);
+            // Deferred to a microtask: an effect body shouldn't call
+            // setState synchronously (react-hooks/set-state-in-effect) —
+            // this resets the palette's search box each time it opens.
+            queueMicrotask(() => {
+                setQuery('');
+                setResults([]);
+            });
             setTimeout(() => inputRef.current?.focus(), 10);
         }
     }, [open]);
 
     useEffect(() => {
-        if (query.trim().length < 2) { setResults([]); return; }
+        if (query.trim().length < 2) { queueMicrotask(() => setResults([])); return; }
         const handle = setTimeout(() => {
             fetch(`/api/admin/search?q=${encodeURIComponent(query)}`)
                 .then((r) => r.json())

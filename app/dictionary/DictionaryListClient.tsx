@@ -16,7 +16,6 @@ export default function DictionaryListClient() {
     const { locale } = useLocale();
     const [words, setWords] = useState<Word[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [filtered, setFiltered] = useState<Word[]>([]);
     const [loading, setLoading] = useState(true);
     const [loadError, setLoadError] = useState(false);
     const [page, setPage] = useState(1);
@@ -34,14 +33,20 @@ export default function DictionaryListClient() {
             })
             .then((data) => {
                 setWords(data);
-                setFiltered(data);
             })
             .catch(() => setLoadError(true))
             .finally(() => setLoading(false));
     }, []);
 
     useEffect(() => {
-        loadDictionary();
+        // Deferred to a microtask: loadDictionary synchronously resets
+        // loading/error state before it fetches, which the effect
+        // shouldn't do directly (an effect body must not call setState
+        // synchronously — see react-hooks/set-state-in-effect). Both
+        // states already start at the right initial value for this first
+        // call anyway; the microtask just avoids a same-tick setState
+        // call chain reachable from the effect itself.
+        queueMicrotask(loadDictionary);
     }, [loadDictionary]);
 
     // Extract unique starting letters
@@ -55,7 +60,12 @@ export default function DictionaryListClient() {
         return Array.from(letters).sort();
     }, [words]);
 
-    useEffect(() => {
+    // Fully derived from words/searchTerm/searchMode/selectedLetter — no
+    // external system involved, so this is a plain computed value rather
+    // than state kept in sync via an effect. `page` resets to 1 directly
+    // in the handlers that change these filters instead (see below), since
+    // that's the actual event that should cause it, not a reaction to it.
+    const filtered = React.useMemo(() => {
         let results = words;
 
         // 1. Filter by Search Term
@@ -78,8 +88,7 @@ export default function DictionaryListClient() {
             results = results.filter(w => w.word.charAt(0).toUpperCase() === selectedLetter);
         }
 
-        setFiltered(results);
-        setPage(1);
+        return results;
     }, [searchTerm, words, searchMode, selectedLetter]);
 
     const paginatedWords = filtered.slice(0, page * itemsPerPage);
@@ -116,6 +125,7 @@ export default function DictionaryListClient() {
                                 onChange={(e) => {
                                     setSearchTerm(e.target.value);
                                     setSelectedLetter(null); // Clear letter filter on search
+                                    setPage(1);
                                 }}
                                 className="w-full bg-background border-4 border-foreground p-4 sm:p-8 text-xl sm:text-3xl font-bold normal-case placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent transition-colors"
                             />
@@ -126,7 +136,10 @@ export default function DictionaryListClient() {
                         <div className="relative md:w-80">
                             <select
                                 value={searchMode}
-                                onChange={(e) => setSearchMode(e.target.value as any)}
+                                onChange={(e) => {
+                                    setSearchMode(e.target.value as 'all' | 'word' | 'english');
+                                    setPage(1);
+                                }}
                                 aria-label={tr('fieldsLabel')}
                                 className="w-full h-full bg-background border-4 border-foreground p-4 pr-10 sm:pl-6 sm:pr-12 sm:py-8 text-lg sm:text-xl font-bold uppercase focus:outline-none focus:border-accent appearance-none cursor-pointer"
                             >
@@ -146,7 +159,10 @@ export default function DictionaryListClient() {
                     <div className="flex flex-wrap gap-2 justify-center" role="group" aria-label={tr('filterByLetter')}>
                         <button
                             type="button"
-                            onClick={() => setSelectedLetter(null)}
+                            onClick={() => {
+                                setSelectedLetter(null);
+                                setPage(1);
+                            }}
                             aria-pressed={!selectedLetter}
                             className={cn(
                                 "px-4 py-2 font-bold border-2 border-foreground transition-all uppercase",
@@ -162,6 +178,7 @@ export default function DictionaryListClient() {
                                 onClick={() => {
                                     setSelectedLetter(letter);
                                     setSearchTerm(''); // Clear search term when picking a letter
+                                    setPage(1);
                                 }}
                                 aria-pressed={selectedLetter === letter}
                                 aria-label={`${tr('filterByLetter')} ${letter}`}

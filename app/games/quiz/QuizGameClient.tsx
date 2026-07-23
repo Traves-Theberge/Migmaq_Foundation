@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, Trophy, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -25,7 +25,7 @@ export default function QuizGameClient() {
     const t = useTranslations('quiz');
     const completeHeadingRef = useRef<HTMLHeadingElement>(null);
 
-    const fetchQuestions = async () => {
+    const fetchQuestions = useCallback(async () => {
         setLoading(true);
         setError(null);
         setGameOver(false);
@@ -45,11 +45,14 @@ export default function QuizGameClient() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [t]);
 
     useEffect(() => {
-        fetchQuestions();
-    }, []);
+        // Deferred to a microtask — fetchQuestions resets several pieces of
+        // state synchronously before it fetches, which an effect body
+        // shouldn't do directly (react-hooks/set-state-in-effect).
+        queueMicrotask(fetchQuestions);
+    }, [fetchQuestions]);
 
     useEffect(() => {
         if (gameOver) completeHeadingRef.current?.focus();
@@ -85,7 +88,7 @@ export default function QuizGameClient() {
                 const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
                 const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
-                const interval: any = setInterval(function () {
+                const interval: ReturnType<typeof setInterval> = setInterval(function () {
                     const timeLeft = animationEnd - Date.now();
                     if (timeLeft <= 0) return clearInterval(interval);
                     const particleCount = 50 * (timeLeft / duration);

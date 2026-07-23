@@ -61,7 +61,7 @@ export const TextLeaf = forwardRef<HTMLDivElement, {
     index: number;
     total: number;
     glosses: Record<string, ResolvedWord>;
-}>(function TextLeaf({ page, index, total, glosses }, ref) {
+}>(function TextLeaf({ page, glosses }, ref) {
     return (
         <div ref={ref} className="page">
             <div className={`${styles.leaf} ${styles.textLeaf} flex flex-col justify-center px-7 sm:px-10 py-8`}>
